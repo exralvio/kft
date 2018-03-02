@@ -1,0 +1,18 @@
+.footer {
+	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
+	padding-bottom: 300px;
+	padding-top: 50px;
+}
+
+.footer-sponsor {
+	margin-top: 30px;
+}
+
+.footer-sponsor p {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.footer-sponsor img {
+	width: 200px;
+}
