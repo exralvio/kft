@@ -88,6 +88,13 @@
                             <li><a href="#discover">Discover</a></li>
                         </ul>
                     </div>
+                    <!-- Main Menu -->
+                    <div class="inner-nav desktop-nav login-nav">
+                        <ul class="clearlist scroll-nav local-scroll">
+                            <li><a href="#about">Login</a></li>
+                            <li><a href="#services" class="nav-signup">Sign up</a></li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
             <!-- End Navigation panel -->

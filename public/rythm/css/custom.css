@@ -1,3 +1,15 @@
+.main-nav.transparent ul li a {
+	color: #fff;
+}
+
+.inner-nav {
+	float: left;
+}
+
+.login-nav {
+	float: right;
+}
+
 .footer {
 	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
 	padding-bottom: 300px;
