@@ -11,16 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('landing/index');
-});
+Route::get('/', 'LandingController@showIndex');
 
+Route::get('/login', 'LandingController@showLogin');
+Route::post('/login', 'LandingController@doLogin');
 
-Route::get('/login', function () {
-    return view('landing/login');
-});
-
-
-Route::get('/signup', function () {
-    return view('landing/signup');
-});
+Route::get('/signup', 'LandingController@showSignup');

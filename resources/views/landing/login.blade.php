@@ -3,6 +3,12 @@
 @section('page-title')
  Login
 @endsection
+
+@if($errors)
+   @foreach ($errors->all() as $error)
+      <div>{{ $error }}</div>
+  @endforeach
+@endif
      
 @section('content')       
     <!-- Section -->
@@ -13,17 +19,24 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 bg-gray-lighter pb-40">
                         <h1 class="align-center">Log In To KFT</h1>
-                        <form class="form contact-form" id="contact_form">
+                        <form class="form contact-form" id="contact_form" method="post" action="{{ url('login') }}">
+                            {{ csrf_field() }}
                             <div class="clearfix">
                                 
                                 <!-- Username -->
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" class="input-md round form-control" placeholder="Username" pattern=".{3,100}" required>
+                                    @if ($errors->has('username'))
+                                        <span class="text-danger">{{ $errors->first('username') }}</span>
+                                    @endif
                                 </div>
                                 
                                 <!-- Password -->
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" class="input-md round form-control" placeholder="Password" pattern=".{5,100}" required>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
                                     
                             </div>
