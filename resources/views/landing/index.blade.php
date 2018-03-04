@@ -60,7 +60,7 @@
                     
                     <!-- Scroll Down -->
                     <div class="local-scroll">
-                        <a href="#about" class="scroll-down"><i class="fa fa-angle-down scroll-down-icon"></i></a>
+                        <a href="#discover" class="scroll-down"><i class="fa fa-angle-down scroll-down-icon"></i></a>
                     </div>
                     <!-- End Scroll Down -->
                     
@@ -74,7 +74,7 @@
                     <!-- Logo ( * your text or image into link tag *) -->
                     <div class="nav-logo-wrap local-scroll">
                         <a href="#top" class="logo">
-                            <img src="{{ url('') }}/rythm/images/logo-white.png" alt="" />
+                            <img src="{{ url('') }}/images/logo-kft.png" alt="" />
                         </a>
                     </div>
                     <div class="mobile-nav">
@@ -91,8 +91,8 @@
                     <!-- Main Menu -->
                     <div class="inner-nav desktop-nav login-nav">
                         <ul class="clearlist scroll-nav local-scroll">
-                            <li><a href="#about">Login</a></li>
-                            <li><a href="#services" class="nav-signup">Sign up</a></li>
+                            <li><a href="{{ url('login') }}">Login</a></li>
+                            <li><a href="{{ url('signup') }}" class="nav-signup">Sign up</a></li>
                         </ul>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                         
                         <!-- Copyright -->
                         <div class="footer-copy font-alt">
-                            <a href="http://themeforest.net/user/theme-guru/portfolio" target="_blank">&copy; Komunitas Fotografi Telkom 2018</a>.
+                            &copy; Komunitas Fotografi Telkom 2018.
                         </div>
                         <!-- End Copyright -->
                         

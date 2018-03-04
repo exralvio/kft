@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('landing/index');
 });
+
+
+Route::get('/login', function () {
+    return view('landing/login');
+});
+
+
+Route::get('/signup', function () {
+    return view('landing/signup');
+});

@@ -10,6 +10,22 @@
 	float: right;
 }
 
+a.nav-signup {
+	background: #EB1E2D;
+    padding: 0 20px;
+    margin: 23px 0;
+    border-radius: 20px;
+    height: 30px !important;
+    line-height: 30px !important;
+}
+
+.small-height .inner-nav ul li a.nav-signup {
+	height: 30px !important;
+    line-height: 30px !important;
+    margin: 13px 0;
+    color: #fff;
+}
+
 .footer {
 	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
 	padding-bottom: 300px;
