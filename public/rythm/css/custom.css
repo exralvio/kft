@@ -19,6 +19,10 @@ a.nav-signup {
     line-height: 30px !important;
 }
 
+.inner-nav ul li a.nav-signup {
+	color: #fff;
+}
+
 .small-height .inner-nav ul li a.nav-signup {
 	height: 30px !important;
     line-height: 30px !important;
