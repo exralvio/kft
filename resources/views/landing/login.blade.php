@@ -3,12 +3,6 @@
 @section('page-title')
  Login
 @endsection
-
-@if($errors)
-   @foreach ($errors->all() as $error)
-      <div>{{ $error }}</div>
-  @endforeach
-@endif
      
 @section('content')       
     <!-- Section -->
