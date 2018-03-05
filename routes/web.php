@@ -13,8 +13,8 @@
 
 Route::get('/', 'LandingController@showIndex');
 
-Route::get('/login', 'LandingController@showLogin');
-Route::post('/login', 'LandingController@doLogin');
+Route::get('/login', 'Auth\AuthController@showLogin');
+Route::post('/login', 'Auth\AuthController@doLogin');
 
-Route::get('/signup', 'LandingController@showSignup');
-Route::post('/signup', 'LandingController@doSignup');
+Route::get('/signup', 'Auth\AuthController@showSignup');
+Route::post('/signup', 'Auth\AuthController@doSignup');
