@@ -62,7 +62,7 @@ class AuthController extends Controller{
 				'username' 	=> Input::get('username'),
 				'password' 	=> Input::get('password')
 			);
-            echo "Validation Success, will be redirect to dashboard";
+            echo "Validation Success, next step is complete user data";
         }
     }
 

@@ -18,3 +18,7 @@ Route::post('/login', 'Auth\AuthController@doLogin');
 
 Route::get('/signup', 'Auth\AuthController@showSignup');
 Route::post('/signup', 'Auth\AuthController@doSignup');
+
+Route::get('/dashboard', function(){
+	return view('dashboard/index');
+});
