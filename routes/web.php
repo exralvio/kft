@@ -11,6 +11,14 @@
 |
 */
 
+/**
+ * test connection to mongodb
+*/
+Route::get('mongo', function(Request $request) {
+    $collection = Mongo::get()->practice_mongo->users;
+    return $collection->find()->toArray();
+});
+
 Route::get('/', 'LandingController@showIndex');
 
 Route::get('/login', 'Auth\AuthController@showLogin');
