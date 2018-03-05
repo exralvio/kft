@@ -30,6 +30,54 @@ a.nav-signup {
     color: #fff;
 }
 
+.landing-text-1 {
+	font-size: 30px;
+}
+
+body.timeline {
+	background: #F7F8FA;
+}
+
+.timeline .post-item {
+	background: #fff;
+	min-height: 300px;
+	border-radius: 3px;
+	border: 1px solid #eeeff2;
+}
+
+a.nav-upload {
+	color: #fff !important;
+	letter-spacing: 0px !important;
+	background: #3DBC54;
+	padding: 0 20px 0 23px;
+	text-transform: none;
+	font-size: 15px;
+}
+
+a.nav-upload .fa {
+	font-size: 30px;
+	position: relative;
+    top: 5px;
+    right: 5px;
+}
+
+a.nav-notification .fa {
+	font-size: 20px;
+	position: relative;
+	top: 2px;
+	font-weight: bold;
+}
+
+a.nav-notification:hover .fa {
+	color: #0095EB;
+}
+
+.nav-avatar img {
+	width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
 .footer {
 	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
 	padding-bottom: 300px;

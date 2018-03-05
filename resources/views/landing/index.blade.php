@@ -13,12 +13,12 @@
             <div class="home-content">
                 <div class="home-text">
                     
-                    <h1 class="hs-line-1 font-alt mb-80 mb-xs-30 mt-70 mt-sm-0">
-                        Komunitas Fotografi Telkom
+                    <h1 class="hs-line-2 mb-20 mb-xs-10 mt-70 mt-sm-0 landing-text-1">
+                        Get inspired and share your best photos
                     </h1>
                     
-                    <div class="hs-line-6">
-                        Get inspired and share your best photos
+                    <div class="hs-line-3 landing-text-2">
+                        Find your home among the world's best photographers.
                     </div>
                     
                 </div>
@@ -45,10 +45,9 @@
             
             <!-- Works Filter -->                    
             <div class="works-filter font-alt align-center">
-                <a href="#" class="filter active" data-filter="*">All works</a>
-                <a href="#branding" class="filter" data-filter=".branding">Branding</a>
-                <a href="#design" class="filter" data-filter=".design">Design</a>
-                <a href="#photography" class="filter" data-filter=".photography">Photography</a>
+                <a href="#" class="filter active" data-filter="*">All types</a>
+                <a href="#branding" class="filter" data-filter=".branding">Fresh</a>
+                <a href="#design" class="filter" data-filter=".design">Popular</a>
             </div>                    
             <!-- End Works Filter -->
             

@@ -13,8 +13,13 @@
 
 Route::get('/', 'LandingController@showIndex');
 
+
 Route::get('/login', 'LandingController@showLogin');
 Route::post('/login', 'LandingController@doLogin');
 
 Route::get('/signup', 'LandingController@showSignup');
 Route::post('/signup', 'LandingController@doSignup');
+
+Route::get('/dashboard', function(){
+	return view('dashboard/index');
+});
