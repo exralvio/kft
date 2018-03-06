@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Medias extends Eloquent
+class Media extends Eloquent
 {
     protected $collection = 'medias';
 }
