@@ -49,9 +49,9 @@
         </div>
         <!-- End Page Wrap -->
         
-        
+
         <!-- JS -->
-        <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/bootstrap.min.js"></script>        
         <script type="text/javascript" src="{{ url('') }}/rythm/js/SmoothScroll.js"></script>
@@ -67,9 +67,9 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/isotope.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/imagesloaded.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
-        <!-- Replace test API Key "AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg" with your own one below 
-        **** You can get API Key here - https://developers.google.com/maps/documentation/javascript/get-api-key -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg"></script>
+
+        @include('partials/uploader')
+        
         <script type="text/javascript" src="{{ url('') }}/rythm/js/wow.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/masonry.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>

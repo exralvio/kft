@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('upload') }}" class="nav-upload">
+                    <a href="#uploader" class="nav-upload upload-btn">
                        <i class="fa fa-cloud-upload"></i> Upload
                     </a>
                 </li>
