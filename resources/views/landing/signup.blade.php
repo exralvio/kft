@@ -3,7 +3,7 @@
 @section('page-title')
  Sign Up
 @endsection
-     
+
 @section('content')       
     <!-- Section -->
     <section class="page-section">
@@ -13,21 +13,15 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4  bg-gray-lighter pb-40">
                     <h1 class="align-center">Sign Up To KFT</h1>
-
                     <form class="form contact-form" id="contact_form" method="post" action="{{ url('signup') }}">
                         {{ csrf_field() }}
                         <div class="clearfix">
                             
-                            <!-- Email -->
-                            <!-- <div class="form-group">
-                                <input type="text" name="Email" id="Email" class="input-md round form-control" placeholder="Email" pattern=".{3,100}" required>
-                            </div> -->
-                            
-                            <!-- Username -->
+                            <!-- email -->
                             <div class="form-group">
-                                <input type="text" name="username" id="username" class="input-md round form-control" placeholder="Username" pattern=".{3,100}" required>
-                                @if ($errors->has('username'))
-                                    <span class="text-danger">{{ $errors->first('username') }}</span>
+                                <input type="text" name="email" id="email" class="input-md round form-control" placeholder="Email" pattern=".{3,100}" required>
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
                             
