@@ -94,7 +94,6 @@ class AuthController extends Controller{
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
                 $newUser->save();
-                $this->sendMail();
             }
 
         }
@@ -111,7 +110,7 @@ class AuthController extends Controller{
 
     public function sendMail()
     {
-        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+        Mail::raw('Sending emails with Laravel is easy!', function($message)
         {
             $message->to('fazrin.mutaqin@gmail.com');
         });
