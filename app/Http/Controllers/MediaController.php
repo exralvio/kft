@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Validator;
+use File;
+use Response;
 
 class MediaController extends Controller{
 
-    public function postUpload(){
-		$input = Input::all();
+    public function postUpload(Request $request){
+		$input = $request->all();
+
 		$rules = array(
 		    'file' => 'image|max:3000',
 		);
@@ -19,13 +24,14 @@ class MediaController extends Controller{
 			return Response::make($validation->errors->first(), 400);
 		}
 
-		$file = Input::file('file');
+		$original_name = $request->file('file')->getClientOriginalName();
 
-        $extension = File::extension($file['name']);
-        $directory = path('public').'uploads/'.sha1(time());
+        $extension = File::extension($original_name);
+        $directory = 'tmp';
+        // $directory = path('public').'uploads/tmp/'.sha1(time());
         $filename = sha1(time().time()).".{$extension}";
 
-        $upload_success = Input::upload('file', $directory, $filename);
+        $upload_success = $request->file->storeAs($directory, $filename);
 
         if( $upload_success ) {
         	return Response::json('success', 200);
