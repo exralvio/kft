@@ -64,7 +64,7 @@
                             <a href="#">Manage Photos</i></a>
                         </li>
                         <li>
-                            <a href="#">Logout</i></a>
+                            <a href="{{ url('logout') }}">Logout</i></a>
                         </li>
                     </ul>
                     <!-- End Sub -->

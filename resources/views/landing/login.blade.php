@@ -32,6 +32,12 @@
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
+
+                                <div class="form-group">
+                                    @if ($errors->has('failedLogin'))
+                                        <span class="text-danger">{{ $errors->first('failedLogin') }}</span>
+                                    @endif
+                                </div>
                                     
                             </div>
                             

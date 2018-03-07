@@ -7,10 +7,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Validator;
 use Illuminate\Support\Facades\Hash;
 
+use Session;
+use Validator;
+use Auth;
+
 class AuthController extends Controller{
+
+    public function __construct() {
+        if (Auth::check()){
+            return redirect()->to('/dashboard');
+        }
+    }
 
     public function showIndex(){
         return view('landing/index');
@@ -26,7 +35,7 @@ class AuthController extends Controller{
     );
 
     public function doLogin(Request $request){
-
+        
         $validator = Validator::make($request->all(), $this->authRules);
 
         if($validator->fails()){
@@ -34,14 +43,23 @@ class AuthController extends Controller{
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         }else{
-            $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
-            if($findUser && Hash::check($request->get('password'), $findUser->password)){
-                echo "Should set session and change Login, Signup to profile's username";
-            }else{
+            
+            $userdata = array(
+                'email'     => Input::get('email'),
+                'password'  => Input::get('password')
+            );
+
+            // attempt to do the login
+            if (Auth::attempt($userdata)) {
+                $loginUser = Auth::User();
+                Session::put('email',$loginUser->email);
+                return redirect()->intended('dashboard');
+            } else {        
                 return Redirect::to('login')
-                    ->withErrors(['password'=>'Email or Password Wrong'])
+                    ->withErrors(['failedLogin'=>'Email or Password was incorrect'])
                     ->withInput(Input::except('password'));
             }
+
         }
     }
 
@@ -81,7 +99,8 @@ class AuthController extends Controller{
     }
 
     public function doLogout(){
-
+        \Auth::logout();
+        return Redirect::to('login');
     }
 
     public function sendEmailSignupNotification(){
