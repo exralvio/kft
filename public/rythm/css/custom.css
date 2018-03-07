@@ -72,10 +72,74 @@ a.nav-notification:hover .fa {
 	color: #0095EB;
 }
 
+.upload-modal {
+	width: 95vw !important;
+    height: 90vh;
+    max-width: none !important;
+    border-radius: 3px;
+}
+
+.upload-modal form {
+	height: 100%;
+	cursor: crosshair;
+}
+
+.dz-message {
+	top: 45%;
+    position: relative;
+}
+
+.dz-message .btn {
+	width: 180px;
+    height: 40px;
+    text-align: center;
+    font-size: 16px;.
+    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    background-color: #0099e5;
+    border: 1px solid #0099e5;
+    margin-bottom: 20px;
+}
+
+.dz-message .btn:hover {
+	background-color: #00aaff;
+}
+
+.dz-message p {
+	color: #0099e5;
+}
+
+.dz-preview {
+	cursor: default;
+}
+
 .nav-avatar img {
 	width: 40px;
     height: 40px;
     border-radius: 20px;
+}
+
+.dropzone .dz-preview {
+	float: left;
+}
+
+.dz-addmore {
+	width: 200px;
+    height: 200px;
+    border: 2px solid #b9c1c7;
+    color: #b9c1c7;
+    float: left;
+    display: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dz-addmore .add-more-icon {
+	font-size: 30px;
+    margin-top: 60px;
 }
 
 .footer {
