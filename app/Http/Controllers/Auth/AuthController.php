@@ -33,14 +33,14 @@ class AuthController extends Controller{
                 ->withErrors($validator)
                 ->withInput(Input::except('password'));
         }else{
-            $findUser = \Mongo::get()->kft_db->users->findOne(Array('email'=>$request->get('email')));
+            /* $findUser = \Mongo::get()->kft_db->users->findOne(Array('email'=>$request->get('email')));
             if($findUser && Hash::check($request->get('password'), $findUser->password)){
                 echo "Should set session and change Login, Signup to profile's username";
             }else{
                 return Redirect::to('login')
                     ->withErrors(['password'=>'Email or Password Wrong'])
                     ->withInput(Input::except('password'));
-            }
+            } */
         }
     }
 
@@ -64,23 +64,24 @@ class AuthController extends Controller{
             /**
              * check if username already exists
             */
-            $findUser = \Mongo::get()->kft_db->users->findOne(Array('username'=>'fazrin.mutaqin@wgs.co.id'));
+            /* $findUser = \Mongo::get()->kft_db->users->findOne(Array('username'=>'fazrin.mutaqin@wgs.co.id'));
             if($findUser){
                 return Redirect::to('signup')
                     ->withInput(Input::except('password'))
                     ->withErrors(['email'=>'Email Already Registered']);
             }else{
                 \Mongo::get()->kft_db->users->insertOne($userdata);
-                /**
-                 * then it should be redirect to user profile to complete user data
-                */
-            }
+            } */
 
         }
     }
 
+    public function doLogout(){
+
+    }
+
     public function sendEmailSignupNotification(){
-        
+
     }
 
 }
