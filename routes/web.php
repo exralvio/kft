@@ -16,6 +16,9 @@ Route::get('/', 'LandingController@showIndex');
 Route::get('/login', 'Auth\AuthController@showLogin');
 Route::post('/login', 'Auth\AuthController@doLogin');
 
+//for testing only, will be removed later
+Route::get('/sendMail', 'Auth\AuthController@sendMail');
+
 Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
 
 Route::get('/signup', 'Auth\AuthController@showSignup');

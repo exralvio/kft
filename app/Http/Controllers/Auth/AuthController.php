@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 
 use Session;
 use Validator;
@@ -93,6 +94,7 @@ class AuthController extends Controller{
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
                 $newUser->save();
+                $this->sendMail();
             }
 
         }
@@ -105,6 +107,15 @@ class AuthController extends Controller{
 
     public function sendEmailSignupNotification(){
 
+    }
+
+    public function sendMail()
+    {
+        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+        {
+            $message->to('fazrin.mutaqin@gmail.com');
+        });
+        dd('send email success');
     }
 
 }
