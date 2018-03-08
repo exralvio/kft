@@ -10,6 +10,10 @@
 	float: right;
 }
 
+.remodal {
+	padding: 0px !important;
+}
+
 a.nav-signup {
 	background: #EB1E2D;
     padding: 0 20px;
@@ -79,9 +83,11 @@ a.nav-notification:hover .fa {
     border-radius: 3px;
 }
 
-.upload-modal form {
+.upload-modal .dropzone {
 	height: 100%;
 	cursor: crosshair;
+	background: #F7F8FA;
+	overflow-y: scroll;
 }
 
 .dz-message {
@@ -124,6 +130,21 @@ a.nav-notification:hover .fa {
 
 .dropzone .dz-preview {
 	float: left;
+	width: 170px !important;
+	height: 198px;
+	box-sizing: content-box;
+	margin: 0 15px 20px !important;
+	border-bottom: 2px solid #b9c1c7;
+}
+
+.dropzone .dz-image {
+	width: 170px;
+	height: 110px;
+}
+
+.dropzone .dz-image img {
+	width: 100%;
+	height: 100%;
 }
 
 .dz-addmore {
@@ -140,6 +161,74 @@ a.nav-notification:hover .fa {
 .dz-addmore .add-more-icon {
 	font-size: 30px;
     margin-top: 60px;
+}
+
+.dz-details {
+	display: none;
+}
+
+.dz-success-mark {
+	display: none;
+}
+
+.dropzone .dz-preview .dz-progress .dz-upload {
+	background: #41CB56 !important;
+}
+
+.form-uploader-wrapper {
+	height: 100%;
+	display: none;
+	border-radius: 3px;
+}
+
+.form-uploader-wrapper .row {
+	height: inherit;
+}
+
+.form-uploader {
+	overflow-y: scroll;
+	height: inherit;
+}
+
+.form-uploader label {
+	color: #0099e5;
+	font-weight: normal;
+}
+
+.form-uploader input, .form-uploader textarea {
+	text-transform: none !important;
+}
+
+.bootstrap-tagsinput {
+	width: 100%;
+}
+
+.btn-uploader-submit {
+	width: 100%;
+	background-color: #34bf49;
+    border-color: #34bf49;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 0;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+}
+
+.btn-uploader-submit:hover {
+	color: #fff;
+	background: #41CB56;
+}
+
+.publish-section {
+	border-bottom: 1px solid #ddd;
+}
+
+.publish-section p {
+	font-size: 12px;
 }
 
 .footer {
