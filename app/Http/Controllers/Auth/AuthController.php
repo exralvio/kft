@@ -94,7 +94,7 @@ class AuthController extends Controller{
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
                 $newUser->save();
-                // $this->sendMail('fazrin.mutaqin@gmail.com');
+                $this->sendMail($newUser->email);
             }
 
         }
@@ -109,12 +109,12 @@ class AuthController extends Controller{
 
     }
 
-    public function sendMail()
+    public function sendMail($to)
     {
         Mail::send('emails.signup-mail', [], function($message)
         {
             $message->subject('Email Subject');
-            $message->to('fazrin.mutaqin@gmail.com');
+            $message->to($to);
         });
     }
 }
