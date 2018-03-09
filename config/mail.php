@@ -120,4 +120,15 @@ return [
         ],
     ],
 
+    /**
+     * for development purpose only, remove when go into production, because it's not save
+    */
+    'stream' => [
+        'ssl' => [
+           'allow_self_signed' => true,
+           'verify_peer' => false,
+           'verify_peer_name' => false,
+        ],
+     ],
+
 ];

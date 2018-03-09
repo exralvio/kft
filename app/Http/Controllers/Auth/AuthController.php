@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
-// use Mail;
+use Mail;
 
 use Session;
 use Validator;
@@ -94,6 +94,7 @@ class AuthController extends Controller{
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
                 $newUser->save();
+                // $this->sendMail('fazrin.mutaqin@gmail.com');
             }
 
         }
@@ -110,23 +111,10 @@ class AuthController extends Controller{
 
     public function sendMail()
     {
-        /* Mail::raw('Sending emails with Laravel is easy!', function($message)
+        Mail::send('emails.signup-mail', [], function($message)
         {
+            $message->subject('Email Subject');
             $message->to('fazrin.mutaqin@gmail.com');
         });
-        dd('send email success'); */
-
-        $to       = 'fazrin.mutaqin@gmail.com';
-        $subject  = 'Testing sendmail.exe';
-        $message  = 'Hi, you just received an email using sendmail!';
-        $headers  = 'From: [your_gmail_account_username]@gmail.com' . "\r\n" .
-                    'MIME-Version: 1.0' . "\r\n" .
-                    'Content-type: text/html; charset=utf-8';
-
-        if(mail($to, $subject, $message, $headers)){
-            echo "Email sent";
-        }else{
-            echo "Email sending failed";
-        }
     }
 }
