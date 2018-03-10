@@ -25,6 +25,7 @@
   <div class="col-sm-12 col-md-3 pull-right form-uploader-wrapper">
     <div class="row">
       <form class="form form-uploader pt-20 pd-20 align-left" role="form">
+        <div class="form-blocker"></div>
         <div class="col-sm-12">
           <div class="mb-20 mb-md-10 publish-section">
             <button class="btn btn-large btn-uploader-submit">Submit</button>
@@ -33,25 +34,26 @@
 
           <div class="mb-20 mb-md-10">
             <label>Category</label>
-            <select class="form-control input-md">
+            <select class="form-control input-md upload-category">
               <option>Category 1</option>
               <option>Category 2</option>
             </select>
           </div> 
           <div class="mb-20 mb-md-10">
             <label>Title</label>
-            <input type="text" class="form-control input-md">
+            <input type="text" placeholder="Untitled" class="form-control input-md upload-title">
           </div> 
           <div class="mb-20 mb-md-10">
             <label>Description</label>
-            <textarea class="form-control input-md"></textarea>
+            <textarea placeholder="None" class="form-control input-md"></textarea>
           </div>
           <div class="mb-20 mb-md-10">
             <label>Keywords</label>
             <div>
-              <input type="text" name="" data-role="tagsinput">
+              <input class="upload-keywords" type="text" name="" data-role="tagsinput">
             </div>
           </div>
+          <input type="hidden" class="upload-index" name="">
         </div>
       </form> 
     </div>

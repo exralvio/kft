@@ -14,14 +14,14 @@ class MediaController extends Controller{
 		$input = $request->all();
 
 		$rules = array(
-		    'file' => 'image|max:3000',
+		    'file' => 'image|max:50000',
 		);
 
 		$validation = Validator::make($input, $rules);
 
 		if ($validation->fails())
 		{
-			return Response::make($validation->errors->first(), 400);
+			return Response::make($validation->errors()->first(), 400);
 		}
 
 		$original_name = $request->file('file')->getClientOriginalName();
@@ -33,10 +33,17 @@ class MediaController extends Controller{
 
         $upload_success = $request->file->storeAs($directory, $filename);
 
+        $response = [
+        	'filename'=>$filename,
+        	'original'=>$original_name
+        ];
+
         if( $upload_success ) {
-        	return Response::json('success', 200);
+        	$response['status'] = 'success';
+        	return Response::json($response, 200);
         } else {
-        	return Response::json('error', 400);
+        	$response['status'] = 'error';
+        	return Response::json($response, 400);
         }
 	}
 
