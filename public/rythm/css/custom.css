@@ -171,8 +171,16 @@ a.nav-notification:hover .fa {
 	display: none;
 }
 
+.dz-active {
+	background: #aaa;
+}
+
 .dropzone .dz-preview .dz-progress .dz-upload {
 	background: #41CB56 !important;
+}
+
+.dz-success-mark {
+	display: none !important;
 }
 
 .form-uploader-wrapper {
@@ -197,6 +205,16 @@ a.nav-notification:hover .fa {
 
 .form-uploader input, .form-uploader textarea {
 	text-transform: none !important;
+}
+
+.form-blocker {
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: black;
+    z-index: 2;
+    top: 0;
 }
 
 .bootstrap-tagsinput {
