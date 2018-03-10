@@ -29,10 +29,10 @@ Route::middleware('guest')->group(function(){
 
 Route::middleware('auth')->group(function () {
 	
-	Route::get('user/{id}/profile', function($id){
-		echo "id $id";
+	Route::prefix('user')->group(function () {
+		Route::get('profile', ['uses'=>'UserController@showProfile']);
 	});
-	
+
 	Route::get('/dashboard', function(){
 		return view('dashboard/index');
 	});

@@ -55,7 +55,7 @@
                     <!-- Sub -->
                     <ul class="mn-sub">
                         <li>
-                            <a href="#">My Profile</i></a>
+                            <a href="{{ url('user/profile') }}">My Profile</i></a>
                         </li>
                         <li>
                             <a href="#">My Settings</i></a>

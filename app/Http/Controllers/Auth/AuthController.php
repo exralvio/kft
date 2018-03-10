@@ -16,12 +16,6 @@ use Auth;
 
 class AuthController extends Controller{
 
-    public function __construct() {
-        if (Auth::check()){
-            return redirect()->to('/dashboard');
-        }
-    }
-
     public function showIndex(){
         return view('landing/index');
     }
@@ -104,7 +98,7 @@ class AuthController extends Controller{
                         /**
                          * this should be redirected to complete user's profiles views
                          * */
-                        return redirect()->to('/login');
+                        return redirect()->to('/user/profile');
                     }
                 }else{
                     dd('Signup failed');
