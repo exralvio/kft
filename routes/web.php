@@ -13,21 +13,32 @@
 
 Route::get('/', 'LandingController@showIndex');
 
-Route::get('/login', 'Auth\AuthController@showLogin');
-Route::post('/login', 'Auth\AuthController@doLogin');
 
 //for testing only, will be removed later
-Route::get('/sendMail', 'Auth\AuthController@sendMail');
-
-Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
-
-Route::get('/signup', 'Auth\AuthController@showSignup');
-Route::post('/signup', 'Auth\AuthController@doSignup');
+Route::get('/sendMail', 'Auth\AuthController@sendSignUpMail');
 
 
-Route::get('/dashboard', function(){
-	return view('dashboard/index');
+Route::middleware('guest')->group(function(){
+	/** signup **/
+	Route::get('/signup', 'Auth\AuthController@showSignup');
+	Route::post('/signup', 'Auth\AuthController@doSignup');
+	/** login **/
+	Route::get('/login', [ 'as' => 'login', 'uses' => 'Auth\AuthController@showLogin']);
+	Route::post('/login', 'Auth\AuthController@doLogin');
 });
 
-/** Media **/
-Route::post('/upload', 'MediaController@postUpload');
+Route::middleware('auth')->group(function () {
+	
+	Route::get('user/{id}/profile', function($id){
+		echo "id $id";
+	});
+	
+	Route::get('/dashboard', function(){
+		return view('dashboard/index');
+	});
+
+	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
+
+	/** Media **/
+	Route::post('/upload', 'MediaController@postUpload');
+});

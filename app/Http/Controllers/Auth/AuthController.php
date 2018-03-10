@@ -94,7 +94,9 @@ class AuthController extends Controller{
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
                 $newUser->save();
-                $this->sendMail($newUser->email);
+                // $this->sendSignUpMail($newUser->email);
+                // return Redirect::to('sendMail');
+                dd('Email send to '.$newUser->email);
             }
 
         }
@@ -105,15 +107,12 @@ class AuthController extends Controller{
         return Redirect::to('login');
     }
 
-    public function sendEmailSignupNotification(){
-
-    }
-
-    public function sendMail($to)
+    public function sendSignUpMail($to = 'fazrin.mutaqin@gmail.com', $data = [])
     {
-        Mail::send('emails.signup-mail', [], function($message)
+        $subject = 'Registration Notification';
+        Mail::send('emails.signup-mail', $data, function($message)
         {
-            $message->subject('Email Subject');
+            $message->subject('');
             $message->to($to);
         });
     }
