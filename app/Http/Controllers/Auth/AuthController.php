@@ -35,6 +35,12 @@ class AuthController extends Controller{
         'password' => 'required|alphaNum|min:3'
     );
 
+    /**
+     * another validation needed:
+     * if user profile has not complete
+     * then do not redirect to dashboard
+     * redirect to user profile instead
+    */
     public function doLogin(Request $request){
         
         $validator = Validator::make($request->all(), $this->authRules);
@@ -50,7 +56,6 @@ class AuthController extends Controller{
                 'password'  => Input::get('password')
             );
 
-            // attempt to do the login
             if (Auth::attempt($userdata)) {
                 $loginUser = Auth::User();
                 Session::put('email',$loginUser->email);
@@ -81,6 +86,7 @@ class AuthController extends Controller{
                 'email' 	=> $request->get('email'),
                 'password' 	=> Hash::make($request->get('password'))
             );
+
             /**
              * check if username already exists
             */
@@ -93,10 +99,16 @@ class AuthController extends Controller{
                 $newUser = new User();
                 $newUser->email = $request->get('email');
                 $newUser->password = Hash::make($request->get('email'));
-                $newUser->save();
-                // $this->sendSignUpMail($newUser->email);
-                // return Redirect::to('sendMail');
-                dd('Email send to '.$newUser->email);
+                if($newUser->save()){
+                    if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
+                        /**
+                         * this should be redirected to complete user's profiles views
+                         * */
+                        return redirect()->to('/login');
+                    }
+                }else{
+                    dd('Signup failed');
+                }
             }
 
         }
@@ -107,13 +119,27 @@ class AuthController extends Controller{
         return Redirect::to('login');
     }
 
-    public function sendSignUpMail($to = 'fazrin.mutaqin@gmail.com', $data = [])
+    /**
+     * will be moved into mail helper later
+     * 'fazrin.mutaqin@gmail.com' hardcoded temporary so it should not send to registed email 
+     * for dev purpose only
+    */
+    private $mail;
+    public function sendSignUpMail($user = [], $subject, $redirectRoute = null)
     {
-        $subject = 'Registration Notification';
-        Mail::send('emails.signup-mail', $data, function($message)
+        $this->mail['to'] = 'fazrin.mutaqin@gmail.com'; //$user['email'];
+        $this->mail['subject'] = $subject;
+        Mail::send('emails.signup-mail', ['user' => $user], function($message)
         {
-            $message->subject('');
-            $message->to($to);
+            $message->subject($this->mail['subject']);
+            $message->to($this->mail['to']);
         });
+        
+        if(Mail::failures()){
+            //do something
+            dd('Mail failed to send, set handler here');
+        }else{
+            return true;
+        }
     }
 }

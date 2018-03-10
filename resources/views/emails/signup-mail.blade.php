@@ -24,7 +24,7 @@
                                                                                     <tr>
                                                                                         <td class="logo" border="0" width="60" style="border-collapse:collapse;padding:10px 0;height:31px;width:65px">
                                                                                             <a href="http://localhost:8000" style="text-decoration:none;color:#02ade2;border:0;outline:none" target="_blank">
-                                                                                                <img src="{{ url('') }}/images/logo-kft.png" alt="500px logo" width="100px" border="0" style="outline:none;padding:2px 0;height:25px;width:auto;border:0!important" class="CToWUd">
+                                                                                                <img src="{{ url('') }}/images/logo-kft.png" alt="KFT logo" width="100px" border="0" style="outline:none;padding:2px 0;height:25px;width:auto;border:0!important" class="CToWUd">
                                                                                             </a>                          
                                                                                         </td>
                                                                                         <td class="salutation" align="right" style="border-collapse:collapse;color:#71767a;width:92%;padding-left:8%;text-align:right;font-size:14px">
@@ -43,7 +43,7 @@
                                                                                         <td class="m_-8868316613107705934w20" style="border-collapse:collapse;width:10px"></td>
                                                                                         <td class="content center" style="border-collapse:collapse;margin:auto;text-align:center">
                                                                                             <h1 style="color:#525558;margin:1.5em 20px;font-weight:300;font-size:24px;line-height:120%!important">
-                                                                                            Nice to meet you!
+                                                                                            Nice to meet you! {{ $user->email }}
                                                                                             </h1>
                                                                                             <p class="m_-8868316613107705934lead" style="color:#525558;font-size:18px;line-height:26px">Welcome to <span class="il">KFT</span>! <br> Thank You for joining KFT.</p>
                                                                                             <br><br>
@@ -52,8 +52,7 @@
                                                                                                 <tr>
                                                                                                     <td style="border-collapse:collapse"></td>
                                                                                                     <td style="border-collapse:collapse">
-                                                                                                        <!-- <a href="http://emln.500px.com/wf/click?upn=PKbeYZDTP7DiDg9hkBaHfiiJoVKP7YBoaLozDJmCQRPxJ4PH9B6h-2FEpWGaYcd3LlUwWH2yy8qkRd35wz2MERm4ikassfBEmiFxOhkhi2fJM-3D_ke0Su3raYVM7HqNn27VPUE64Jb6TYkZn-2Fk-2B83IAaVPoZ6jAqdUL0QqsO7yaywgayxqTjEL4whnSURorEfr4t-2BXHVAkg2WE3cGXUhZevMSf-2BywLcUMo2tEYETMfkFiidIY-2F4RoSF8tPwMaf5AYELBWcjkn9JRi6wmAJm9W93uBu2BIrdaupZ-2FhNA2HDqalKhQ3HBICm4PQX7p4thqB-2FumbXl7daP84FLzmBaZ3Sg8ruwPs62LN7pb-2BgFW-2FMF7KE-2FZDczEd1BcYScx81QlDCnBdw-3D-3D" style="text-decoration:none;border:0;outline:none;color:#fff!important" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=http://emln.500px.com/wf/click?upn%3DPKbeYZDTP7DiDg9hkBaHfiiJoVKP7YBoaLozDJmCQRPxJ4PH9B6h-2FEpWGaYcd3LlUwWH2yy8qkRd35wz2MERm4ikassfBEmiFxOhkhi2fJM-3D_ke0Su3raYVM7HqNn27VPUE64Jb6TYkZn-2Fk-2B83IAaVPoZ6jAqdUL0QqsO7yaywgayxqTjEL4whnSURorEfr4t-2BXHVAkg2WE3cGXUhZevMSf-2BywLcUMo2tEYETMfkFiidIY-2F4RoSF8tPwMaf5AYELBWcjkn9JRi6wmAJm9W93uBu2BIrdaupZ-2FhNA2HDqalKhQ3HBICm4PQX7p4thqB-2FumbXl7daP84FLzmBaZ3Sg8ruwPs62LN7pb-2BgFW-2FMF7KE-2FZDczEd1BcYScx81QlDCnBdw-3D-3D&amp;source=gmail&amp;ust=1520649404897000&amp;usg=AFQjCNFOiuV4i7D6OJWod69SDP_uSm61HA">Confirm Email</a> -->
-                                                                                                        <a href="http://localhost:8000/dashboard" style="text-decoration:none;border:0;outline:none;color:#fff!important" target="_blank">Go To KFT</a>
+                                                                                                        <a href="http://localhost:8000/login" style="text-decoration:none;border:0;outline:none;color:#fff!important" target="_blank">Go To KFT</a>
                                                                                                     </td>
                                                                                                     <td style="border-collapse:collapse"></td>
                                                                                                 </tr>
