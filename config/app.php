@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
+        Jenssegers\Mongodb\Session\SessionServiceProvider::class,
 
         /*
          * Application Service Providers...
