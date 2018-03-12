@@ -14,7 +14,7 @@
                 <li>0 Photos Views</li>
                 <li>0 Followers</li>
                 <li>0 Following</li>
-                <li>Bandung, Indonesia</li>
+                <li class="location-icon">Bandung, Indonesia</li>
             </ul>
         </div>
     </div>
