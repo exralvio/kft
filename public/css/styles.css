@@ -26,7 +26,10 @@
     *display:inline; /* ie7 fix */
      zoom:1; /* hasLayout ie7 trigger */
 }
-
+.profile-button{
+    background: #ffffff;
+    padding: 10px;
+}
 #profile .nav-tabs, .nav-pills {
     text-align:center;
 }

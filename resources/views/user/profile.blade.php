@@ -5,7 +5,12 @@
 @endsection
 
 @section('content')
-<section class="page-section pt-70" id="profile">
+<section class="page-section pt-80" id="profile">
+    <div class="text-right profile-button">
+        <button type="button" class="btn btn-default">Manage</button>
+        <button type="button" class="btn btn-default">Settings</button>
+        <button type="button" class="btn btn-primary">Edit your profile</button>
+    </div>
     <div class="text-center user-profile">
         <div class="profile-name">Fazrin Mutaqin</div>
         <div class="profile-social">
