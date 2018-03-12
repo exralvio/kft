@@ -1,0 +1,57 @@
+.profile-social{
+    color: #bfbfbf;
+}
+.profile-social ul {
+    display: inline-block;
+    list-style: none;
+}
+.profile-social ul li {
+    float: left;
+    margin:0 10px;
+}
+.user-profile{
+    border: 1px solid #dddddd;
+    padding-top: 15px;
+    background: #ffffff;
+}
+.profile-name{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom:15px;
+}
+/** override bootstrap tab **/
+#profile .nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+#profile .nav-tabs, .nav-pills {
+    text-align:center;
+}
+#profile .nav-tabs>li a{
+    font-weight: bold;
+    text-decoration: none;
+}
+#profile .nav-tabs>li.active>a,
+#profile .nav-tabs>li.active>a:hover,
+#profile .nav-tabs>li.active>a:focus {
+    color: #555;
+    background-color: #ffffff;
+    color: blue;
+    border: none;
+    border-bottom: 2px solid blue;
+    /* border-bottom-color: transparent; */
+    cursor: default;
+}
+#profile .nav-tabs>li>a:hover {
+    border: none;
+    background: #ffffff;
+}
+
+#profile .nav-tabs, .nav-pills {
+    text-align: center;
+    background: #ffffff;
+}
+

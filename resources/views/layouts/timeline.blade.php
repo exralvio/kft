@@ -23,7 +23,8 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/animate.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
-        <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">        
+        <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/styles.css">  
 
         
     </head>
