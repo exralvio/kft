@@ -149,6 +149,7 @@
         </div>
     </div>
 </section>
+@include('user/edit-profile')
+
 @endsection
 
-@include('user/edit-profile')
