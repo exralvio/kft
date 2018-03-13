@@ -9,7 +9,8 @@
     <div class="text-right profile-button">
         <button type="button" class="btn btn-default">Manage</button>
         <button type="button" class="btn btn-default">Settings</button>
-        <button type="button" class="btn btn-primary">Edit your profile</button>
+        <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
+        <a href="#editProfile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
     </div>
     <div class="text-center user-profile">
         <div class="profile-name">Fazrin Mutaqin</div>
@@ -19,7 +20,7 @@
                 <li>0 Photos Views</li>
                 <li>0 Followers</li>
                 <li>0 Following</li>
-                <li class="location-icon">Bandung, Indonesia</li>
+                <li><i class="fa fa-map-marker"></i> Bandung, Indonesia</li>
             </ul>
         </div>
     </div>
@@ -149,3 +150,5 @@
     </div>
 </section>
 @endsection
+
+@include('user/edit-profile')

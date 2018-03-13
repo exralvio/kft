@@ -65,3 +65,21 @@
     padding-left: 16px;
     text-transform: capitalize;
 }
+#modalEditProfile{
+    background-color: #f7f8fa;
+}
+#modalEditProfile label{
+    float: left;
+    font-weight: 500;
+    color: #16b4ff;
+}
+.profile-picture img{
+    border-radius: 50px;
+}
+.profile-picture{
+    width: 100px;
+    height: auto;
+    border: 1px solid #efefef;
+    border-radius: 50px;
+    margin: 15px auto;
+}
