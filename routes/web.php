@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 	
 	Route::prefix('user')->group(function () {
 		Route::get('profile', ['uses'=>'UserController@showProfile']);
+		Route::post('profile', ['uses'=>'UserController@saveEditProfile']);
 	});
 	
 	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
 /** User Login and profile complete **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
-	
+
 	Route::get('/dashboard', function(){
 		return view('dashboard/index');
 	});

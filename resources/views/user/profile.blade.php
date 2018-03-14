@@ -12,15 +12,18 @@
         <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
         <a href="#editProfile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
     </div>
+    <div class="pp-container">
+        <div class="pp-image">
+            <img src="{{ url('') }}/images/pp-icon.png"/>
+        </div>
+    </div>
     <div class="text-center user-profile">
         <div class="profile-name">Fazrin Mutaqin</div>
         <div class="profile-social">
             <ul>
-                <li>0 Affection</li>
-                <li>0 Photos Views</li>
-                <li>0 Followers</li>
-                <li>0 Following</li>
-                <li><i class="fa fa-map-marker"></i> Bandung, Indonesia</li>
+                <li>{{ isset($user['photoview_number']) ? $user['photoview_number'] : 0  }} Photos Views</li>
+                <li>{{ isset($user['follower_number']) ? $user['follower_number'] : 0 }} Followers</li>
+                <li>{{ isset($user['following_number']) ? $user['following_number'] : 0 }} Following</li>
             </ul>
         </div>
     </div>
@@ -29,8 +32,8 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">PHOTOS</a></li>
             <li role="presentation"><a href="#galleries" aria-controls="galleries" role="tab" data-toggle="tab">GALLERIES</a></li>
-            <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">GROUPS</a></li>
-            <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">ABOUT</a></li>
+            <!-- <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">GROUPS</a></li> -->
+            <!-- <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">ABOUT</a></li> -->
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -144,8 +147,6 @@
                 </ul>
                 <!-- End Works Grid -->
             </div>
-            <div role="tabpanel" class="tab-pane fade" id="groups">Groups</div>
-            <div role="tabpanel" class="tab-pane fade" id="about">About</div>
         </div>
     </div>
 </section>

@@ -4,13 +4,14 @@
 .profile-social ul {
     display: inline-block;
     list-style: none;
+    padding-left: 0;
 }
 .profile-social ul li {
     float: left;
     margin:0 10px;
 }
 .user-profile{
-    border: 1px solid #dddddd;
+    /* border: 1px solid #dddddd; */
     padding-top: 15px;
     background: #ffffff;
 }
@@ -82,4 +83,14 @@
     border: 1px solid #efefef;
     border-radius: 50px;
     margin: 15px auto;
+}
+.pp-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border: 1px solid;
+    border-radius: 60px;
+}
+.pp-container{
+    background-color: #ffffff;
 }
