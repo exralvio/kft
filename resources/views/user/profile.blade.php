@@ -14,7 +14,11 @@
     </div>
     <div class="pp-container">
         <div class="pp-image">
-            <img src="{{ url('') }}/images/pp-icon.png"/>
+            @if (isset($user['photo']))
+                <img src="{{ $user['photo'] }}"/>
+            @else
+                <img src="{{ url('') }}/images/pp-icon.png"/>
+            @endif
         </div>
     </div>
     <div class="text-center user-profile">
