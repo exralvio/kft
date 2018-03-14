@@ -52,7 +52,12 @@ class AuthController extends Controller{
 
             if (Auth::attempt($userdata)) {
                 $loginUser = Auth::User();
-                Session::put('email',$loginUser->email);
+                /**
+                 * get users by email to store into session
+                 * will be used by custom middleware later to check complete profile
+                */
+                $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
+                Session::put('user',$findUser);
                 return redirect()->intended('dashboard');
             } else {        
                 return Redirect::to('login')
