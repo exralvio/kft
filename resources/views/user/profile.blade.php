@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="text-center user-profile">
-        <div class="profile-name">Fazrin Mutaqin</div>
+        <div class="profile-name">{{ isset($user['firstname']) ? $user['firstname'] : '' }} {{ isset($user['lastname']) ? $user['lastname'] : '' }}</div>
         <div class="profile-social">
             <ul>
                 <li>{{ isset($user['photoview_number']) ? $user['photoview_number'] : 0  }} Photos Views</li>
