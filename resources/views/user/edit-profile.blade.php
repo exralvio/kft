@@ -1,10 +1,13 @@
 <div class="remodal" id="modalEditProfile" data-remodal-id="editProfile">
 
-  <form class="form profile-form" id="profile_form" method="post" action="{{ url('user/profile') }}">
+  <form class="form profile-form" id="profile_form" method="post" action="{{ url('user/profile') }}" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <div class="col-md-12">
-        <div class="profile-picture">
-          <img src="{{ url('') }}/images/pp-icon.png"/>
+    <div class="col-md-12 edit-pp-container">
+        <div id="pp-preview">
+          <input type="file" name="photo" id="image-upload" />
+        </div>
+        <div class="col-md-12" style="margin-bottom:10px;">
+          <label for="image-upload" id="pp-image-label">Change Profile Picture</label>
         </div>
     </div>
     <div class="col-md-12">
@@ -57,3 +60,24 @@
     </div>
   </form>
 </div>
+
+<script type="text/javascript">
+
+  window.onload = function(){
+      $(document).ready(function() {
+          var photo = "<?php echo $user->photo; ?>";
+          var photoUrl = "";
+          if(photo.length){
+            photoUrl = "../"+photo;
+          }else{
+            photoUrl = "../images/pp-icon.png";
+          }
+          $('#pp-preview').css({'background':"url("+photoUrl+")","background-size":"contain"});
+          $.uploadPreview({
+              input_field: "#image-upload",
+              preview_box: "#pp-preview"
+          });
+      });
+  }
+
+</script>

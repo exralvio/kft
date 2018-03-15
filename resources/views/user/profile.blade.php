@@ -1,5 +1,7 @@
 @extends('layouts/timeline')
- 
+
+<link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
+
 @section('page-title')
  Komunitas Fotografi Telkom
 @endsection
@@ -15,7 +17,7 @@
     <div class="pp-container">
         <div class="pp-image">
             @if (isset($user['photo']))
-                <img src="{{ $user->photo }}"/>
+                <img src="{{ url('').'/'.$user->photo }}"/>
             @else
                 <img src="{{ url('') }}/images/pp-icon.png"/>
             @endif
@@ -152,6 +154,7 @@
         </div>
     </div>
 </section>
+
 @include('user/edit-profile')
 
 @endsection

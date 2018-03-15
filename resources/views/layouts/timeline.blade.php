@@ -24,9 +24,8 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
-        <link rel="stylesheet" href="{{ url('') }}/css/styles.css">  
-
         
+
     </head>
     <body class="appear-animate timeline">
         
@@ -68,6 +67,7 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/isotope.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/imagesloaded.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/jquery.uploadPreview.js"></script>
 
         @include('partials/uploader')
         
