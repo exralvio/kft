@@ -14,7 +14,8 @@ class UserController extends Controller{
     public function showProfile(Request $request){
         $user_session = $request->session()->get('user');
         $user_data = iterator_to_array($user_session);
-        $user = \DB::collection('users')->where('email', $user_data['email'])->first();
+        // $user = \DB::collection('users')->where('email', $user_data['email'])->first();
+        $user = User::where('email', $user_data['email'])->first();
         /**
          * set temporary data just in case not exists on collection
          **/
@@ -37,7 +38,8 @@ class UserController extends Controller{
             $user_session = $request->session()->get('user');
             $user_data = iterator_to_array($user_session);
             $user = \DB::collection('users')->where('email', $user_data['email'])->update($request->all());
-            return view('user/profile',['user'=>$request->all()]);
+            $updatedUser = User::where('email', $user_data['email'])->first();
+            return view('user/profile',['user'=>$updatedUser]);
         }
     }
 

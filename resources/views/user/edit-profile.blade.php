@@ -10,27 +10,27 @@
     <div class="col-md-12">
       <div class="col-md-6">
         <label for="firstname">First Name*</label>
-        <input type="text" class="input-md round form-control" id="firstname" name="firstname" placeholder="First Name" required value="{{ $user['firstname'] }}">
+        <input type="text" class="input-md round form-control" id="firstname" name="firstname" placeholder="First Name" required value="{{ $user->firstname }}">
         @if ($errors->has('firstname'))
             <span class="text-danger" style="float:left;">{{ $errors->first('firstname') }}</span>
         @endif
       </div>
       <div class="col-md-6">
         <label for="lastname">Last Name</label>
-        <input type="text" class="input-md round form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ $user['lastname'] }}">
+        <input type="text" class="input-md round form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ $user->lastname }}">
       </div>
     </div>
     <div class="col-md-12">
       <div class="col-md-6">
         <label for="department">Department*</label>
-        <input type="text" class="input-md round form-control" id="department" name="department" placeholder="Department" required value="{{ $user['department'] }}">
+        <input type="text" class="input-md round form-control" id="department" name="department" placeholder="Department" required value="{{ $user->department }}">
         @if ($errors->has('department'))
             <span class="text-danger" style="float:left;">{{ $errors->first('department') }}</span>
         @endif
       </div>
       <div class="col-md-6">
         <label for="birthday">Birthday</label>
-        <input type="date" name="birthday" id="birthday" name="birthday" class="input-md round form-control" value="{{ $user['birthday'] }}">
+        <input type="date" name="birthday" id="birthday" name="birthday" class="input-md round form-control" value="{{ $user->birthday }}">
       </div>
     </div>
     <div class="col-md-12">
@@ -38,15 +38,15 @@
         <label for="gender">Gender</label>
         <select id="gender" name="gender" class="input-md round form-control">
           <option value="">-- Select Gender --</option>
-          <option value="M" {{ $user['gender'] == 'M' ? 'selected' : '' }}>Male</option>
-          <option value="F" {{ $user['gender'] == 'F' ? 'selected' : '' }}>Female</option>
+          <option value="M" {{ $user->gender == 'M' ? 'selected' : '' }}>Male</option>
+          <option value="F" {{ $user->gender == 'F' ? 'selected' : '' }}>Female</option>
         </select>
       </div>
     </div>
     <div class="col-md-12">
         <div class="col-md-12">
           <label for="about">About</label>
-          <textarea  class="input-md round form-control" id="about" name="about" placeholder="About">{{ $user['about'] }}</textarea>
+          <textarea  class="input-md round form-control" id="about" name="about" placeholder="About">{{ $user->about }}</textarea>
         </div>
     </div>
     <div class="profile-button col-md-12 text-right">

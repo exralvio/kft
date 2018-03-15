@@ -15,19 +15,19 @@
     <div class="pp-container">
         <div class="pp-image">
             @if (isset($user['photo']))
-                <img src="{{ $user['photo'] }}"/>
+                <img src="{{ $user->photo }}"/>
             @else
                 <img src="{{ url('') }}/images/pp-icon.png"/>
             @endif
         </div>
     </div>
     <div class="text-center user-profile">
-        <div class="profile-name">{{ isset($user['firstname']) ? $user['firstname'] : '' }} {{ isset($user['lastname']) ? $user['lastname'] : '' }}</div>
+        <div class="profile-name">{{ $user->firstname }} {{ $user->lastname }}</div>
         <div class="profile-social">
             <ul>
-                <li>{{ isset($user['photoview_number']) ? $user['photoview_number'] : 0  }} Photos Views</li>
-                <li>{{ isset($user['follower_number']) ? $user['follower_number'] : 0 }} Followers</li>
-                <li>{{ isset($user['following_number']) ? $user['following_number'] : 0 }} Following</li>
+                <li>{{ $user->photoview_number ? $user->photoview_number : 0 }} Photos Views</li>
+                <li>{{ $user->follower_number ? $user->follower_number : 0 }} Followers</li>
+                <li>{{ $user->following_number ? $user->following_number : 0 }} Following</li>
             </ul>
         </div>
     </div>
@@ -36,8 +36,6 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">PHOTOS</a></li>
             <li role="presentation"><a href="#galleries" aria-controls="galleries" role="tab" data-toggle="tab">GALLERIES</a></li>
-            <!-- <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">GROUPS</a></li> -->
-            <!-- <li role="presentation"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">ABOUT</a></li> -->
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
