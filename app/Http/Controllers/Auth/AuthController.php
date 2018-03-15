@@ -83,7 +83,7 @@ class AuthController extends Controller{
 
             $userdata = array(
                 'email' 	=> $request->get('email'),
-                'password' 	=> Hash::make($request->get('password'))
+                'password' 	=> bcrypt($request->get('password'))
             );
 
             /**
@@ -97,7 +97,7 @@ class AuthController extends Controller{
             }else{
                 $newUser = new User();
                 $newUser->email = $request->get('email');
-                $newUser->password = Hash::make($request->get('email'));
+                $newUser->password = bcrypt($request->get('password'));
                 if($newUser->save()){
                     if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
                         /**
