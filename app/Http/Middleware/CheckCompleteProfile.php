@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use \App\Models\User;
 
 class CheckCompleteProfile
 {
@@ -14,7 +15,9 @@ class CheckCompleteProfile
             return redirect('/');
         }else{
             $user_session = $request->session()->get('user');
-            $user = iterator_to_array($user_session);
+            $user_arr = iterator_to_array($user_session);
+            $user = User::raw()->findOne(['_id' => $user_arr['_id']]);
+
             if(isset($user['firstname']) && isset($user['department'])){
                 return $next($request);
             }else{
