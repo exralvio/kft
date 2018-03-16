@@ -38,36 +38,10 @@
         <div class="page" id="top">
             
             <?php $route = Route::current()->uri; ?>
-            <!-- Navigation panel -->
-            <nav class="main-nav stick-fixed {{ $route == '/' ? 'transparent': '' }}">
-                <div class="full-wrapper relative clearfix">
-                    <!-- Logo ( * your text or image into link tag *) -->
-                    <div class="nav-logo-wrap local-scroll">
-                        <a href="{{ url('/') }}" class="logo">
-                            <img src="{{ url('') }}/images/logo-kft.png" alt="" />
-                        </a>
-                    </div>
-                    <div class="mobile-nav">
-                        <i class="fa fa-bars"></i>
-                    </div>
-                    <!-- Main Menu -->
-                    <div class="inner-nav desktop-nav">
-                        <ul class="clearlist scroll-nav local-scroll">
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#services">Help</a></li>
-                            <li><a href="#discover">Discover</a></li>
-                        </ul>
-                    </div>
-                    <!-- Main Menu -->
-                    <div class="inner-nav desktop-nav login-nav">
-                        <ul class="clearlist scroll-nav local-scroll">
-                            <li><a href="{{ url('login') }}">Login</a></li>
-                            <li><a href="{{ url('signup') }}" class="nav-signup">Sign up</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- End Navigation panel -->
+
+            <!-- Begin Navigation -->
+            @include('layouts/nav')
+            <!-- End Navigation -->
 
             <!-- Begin Content -->
             @yield('content')

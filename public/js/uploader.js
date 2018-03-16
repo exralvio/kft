@@ -84,6 +84,12 @@ function submitUpload(e){
 			setTimeout(function(){
 				location.reload();
 			}, 1000);
+		},
+		error: function(){
+			alert("Unexpected Error! Please Reload");
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
 		}
 	});
 }
