@@ -38,9 +38,7 @@ Route::middleware('auth')->group(function () {
 /** User Login and profile complete **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
-	Route::get('/dashboard', function(){
-		return view('dashboard/index');
-	});
+	Route::get('/dashboard', 'DashboardController@showDashboard');
 
 	/** Media **/
 	Route::post('/upload', 'MediaController@postUpload');
