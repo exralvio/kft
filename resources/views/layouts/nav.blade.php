@@ -49,7 +49,13 @@
                 <li>
                     <a href="#" class="mn-has-sub">
                         <span class="visible-xs">Account</span>
-                        <span class="nav-avatar visible-lg"><img src="{{ url('') }}/rythm/images/user-avatar.png"></span>
+                        <span class="nav-avatar visible-lg">
+                            @if(Session::has('user')) 
+                            <img src="{{ Session::get('user')->photo }}" />
+                            @else
+                            <img src="{{ url('') }}/rythm/images/user-avatar.png">
+                            @endif
+                        </span>
                     </a>
                     
                     <!-- Sub -->
