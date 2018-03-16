@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-12">
       <div class="col-md-6">
-        <label for="department">Gender</label>
+        <label for="department">Department</label>
         <select id="department" name="department" class="input-md round form-control">
           <option value="">-- Select Department --</option>
           @foreach ($departments as $department)
