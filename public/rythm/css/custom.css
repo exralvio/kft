@@ -253,6 +253,21 @@ a.nav-notification:hover .fa {
 	font-size: 12px;
 }
 
+.upload-publish {
+	height: 100%;
+	display: none;
+}
+
+.upload-publish img {
+	width: 100px;
+}
+
+.upload-publish h5 {
+	font-size: 23px;
+	margin-top: 35vh;
+	margin-bottom: 10px;
+}
+
 .footer {
 	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
 	padding-bottom: 300px;

@@ -24,7 +24,7 @@
   </form>
   <div class="col-sm-12 col-md-3 pull-right form-uploader-wrapper">
     <div class="row">
-      <form class="form form-uploader pt-20 pd-20 align-left" role="form">
+      <form class="form form-uploader pt-20 pd-20 align-left" role="form" action="{{ url('confirmUpload') }}">
         <div class="form-blocker"></div>
         <div class="col-sm-12">
           <div class="mb-20 mb-md-10 publish-section">
@@ -34,10 +34,7 @@
 
           <div class="mb-20 mb-md-10">
             <label>Category</label>
-            <select class="form-control input-md upload-category">
-              <option>Category 1</option>
-              <option>Category 2</option>
-            </select>
+            {{ Form::select('department', App\Models\MediaCategory::pluck('name', '_id'), null, ['placeholder'=>'Uncategorized', 'class'=>'input-md form-control upload-category']) }}
           </div> 
           <div class="mb-20 mb-md-10">
             <label>Title</label>
@@ -45,7 +42,7 @@
           </div> 
           <div class="mb-20 mb-md-10">
             <label>Description</label>
-            <textarea placeholder="None" class="form-control input-md"></textarea>
+            <textarea placeholder="None" class="form-control input-md upload-description"></textarea>
           </div>
           <div class="mb-20 mb-md-10">
             <label>Keywords</label>
@@ -57,8 +54,13 @@
         </div>
       </form> 
     </div>
-    
   </div>
+
+  <div class="col-sm-12 upload-publish">
+    <h5 class="mt-sm-30 mt-lg-50">Publishing</h5>
+    <img src="{{ url('images/rolling.gif') }}">
+  </div>
+
 </div>
 
 <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>

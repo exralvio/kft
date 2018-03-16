@@ -1,5 +1,10 @@
 
 var upload_images = [];
+var	first_time = 1;
+var upload_index = 0;
+var image_counter = 0;
+var remodal = $('[data-remodal-id=uploader]').remodal();
+
 function resetUploadForm(){
 	$('.form-uploader')[0].reset();
 	$('.form-blocker').show();
@@ -15,6 +20,7 @@ function editUploadForm(e){
 	$('.form-blocker').hide();
 	$('.upload-title').val(data.title);
 	$('.upload-description').val(data.description);
+	$('.upload-category').val(data.category);
 	$('.upload-index').val(upload_index);
 
 	$('.upload-title').on('change keyup paste', function(e){
@@ -29,15 +35,60 @@ function editUploadForm(e){
 		upload_images[current_index].description = new_val;
 	});
 
-	$('.upload-keywords').on('itemAdded itemRemoved', function(event) {
+	$('.upload-keywords').on('itemAdded itemRemoved', function(e) {
 		var new_val = $('.upload-keywords').tagsinput('items');
 		var current_index = $('.upload-index').val();
 		upload_images[current_index].keywords = new_val;
 	});
+
+	$('.upload-category').on('change', function(e){
+		var new_val = $(this).val();
+		var current_index = $('.upload-index').val();
+		upload_images[current_index].category = new_val;
+	})
+}
+
+function submitUpload(e){
+	e.preventDefault();
+
+	/** Update element **/
+	$('.form-uploader-wrapper').hide();
+	$('#uploadzone').hide();
+	$('.upload-publish').show();
+
+
+	var active_index = [];
+	$('.dz-preview').each(function(i, e){
+		active_index.push($(e).data('upload-index'));
+	});
+
+	var active_images = [];
+	$(active_index).each(function(i, v){
+		active_images.push(upload_images[v]);
+	});
+
+	var datas = {
+		"_token": $('meta[name="csrf-token"]').attr('content'),
+		"items": active_images
+	};
+
+	$.ajax({
+		type: 'post',
+		url: $('.form-uploader').attr('action'),
+		data: datas,
+		success: function(response){
+			$('.upload-publish').hide();
+			$('#uploadzone').show();
+			remodal.close();
+
+			setTimeout(function(){
+				location.reload();
+			}, 1000);
+		}
+	});
 }
 
 $(function(){
-	var image_counter = 0;
 
 	Dropzone.autoDiscover = false;
 
@@ -60,6 +111,25 @@ $(function(){
 		$('.dz-addmore').show();
 		$('#uploadzone').removeClass('col-md-12').addClass('col-md-9');
 		$('.form-uploader-wrapper').show();
+
+		upload_images.push({
+			'filename': null,
+			'category': null,
+			'title': null,
+			'description': null,
+			'keywords': []
+		});
+
+		if(first_time == 1){
+			$('body .dz-preview').trigger('click');
+			first_time = 0;
+		}
+	});
+
+	mydropzone.on("sending", function(file, xhr, formData) {
+	  // Will send the filesize along with the file as POST data.
+	  formData.append("upload_index", upload_index);
+	  upload_index++;
 	});
 
 	mydropzone.on('reset', function(){
@@ -67,17 +137,13 @@ $(function(){
 		$('.dz-message').show();
 		$('.form-uploader-wrapper').hide();
 		$('#uploadzone').removeClass('col-md-9').addClass('col-md-12');
+
+		first_time = 1;
 	});
 
 	mydropzone.on('success', function(file, response){
 		if(response){
-			upload_images.push({
-				'filename': response.filename,
-				'category': null,
-				'title': null,
-				'description': null,
-				'keywords': []
-			});	
+			upload_images[response.upload_index].filename = response.filename;
 		}
 	});
 
@@ -91,5 +157,5 @@ $(function(){
 
 	$('body').on('click', '.dz-preview', editUploadForm);
 
-	// $('body').not('.dz-preview').on('click', resetUploadForm);
+	$('.btn-uploader-submit').on('click', submitUpload);
 });
