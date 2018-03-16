@@ -11,7 +11,6 @@
         margin: 0 auto 50px auto;
     }
     .post-container{
-        margin-bottom: 10px;
         display: inline-block;
         vertical-align: top;
         margin-left: 5px;
@@ -52,7 +51,8 @@
                             </div>
                             <div class="post-container font-alt">
                                 <div class="poster">{{ $post->user_detail['first_name'] }} {{ isset($post->user_detail['last_name']) ? $post->user_detail['last_name'] : '' }}</div>
-                                <div class="published-text">Published a Gallery 20 Hours Ago</div>
+                                <!-- <div class="published-text">Published a Gallery {{ $post->created_at }}</div> -->
+                                <div class="publish-date">Published a Gallery {{ $post->created_at->diffForHumans() }}</div>
                             </div>
                             
                             <div class="team-item-image">
@@ -73,3 +73,4 @@
         </div>
     </section>
 @endsection
+
