@@ -51,7 +51,6 @@
                             </div>
                             <div class="post-container font-alt">
                                 <div class="poster">{{ $post->user_detail['first_name'] }} {{ isset($post->user_detail['last_name']) ? $post->user_detail['last_name'] : '' }}</div>
-                                <!-- <div class="published-text">Published a Gallery {{ $post->created_at }}</div> -->
                                 <div class="publish-date">Published a Gallery {{ $post->created_at->diffForHumans() }}</div>
                             </div>
                             
