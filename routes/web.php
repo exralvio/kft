@@ -13,6 +13,11 @@
 
 Route::get('/', 'LandingController@showIndex');
 
+/** Discover **/
+Route::get('/discover', function(){
+	return view('landing/discover');
+});
+
 Route::middleware('guest')->group(function(){
 	/** signup **/
 	Route::get('/signup', 'Auth\AuthController@showSignup');

@@ -77,6 +77,8 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>       
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
+
+        @yield('footer_script')
         
     </body>
 </html>
