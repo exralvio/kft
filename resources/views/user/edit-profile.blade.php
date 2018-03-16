@@ -25,8 +25,13 @@
     </div>
     <div class="col-md-12">
       <div class="col-md-6">
-        <label for="department">Department*</label>
-        <input type="text" class="input-md round form-control" id="department" name="department" placeholder="Department" required value="{{ $user->department }}">
+        <label for="department">Gender</label>
+        <select id="department" name="department" class="input-md round form-control">
+          <option value="">-- Select Department --</option>
+          @foreach ($departments as $department)
+            <option value="{{ $department }}" {{ $user->department == $department ? 'selected' : ''}}>{{ $department->parent }} - {{ $department->name }}</option>
+          @endforeach
+        </select>
         @if ($errors->has('department'))
             <span class="text-danger" style="float:left;">{{ $errors->first('department') }}</span>
         @endif
