@@ -69,7 +69,7 @@
                                 <a href="#">My Settings</i></a>
                             </li>
                             <li>
-                                <a href="#">Manage Photos</i></a>
+                                <a href="{{ url('manage') }}">Manage Photos</i></a>
                             </li>
                             <li>
                                 <a href="{{ url('logout') }}">Logout</i></a>

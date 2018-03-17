@@ -177,4 +177,8 @@ class MediaController extends Controller{
         
         $input['exif'] = $results;
     }
+
+    public function getManage(){
+        return view('media/manage');
+    }
 }
