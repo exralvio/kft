@@ -41,4 +41,16 @@ class Media extends Eloquent
     	$media->keywords = !empty($data['keywords']) ? $data['keywords'] : [];
     	$media->save();
     }
+
+    public function getName(){
+        return !empty($this->user['firstname']) ? $this->user['firstname'].' '.$this->user['lastname'] : $this->user['firstname'];
+    }
+
+    public static function freshMedia(){
+        return Media::get()->sortBy('created_at', null, true);
+    }
+
+    public static function popularMedia(){
+        return Media::get()->sortBy('view_count', null, true);
+    }
 }

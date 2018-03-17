@@ -94,6 +94,23 @@ a.nav-notification:hover .fa {
 	overflow-y: scroll;
 }
 
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.work-intro .profile-icon {
+	float: left;
+	margin-left: 10px;
+}
+
+.work-intro .work-title {
+	line-height: 40px;
+    margin-left: 20px;
+    float: left;
+}
+
 .dz-message {
 	top: 45%;
     position: relative;

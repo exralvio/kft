@@ -86,7 +86,7 @@ class MediaController extends Controller{
         }
 
         $md = Image::make($ori_path);
-        $md->resize(300, null, function ($constraint) {
+        $md->resize(null, 400, function ($constraint) {
             $constraint->aspectRatio();
         });
         if($md->save($md_path)){
@@ -105,7 +105,7 @@ class MediaController extends Controller{
         $input['images'] = [
             'original'=>$ori_name,
             'medium'=>$md_name,
-            'lg_name'=>$lg_name
+            'large'=>$lg_name
         ];
     }
 
