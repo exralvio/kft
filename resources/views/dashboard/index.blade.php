@@ -111,8 +111,8 @@
     
     
         function loadMoreData(last_id){
-            var timer = setTimeout(function(){
-                clearTimeout(timer);
+            // var timer = setTimeout(function(){
+                // clearTimeout(timer);
                 $.ajax({
                     url: '/loadMorePost/'+last_id,
                     type: "get",
@@ -130,7 +130,7 @@
                 {
                     alert('failed to connect to server ...');
                 });
-            },800);
+            // },300);
         }
     } 
 </script>
