@@ -8,6 +8,7 @@
         <meta name="author" content="Roman Kirichik">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         
         <!-- Favicons -->
         <link rel="shortcut icon" href="{{ url('') }}/rythm/images/favicon.png">
@@ -76,6 +77,8 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>       
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
+
+        @yield('footer_script')
         
     </body>
 </html>

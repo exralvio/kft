@@ -89,7 +89,7 @@
 
             <!-- Ajax Loader -->
             <div class="text-center ajax-load"  style="display:none">
-                <p><img src="{{url('')}}/images/ajax-loader.gif">Loading More post</p>
+                <p><img src="{{url('images/ajax-loader.gif')}}">Loading More post</p>
             </div>
 
         </div>
@@ -102,11 +102,10 @@
         $(window).scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
                 var last_id = $(".timeline-post:last").attr("id");
-                console.log(prev_id+' = '+last_id, prev_id == last_id);
-                // if(prev_id != last_id){
-                //     prev_id = last_id;
+                if(prev_id != last_id){
+                    prev_id = last_id;
                     loadMoreData(last_id);
-                // }
+                }
             }
         });
     

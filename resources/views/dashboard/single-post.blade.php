@@ -4,7 +4,7 @@
 
         <div class="post-header">
             <div class="poster-pp">
-                <img src="{{ isset($post->user_detail['photo']) ? $post->user_detail['photo'] : url('')/images/pp-icon.png }}"/>
+                <img src="{{ isset($post->user_detail['photo']) ? $post->user_detail['photo'] : url('images/pp-icon.png') }}"/>
             </div>
             <div class="post-container font-alt">
                 <div class="poster">{{ $post->user_detail['first_name'] }} {{ isset($post->user_detail['last_name']) ? $post->user_detail['last_name'] : '' }}</div>

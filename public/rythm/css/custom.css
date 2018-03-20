@@ -94,6 +94,23 @@ a.nav-notification:hover .fa {
 	overflow-y: scroll;
 }
 
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.work-intro .profile-icon {
+	float: left;
+	margin-left: 10px;
+}
+
+.work-intro .work-title {
+	line-height: 40px;
+    margin-left: 20px;
+    float: left;
+}
+
 .dz-message {
 	top: 45%;
     position: relative;
@@ -251,6 +268,61 @@ a.nav-notification:hover .fa {
 
 .publish-section p {
 	font-size: 12px;
+}
+
+.upload-publish {
+	height: 100%;
+	display: none;
+}
+
+.upload-publish img {
+	width: 100px;
+}
+
+.upload-publish h5 {
+	font-size: 23px;
+	margin-top: 35vh;
+	margin-bottom: 10px;
+}
+
+.bg-white {
+	background: #fff;
+}
+
+.discover-tablist {
+	border-bottom: 1px solid #eeeff2;
+}
+
+.discover-tablist .nav-tabs {
+	border-bottom: 0px;
+}
+
+.discover-tablist .nav-tabs>li>a {
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+    padding: 0px 0px 15px;
+    margin: 0 10px;
+    font-size: 15px;
+    border: none;
+}
+
+.discover-tablist .nav-tabs>li:first-child a {
+	margin-left: 0px;
+}
+
+.discover-tablist .nav-tabs>li.active>a, 
+.discover-tablist .nav-tabs>li.active>a:hover, 
+.discover-tablist .nav-tabs>li.active>a:focus{
+	text-decoration: none;
+	border: none;
+    border-bottom: 3px solid #0099e5 !important;
+}
+
+.discover-tablist .nav-tabs>li>a:hover {
+	border: none;
+	color: #0099e5;
+	background: none;
 }
 
 .footer {
