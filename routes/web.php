@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
 	Route::get('/dashboard', 'DashboardController@showDashboard');
+	Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 
 	/** Media **/
 	Route::post('/upload', 'MediaController@postUpload');

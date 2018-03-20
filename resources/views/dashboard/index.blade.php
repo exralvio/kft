@@ -7,8 +7,15 @@
 @section('content')   
 <style type="text/css">
     .timeline-post{
-        max-width:480px;
+        max-width:650px;
         margin: 0 auto 50px auto;
+        background: #ffffff;
+        -webkit-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
+        -moz-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
+        box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
+    }
+    .post-header{
+        padding: 10px;
     }
     .post-container{
         display: inline-block;
@@ -27,49 +34,106 @@
     .poster-pp{
         width: 40px;
         height: 40px;
-        border: 1px solid #ccc;
         display: inline-block;
+    }
+    .poster-pp img {
+        border-radius: 50px;
     }
     .category-text{
         font-weight: bold;
     }
+    .post-footer{
+        padding: 10px;
+    }
+    .ajax-load{
+        background: transparent;
+        padding: 10px 0px;
+        width: 100%;
+    }
+    a.button-rounded{
+        border: 1px solid #ccc;
+        margin: 2px;
+        border-radius: 15px;
+        padding: 5px 15px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .blue-sky-bg{
+        background-color: #0099e5;
+        color: #ffffff;
+        font-weight: bold;
+        border:none!important;
+    }
+    .blue-sky-bg:hover{
+        background-color: #1fb5ff;
+        color: #ffffff;
+    }
+    .team-item-image {
+        margin: 0 5px;
+    }
+    .post-description{
+        margin-top:10px;
+    }
+    .post-title{
+        font-weight: bold;
+    }
 </style>
 
-    <section class="page-section pt-100">
-        <div class="container relative">
-            <div class="col-xs-12 col-lg-10 col-lg-push-1 post-wrapper">
-                <!-- <div class="col-xs-12 post-item mb-20">
-                    post item 1
-                </div> -->
-                <div class="row">
-                    @foreach($posts as $post)
-                    <div class="timeline-post mb-xs-30 wow fadeInUp">
-                        <div class="team-item">
+<section class="page-section pt-100">
+    <div class="container relative">
+        <div class="col-xs-12 col-lg-10 col-lg-push-1 post-wrapper">
 
-                            <div class="poster-pp">
-                                <img src="{{ isset($post->user_detail['photo']) ? $post->user_detail['photo'] : url('')/images/pp-icon.png }}"/>
-                            </div>
-                            <div class="post-container font-alt">
-                                <div class="poster">{{ $post->user_detail['first_name'] }} {{ isset($post->user_detail['last_name']) ? $post->user_detail['last_name'] : '' }}</div>
-                                <div class="publish-date">Published a Gallery {{ $post->created_at->diffForHumans() }}</div>
-                            </div>
-                            
-                            <div class="team-item-image">
-                                <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
-                                <div class="team-item-detail">
-                                    <h4 class="font-alt category-text">{{ isset($post->category_detail['name']) ? $post->category_detail['name'] : '' }}</h4>
-                                    <h4 class="font-alt normal">{{ $post->title }}</h4>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    @endforeach
-                    <!-- End Team item -->
-                </div>
-
+            <div class="row" id="post-data">
+                @include('dashboard/single-post')
             </div>
+
+            <!-- Ajax Loader -->
+            <div class="text-center ajax-load"  style="display:none">
+                <p><img src="{{url('')}}/images/ajax-loader.gif">Loading More post</p>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
+<script type="text/javascript">
+    window.onload = function(){
+        var prev_id = null;
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                var last_id = $(".timeline-post:last").attr("id");
+                console.log(prev_id+' = '+last_id, prev_id == last_id);
+                // if(prev_id != last_id){
+                //     prev_id = last_id;
+                    loadMoreData(last_id);
+                // }
+            }
+        });
+    
+    
+        function loadMoreData(last_id){
+            var timer = setTimeout(function(){
+                clearTimeout(timer);
+                $.ajax({
+                    url: '/loadMorePost/'+last_id,
+                    type: "get",
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                    $('.ajax-load').hide();
+                    $("#post-data").append(data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                    alert('failed to connect to server ...');
+                });
+            },800);
+        }
+    } 
+</script>
 @endsection
 
