@@ -23,14 +23,14 @@
         <div class="row post-footer">
             <div class="col-md-6 font-alt post-title">{{ $post->title }}</div>
             <div class="col-md-6 text-right" style="margin-top: 5px;">
-                <a class="button-rounded">
+                <a id="{{ $post->_id }}" class="button-rounded comment-button" href="#">
                     <i class="fa fa-comment-o"></i>
                 </a>
                 <a class="button-rounded">
                     <i class="fa fa-plus-square-o"></i>
                 </a>
                 <a class="button-rounded blue-sky-bg">
-                    <i class="fa fa-heart-o"></i> 20
+                    <i class="fa fa-heart-o"></i> {{ count($post->like_users) }}
                 </a>
             </div>
             <div class="col-md-12 post-description">{{ $post->description }}</div>

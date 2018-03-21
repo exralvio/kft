@@ -45,7 +45,8 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
 	Route::get('/dashboard', 'DashboardController@showDashboard');
 	Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
-
+	Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
+	//5ab0baf12db039f6a33159e2
 	/** Media **/
 	Route::post('/upload', 'MediaController@postUpload');
 	Route::post('/confirmUpload', 'MediaController@postConfirmUpload');

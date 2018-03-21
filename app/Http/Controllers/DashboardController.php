@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Media;
+use App\Models\Comment;
 use App\Models\Following;
 use Session;
+use MongoDB\BSON\ObjectID;
 
 class DashboardController extends Controller{
 
@@ -56,6 +58,20 @@ class DashboardController extends Controller{
                 ->get();
 
         $html = view('dashboard/single-post',["posts"=>$medias])->render();
+        echo $html;
+    }
+
+    /**
+     * function for ajax rendering
+    */
+    public function loadCommentPage($mediaId){
+        $mediaId = new ObjectId($mediaId);
+        // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
+        $comments = Comment::where('photo_id','=',$mediaId)->get();
+        $media = Media::find($mediaId);
+        // dd($media);
+        $html = view('dashboard/comment',["post"=>$media, "comments"=>$comments])->render();
+
         echo $html;
     }
 

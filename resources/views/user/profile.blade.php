@@ -1,12 +1,12 @@
 @extends('layouts/timeline')
 
-<link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
 
 @section('page-title')
- Komunitas Fotografi Telkom
+Komunitas Fotografi Telkom
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
 <section class="page-section pt-80" id="profile">
     <div class="text-right profile-button">
         <button type="button" class="btn btn-default">Manage</button>

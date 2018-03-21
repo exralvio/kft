@@ -54,7 +54,7 @@
         border: 1px solid #ccc;
         margin: 2px;
         border-radius: 15px;
-        padding: 5px 15px;
+        padding: 5px 15px 5px 17px;
         text-decoration: none;
         cursor: pointer;
     }
@@ -96,8 +96,57 @@
     </div>
 </section>
 
+<style type="text/css">
+    .modal-fs{max-width: none!important;}
+    .border-right{border-right:1px solid #cccccc;}
+    .comment-photo img{padding:5px;max-height: 579px;}
+    .comment-block{margin-top:10px;}
+    .comment-photo-detail, .comment-block{margin-right: 0;}
+    .comment-block .pp{padding: 0px;height: 35px;overflow: hidden;}
+    .comment-block .pp img{height:30px;width: auto; border-radius:30px;}
+    .comment-user-block{margin-top: 10px; margin-left: 0px;}
+    .comment-user-block .pp{height: 50px;width: 50px;overflow: hidden; float: left;}
+    .comment-user-block .pp img{border-radius: 25px;}
+    .comment-input{padding-left:0px;text-align: left;font-size:12px}
+    .profile-name, .following-status{text-align: left;margin-left: 60px;font-weight: bold;}
+    .comment-buttons{margin-top: 40px;text-align: left;margin-bottom: 10px;}
+    .comments{width: 100%;padding: 2px;float: left;}
+    .remodal-close {right: 0;z-index: 9999;left:inherit!important;}
+
+</style>
+<div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <div id="comment-content"></div>
+</div>
+
 <script type="text/javascript">
     window.onload = function(){
+
+        var inst = $('[data-remodal-id=commentPostModal]').remodal();
+        $('#post-data').on('click', 'a.comment-button', function(e) {
+            $.ajax({
+                url: '/loadCommentPage/'+e.currentTarget.id,
+                type: "get",
+                beforeSend: function()
+                {
+                    // $('.ajax-load').show();
+                    //show loader
+                }
+            })
+            .done(function(data)
+            {
+                $('#comment-content').empty();
+                $('#comment-content').append(data);
+                inst.open();
+                // $("#post-data").append(data);
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError)
+            {
+                alert('failed to connect to server ...');
+            });
+        });
+
+
         var prev_id = null;
         $(window).scroll(function() {
             if($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -111,26 +160,23 @@
     
     
         function loadMoreData(last_id){
-            // var timer = setTimeout(function(){
-                // clearTimeout(timer);
-                $.ajax({
-                    url: '/loadMorePost/'+last_id,
-                    type: "get",
-                    beforeSend: function()
-                    {
-                        $('.ajax-load').show();
-                    }
-                })
-                .done(function(data)
+            $.ajax({
+                url: '/loadMorePost/'+last_id,
+                type: "get",
+                beforeSend: function()
                 {
-                    $('.ajax-load').hide();
-                    $("#post-data").append(data);
-                })
-                .fail(function(jqXHR, ajaxOptions, thrownError)
-                {
-                    alert('failed to connect to server ...');
-                });
-            // },300);
+                    $('.ajax-load').show();
+                }
+            })
+            .done(function(data)
+            {
+                $('.ajax-load').hide();
+                $("#post-data").append(data);
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError)
+            {
+                alert('failed to connect to server ...');
+            });
         }
     } 
 </script>
