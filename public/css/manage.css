@@ -116,7 +116,7 @@ body.timeline {
 .form-editor {
 	overflow-y: scroll;
 	padding-right: 15px;
-	height: 700px;
+	height: 500px;
 }
 
 .form-editor label {
@@ -163,4 +163,43 @@ body.timeline {
 
 .form-editor-save .btn-cancel {
 	text-decoration: none;
+	font-size: 15px;
+}
+
+.manage-media {
+	background: #F7F8FA;
+	height: 800px;
+	cursor: crosshair;
+}
+
+.manage-item {
+	height: 125px;
+}
+
+.manage-item-inner {
+	cursor: default;
+}
+
+.manage-item-icon {
+	position: absolute;
+	left: 15px;
+	right: 15px;
+	padding-top: 5px;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.6)), to(transparent));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+    height: 40px;
+}
+
+.manage-item-icon a {
+	color: #fff;
+}
+
+.manage-item-icon a:first-child {
+	margin-left: 10px;
+}
+
+.manage-item-icon a:last-child {
+	margin-right: 10px;
 }

@@ -29,7 +29,21 @@
                     <div class="manage-header row">
                         <h5>All Photos</h5> <span>10 Photos</span>
                     </div>
-                    <div class="manage-media">
+                    <div class="manage-media pt-20 row">
+                      @foreach(\App\Models\Media::all() as $key=>$media)
+                        <div class="col-sm-3 mb-20 manage-item">
+                          <div class="manage-item-inner" data-media-id="{{ $media['_id'] }}">
+                            <div class="manage-item-icon">
+                              <a href="" class="manage-item-zoom pull-left"><i class="fa fa-search-plus"></i></a>
+                              <a href="" class="manage-item-detail pull-right"><i class="fa fa-external-link"></i></a>
+                            </div>
+                            <img src="{{ url($media['images']['medium']) }}">
+                          </div>
+                        </div>
+                        @if(($key+1) % 4 == 0)
+                          <div class="clearfix"></div>
+                        @endif
+                      @endforeach
                     </div>
                 </div>
                 <div class="col-md-3 manage-right">
@@ -40,20 +54,20 @@
 
                           <div class="mb-20 mb-md-10">
                             <label>Category</label>
-                            {{ Form::select('department', App\Models\MediaCategory::pluck('name', '_id'), null, ['placeholder'=>'Uncategorized', 'class'=>'input-md form-control upload-category']) }}
+                            {{ Form::select('department', App\Models\MediaCategory::pluck('name', '_id'), null, ['placeholder'=>'Uncategorized', 'class'=>'input-md form-control edit-category']) }}
                           </div> 
                           <div class="mb-20 mb-md-10">
                             <label>Title</label>
-                            <input type="text" placeholder="Untitled" class="form-control input-md upload-title">
+                            <input type="text" placeholder="Untitled" class="form-control input-md edit-title">
                           </div> 
                           <div class="mb-20 mb-md-10">
                             <label>Description</label>
-                            <textarea placeholder="None" class="form-control input-md upload-description"></textarea>
+                            <textarea placeholder="None" class="form-control input-md edit-description"></textarea>
                           </div>
                           <div class="mb-20 mb-md-10">
                             <label>Keywords</label>
                             <div>
-                              <input class="upload-keywords" type="text" name="" data-role="tagsinput">
+                              <input class="edit-keywords" type="text" name="" data-role="tagsinput">
                             </div>
                           </div>
                           <div>
@@ -64,43 +78,43 @@
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Camera</label>
                                 <div class="col-sm-8">
-                                    <input class="form-control input-md" type="text" name="">
+                                    <input class="form-control input-md edit-camera" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Lens</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-lens" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Focal Length</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-fl" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Shutter Speed</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-ss" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Aperture</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-aperture" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">ISO</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-iso" type="text" name="">
                                 </div>
                               </div>
                               <div class="mb-10 row">
                                 <label class="col-sm-4">Date Taken</label>
                                 <div class="col-sm-8">
-                                     <input class="form-control input-md" type="text" name="">
+                                     <input class="form-control input-md edit-dt" type="text" name="">
                                 </div>
                               </div>
                           </div>
@@ -108,7 +122,7 @@
                               <a class="btn btn-mod btn-round btn-small btn-remove-media">Delete this photo</a>
                           </div>
 
-                          <input type="hidden" class="media-id" name="">
+                          <input type="hidden" class="edit-mediaid" name="">
                         </div>
                       </form> 
                     <div class="form-editor-save pt-20">
@@ -127,5 +141,12 @@
 @endsection
 
 @section('footer_script')
+    <script type="text/javascript">
+      var medias = {};
+
+      @foreach(\App\Models\Media::all() as $media)
+        medias["{{ $media['_id'] }}"] = JSON.parse('{!! $media->toJson() !!}');
+      @endforeach
+    </script>
     <script type="text/javascript" src="{{ url('js/manage.js') }}"></script>
 @endsection
