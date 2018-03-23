@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
         
+        @yield('header_script')
 
     </head>
     <body class="appear-animate timeline">

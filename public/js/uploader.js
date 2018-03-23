@@ -3,7 +3,7 @@ var upload_images = [];
 var	first_time = 1;
 var upload_index = 0;
 var image_counter = 0;
-var remodal = $('[data-remodal-id=uploader]').remodal();
+var remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true});
 
 function resetUploadForm(){
 	$('.form-uploader')[0].reset();
@@ -95,6 +95,11 @@ function submitUpload(e){
 }
 
 $(function(){
+
+	$(document).on('closed', '.remodal', function (e) {
+		// Reason: 'confirmation', 'cancellation'
+		console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
+	});
 
 	Dropzone.autoDiscover = false;
 
