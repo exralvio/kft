@@ -112,7 +112,8 @@
     .comment-buttons{margin-top: 40px;text-align: left;margin-bottom: 10px;}
     .comments{width: 100%;padding: 2px;float: left;}
     .remodal-close {right: 0;z-index: 9999;left:inherit!important;}
-
+    .row .dynamicComment{margin: 0;max-height: 325px;overflow-y: scroll;display: inline-block;}
+    .comment-text:hover .del-comment{font-weight: bold; display: block!important;}
 </style>
 <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
     <button data-remodal-action="close" class="remodal-close"></button>
@@ -122,6 +123,7 @@
 <script type="text/javascript">
     window.onload = function(){
 
+        var postId = null;
         var inst = $('[data-remodal-id=commentPostModal]').remodal();
         $('#post-data').on('click', 'a.comment-button', function(e) {
             $.ajax({
@@ -129,6 +131,7 @@
                 type: "get",
                 beforeSend: function()
                 {
+                    postId = e.currentTarget.id
                     // $('.ajax-load').show();
                     //show loader
                 }
@@ -146,6 +149,48 @@
             });
         });
 
+        $('#comment-content').on('keyup','#commentPhoto', function(e){
+            if(e.keyCode == 13){
+                $.ajax({
+                    url: '/postComment',
+                    type: "post",
+                    data: { 
+                        _token: '{{csrf_token()}}',
+                        comment : e.target.value,
+                        post_id: postId
+                    }
+                })
+                .done(function(data)
+                {
+                    e.currentTarget.value = "";
+                    $('#dynamicComment').append(data);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                    alert('failed to connect to server ...');
+                });
+            }
+        })
+        
+        $('#comment-content').on('click','.del-comment', function(e){
+            var id = e.currentTarget.id.replace('del-','');
+            $.ajax({
+                url: '/deleteComment',
+                type: "post",
+                data: { 
+                    _token: '{{csrf_token()}}',
+                    comment_id: id
+                }
+            })
+            .done(function(data)
+            {
+                $('#comment-'+id).remove();
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError)
+            {
+                alert('failed to connect to server ...');
+            });
+        })
 
         var prev_id = null;
         $(window).scroll(function() {
@@ -157,7 +202,6 @@
                 }
             }
         });
-    
     
         function loadMoreData(last_id){
             $.ajax({

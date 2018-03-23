@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Media;
 use App\Models\Comment;
 use App\Models\Following;
+use Illuminate\Http\Request;
+use Response;
 use Session;
+use App\Models\User;
 use MongoDB\BSON\ObjectID;
 
 class DashboardController extends Controller{
@@ -73,6 +76,33 @@ class DashboardController extends Controller{
         $html = view('dashboard/comment',["post"=>$media, "comments"=>$comments])->render();
 
         echo $html;
+    }
+
+    public function postComment(Request $request){
+        $currentUser = User::current();
+        // dd($currentUser);
+        $media = Media::find($request->get('post_id'));
+        // dd($media->id);
+        $comment = new Comment;
+        $comment->photo_id = new ObjectId($media->_id);
+        $comment->user_id = $media->user_id;
+        $comment->user_detail = [
+            'first_name'=>$currentUser['firstname'],
+            'last_name'=>$currentUser['lastname'],
+            'photo'=>$currentUser['photo']
+        ];
+        $comment->comment = $request->get('comment');
+        if($comment->save()){
+            // return Response::json(['success' => true, 'data' => $comment->toArray()], 200);
+            $html = view('dashboard/single-comment',["comment"=>$comment])->render();
+            echo $html;
+        }
+    }
+
+    public function deleteComment(Request $request){
+        $comment = new Comment;
+        $comment->delete();
+        return Response::json(['status'=>'success'],200);
     }
 
 }
