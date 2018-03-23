@@ -100,8 +100,7 @@ class DashboardController extends Controller{
     }
 
     public function deleteComment(Request $request){
-        $comment = new Comment;
-        $comment->delete();
+        Comment::destroy($request->comment_id);
         return Response::json(['status'=>'success'],200);
     }
 
