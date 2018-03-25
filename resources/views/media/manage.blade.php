@@ -15,7 +15,13 @@
             <div class="row">
                 <div class="col-md-2 manage-left">
                     <div class="manage-header row first-row">
-                        <button class="manage-uploadbtn">Upload To Library</button>
+                        <a href="#uploader" class="manage-uploadbtn">
+                          @if($media_type == 'public')
+                            Upload to Profile
+                          @else
+                            Upload to Library
+                          @endif
+                        </a>
                     </div>
                     <div class="manage-categories mt-20">
                         <h4>Photos</h4>

@@ -31,10 +31,13 @@ body.timeline {
     outline: none;
     background-color: #0099e5;
     border: 1px solid #0099e5;
+    text-align: center;
 }
 
 .manage-uploadbtn:hover {
 	background: #00aaff;
+	color: #fff;
+	text-decoration: none;
 }
 
 .manage-header{
