@@ -1,7 +1,11 @@
 function updateEditForm(e){
 	e.preventDefault();
 
+	$('.manage-item-inner').removeClass('active');
+	$(this).addClass('active');
+
 	$('.form-editor')[0].reset();
+	$('.form-blocker').hide();
 
 	var media_id = $(this).data('media-id');
 	var media = medias[media_id];
@@ -39,6 +43,18 @@ function updateEditForm(e){
 	$('.edit-mediaid').val(media._id);
 }
 
+function updateEditorHeight(){
+	var managemedia_height = $(window).height() - 75 - 58;
+	$('.manage-media').css('height', managemedia_height+'px');
+
+	var formeditor_height = $(window).height() - 75 - 105;
+	$('.form-editor').css('height', formeditor_height+'px');
+}
+
 $(function(){
+	updateEditorHeight();
+
+	$(window).on('resize', updateEditorHeight);
+
 	$('.manage-item-inner').on('click', updateEditForm);
 });

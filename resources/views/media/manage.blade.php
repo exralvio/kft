@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-md-3 manage-right">
                     <form class="form form-editor mb-20 pd-20 align-left" role="form" action="{{ url('confirmUpload') }}">
-                        <!-- <div class="form-blocker"></div> -->
+                        <div class="form-blocker"></div>
                         <div class="relative">
                           <h3>Editing 1 Photo</h3>
 
@@ -132,6 +132,7 @@
                         <div class="col-sm-8">                        
                             <button class="btn btn-editor-save btn-success btn-lg btn-round">Save</button>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
