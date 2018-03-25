@@ -109,6 +109,18 @@ class MediaController extends Controller{
         return Response::json($results);
     }
 
+    public function postRemoveMedia(Request $request){
+        $media_id = $request->media_id;
+        $media = Media::find($media_id);
+        
+
+        if($media->delete()){
+            return Response::json(['status'=>'success']);
+        }
+
+        return Response::json(['status'=>'error'], 400);
+    }
+
     public function saveFile(&$input){
         $basename = pathinfo($input['filename'], PATHINFO_FILENAME);
         $extension = File::extension($input['filename']);

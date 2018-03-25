@@ -11,6 +11,8 @@ function updateEditForm(e){
 	var media_id = $(this).data('media-id');
 	var media = medias[media_id];
 
+	$('.btn-remove-media').data('mediaid', media_id);
+
 	if(typeof media.category.id !== 'undefined')
 		$('.edit-category').val(media.category.id);
 
@@ -76,6 +78,35 @@ function saveEditForm(e){
 	});
 }
 
+function removeMedia(e){
+	e.preventDefault();
+
+	if(!confirm('Are you sure you want to delete this photo?')){
+		return false;
+	}
+
+	var media_id = $(this).data('mediaid');
+	var postUrl = $(this).data('action');
+	var postData = {
+		"_token": $('meta[name="csrf-token"]').attr('content'),
+		"media_id": media_id
+	};
+
+	$('.btn-editor-save').prop('disabled', true);
+	$('.btn-editor-save').text('Deleting..');
+
+	$.ajax({
+		url: postUrl,
+		data: postData,
+		dataType: 'json',
+		type: 'post',
+		success: function(response){
+			alert("Delete photo success!");
+			location.reload();
+		}
+	});
+}
+
 function updateEditorHeight(){
 	var managemedia_height = $(window).height() - 75 - 58;
 	$('.manage-media').css('height', managemedia_height+'px');
@@ -96,4 +127,6 @@ $(function(){
 	$('.form-editor').on('change keyup',':input', function(){
 		$('.btn-editor-save').prop('disabled', false);
 	});
+
+	$('.btn-remove-media').on('click', removeMedia);
 });

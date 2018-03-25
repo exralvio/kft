@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 manage-right">
-                    <form class="form form-editor mb-20 pd-20 align-left" role="form" action="{{ url('updateMedia') }}">
+                    <form class="form form-editor mb-20 pd-20 align-left" role="form" action="{{ url('media/update') }}">
                         <div class="form-blocker"></div>
                         <div class="relative">
                           <h3>Editing 1 Photo</h3>
@@ -123,7 +123,7 @@
                               </div>
                           </div>
                           <div>
-                              <a class="btn btn-mod btn-round btn-small btn-remove-media">Delete this photo</a>
+                              <a class="btn btn-mod btn-round btn-small btn-remove-media" data-action="{{ url('media/remove') }}">Delete this photo</a>
                           </div>
 
                           <input type="hidden" class="edit-mediaid" name="media_id">
