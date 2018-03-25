@@ -20,17 +20,21 @@
                     <div class="manage-categories mt-20">
                         <h4>Photos</h4>
                         <ul>
-                            <li><a href="#" class="active">All Photos <span>10</span></a></li>
-                            <li><a href="#">Public <span>5</span></a></li>
+                            <li><a href="{{ url('manage/all') }}" class="{{ $media_type == 'all' ? 'active' : '' }}">All Photos <span>{{ \App\Models\Media::selfMediaCount('all') }}</span></a></li>
+                            <li><a href="{{ url('manage/public') }}" class="{{ $media_type == 'public' ? 'active' : '' }}">Public <span>{{ \App\Models\Media::selfMediaCount('public') }}</span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-7 manage-center">
                     <div class="manage-header row">
-                        <h5>All Photos</h5> <span>10 Photos</span>
+                        @if($media_type == 'public')
+                          <h5>Public</h5> <span>{{ \App\Models\Media::selfMediaCount('public') }} Photos</span>
+                        @else
+                          <h5>All Photos</h5> <span>{{ \App\Models\Media::selfMediaCount('all') }} Photos</span>
+                        @endif
                     </div>
                     <div class="manage-media pt-20 row">
-                      @foreach(\App\Models\Media::all() as $key=>$media)
+                      @foreach(\App\Models\Media::selfMedia() as $media)
                         <div class="col-sm-3 mb-20 manage-item">
                           <div class="manage-item-inner" data-media-id="{{ $media['_id'] }}">
                             <div class="manage-item-icon">
@@ -40,7 +44,7 @@
                             <img src="{{ url($media['images']['medium']) }}">
                           </div>
                         </div>
-                        @if(($key+1) % 4 == 0)
+                        @if($loop->iteration % 4 == 0)
                           <div class="clearfix"></div>
                         @endif
                       @endforeach

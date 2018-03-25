@@ -46,11 +46,25 @@ class Media extends Eloquent
         return !empty($this->user['firstname']) ? $this->user['firstname'].' '.$this->user['lastname'] : $this->user['firstname'];
     }
 
-    public static function freshMedia(){
+    public static function discoverFresh(){
         return Media::get()->sortBy('created_at', null, true);
     }
 
-    public static function popularMedia(){
+    public static function discoverPopular(){
         return Media::get()->sortBy('view_count', null, true);
+    }
+
+    public static function selfMedia(){
+        $user = User::current();
+        $medias = Media::where('user.id', $user['_id'])->get()->sortBy('created_at', null, true);
+
+        return $medias;
+    }
+
+    public static function selfMediaCount($media_type = null){
+        $user = User::current();
+        $count = Media::where('user.id', $user['_id'])->count();
+
+        return $count;
     }
 }

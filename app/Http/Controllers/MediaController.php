@@ -199,7 +199,7 @@ class MediaController extends Controller{
         $input['exif'] = $results;
     }
 
-    public function getManage(){
-        return view('media/manage');
+    public function getManage($media_type = null){
+        return view('media/manage', compact('media_type'));
     }
 }

@@ -38,7 +38,7 @@
                   <div class="tab-content">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
                         <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
-                            @foreach(\App\Models\Media::popularMedia() as $media)
+                            @foreach(\App\Models\Media::discoverPopular() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
                                 <a href="{{ url($media['images']['large']) }}" class="work-lightbox-link mfp-image">
@@ -57,7 +57,7 @@
                       </div>
                       <div role="tabpanel" id="fresh" class="tab-pane fade ">
                         <ul class="works-grid work-grid-gut clearfix font-alt hide-titles masonry" id="fresh-grid" >
-                            @foreach(\App\Models\Media::freshMedia() as $media)
+                            @foreach(\App\Models\Media::discoverFresh() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
                                 <a href="{{ url($media['images']['large']) }}" class="work-lightbox-link mfp-image">
