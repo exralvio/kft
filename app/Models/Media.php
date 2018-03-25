@@ -31,7 +31,7 @@ class Media extends Eloquent
 
     	if(!empty($data['category'])){
     		$category = MediaCategory::raw()->findOne(['_id'=>new ObjectID($data['category'])]);
-	    	$media->category = ['id'=>$category['_id'], 'name'=>$category['name']];
+	    	$media->category = ['id'=>(string) $category['_id'], 'name'=>$category['name']];
     	} else {
 	    	$media->category = ['id'=>'', 'name'=>'Uncategorized'];
     	}

@@ -53,4 +53,5 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/upload', 'MediaController@postUpload');
 	Route::post('/confirmUpload', 'MediaController@postConfirmUpload');
 	Route::get('/manage', 'MediaController@getManage');
+	Route::post('/updateMedia', 'MediaController@postUpdateMedia');
 });
