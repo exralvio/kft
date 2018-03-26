@@ -8,7 +8,9 @@ use Validator;
 use File;
 use Response;
 use App\Models\Media;
+use App\Models\MediaCategory;
 use Intervention\Image\ImageManagerStatic as Image;
+use MongoDB\BSON\ObjectID;
 
 class MediaController extends Controller{
 
@@ -67,6 +69,58 @@ class MediaController extends Controller{
         return Response::json(['status'=>'success'], 200);
     }
 
+    public function postUpdateMedia(Request $request){
+        $media_id = $request->media_id;
+
+        $media = Media::find($media_id);
+
+        $category_id = $request->category;
+
+        if(!empty($category_id)){
+            $category = MediaCategory::raw()->findOne(['_id'=>new ObjectID($category_id)]);
+            $media->category = ['id'=>(string) $category['_id'], 'name'=>$category['name']];
+        } else {
+            $media->category = ['id'=>'', 'name'=>'Uncategorized'];
+        }
+
+        $media->title = $request->title;
+        $media->description = $request->description;
+        $media->keywords = explode(",", $request->keywords);
+
+        $exif = array(
+            'camera' => $request->exif['camera'],
+            'lens' => $request->exif['lens'],
+            'focal_length' => $request->exif['focal_length'],
+            'shutter_speed' => $request->exif['shutter_speed'],
+            'aperture' => $request->exif['aperture'],
+            'iso' => $request->exif['iso'],
+            'date_taken' => $request->exif['date_taken']
+        );
+
+        $media->exif = $exif;
+
+        $media->save();
+
+        $results = [
+            'status'=>'success',
+            'data'=>$media
+        ];
+
+        return Response::json($results);
+    }
+
+    public function postRemoveMedia(Request $request){
+        $media_id = $request->media_id;
+        $media = Media::find($media_id);
+        
+
+        if($media->delete()){
+            return Response::json(['status'=>'success']);
+        }
+
+        return Response::json(['status'=>'error'], 400);
+    }
+
     public function saveFile(&$input){
         $basename = pathinfo($input['filename'], PATHINFO_FILENAME);
         $extension = File::extension($input['filename']);
@@ -121,64 +175,43 @@ class MediaController extends Controller{
 
         if(isset($exif['IFD0']['Model'])){
             $camera = $exif['IFD0']['Model'];
-            $results['camera'] = [
-                'name'=>'Camera',
-                'value'=>$camera
-            ];
+            $results['camera'] = $camera;
         }
 
         if(isset($exif['EXIF']['UndefinedTag:0xA434'])){
             $lens = $exif['EXIF']['UndefinedTag:0xA434'];
-            $results['lens'] = [
-                'name'=>'Lens',
-                'value'=>$lens
-            ];
+            $results['lens'] = $lens;
         }
 
         if(isset($exif['EXIF']['FocalLength'])){
             $focal_length = $exif['EXIF']['FocalLength'];
-            $results['focal_length'] = [
-                'name'=>'Focal Length',
-                'value'=>$focal_length
-            ];
+            $results['focal_length'] = $focal_length;
         }
         
         if(isset($exif['EXIF']['ExposureTime'])){
             $shutter_speed = $exif['EXIF']['ExposureTime'];
-            $results['shutter_speed'] = [
-                'name'=>'Shutter Speed',
-                'value'=>$shutter_speed
-            ];
+            $results['shutter_speed'] = $shutter_speed;
         }
 
         if(isset($exif['COMPUTED']['ApertureFNumber'])){
             $aperture = $exif['COMPUTED']['ApertureFNumber'];
-            $results['aperture'] = [
-                'name'=>'Aperture',
-                'value'=>$aperture
-            ];
+            $results['aperture'] = $aperture;
         }
         
         if(isset($exif['EXIF']['ISOSpeedRatings'])){
             $iso = $exif['EXIF']['ISOSpeedRatings'];
-            $results['iso'] = [
-                'name'=>'ISO',
-                'value'=>$iso
-            ];
+            $results['iso'] = $iso;
         }
 
         if(isset($exif['EXIF']['DateTimeOriginal'])){
             $date_taken = $exif['EXIF']['DateTimeOriginal'];
-            $results['date_taken'] = [
-                'name'=>'Date Taken',
-                'value'=>$date_taken
-            ];
+            $results['date_taken'] = $date_taken;
         }
         
         $input['exif'] = $results;
     }
 
-    public function getManage(){
-        return view('media/manage');
+    public function getManage($media_type = null){
+        return view('media/manage', compact('media_type'));
     }
 }

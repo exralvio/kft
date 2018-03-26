@@ -7,7 +7,7 @@ body.timeline {
 }
 
 .manage-left, .manage-center, .manage-right {
-	min-height: 900px;
+	
 }
 
 .manage-left, .manage-center {
@@ -31,10 +31,13 @@ body.timeline {
     outline: none;
     background-color: #0099e5;
     border: 1px solid #0099e5;
+    text-align: center;
 }
 
 .manage-uploadbtn:hover {
 	background: #00aaff;
+	color: #fff;
+	text-decoration: none;
 }
 
 .manage-header{
@@ -128,14 +131,15 @@ body.timeline {
 	text-transform: none !important;
 }
 
-.form-blocker {
+.form-editor .form-blocker {
 	position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
-    background: black;
+    opacity: 0.8;
+    background: white;
     z-index: 2;
     top: 0;
+    margin-left: -15px;
 }
 
 .manage-right h3 {
@@ -155,6 +159,7 @@ body.timeline {
 .form-editor-save {
 	border-top: 1px solid #eeeff2;
 	padding-right: 15px;
+	margin-left: -15px;
 }
 
 .form-editor-save .btn-editor-save {
@@ -170,18 +175,29 @@ body.timeline {
 	background: #F7F8FA;
 	height: 800px;
 	cursor: crosshair;
+	overflow-y: scroll;
 }
 
 .manage-item {
-	height: 125px;
+	/*height: 125px;*/
 }
 
 .manage-item-inner {
 	cursor: default;
+	margin: 0 -3px;
+}
+
+.manage-item-inner img {
+	border: 3px solid #F7F8FA;
+}
+
+.manage-item-inner.active img {
+	border: 3px solid #0099e5;
 }
 
 .manage-item-icon {
 	position: absolute;
+	top: 3px;
 	left: 15px;
 	right: 15px;
 	padding-top: 5px;

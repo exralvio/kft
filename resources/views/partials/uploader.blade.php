@@ -7,7 +7,7 @@
   <div class="row">
     
   </div>
-  <form action="{{ url('upload') }}" class="dropzone pt-20 pd-20 col-sm-12 col-md-12" id="uploadzone">
+  <form action="{{ url('media/upload') }}" class="dropzone pt-20 pd-20 col-sm-12 col-md-12" id="uploadzone">
   	@csrf
   	<div class="dz-default dz-message">
 		<span>
@@ -24,7 +24,7 @@
   </form>
   <div class="col-sm-12 col-md-3 pull-right form-uploader-wrapper">
     <div class="row">
-      <form class="form form-uploader pt-20 pd-20 align-left" role="form" action="{{ url('confirmUpload') }}">
+      <form class="form form-uploader pt-20 pd-20 align-left" role="form" action="{{ url('media/confirm') }}">
         <div class="form-blocker"></div>
         <div class="col-sm-12">
           <div class="mb-20 mb-md-10 publish-section">

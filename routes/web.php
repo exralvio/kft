@@ -50,7 +50,10 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/deleteComment', 'DashboardController@deleteComment');
 	
 	/** Media **/
-	Route::post('/upload', 'MediaController@postUpload');
-	Route::post('/confirmUpload', 'MediaController@postConfirmUpload');
-	Route::get('/manage', 'MediaController@getManage');
+	Route::get('/manage/{media_type}', 'MediaController@getManage');
+
+	Route::post('/media/upload', 'MediaController@postUpload');
+	Route::post('/media/confirm', 'MediaController@postConfirmUpload');
+	Route::post('/media/update', 'MediaController@postUpdateMedia');
+	Route::post('/media/remove', 'MediaController@postRemoveMedia');
 });
