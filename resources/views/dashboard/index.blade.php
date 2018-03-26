@@ -104,7 +104,7 @@
     .comment-photo-detail, .comment-block{margin-right: 0;}
     .comment-block .pp{padding: 0px;height: 35px;overflow: hidden;}
     .comment-block .pp img{height:30px;width: auto; border-radius:30px;}
-    .comment-user-block{margin-top: 10px; margin-left: 0px;}
+    .comment-user-block{margin: 10px 0 0 0; padding-left: 0;}
     .comment-user-block .pp{height: 50px;width: 50px;overflow: hidden; float: left;}
     .comment-user-block .pp img{border-radius: 25px;}
     .comment-input{padding-left:0px;text-align: left;font-size:12px}
@@ -112,8 +112,14 @@
     .comment-buttons{margin-top: 40px;text-align: left;margin-bottom: 10px;}
     .comments{width: 100%;padding: 2px;float: left;}
     .remodal-close {right: 0;z-index: 9999;left:inherit!important;}
-    .row .dynamicComment{margin: 0;max-height: 325px;overflow-y: scroll;display: inline-block;}
+    .dynamicComment{max-height: 400px;overflow-y: scroll;padding:0;}
     .comment-text:hover .del-comment{font-weight: bold; display: block!important;}
+    .input-comment-bg{
+        background: url('../images/chat-bubble.png');
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+    }
 </style>
 <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
     <button data-remodal-action="close" class="remodal-close"></button>

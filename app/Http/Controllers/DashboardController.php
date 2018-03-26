@@ -33,8 +33,9 @@ class DashboardController extends Controller{
         }
         array_push($followed_ids, $currentUserId);
 
+        // $category = Media::raw()->find(['user'=>['id'=>new ObjectID($data['category'])]]);
         $medias = Media::orderBy('_id','desc')
-                ->whereIn('user_id',$followed_ids)
+                ->whereIn('user.id',$followed_ids)
                 ->limit(3)
                 ->get();
 
@@ -56,7 +57,7 @@ class DashboardController extends Controller{
         array_push($followed_ids, $currentUserId);
         $medias = Media::orderBy('_id','desc')
                 ->where('_id','<',$mediaId)
-                ->whereIn('user_id',$followed_ids,'and')
+                ->whereIn('user.id',$followed_ids,'and')
                 ->take(2)
                 ->get();
 
@@ -72,7 +73,7 @@ class DashboardController extends Controller{
         // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
         $comments = Comment::where('photo_id','=',$mediaId)->get();
         $media = Media::find($mediaId);
-        // dd($media);
+
         $html = view('dashboard/comment',["post"=>$media, "comments"=>$comments])->render();
 
         echo $html;
@@ -85,7 +86,7 @@ class DashboardController extends Controller{
         // dd($media->id);
         $comment = new Comment;
         $comment->photo_id = new ObjectId($media->_id);
-        $comment->user_id = $media->user_id;
+        $comment->user_id = $media->user['id'];
         $comment->user_detail = [
             'first_name'=>$currentUser['firstname'],
             'last_name'=>$currentUser['lastname'],

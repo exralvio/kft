@@ -4,10 +4,10 @@
 
         <div class="post-header">
             <div class="poster-pp">
-                <img src="{{ isset($post->user_detail['photo']) ? $post->user_detail['photo'] : url('images/pp-icon.png') }}"/>
+                <img src="{{ isset($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
             </div>
             <div class="post-container font-alt">
-                <div class="poster">{{ $post->user_detail['first_name'] }} {{ isset($post->user_detail['last_name']) ? $post->user_detail['last_name'] : '' }}</div>
+                <div class="poster">{{ $post->user['firstname'] }} {{ isset($post->user['lastname']) ? $post->user['lastname'] : '' }}</div>
                 <div class="publish-date">{{ $post->created_at->diffForHumans() }}</div>
             </div>
         </div>
