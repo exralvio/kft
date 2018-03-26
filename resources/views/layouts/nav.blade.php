@@ -32,12 +32,13 @@
                             
                             <li>
                                 <div class="mn-wrap">
-                                    <form method="post" class="form">
+                                    <form class="form" method="get" action="{{ url('search') }}">
                                         <div class="search-wrap">
                                             <button class="search-button animate" type="submit" title="Start Search">
                                                 <i class="fa fa-search"></i>
                                             </button>
-                                            <input type="text" class="form-control search-field" placeholder="Search...">
+                                            <input type="text" name="q" class="form-control search-field" placeholder="Search...">
+                                            <input type="hidden" name="type" value="photos">
                                         </div>
                                     </form>
                                 </div>
@@ -46,6 +47,14 @@
                         </ul>
                         
                     </li>
+                    <!-- <li>
+                        <div>    
+                            <select id="department" name="department" style="height: 55px; line-height: 55px; font-size: 11px; letter-spacing:2px; border: 1px solid #efefef;" class="input-md round form-control">
+                                <option value="user">USERS</option>
+                                <option value="photo">PHOTOS</option>
+                            </select>
+                        </div>
+                    </li> -->
                     <!-- End Search -->
                     <!-- Item With Sub -->
                     <li>
@@ -53,7 +62,7 @@
                             <span class="visible-xs">Account</span>
                             <span class="nav-avatar visible-lg">
                                 @if(Session::has('user')) 
-                                <img src="{{ Session::get('user')->photo }}" />
+                                <img src="{{ url('').'/'.Session::get('user')->photo }}" />
                                 @else
                                 <img src="{{ url('') }}/rythm/images/user-avatar.png">
                                 @endif
@@ -102,4 +111,13 @@
         @endif
     </div>
 </nav>
+
+<script type="text/javascript">
+    window.onload = function(){
+        $(document).ready(function(){
+            console.log('im ready.........');
+        })
+    }
+</script>
+
 <!-- End Navigation panel -->

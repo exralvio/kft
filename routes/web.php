@@ -18,6 +18,8 @@ Route::get('/discover', function(){
 	return view('media/discover');
 });
 
+Route::get('/search', 'SearchController@showSearchResult');
+
 Route::middleware('guest')->group(function(){
 	/** signup **/
 	Route::get('/signup', 'Auth\AuthController@showSignup');
