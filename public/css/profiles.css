@@ -151,8 +151,8 @@
     height: 400px;
     max-width: 440px;
     overflow: hidden;
-    border: 1px solid #efefef;
-    margin: 5px;
+    border: 1px solid #ddd;
+    margin: 2px;
     display: flex;
     flex-direction: row;
     align-items: center;

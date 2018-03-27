@@ -65,24 +65,3 @@
     </div>
   </form>
 </div>
-
-<script type="text/javascript">
-
-  window.onload = function(){
-      $(document).ready(function() {
-          var photo = "<?php echo $user->photo; ?>";
-          var photoUrl = "";
-          if(photo.length){
-            photoUrl = "../"+photo;
-          }else{
-            photoUrl = "../images/pp-icon.png";
-          }
-          $('#pp-preview').css({'background':"url("+photoUrl+")","background-size":"contain"});
-          $.uploadPreview({
-              input_field: "#image-upload",
-              preview_box: "#pp-preview"
-          });
-      });
-  }
-
-</script>

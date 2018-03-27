@@ -3,14 +3,13 @@ window.onload = function(){
     var postId = null;
     var inst = $('[data-remodal-id=commentPostModal]').remodal();
     $('#post-data').on('click', 'a.comment-button', function(e) {
+        console.log('you click me');
         $.ajax({
             url: '/loadCommentPage/'+e.currentTarget.id,
             type: "get",
             beforeSend: function()
             {
                 postId = e.currentTarget.id
-                // $('.ajax-load').show();
-                //show loader
             }
         })
         .done(function(data)
@@ -18,13 +17,6 @@ window.onload = function(){
             $('#comment-content').empty();
             $('#comment-content').append(data);
             inst.open();
-            /* $('#accordion').find('.panel-default:has(".in")').addClass('panel-primary');
-            $('#accordion').on('show.bs.collapse', function(e) {
-                $(e.target).closest('.panel-default').addClass(' panel-primary');
-                $('.collapse').collapse('hide');
-            }).on('hide.bs.collapse', function(e) {
-                $(e.target).closest('.panel-default').removeClass(' panel-primary');
-            }) */
         })
         .fail(function(jqXHR, ajaxOptions, thrownError)
         {
@@ -63,8 +55,11 @@ window.onload = function(){
         $.ajax({
             url: '/deleteComment',
             type: "post",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             data: { 
-                _token: '{{csrf_token()}}',
+                // _token: '{{csrf_token()}}',
                 comment_id: id
             }
         })

@@ -44,7 +44,7 @@ Komunitas Fotografi Telkom
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="photos">
                 <!-- Works Grid -->
-                <ul id="post-data" class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid-1">
+                <ul id="post-data" class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" style="margin: 5px;">
                     
                     @foreach($medias as $media)
                     <!-- Work Item (External Page) -->
@@ -131,6 +131,24 @@ Komunitas Fotografi Telkom
 </div>
 
 <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
+<script type="text/javascript">
+    window.addEventListener("load", function(){
+        $(document).ready(function() {
+            var photo = "<?php echo $user->photo; ?>";
+            var photoUrl = "";
+            if(photo.length){
+                photoUrl = "../"+photo;
+            }else{
+                photoUrl = "../images/pp-icon.png";
+            }
+            $('#pp-preview').css({'background':"url("+photoUrl+")","background-size":"contain"});
+            $.uploadPreview({
+                input_field: "#image-upload",
+                preview_box: "#pp-preview"
+            });
+        });
+    });
+</script>
 
 @endsection
 
