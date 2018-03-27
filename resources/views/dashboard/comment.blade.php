@@ -7,7 +7,7 @@
             <div class="pp">
                 <img src="{{ url('').'/'.$post->user['photo'] }}">
             </div>
-            <div class="profile-name">
+            <div class="comment-profile-name">
                 {{ $post->user['firstname'] }} {{ $post->user['lastname'] }}
             </div>
             <!-- <div class="following-status">
@@ -27,13 +27,27 @@
             <div id="showPhotoDetail" class="font-alt post-title" style="cursor: pointer;">Photo Details</div>
             <div id="exifData" style="display:none;">
                 @if(isset($post->exif))
-                {{ isset($post->exif['camera']) ? $post->exif['camera'] : '' }}<br>
-                {{ isset($post->exif['lens']) ? $post->exif['lens'] : '' }}<br>
-                {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
-                {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
-                {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
-                {{ isset($post->exif['iso']) ? $post->exif['iso'] : '' }}<br>
-                {{ isset($post->exif['date_taken']) ? date('d-m-Y H:i:s', strtotime($post->exif['date_taken'])) : '' }}
+
+                    @if(isset($post->exif['camera']))
+                        {{ $post->exif['camera'] }} <br>
+                    @endif
+
+                    @if(isset($post->exif['lens']))
+                       {{ $post->exif['lens'] }} <br>
+                    @endif
+
+                    {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
+                    {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
+                    {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
+
+                    @if(isset($post->exif['iso']))
+                       {{ $post->exif['iso'] }} <br>
+                    @endif
+
+                    @if(isset($post->exif['date_taken']))
+                       {{ date('d-m-Y H:i:s', strtotime($post->exif['date_taken'])) }}
+                    @endif
+                
                 @else
                 No Photo Detail
                 @endif
@@ -44,7 +58,7 @@
             <div class="comments" style="margin:10px 0;">
                 <div class="col-md-2 pp">
                     @if(Session::has('user') &&  isset(Session::get('user')->photo)) 
-                    <img src="{{ Session::get('user')->photo }}" />
+                    <img src="{{ url('').'/'.Session::get('user')->photo }}" />
                     @else
                     <img src="{{ url('') }}/rythm/images/user-avatar.png">
                     @endif
@@ -59,7 +73,7 @@
                 @foreach($comments as $comment)
                 <div id="comment-{{ $comment->_id }}" class="comments">
                     <div class="col-md-2 pp">
-                        <img src="{{ $comment->user_detail['photo'] }}"/>
+                        <img src="{{ url('').'/'.$comment->user_detail['photo'] }}"/>
                     </div>
                     <div class="col-md-10 comment-input comment-text">
                         <div style="font-weight: bold;">{{ $comment->user_detail['first_name'] }} {{ $comment->user_detail['last_name'] }}</div>

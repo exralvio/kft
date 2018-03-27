@@ -7,6 +7,7 @@ Komunitas Fotografi Telkom
 
 @section('content')
 <link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
+<link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
 <section class="page-section pt-80" id="profile">
     <div class="text-right profile-button">
         <button type="button" class="btn btn-default">Manage</button>
@@ -43,55 +44,22 @@ Komunitas Fotografi Telkom
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="photos">
                 <!-- Works Grid -->
-                <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid-1">
+                <ul id="post-data" class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid-1">
                     
+                    @foreach($medias as $media)
                     <!-- Work Item (External Page) -->
-                    <li class="work-item mix design photography">
-                        <a href="portfolio-single-1.html" class="work-ext-link">
+                    <li class="media-list work-item">
+                        <a id="{{ $media->_id }}" href="#" class="comment-button work-ext-link">
                             <div class="work-img">
-                                <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-4.jpg" alt="Work" />
+                                <img class="work-img" src="{{ url('').'/'.$media->images['medium'] }}" alt="Work" />
                             </div>
                             <div class="work-intro">
-                                <h3 class="work-title">Space</h3>
-                                <div class="work-descr">
-                                    External Page
-                                </div>
+                                <h3 class="work-title">{{ $media->title }}</h3>
                             </div>
                         </a>
                     </li>
                     <!-- End Work Item -->
-                    
-                    <!-- Work Item (External Page) -->
-                    <li class="work-item mix design">
-                        <a href="portfolio-single-1.html" class="work-ext-link">
-                            <div class="work-img">
-                                <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-5.jpg" alt="Work" />
-                            </div>
-                            <div class="work-intro">
-                                <h3 class="work-title">Model</h3>
-                                <div class="work-descr">
-                                    External Page
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <!-- End Work Item -->
-                    
-                    <!-- Work Item (Lightbox) -->
-                    <li class="work-item mix design branding">
-                        <a href="{{ url('') }}/rythm/images/portfolio/full-project-3.jpg" class="work-lightbox-link mfp-image">
-                            <div class="work-img">
-                                <img src="{{ url('') }}/rythm/images/portfolio/projects-6.jpg" alt="Work" />
-                            </div>
-                            <div class="work-intro">
-                                <h3 class="work-title">Young Man</h3>
-                                <div class="work-descr">
-                                    Lightbox
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <!-- End Work Item -->
+                    @endforeach
                     
                 </ul>
                 <!-- End Works Grid -->
@@ -156,6 +124,13 @@ Komunitas Fotografi Telkom
 </section>
 
 @include('user/edit-profile')
+
+<div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <div id="comment-content"></div>
+</div>
+
+<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 
 @endsection
 

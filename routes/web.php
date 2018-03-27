@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 	Route::prefix('user')->group(function () {
 		Route::get('profile', ['uses'=>'UserController@showProfile']);
 		Route::post('profile', ['uses'=>'UserController@saveEditProfile']);
+		// Route::get('media', ['uses'=>'UserController@getUploadedMedia']);
 	});
 	
 	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));

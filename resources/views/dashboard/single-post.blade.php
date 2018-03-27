@@ -14,10 +14,6 @@
             
         <div class="team-item-image">
             <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
-            <!-- <div class="team-item-detail">
-                <h4 class="font-alt category-text">{{ isset($post->category_detail['name']) ? $post->category_detail['name'] : '' }}</h4>
-                <h4 class="font-alt normal">{{ $post->title }}</h4>
-            </div> -->
         </div>
 
         <div class="row post-footer">
