@@ -147,7 +147,13 @@
                 $('#comment-content').empty();
                 $('#comment-content').append(data);
                 inst.open();
-                // $("#post-data").append(data);
+                /* $('#accordion').find('.panel-default:has(".in")').addClass('panel-primary');
+                $('#accordion').on('show.bs.collapse', function(e) {
+                    $(e.target).closest('.panel-default').addClass(' panel-primary');
+                    $('.collapse').collapse('hide');
+                }).on('hide.bs.collapse', function(e) {
+                    $(e.target).closest('.panel-default').removeClass(' panel-primary');
+                }) */
             })
             .fail(function(jqXHR, ajaxOptions, thrownError)
             {
@@ -196,6 +202,11 @@
             {
                 alert('failed to connect to server ...');
             });
+        });
+
+        $('#comment-content').on('click','#showPhotoDetail', function(e){
+            $('#exifData').toggle();
+            console.log('im clicked');
         })
 
         var prev_id = null;

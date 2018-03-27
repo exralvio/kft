@@ -19,9 +19,26 @@
                 </a>
             </div>
         </div>
-        <div class="row comment-photo-detail" style="padding-top:10px;border-top:1px solid #e8e8e8;">
-            <!-- <b>View</b><br>{{ $post->view_count }} -->
+        <div class="row comment-photo-detail" style="padding:10px 0px;border-top:1px solid #e8e8e8;">
             <div class="col-md-12 font-alt post-title">{{ $post->title }}</div>
+        </div>
+        <div class="row comment-photo-detail" style="padding-top:10px;border-top:1px solid #e8e8e8;">
+            <!-- collapse start -->
+            <div id="showPhotoDetail" class="font-alt post-title" style="cursor: pointer;">Photo Details</div>
+            <div id="exifData" style="display:none;">
+                @if(isset($post->exif))
+                {{ isset($post->exif['camera']) ? $post->exif['camera'] : '' }}<br>
+                {{ isset($post->exif['lens']) ? $post->exif['lens'] : '' }}<br>
+                {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
+                {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
+                {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
+                {{ isset($post->exif['iso']) ? $post->exif['iso'] : '' }}<br>
+                {{ isset($post->exif['date_taken']) ? date('d-m-Y H:i:s', strtotime($post->exif['date_taken'])) : '' }}
+                @else
+                No Photo Detail
+                @endif
+            </div>
+            <!-- collapse end -->
         </div>
         <div class="row comment-block" style="border-top:1px solid #e8e8e8;">
             <div class="comments" style="margin:10px 0;">
