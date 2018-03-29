@@ -21,10 +21,10 @@ Class NotificationHelper{
         "created_at":"timestamp"
     } */
     public static function setNotification($notification){
-        // if($notification['sender'] != $notification['receiver'] ){
+        if($notification['sender'] != $notification['receiver'] ){
             $notification['is_read'] = false;
             Notification::create($notification);
-        // }
+        }
     }
     
     public static function getNotification(){
