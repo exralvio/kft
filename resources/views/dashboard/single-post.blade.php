@@ -23,12 +23,19 @@
                     <i class="fa fa-comment-o"></i>
                 </a>
                 <a class="button-rounded">
-                    <i class="fa fa-plus-square-o"></i>
+                    <i class="fa fa-plus-square-o"></i> 
                 </a>
-                <a  id="like-{{ $post->_id }}" class="like-button button-rounded blue-sky-bg">
+                @if($post->liked)
+                <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked-bg">
                     <i class="fa fa-heart-o"></i> 
                     <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
                 </a>
+                @else
+                <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded blue-sky-bg">
+                        <i class="fa fa-heart-o"></i> 
+                        <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
+                    </a>
+                @endif
             </div>
             <div class="col-md-12 post-description">{{ $post->description }}</div>
         </div>

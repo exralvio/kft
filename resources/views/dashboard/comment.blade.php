@@ -14,9 +14,17 @@
                 following
             </div> -->
             <div class="comment-buttons">
-                <a id="like-{{ $post->_id }}" class="button-rounded blue-sky-bg">
-                    <i class="fa fa-heart-o"></i> {{ count($post->like_users) }}
+                @if($post->liked)
+                <a id="like-{{ $post->_id }}" data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked-bg">
+                    <i class="fa fa-heart-o"></i> 
+                    <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
                 </a>
+                @else
+                <a id="like-{{ $post->_id }}" data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded blue-sky-bg">
+                        <i class="fa fa-heart-o"></i> 
+                        <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
+                    </a>
+                @endif
             </div>
         </div>
         <div class="row comment-photo-detail" style="padding:10px 0px;border-top:1px solid #e8e8e8;">

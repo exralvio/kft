@@ -24,9 +24,10 @@ window.onload = function(){
         });
     });
 
-    $('#post-data').on('click', 'a.like-button', function(e) {
+    $('#post-data, #comment-content').on('click', 'a.like-button', function(e) {
         // console.log('you click me', e.currentTarget.id);
-        var postId = e.currentTarget.id.replace('like-','');
+        // var postId = e.currentTarget.id.replace('like-','');
+        var postId = $(this).data('postid');
         $.ajax({
             url: '/likePost',
             type: "post",
@@ -40,11 +41,11 @@ window.onload = function(){
         })
         .done(function(data){
             if(data.status == 'liked'){
-                e.target.classList.add('red-bg');
-                e.target.classList.remove('blue-sky-bg');
+                $('.like-'+postId).addClass('liked-bg');
+                $('.like-'+postId).removeClass('blue-sky-bg');
             }else{
-                e.target.classList.add('blue-sky-bg');
-                e.target.classList.remove('red-bg');
+                $('.like-'+postId).addClass('blue-sky-bg');
+                $('.like-'+postId).removeClass('liked-bg');
             }
             console.log('#like-count-'+e.currentTarget.id);
             $('#like-count-'+postId).text(data.like_count);
