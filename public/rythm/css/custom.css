@@ -2,6 +2,10 @@
 	text-transform: none;
 }
 
+a.btn {
+	text-decoration: none;
+}
+
 .main-nav.transparent ul li a {
 	color: #fff;
 }

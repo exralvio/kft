@@ -20,4 +20,11 @@ $('.nav-notification').on('click', function(){
 
 $('body').on('click',function(){
     $('#notification-content').hide();
-})
+});
+
+var editProfile = $('[data-remodal-id=editProfile]').remodal({closeOnConfirm: true, hashTracking: false});
+
+$('.btn-open-setting').on('click', function(e){
+    e.preventDefault();
+    editProfile.open();
+});

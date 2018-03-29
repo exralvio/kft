@@ -25,7 +25,7 @@ Komunitas Fotografi Telkom
                 <button type="button" class="btn btn-default">Manage</button>
                 <button type="button" class="btn btn-default">Settings</button>
                 <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
-                <a href="#editProfile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
+                <a href="" class="btn btn-primary btn-open-setting">Edit Profile</a>
             </div>
             @else
             <div class="profile-follow">
@@ -136,8 +136,6 @@ Komunitas Fotografi Telkom
         </div>
     </div>
 </section>
-
-@include('user/edit-profile')
 
 <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
     <button data-remodal-action="close" class="remodal-close"></button>
