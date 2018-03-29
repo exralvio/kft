@@ -18,26 +18,12 @@ class DashboardController extends Controller{
     public function __construct(){
     }
     
-    private function getAllFollowing(){
-        $currentUserId = Session::get('user')->_id->__toString();
-        $following = Following::where('user_id','=',$currentUserId)->first();
-        return $following;
-    }
-
     public function showDashboard(){
         $user = User::current();
-        $currentUserId = Session::get('user')->_id;
-        $following = $this->getAllFollowing();
-        if(isset($following)){
-            $followed_ids = $following->followed_ids;
-        }else{
-            $followed_ids = [];
-        }
-        array_push($followed_ids, $currentUserId);
+        $followings = User::getFollowing(true);
 
-        // $category = Media::raw()->find(['user'=>['id'=>new ObjectID($data['category'])]]);
         $medias = Media::orderBy('_id','desc')
-                ->whereIn('user.id',$followed_ids)
+                ->whereIn('user.id', $followings)
                 ->limit(3)
                 ->get();
         
@@ -58,19 +44,12 @@ class DashboardController extends Controller{
     */
     public function loadMoreMedia($mediaId){
         $user = User::current();
-        $currentUserId = Session::get('user')->_id;
-        $following = $this->getAllFollowing();
-        if(isset($following)){
-            $followed_ids = $following->followed_ids;
-        }else{
-            $followed_ids = [];
-        }
+        $followings = User::getFollowing(true);
 
-        array_push($followed_ids, $currentUserId);
         $medias = Media::orderBy('_id','desc')
                 ->where('_id','<',$mediaId)
-                ->whereIn('user.id',$followed_ids,'and')
-                ->take(2)
+                ->whereIn('user.id',$followings,'and')
+                ->take(3)
                 ->get();
 
         foreach($medias as $key=>$media){
