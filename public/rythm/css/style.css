@@ -6372,6 +6372,9 @@ section:hover .small-item-carousel .owl-next{
 .countdown.dark .countdown-number:before{
     background: rgba(0,0,0, .8);
 }
+.pt-75{
+    padding-top: 75px;
+}
 
 
 /* ==============================
