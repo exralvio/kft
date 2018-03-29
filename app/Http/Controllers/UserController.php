@@ -12,6 +12,7 @@ use Validator;
 use Response;
 use File;
 use MongoDB\BSON\ObjectID;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller{
 
@@ -19,13 +20,9 @@ class UserController extends Controller{
         $user_session = $request->session()->get('user');
         $user_data = iterator_to_array($user_session);
         $user = User::where('email', $user_data['email'])->first();
-        $user_media = $this->getUploadedMedia();
-        /**
-         * Get Department master
-        */
-        $departments = UserDepartment::get();
+        $medias = $this->getUploadedMedia();
 
-        return view('user/profile',['user'=>$user,'departments'=>$departments,'medias'=>$user_media]);
+        return view('user/profile', compact('user','medias'));
     }
 
     private function getUploadedMedia(){
@@ -78,12 +75,37 @@ class UserController extends Controller{
         $filename = sha1(time().time().rand()).".{$extension}";
         $filepath = 'uploads/profile';
         $path = public_path($filepath);
+        $originalpath = public_path($filepath.'/original');
 
-        if($file->move($path, $filename)){
-            return $filepath.'/'.$filename;
+        $originaldestination = $originalpath.'/'.$filename;
+        $filedestination = $filepath.'/'.$filename;
+
+        /** Save original file **/
+        $file->move($originalpath, $filename);
+
+        $img = Image::make($originaldestination);
+
+        // resize the image to a width of 300 and constrain aspect ratio (auto height)
+        $img->fit(150, 150);
+
+        if($img->save($filedestination)){
+            File::delete($originaldestination);
+            return $filedestination;
         } else {
             return null;
         }
+    }
+
+    public function getProfile($user_id){
+        $user = User::find($user_id);
+
+        if(!$user){
+            return abort(404);
+        }
+
+        $medias = Media::selfMedia($user['_id']);
+
+        return view('user/profile', compact('user','medias'));
     }
 
 }

@@ -54,8 +54,12 @@ class Media extends Eloquent
         return Media::get()->sortBy('view_count', null, true);
     }
 
-    public static function selfMedia(){
-        $user = User::current();
+    public static function selfMedia($user_id = null){
+        if(!empty($user_id)){
+            $user = User::find($user_id);
+        } else {
+            $user = User::current();
+        }
         $medias = Media::where('user.id', $user['_id'])->get()->sortBy('created_at', null, true);
 
         return $medias;

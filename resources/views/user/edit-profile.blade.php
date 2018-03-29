@@ -28,7 +28,7 @@
         <label for="department">Department</label>
         <select id="department" name="department" class="input-md round form-control">
           <option value="">-- Select Department --</option>
-          @foreach ($departments as $department)
+          @foreach (\App\Models\UserDepartment::all() as $department)
             <option value="{{ $department }}" {{ $user->department == $department ? 'selected' : ''}}>{{ $department->parent }} - {{ $department->name }}</option>
           @endforeach
         </select>
