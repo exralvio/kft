@@ -63,4 +63,22 @@ class User extends Eloquent
 
         return $followed ? true : false;
     }
+
+    public static function getFollowing($timeline = false){
+        $user = User::current();
+        $user_id = $user['_id'];
+
+        $following = \App\Models\Following::where('user_id', $user_id)->first();
+        if(isset($following)){
+            $followings = array_map(function($v){ return $v['id']; }, (array) $following->followings);
+        }else{
+            $followings = [];
+        }
+
+        if($timeline){
+            array_push($followings, $user_id);
+        }
+
+        return $followings;
+    }
 }
