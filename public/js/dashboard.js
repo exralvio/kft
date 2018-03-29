@@ -3,7 +3,6 @@ window.onload = function(){
     var postId = null;
     var inst = $('[data-remodal-id=commentPostModal]').remodal();
     $('#post-data').on('click', 'a.comment-button', function(e) {
-        console.log('you click me');
         $.ajax({
             url: '/loadCommentPage/'+e.currentTarget.id,
             type: "get",

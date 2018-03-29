@@ -4,55 +4,45 @@
  Komunitas Fotografi Telkom
 @endsection
 
-@section('content') 
-<style type="text/css">
-    .search-image{ height: 275px!important; width: auto;overflow: hidden; margin: 5px;}
-    .search-image img{ height: 275px;}
-    .search-image-container{ float: left;margin: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box; box-sizing: border-box; }
-    #photos {
-        /* Prevent vertical gaps */
-        line-height: 0;
-        
-        -webkit-column-count: 4;
-        -webkit-column-gap:   0px;
-        -moz-column-count:    4;
-        -moz-column-gap:      0px;
-        column-count:         4;
-        column-gap:           5px;
-        }
-
-     #photos img {
-        /* Just in case there are inline attributes */
-        width: 100% !important;
-        height: auto !important;
-        margin: 5px;
-    }
-
-    
-
-    body {
-    margin: 0;
-    padding: 0;
-    }
-</style>
-<section class="page-section pt-100">
-    <!-- <ul class="works-grid work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid-2"> -->
-        <!-- @foreach($data as $result) -->
-        <!-- Work Item (External Page) -->
-        <!-- <li class="search-image-container mix design photography">
-            <a href="#" class="work-ext-link">
-                <div class="search-image">
-                    <img src="{{ url('').'/'.$result->images['medium'] }}" alt="{{ $result->title }}" />
+@section('content')       
+    <!-- Section -->
+    <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
+    <section class="page-section pt-100 pb-20">
+        <div class="relative">
+            <div class="row">
+                <div class="col-sm-10 col-sm-push-1">
+                  <div class="tab-content">
+                      <div role="tabpanel" id="post-data" class="tab-pane fade in active">
+                        <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
+                            @foreach($data as $media)
+                            <!-- Work Item (Lightbox) -->
+                            <li class="work-item mix photography" >
+                                <a id="{{ $media->_id }}" href="#" class="mfp-image comment-button">
+                                    <div class="work-img">
+                                        <img src="{{ url($media['images']['medium']) }}" alt="Work">
+                                    </div>
+                                </a>
+                                <div class="work-intro align-left">
+                                    <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
+                                    <h3 class="work-title">{{ $media->getName() }}</h3>
+                                </div>
+                            </li>
+                            <!-- End Work Item -->
+                            @endforeach
+                        </ul>
+                      </div>
+                    </div>  
                 </div>
-            </a>
-        </li> -->
-        <!-- End Work Item -->
-        <!-- @endforeach -->
-    <!-- </ul> -->
-    <div id="photos">
-    @foreach($data as $result)
-    <img src="{{ url('').'/'.$result->images['medium'] }}" alt="{{ $result->title }}" />
-    @endforeach
+            </div>
+        </div>
+    </section>
+    <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <div id="comment-content"></div>
     </div>
-</section>
+    <!-- End Section -->
+@endsection
+
+@section('footer_script')
+    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 @endsection
