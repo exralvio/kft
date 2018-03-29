@@ -23,6 +23,7 @@ Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
 
+
 /** user profile **/
 Route::get('/profile/{user_id}', 'UserController@getProfile');
 
