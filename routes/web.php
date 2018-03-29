@@ -19,6 +19,8 @@ Route::get('/discover', function(){
 });
 
 Route::get('/search', 'SearchController@showSearchResult');
+Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
+Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 
 /** user profile **/
 Route::get('/profile/{user_id}', 'UserController@getProfile');
@@ -50,8 +52,6 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
 	Route::get('/dashboard', 'DashboardController@showDashboard');
-	Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
-	Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 	Route::post('/postComment', 'DashboardController@postComment');
 	Route::post('/deleteComment', 'DashboardController@deleteComment');
 	Route::post('/likePost', 'DashboardController@likePost');

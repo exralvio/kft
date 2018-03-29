@@ -4,7 +4,8 @@
  Discover
 @endsection
      
-@section('content')       
+@section('content')
+    <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">         
     <!-- Section -->
     <section class="small-section mt-80 bg-white pb-0 discover-tablist">
         <div class="relative container align-left">
@@ -35,13 +36,13 @@
         <div class="relative">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
-                  <div class="tab-content">
+                  <div id="post-data" class="tab-content">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
                         <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
                             @foreach(\App\Models\Media::discoverPopular() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="{{ url($media['images']['large']) }}" class="work-lightbox-link mfp-image">
+                                <a href="#" id="{{ $media->_id }}" class="comment-button mfp-image">
                                     <div class="work-img">
                                         <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                     </div>
@@ -60,7 +61,7 @@
                             @foreach(\App\Models\Media::discoverFresh() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="{{ url($media['images']['large']) }}" class="work-lightbox-link mfp-image">
+                                <a href="#" id="{{ $media->_id }}" class="comment-button mfp-image">
                                     <div class="work-img">
                                         <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                     </div>
@@ -80,6 +81,12 @@
         </div>
     </section>
     <!-- End Section -->
+    <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
+        <button data-remodal-action="close" class="remodal-close"></button>
+        <div id="comment-content"></div>
+    </div>
+    
+    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 @endsection
 
 @section('footer_script')
