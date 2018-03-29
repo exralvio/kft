@@ -5,7 +5,7 @@
     <div class="col-md-3">
         <div class="row comment-user-block">
             <div class="pp">
-                <img src="{{ url('').'/'.$post->user['photo'] }}">
+                <img src="{{ url($post->user['photo']) }}">
             </div>
             <div class="comment-profile-name">
                 {{ $post->user['firstname'] }} {{ $post->user['lastname'] }}
@@ -57,8 +57,8 @@
         <div class="row comment-block" style="border-top:1px solid #e8e8e8;">
             <div class="comments" style="margin:10px 0;">
                 <div class="col-md-2 pp">
-                    @if(Session::has('user') &&  isset(Session::get('user')->photo)) 
-                    <img src="{{ url('').'/'.Session::get('user')->photo }}" />
+                    @if(Session::has('user')) 
+                    <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                     @else
                     <img src="{{ url('') }}/rythm/images/user-avatar.png">
                     @endif
@@ -73,7 +73,7 @@
                 @foreach($comments as $comment)
                 <div id="comment-{{ $comment->_id }}" class="comments">
                     <div class="col-md-2 pp">
-                        <img src="{{ url('').'/'.$comment->user_detail['photo'] }}"/>
+                        <img src="{{ url($comment->user['photo']) }}"/>
                     </div>
                     <div class="col-md-10 comment-input comment-text">
                         <div style="font-weight: bold;">{{ $comment->user_detail['first_name'] }} {{ $comment->user_detail['last_name'] }}</div>

@@ -33,4 +33,24 @@ class User extends Eloquent
     public static function name($firstname, $lastname){
     	return empty($lastname) ? $firstname : $firstname.' '.$lastname;
     }
+
+    public static function updateUserPhoto($user_id, $photo){
+        /** Update user media **/
+        $medias = \App\Models\Media::raw()->find(['user.id'=>$user_id]);
+
+        if($medias){
+            foreach ($medias as $media) {
+                \DB::collection('medias')->where('_id', $media['_id'])->update(['user.photo'=>$photo]);
+            }   
+        }
+
+        /** Update user comments **/
+        $comments = \App\Models\Comment::raw()->find(['user.id'=>$user_id]);
+
+        if($comments){
+            foreach ($comments as $comment) {
+                \DB::collection('comments')->where('_id', $comment['_id'])->update(['user.photo'=>$photo]);
+            }   
+        }
+    }
 }

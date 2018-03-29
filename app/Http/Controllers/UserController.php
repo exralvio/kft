@@ -90,6 +90,9 @@ class UserController extends Controller{
 
         if($img->save($filedestination)){
             File::delete($originaldestination);
+
+            \App\Models\User::updateUserPhoto(User::current()['_id'], $filedestination);
+
             return $filedestination;
         } else {
             return null;

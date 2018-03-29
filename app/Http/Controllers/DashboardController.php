@@ -86,10 +86,10 @@ class DashboardController extends Controller{
         // dd($media->id);
         $comment = new Comment;
         $comment->photo_id = new ObjectId($media->_id);
-        $comment->user_id = $media->user['id'];
-        $comment->user_detail = [
-            'first_name'=>$currentUser['firstname'],
-            'last_name'=>$currentUser['lastname'],
+        $comment->user = [
+            'id' => $media->user['id'],
+            'firstname'=>$currentUser['firstname'],
+            'lastname'=>$currentUser['lastname'],
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
