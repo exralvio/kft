@@ -23,7 +23,7 @@ window.onload = function(){
     });
 
     $('#post-data, #comment-content').on('click', 'a.like-button', function(e) {
-        // var postId = $(this).data('postid');
+        var postId = $(this).data('postid');
         $.ajax({
             url: '/likePost',
             type: "post",
@@ -31,7 +31,6 @@ window.onload = function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: { 
-                comment : e.target.value,
                 post_id: postId
             }
         })
