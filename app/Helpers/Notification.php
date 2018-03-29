@@ -7,25 +7,31 @@ Use App\Models\User;
 
 Class NotificationHelper{
 
-    /**
-     * {
-     *   "sender":"string of id",
-     *   "receiver":"string of id",
-     *   "type":"string",
-     *   "content":"string",
-     *   "is_read":"boolean",
-     *   "created_at":"timestamp"
-     * }
-    */
+    /* {
+        "sender":{
+            "id": "objid",
+            "firstname": "string",
+            "lastname": "string",
+            "photo": "string"
+        },
+        "receiver":"objid",
+        "type":"like|comment|follow",
+        "content":"string",
+        "is_read":"boolean",
+        "created_at":"timestamp"
+    } */
     public static function setNotification($notification){
-        $newNotification = new Notification;
-        $newNotification = $notification;
-        $newNotification->save();
+        // if($notification['sender'] != $notification['receiver'] ){
+            $notification['is_read'] = false;
+            Notification::create($notification);
+        // }
     }
     
-    public static function getNotification($notification){
+    public static function getNotification(){
         $user = User::current();
-        $notification = Notification::where('receiver','=',$user['_id'])->get();
+        $notification = Notification::where('receiver','=',$user['_id'])
+                        ->orderBy('created_at', 'desc')
+                        ->get();
         return $notification;
     }
 

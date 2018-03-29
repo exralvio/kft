@@ -22,6 +22,7 @@ Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
+Route::get('/loadNotificationContent', 'NotificationController@loadNotificationContent');
 
 
 /** user profile **/

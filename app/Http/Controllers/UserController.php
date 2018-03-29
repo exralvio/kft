@@ -133,7 +133,8 @@ class UserController extends Controller{
     }
 
     public function doFollow($request){
-        $self_id = User::current()['_id'];
+        $me = User::current();
+        $self_id = $me['_id'];
         $user_id = new ObjectID($request['user_id']);
 
         /** Check if already follow **/
@@ -166,8 +167,21 @@ class UserController extends Controller{
                 'lastname'=>$user['lastname'],
                 'photo'=>$user['photo']
             ]];
-
-            $following->save();
+            
+            if($following->save()){
+                $notification = [
+                    "sender"=>[
+                        "id"=>$me['_id'],
+                        "firstname"=>$me['firstname'],
+                        "lastname"=>$me['lastname'],
+                        "photo"=>$me['photo'],
+                    ],
+                    "receiver"=>$following->user_id,
+                    "type"=>"follow",
+                    "media"=>[]
+                ];
+                \NotificationHelper::setNotification($notification);
+            }
         }
 
         /** Update followed **/

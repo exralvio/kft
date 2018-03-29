@@ -47,15 +47,6 @@
                         </ul>
                         
                     </li>
-                    <!-- <li>
-                        <div>    
-                            <select id="department" name="department" style="height: 55px; line-height: 55px; font-size: 11px; letter-spacing:2px; border: 1px solid #efefef;" class="input-md round form-control">
-                                <option value="user">USERS</option>
-                                <option value="photo">PHOTOS</option>
-                            </select>
-                        </div>
-                    </li> -->
-                    <!-- End Search -->
                     <!-- Item With Sub -->
                     <li>
                         <a href="#" class="mn-has-sub">
@@ -93,6 +84,9 @@
                             <span class="visible-lg"><i class="fa fa-bell-o"></i> </span>
                             <span class="visible-xs"><i class="fa fa-bell-o"></i> Notification</span>
                         </a>
+                        <ul id="notification-content" style="display:none;">
+                            <li class="header-group">NOTIFICATION</li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#uploader" class="nav-upload upload-btn">
@@ -111,13 +105,5 @@
         @endif
     </div>
 </nav>
-
-<script type="text/javascript">
-    window.onload = function(){
-        $(document).ready(function(){
-            console.log('im ready.........');
-        })
-    }
-</script>
 
 <!-- End Navigation panel -->

@@ -114,7 +114,24 @@ class DashboardController extends Controller{
         ];
         $comment->comment = $request->get('comment');
         if($comment->save()){
-            // return Response::json(['success' => true, 'data' => $comment->toArray()], 200);
+
+            $notification = [
+                "sender"=>[
+                    "id"=>$currentUser['_id'],
+                    "firstname"=>$currentUser['firstname'],
+                    "lastname"=>$currentUser['lastname'],
+                    "photo"=>$currentUser['photo'],
+                ],
+                "receiver"=>$media->user['id'],
+                "type"=>"comment",
+                "media"=>[
+                    "id"=> $media->_id,
+                    "title"=> $media->title,
+                ]
+                // "content"=>'<b>'.$currentUser['firstname']." ".$currentUser['lastname'].'</b> commented on <b>'.$media->title.'</b>'
+            ];
+            \NotificationHelper::setNotification($notification);
+
             $html = view('dashboard/single-comment',["comment"=>$comment])->render();
             echo $html;
         }
@@ -140,6 +157,24 @@ class DashboardController extends Controller{
                 "lastname"=> $user['lastname'],
                 "created_at"=> Carbon::now()->toDateTimeString()
             ));
+
+            $notification = [
+                "sender"=>[
+                    "id"=>$user['_id'],
+                    "firstname"=>$user['firstname'],
+                    "lastname"=>$user['lastname'],
+                    "photo"=>$user['photo'],
+                ],
+                "receiver"=>$media->user['id'],
+                "type"=>"like",
+                "media"=>[
+                    "id"=> $media->_id,
+                    "title"=> $media->title,
+                ]
+                // "content"=>'<b>'.$user['firstname']." ".$user['lastname'].'</b> liked <b>'.$media->title.'</b>'
+            ];
+            \NotificationHelper::setNotification($notification);
+
             $updatedMedia = Media::find($request->post_id);
             return Response::json(['status'=>'liked', 'like_count'=>count($updatedMedia->like_users)],200);
         }
