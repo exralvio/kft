@@ -25,8 +25,9 @@
                 <a class="button-rounded">
                     <i class="fa fa-plus-square-o"></i>
                 </a>
-                <a class="button-rounded blue-sky-bg">
-                    <i class="fa fa-heart-o"></i> {{ count($post->like_users) }}
+                <a  id="like-{{ $post->_id }}" class="like-button button-rounded blue-sky-bg">
+                    <i class="fa fa-heart-o"></i> 
+                    <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
                 </a>
             </div>
             <div class="col-md-12 post-description">{{ $post->description }}</div>

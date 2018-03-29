@@ -14,7 +14,7 @@
                 following
             </div> -->
             <div class="comment-buttons">
-                <a class="button-rounded blue-sky-bg">
+                <a id="like-{{ $post->_id }}" class="button-rounded blue-sky-bg">
                     <i class="fa fa-heart-o"></i> {{ count($post->like_users) }}
                 </a>
             </div>

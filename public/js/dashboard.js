@@ -24,6 +24,36 @@ window.onload = function(){
         });
     });
 
+    $('#post-data').on('click', 'a.like-button', function(e) {
+        // console.log('you click me', e.currentTarget.id);
+        var postId = e.currentTarget.id.replace('like-','');
+        $.ajax({
+            url: '/likePost',
+            type: "post",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: { 
+                comment : e.target.value,
+                post_id: postId
+            }
+        })
+        .done(function(data){
+            if(data.status == 'liked'){
+                e.target.classList.add('red-bg');
+                e.target.classList.remove('blue-sky-bg');
+            }else{
+                e.target.classList.add('blue-sky-bg');
+                e.target.classList.remove('red-bg');
+            }
+            console.log('#like-count-'+e.currentTarget.id);
+            $('#like-count-'+postId).text(data.like_count);
+        })
+        .fail(function(jqXHR, ajaxOptions, thrownError){
+            alert('failed to connect to server ...');
+        });
+    });
+
     $('#comment-content').on('keyup','#commentPhoto', function(e){
         if(e.keyCode == 13){
             $.ajax({
@@ -75,7 +105,6 @@ window.onload = function(){
 
     $('#comment-content').on('click','#showPhotoDetail', function(e){
         $('#exifData').toggle();
-        console.log('im clicked');
     })
 
     var prev_id = null;

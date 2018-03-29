@@ -11,6 +11,7 @@ use Response;
 use Session;
 use App\Models\User;
 use MongoDB\BSON\ObjectID;
+use Carbon\Carbon;
 
 class DashboardController extends Controller{
 
@@ -103,6 +104,36 @@ class DashboardController extends Controller{
     public function deleteComment(Request $request){
         Comment::destroy($request->comment_id);
         return Response::json(['status'=>'success'],200);
+    }
+
+    /**
+     * "like_users":[
+     *   {
+     *       "user_id": "string",
+     *       "first_name": "string",
+     *       "last_name": "string",
+     *       "created_at": "string"
+     *   }
+     * ], 
+    */
+    public function likePost(Request $request){
+
+        $user = User::current();
+        $media = Media::find($request->post_id);
+        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
+            $media->pull('like_users',Array("user_id"=> $user['_id']));
+            $updatedMedia = Media::find($request->post_id);
+            return Response::json(['status'=>'unliked', 'like_count'=>count($updatedMedia->like_users)],200);
+        }else{
+            $media->push('like_users',Array(
+                "user_id"=> $user['_id'],
+                "firstname"=> $user['firstname'],
+                "lastname"=> $user['lastname'],
+                "created_at"=> Carbon::now()->toDateTimeString()
+            ));
+            $updatedMedia = Media::find($request->post_id);
+            return Response::json(['status'=>'liked', 'like_count'=>count($updatedMedia->like_users)],200);
+        }
     }
 
 }

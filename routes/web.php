@@ -51,6 +51,7 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 	Route::post('/postComment', 'DashboardController@postComment');
 	Route::post('/deleteComment', 'DashboardController@deleteComment');
+	Route::post('/likePost', 'DashboardController@likePost');
 	
 	/** Media **/
 	Route::get('/manage/{media_type}', 'MediaController@getManage');
