@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use MongoDB\BSON\ObjectID;
 
 class User extends Eloquent
 {
@@ -52,5 +53,14 @@ class User extends Eloquent
                 \DB::collection('comments')->where('_id', $comment['_id'])->update(['user.photo'=>$photo]);
             }   
         }
+    }
+
+    public static function isFollower($user_id){
+        $current_id = User::current()['_id'];
+        $user_id = new ObjectID($user_id);
+
+        $followed = \App\Models\Following::raw()->findOne(['user_id'=>$current_id, 'followings.id'=>$user_id]);
+
+        return $followed ? true : false;
     }
 }

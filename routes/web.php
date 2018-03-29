@@ -57,10 +57,15 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/likePost', 'DashboardController@likePost');
 	
 	/** Media **/
+	Route::get('/manage', function(){
+		return redirect('manage/all');
+	});
 	Route::get('/manage/{media_type}', 'MediaController@getManage');
 
 	Route::post('/media/upload', 'MediaController@postUpload');
 	Route::post('/media/confirm', 'MediaController@postConfirmUpload');
 	Route::post('/media/update', 'MediaController@postUpdateMedia');
 	Route::post('/media/remove', 'MediaController@postRemoveMedia');
+
+	Route::post('/user/relation', 'UserController@postRelation');
 });

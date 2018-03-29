@@ -13,6 +13,8 @@ use Response;
 use File;
 use MongoDB\BSON\ObjectID;
 use Intervention\Image\ImageManagerStatic as Image;
+use \App\Models\Following;
+use \App\Models\Followed;
 
 class UserController extends Controller{
 
@@ -109,6 +111,130 @@ class UserController extends Controller{
         $medias = Media::selfMedia($user['_id']);
 
         return view('user/profile', compact('user','medias'));
+    }
+
+    public function postRelation(Request $request){
+        $profileRules = array(
+            'action' => 'required',
+            'user_id' => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $profileRules);
+
+        if($validator->fails()){
+            return Response::json(['status'=>'error','errors'=>$validator->errors()->first()], 500);
+        }
+
+        if($request->action == 'follow'){
+            return $this->doFollow($request->all());
+        } else if($request->action = 'unfollow'){
+            return $this->doUnfollow($request->all());
+        }
+    }
+
+    public function doFollow($request){
+        $self_id = User::current()['_id'];
+        $user_id = new ObjectID($request['user_id']);
+
+        /** Check if already follow **/
+        if(User::isFollower($user_id)){
+            return Response::json([
+                'status'=>'error',
+                'errors'=>"You're already followed."
+            ]);
+        };
+
+        /** Update following **/
+        $following = Following::raw()->findOne(['user_id'=>$self_id]);
+
+        $user = User::find($user_id);
+        if($following){
+            
+            $following = Following::find($following['_id']);
+            $following->push('followings', [
+                'id'=>new ObjectID($user['_id']),
+                'firstname'=>$user['firstname'],
+                'lastname'=>$user['lastname'],
+                'photo'=>$user['photo']
+            ]);
+        } else {
+            $following = new Following;
+            $following->user_id = $self_id;
+            $following->followings = [[
+                'id'=>new ObjectID($user['_id']),
+                'firstname'=>$user['firstname'],
+                'lastname'=>$user['lastname'],
+                'photo'=>$user['photo']
+            ]];
+
+            $following->save();
+        }
+
+        /** Update followed **/
+        $followed = Followed::raw()->findOne(['user_id'=>$user_id]);
+
+        $user = User::find($self_id);
+        if($followed){
+            $followed = Followed::find($followed['_id']);
+            $followed->push('followers', [
+                'id'=>new ObjectID($user['_id']),
+                'firstname'=>$user['firstname'],
+                'lastname'=>$user['lastname'],
+                'photo'=>$user['photo']
+            ]);
+        } else {
+            $followed = new Followed;
+            $followed->user_id = $user_id;
+            $followed->followers = [[
+                'id'=>new ObjectID($user['_id']),
+                'firstname'=>$user['firstname'],
+                'lastname'=>$user['lastname'],
+                'photo'=>$user['photo']
+            ]];
+
+            $followed->save();
+        }
+
+        return Response::json([
+            'status'=>'success',
+            'message'=>"You're now following."
+        ]);
+    }
+
+    public function doUnfollow($request){
+        $self_id = User::current()['_id'];
+        $user_id = new ObjectID($request['user_id']);
+
+        /** Check if already follow **/
+        if(!User::isFollower($user_id)){
+            return Response::json([
+                'status'=>'error',
+                'errors'=>"You're not follower."
+            ]);
+        };
+
+        /** Update following **/
+        $following = Following::raw()->findOne(['user_id'=>$self_id]);
+
+        $user = User::find($user_id);
+        if($following){
+            $following = Following::find($following['_id']);
+            $following->pull('followings', ['id'=>new ObjectID($user['_id'])] );
+        }
+
+        /** Update followed **/
+        $followed = Followed::raw()->findOne(['user_id'=>$user_id]);
+
+        $user = User::find($self_id);
+        if($followed){
+            $followed = Followed::find($followed['_id']);
+            $followed->pull('followers', ['id'=>new ObjectID($user['_id'])] );
+        }
+
+        return Response::json([
+            'status'=>'success',
+            'message'=>"You're now not follower."
+        ]);
     }
 
 }

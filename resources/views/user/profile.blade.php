@@ -9,18 +9,32 @@ Komunitas Fotografi Telkom
 <link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
 <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
 <section class="page-section pt-80" id="profile">
-    <div class="text-right profile-button">
-        <button type="button" class="btn btn-default">Manage</button>
-        <button type="button" class="btn btn-default">Settings</button>
-        <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
-        <a href="#editProfile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
-    </div>
-    <div class="pp-container">
-        <div class="pp-image">
-            @if (isset($user['photo']))
-                <img src="{{ url('').'/'.$user->photo }}"/>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="pp-container pt-20">
+                <div class="pp-image">
+                    @if (isset($user['photo']))
+                        <img src="{{ url('').'/'.$user->photo }}"/>
+                    @else
+                        <img src="{{ url('') }}/images/pp-icon.png"/>
+                    @endif
+                </div>
+            </div>
+            @if($user['_id'] == \App\Models\User::current()['_id'])
+            <div class="text-right profile-button">
+                <button type="button" class="btn btn-default">Manage</button>
+                <button type="button" class="btn btn-default">Settings</button>
+                <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
+                <a href="#editProfile"><button type="button" class="btn btn-primary">Edit Profile</button></a>
+            </div>
             @else
-                <img src="{{ url('') }}/images/pp-icon.png"/>
+            <div class="profile-follow">
+                @if(\App\Models\User::isFollower($user['_id']))
+                <a class="btn btn-follow followed follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
+                @else
+                <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
+                @endif
+            </div>
             @endif
         </div>
     </div>

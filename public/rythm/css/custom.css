@@ -343,3 +343,43 @@ a.nav-notification:hover .fa {
 .footer-sponsor img {
 	width: 200px;
 }
+
+.profile-follow {
+	margin-top: 20px;
+	margin-right: 20px;
+	position: absolute;
+	top: 0px;
+	right: 20px;
+}
+
+.btn-follow {
+	cursor: pointer;
+    display: inline-block;
+    padding: 0px;
+    width: 110px;
+    height: 30px;
+    line-height: 28px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    background-color: #0099e5;
+    -webkit-transition: background-color 0.1s ease-in-out;
+    -moz-transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.btn-follow:hover {
+	background: #00aaff;
+	color: #fff;
+}
+
+.btn-follow.followed {
+	background: #34bf49;
+}
+
+.btn-follow.followed:hover {
+	background: #ff4c4c;
+}
