@@ -98,6 +98,16 @@ class AuthController extends Controller{
                 $newUser = new User();
                 $newUser->email = $request->get('email');
                 $newUser->password = bcrypt($request->get('password'));
+
+                $newUser->firstname = '';
+                $newUser->lastname = '';
+                $newUser->is_active = false;
+                $newUser->birthday = '';
+                $newUser->gender = '';
+                $newUser->about = '';
+                $newUser->photo = '';
+                $newUser->department = [];
+
                 if($newUser->save()){
                     if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
                         /**

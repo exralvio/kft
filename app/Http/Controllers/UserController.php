@@ -45,7 +45,7 @@ class UserController extends Controller{
             return Redirect::to('user/profile#editProfile')
                     ->withErrors($validator);
         }else{
-            $collection = collect($request->all());
+            $collection = collect($request->all() + ['is_active'=>true]);
             if($request->hasFile('photo')){
                 $savedFilename = $this->uploadProfilePict($request);
                 $collection->put('photo', $savedFilename);
@@ -56,7 +56,8 @@ class UserController extends Controller{
             $user_data = iterator_to_array($user_session);
             $user = \DB::collection('users')->where('email', $user_data['email'])->update($collection->all());
             $updatedUser = User::where('email', $user_data['email'])->first();
-            return view('user/profile',['user'=>$updatedUser,'departments'=>$departments]);
+
+            return redirect('user/profile');
         }
     }
 

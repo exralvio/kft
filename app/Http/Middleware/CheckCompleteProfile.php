@@ -18,7 +18,7 @@ class CheckCompleteProfile
             $user_arr = iterator_to_array($user_session);
             $user = User::raw()->findOne(['_id' => $user_arr['_id']]);
 
-            if(isset($user['firstname']) && isset($user['department'])){
+            if($user['is_active'] == true){
                 return $next($request);
             }else{
                 //redirect to edit profile
