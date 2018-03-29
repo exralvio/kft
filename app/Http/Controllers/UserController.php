@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Validator;
 use Response;
+use File;
 use MongoDB\BSON\ObjectID;
 
 class UserController extends Controller{
@@ -71,11 +72,16 @@ class UserController extends Controller{
          * Move Uploaded File
          * Temporary destination 
          **/ 
-        $destinationPath = 'uploads';
-        if($file->move($destinationPath,$file->getClientOriginalName())){
-            $savedFilename = $destinationPath.'/'.$file->getClientOriginalName();
-            return $savedFilename;
-        }else{
+
+        $original_name = $file->getClientOriginalName();
+        $extension = File::extension($original_name);
+        $filename = sha1(time().time().rand()).".{$extension}";
+        $filepath = 'uploads/profile';
+        $path = public_path($filepath);
+
+        if($file->move($path, $filename)){
+            return $filepath.'/'.$filename;
+        } else {
             return null;
         }
     }

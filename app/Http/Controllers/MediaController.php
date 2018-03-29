@@ -58,7 +58,10 @@ class MediaController extends Controller{
         foreach ($items as $value) {
             $old_path = storage_path('upload_tmp/'.$value['filename']);
             if(file_exists($old_path)){
-                $this->parseExif($value);
+                $extension = File::extension($value['filename']);
+                if(in_array(strtolower($extension), ['jpeg','jpg'])){
+                    $this->parseExif($value);
+                }
                 
                 $this->saveFile($value);
 
