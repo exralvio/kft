@@ -1,4 +1,5 @@
 <div class="row">
+    <input id="postId" type="hidden" value="{{ $post->_id }}">
     <div class="col-md-9 comment-photo border-right">
         <img src="{{url('').'/'.$post->images['original'] }}">
     </div>

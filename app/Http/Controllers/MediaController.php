@@ -8,6 +8,8 @@ use Validator;
 use File;
 use Response;
 use App\Models\Media;
+use App\Models\Comment;
+use App\Models\User;
 use App\Models\MediaCategory;
 use Intervention\Image\ImageManagerStatic as Image;
 use MongoDB\BSON\ObjectID;
@@ -216,5 +218,21 @@ class MediaController extends Controller{
 
     public function getManage($media_type = null){
         return view('media/manage', compact('media_type'));
+    }
+
+    public function mediaDetail($mediaId){
+        $user = User::current();
+        $mediaId = new ObjectId($mediaId);
+        // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
+        $comments = Comment::where('photo_id','=',$mediaId)->get();
+        $media = Media::find($mediaId);
+
+        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
+            $media['liked'] = true;
+        }else{
+            $media['liked'] = false;
+        }
+
+        return view('media/detail',["post"=>$media, "comments"=>$comments]);
     }
 }

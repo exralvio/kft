@@ -1,6 +1,5 @@
 window.onload = function(){
-
-    var postId = null;
+    var postId = $('#postId').val();
     var inst = $('[data-remodal-id=commentPostModal]').remodal();
     $('#post-data').on('click', 'a.comment-button', function(e) {
         $.ajax({
@@ -24,9 +23,7 @@ window.onload = function(){
     });
 
     $('#post-data, #comment-content').on('click', 'a.like-button', function(e) {
-        // console.log('you click me', e.currentTarget.id);
-        // var postId = e.currentTarget.id.replace('like-','');
-        var postId = $(this).data('postid');
+        // var postId = $(this).data('postid');
         $.ajax({
             url: '/likePost',
             type: "post",

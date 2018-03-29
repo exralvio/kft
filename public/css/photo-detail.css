@@ -16,6 +16,7 @@ a.button-rounded{
     background-color: #1fb5ff;
     color: #ffffff;
 }
+#comment-content{text-align: center;}
 .modal-fs{max-width: none!important;}
 .border-right{border-right:1px solid #cccccc;}
 .comment-photo img{padding:5px;max-height: 579px;}

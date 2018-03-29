@@ -17,7 +17,14 @@ class DashboardController extends Controller{
 
     public function __construct(){
     }
-    
+
+    /**
+     * if following == 0
+     * then 
+     * get popular post
+     * else
+     * show following 
+    */
     public function showDashboard(){
         $user = User::current();
         $followings = User::getFollowing(true);
@@ -89,7 +96,7 @@ class DashboardController extends Controller{
         $currentUser = User::current();
         // dd($currentUser);
         $media = Media::find($request->get('post_id'));
-        // dd($media->id);
+        // dd($media);
         $comment = new Comment;
         $comment->photo_id = new ObjectId($media->_id);
         $comment->user = [
