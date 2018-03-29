@@ -62,7 +62,7 @@
                             <span class="visible-xs">Account</span>
                             <span class="nav-avatar visible-lg">
                                 @if(Session::has('user')) 
-                                <img src="{{ url('').'/'.Session::get('user')->photo }}" />
+                                <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                                 @else
                                 <img src="{{ url('') }}/rythm/images/user-avatar.png">
                                 @endif

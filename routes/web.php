@@ -20,6 +20,9 @@ Route::get('/discover', function(){
 
 Route::get('/search', 'SearchController@showSearchResult');
 
+/** user profile **/
+Route::get('/profile/{user_id}', 'UserController@getProfile');
+
 Route::middleware('guest')->group(function(){
 	/** signup **/
 	Route::get('/signup', 'Auth\AuthController@showSignup');
