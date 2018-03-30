@@ -77,6 +77,8 @@ class Media extends Eloquent
         $this->view_count += 1;
         $this->save();
 
+        \App\Models\User::updateView($this->user['id']);
+
         $popular_view_threshold = 10;
 
         if($this->view_count == $popular_view_threshold){

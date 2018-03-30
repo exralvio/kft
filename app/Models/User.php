@@ -114,4 +114,12 @@ class User extends Eloquent
 
         return 0;
     }
+
+    public static function updateView($user_id){
+        $user = User::where(['_id'=>$user_id])->first();
+        if($user){
+            $user->view_count += 1;
+            $user->save();
+        }
+    }
 }

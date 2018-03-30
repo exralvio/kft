@@ -107,6 +107,7 @@ class AuthController extends Controller{
                 $newUser->gender = '';
                 $newUser->about = '';
                 $newUser->photo = '';
+                $newUser->view_count = 0;
                 $newUser->department = [];
 
                 if($newUser->save()){

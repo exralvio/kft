@@ -39,7 +39,7 @@
         <div class="profile-name">{{ $user->firstname }} {{ $user->lastname }}</div>
         <div class="profile-social">
             <ul>
-                <li>{{ $user->photoview_number ? $user->photoview_number : 0 }} Photos Views</li>
+                <li>{{ $user->view_count }} Photo Views</li>
                 <li>{{ $user->getFollowerCount() }} Followers</li>
                 <li>{{ $user->getFollowingCount() }} Following</li>
             </ul>
