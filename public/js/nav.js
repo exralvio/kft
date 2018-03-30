@@ -11,6 +11,8 @@ $('.nav-notification').on('click', function(){
         $('#notification-content').empty();
         $('#notification-content').append(data);
         $('#notification-content').toggle();
+        $('#activeNotification').empty();
+        $('#activeNotification').hide();
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
