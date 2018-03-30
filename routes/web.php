@@ -22,7 +22,6 @@ Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
 Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
-Route::get('/loadNotificationContent', 'NotificationController@loadNotificationContent');
 
 
 /** user profile **/
@@ -58,6 +57,10 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/postComment', 'DashboardController@postComment');
 	Route::post('/deleteComment', 'DashboardController@deleteComment');
 	Route::post('/likePost', 'DashboardController@likePost');
+
+	/** notification **/
+	Route::get('/loadNotificationContent', 'NotificationController@loadNotificationContent');
+	Route::get('/loadUnreadNotification', 'NotificationController@unreadNotification');
 	
 	/** Media **/
 	Route::get('/manage', function(){

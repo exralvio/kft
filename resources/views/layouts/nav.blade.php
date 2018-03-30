@@ -81,7 +81,9 @@
                     <!-- End Item With Sub -->
                     <li>
                         <a href="#" class="nav-notification">
-                            <span class="visible-lg"><i class="fa fa-bell-o"></i> </span>
+                            <span class="visible-lg"><i class="fa fa-bell-o"></i> 
+                                <span id="activeNotification" style="display:none;"></span>
+                            </span>
                             <span class="visible-xs"><i class="fa fa-bell-o"></i> Notification</span>
                         </a>
                         <ul id="notification-content" style="display:none;">

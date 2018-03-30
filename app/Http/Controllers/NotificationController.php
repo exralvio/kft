@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use Response;
 
 class NotificationController  extends Controller{
 
     public function loadNotificationContent(){
         $html = '';
+        $loadedCommentIds = [];
         $myNotifications = \NotificationHelper::getNotification();
         if(!empty($myNotifications)){
             foreach($myNotifications as $notif){
+                array_push($loadedCommentIds, $notif->_id);
                 if(isset($notif->sender['photo'])){
                     $photo = url($notif->sender['photo']);
                 }else{
@@ -31,7 +35,18 @@ class NotificationController  extends Controller{
                 $html .= "<li>"."<div class='pull-left'>".$sender_photo."</div><div style='display:table;padding-left: 5px;'>".$sender.$action.$media."</div></li>";
             }
         }
+
+        /**
+         * set all opened notification as read
+        */
+        Notification::whereIn('_id',$loadedCommentIds)->update(['is_read'=>true]);
+
         echo $html;
+    }
+
+    public function unreadNotification(){
+        $count = \NotificationHelper::getUnreadNotification();
+        return Response::json(['status'=>'success', 'unread_notification'=> $count],200);
     }
 
 }

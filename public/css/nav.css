@@ -25,3 +25,10 @@
 #notification-content a {
     color: #ffe4c4;
 }
+#activeNotification{
+    background-color: #ff0000;
+    border-radius: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 3px 6px;
+}
