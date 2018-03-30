@@ -27,20 +27,22 @@ class DashboardController extends Controller{
     */
     public function showDashboard(){
         $user = User::current();
-        $followings = User::getFollowing(true);
-
-        // if(count($followings)>0){
-        $medias = Media::orderBy('_id','desc')
-                ->whereIn('user.id', $followings)
-                ->limit(3)
-                ->get();
-        // }else{
-        //     $medias = Media::orderBy('_id','desc')
-        //             ->orderBy('view_count', 'desc')
-        //             ->limit(3)
-        //             ->get();
-        // }
+        $followings = User::getFollowing(false);
         
+        if(count($followings) == 0){
+            $popularMedias = Media::where('user.id','!=',$user['_id'])->get()->sortBy('view_count', null, true);
+        }else{
+            $popularMedias = [];
+        }
+
+        array_push($followings, $user['_id']);
+        
+        $medias = Media::orderBy('_id','desc')
+        ->whereIn('user.id', $followings)
+        ->limit(3)
+        ->get();
+
+
         foreach($medias as $key=>$media){
             if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
                 $medias[$key]['liked'] = true;
@@ -50,7 +52,7 @@ class DashboardController extends Controller{
         }
         
 
-        return view('dashboard/index',["posts"=>$medias]);
+        return view('dashboard/index',["posts"=>$medias, 'popularMedias'=>$popularMedias]);
     }
 
     /**
