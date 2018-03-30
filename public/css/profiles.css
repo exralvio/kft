@@ -29,7 +29,9 @@
 }
 .profile-button{
     background: #ffffff;
-    padding: 10px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
 }
 #profile .nav-tabs, .nav-pills {
     text-align:center;

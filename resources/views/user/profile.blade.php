@@ -22,9 +22,7 @@ Komunitas Fotografi Telkom
             </div>
             @if($user['_id'] == \App\Models\User::current()['_id'])
             <div class="text-right profile-button">
-                <button type="button" class="btn btn-default">Manage</button>
-                <button type="button" class="btn btn-default">Settings</button>
-                <!-- <button type="button" class="btn btn-primary">Edit your profile</button>-->
+                <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
                 <a href="" class="btn btn-primary btn-open-setting">Edit Profile</a>
             </div>
             @else
