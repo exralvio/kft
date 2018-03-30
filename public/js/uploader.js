@@ -14,6 +14,10 @@ function editUploadForm(e){
 	var upload_index = $(this).data('upload-index');
 	var data = upload_images[upload_index];
 
+	$('.upload-keywords').tagsinput('destroy');
+	$('.upload-keywords').val('');
+	$('.upload-keywords').tagsinput();
+
 	$('.dz-preview').removeClass('dz-active');
 	$(this).addClass('dz-active');
 
@@ -22,6 +26,10 @@ function editUploadForm(e){
 	$('.upload-description').val(data.description);
 	$('.upload-category').val(data.category);
 	$('.upload-index').val(upload_index);
+
+	$.each(data.keywords, function(index, value){
+		$('.upload-keywords').tagsinput('add', value);
+	});
 
 	$('.upload-title').on('change keyup paste', function(e){
 		var new_val = $(this).val();
@@ -36,8 +44,8 @@ function editUploadForm(e){
 	});
 
 	$('.upload-keywords').on('itemAdded itemRemoved', function(e) {
-		var new_val = $('.upload-keywords').tagsinput('items');
 		var current_index = $('.upload-index').val();
+		var new_val = $('.upload-keywords').tagsinput('items');
 		upload_images[current_index].keywords = new_val;
 	});
 

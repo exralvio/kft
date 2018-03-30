@@ -82,7 +82,9 @@
     <button data-remodal-action="close" class="remodal-close"></button>
     <div id="comment-content"></div>
 </div>
+@endsection
 
+@section('footer_script')
 <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 <script type="text/javascript">
     window.addEventListener("load", function(){
@@ -102,6 +104,5 @@
         });
     });
 </script>
-
 @endsection
 

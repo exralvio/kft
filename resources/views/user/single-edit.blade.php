@@ -91,8 +91,9 @@ Edit Profile
   </div>
   
 </section>
+@endsection
 
-<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
+@section('footer_script')
 <script type="text/javascript">
     window.addEventListener("load", function(){
         $(document).ready(function() {
@@ -111,5 +112,4 @@ Edit Profile
         });
     });
 </script>
-
 @endsection
