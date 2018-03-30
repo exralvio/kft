@@ -21,19 +21,19 @@
                                 <img src="{{ isset($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
                             </div>
                             <div class="post-container font-alt">
-                                <div class="poster">{{ $post->user['firstname'] }} {{ isset($post->user['lastname']) ? $post->user['lastname'] : '' }}</div>
+                                <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post->user['firstname'] }} {{ isset($post->user['lastname']) ? $post->user['lastname'] : '' }}</a></div>
                                 <div class="publish-date">{{ $post->created_at->diffForHumans() }}</div>
                             </div>
                         </div>
                             
-                        <div class="team-item-image">
+                        <div class="team-item-image open-single-post" data-postid="{{ $post->_id }}" >
                             <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
                         </div>
                 
                         <div class="row post-footer">
                             <div class="col-md-6 font-alt post-title">{{ $post->title }}</div>
                             <div class="col-md-6 text-right" style="margin-top: 5px;">
-                                <a id="{{ $post->_id }}" class="button-rounded comment-button" href="#">
+                                <a id="{{ $post->_id }}" class="button-rounded comment-button open-single-post" data-postid="{{ $post->_id }}" href="#">
                                     <i class="fa fa-comment-o"></i>
                                 </a>
                                 <a class="button-rounded">
@@ -76,6 +76,8 @@
     <div id="comment-content"></div>
 </div>
 
-<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 @endsection
 
+@section('footer_script')
+<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
+@endsection

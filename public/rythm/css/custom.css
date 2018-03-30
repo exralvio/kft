@@ -398,3 +398,7 @@ a.nav-notification:hover .fa {
     height: 25px;
     line-height: 23px;
 }
+
+a.profile-link {
+	text-decoration: none;
+}

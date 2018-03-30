@@ -45,6 +45,7 @@
 }
 .team-item-image {
     margin: 0 5px;
+    cursor: zoom-in;
 }
 .post-description{
     margin-top:10px;

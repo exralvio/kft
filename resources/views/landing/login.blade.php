@@ -8,6 +8,18 @@
     <!-- Section -->
     <section class="page-section pb-50 mt-30">
         <div class="container relative">
+                @if(Session::has('register_success'))
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="alert success">
+                                <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('register_success') }}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                @endif
+
 
                 <!-- Login Form -->                            
                 <div class="row">

@@ -85,4 +85,32 @@ class User extends Eloquent
 
         return $followings;
     }
+
+    public function getFollowerCount($user_id = null){
+        if(!isset($user_id)){
+            $user_id = new ObjectID($this->_id);
+        }
+
+        $follower = \App\Models\Followed::where('user_id', $user_id)->first();
+
+        if($follower){
+            return count($follower['followers']);
+        }
+
+        return 0;
+    }
+
+    public function getFollowingCount($user_id = null){
+        if(!isset($user_id)){
+            $user_id = new ObjectID($this->_id);
+        }
+
+        $following = \App\Models\Following::where('user_id', $user_id)->first();
+
+        if($following){
+            return count($following['followings']);
+        }
+
+        return 0;
+    }
 }

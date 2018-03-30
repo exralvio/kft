@@ -263,4 +263,10 @@ class UserController extends Controller{
         ]);
     }
 
+    public function editProfile(){
+        $profile = User::current();
+        
+        return view('user/single-edit', compact('profile'));
+    }
+
 }

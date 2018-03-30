@@ -40,18 +40,15 @@ Route::middleware('guest')->group(function(){
  * User Login but profile not complete
 */
 Route::middleware('auth')->group(function () {
-	
-	Route::prefix('user')->group(function () {
-		Route::get('profile', ['uses'=>'UserController@showProfile']);
-		Route::post('profile', ['uses'=>'UserController@saveEditProfile']);
-		// Route::get('media', ['uses'=>'UserController@getUploadedMedia']);
-	});
+	Route::get('user/edit', ['uses'=>'UserController@editProfile']);
+	Route::post('user/profile', ['uses'=>'UserController@saveEditProfile']);
 	
 	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
 });
 
 /** User Login and profile complete **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
+	Route::get('user/profile', ['uses'=>'UserController@showProfile']);
 
 	Route::get('/dashboard', 'DashboardController@showDashboard');
 	Route::post('/postComment', 'DashboardController@postComment');

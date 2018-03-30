@@ -96,7 +96,7 @@ class DashboardController extends Controller{
             $media['liked'] = false;
         }
 
-        $html = view('dashboard/comment',["post"=>$media, "comments"=>$comments])->render();
+        return view('dashboard/comment', ["post"=>$media, "comments"=>$comments])->render();
 
         echo $html;
     }

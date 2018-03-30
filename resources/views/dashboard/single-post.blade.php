@@ -12,14 +12,14 @@
             </div>
         </div>
             
-        <div class="team-item-image">
+        <div class="team-item-image open-single-post" data-postid="{{ $post->_id }}" >
             <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
         </div>
 
         <div class="row post-footer">
             <div class="col-md-6 font-alt post-title">{{ $post->title }}</div>
             <div class="col-md-6 text-right" style="margin-top: 5px;">
-                <a id="{{ $post->_id }}" class="button-rounded comment-button" href="#">
+                <a id="{{ $post->_id }}" data-postid="{{ $post->_id }}" class="button-rounded comment-button open-single-post" href="#">
                     <i class="fa fa-comment-o"></i>
                 </a>
                 <a class="button-rounded">

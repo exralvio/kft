@@ -1,28 +1,53 @@
-window.onload = function(){
-    var postId = $('#postId').val();
-    var inst = $('[data-remodal-id=commentPostModal]').remodal({hashTracking: false});
-    $('#post-data').on('click', 'a.comment-button', function(e) {
-        e.preventDefault();
+var postId = $('#postId').val();
+var inst = $('[data-remodal-id=commentPostModal]').remodal({hashTracking: false});
 
-        $.ajax({
-            url: '/loadCommentPage/'+e.currentTarget.id,
-            type: "get",
-            beforeSend: function()
-            {
-                postId = e.currentTarget.id
-            }
-        })
-        .done(function(data)
+function loadMoreData(last_id){
+    $.ajax({
+        url: '/loadMorePost/'+last_id,
+        type: "get",
+        beforeSend: function()
         {
-            $('#comment-content').empty();
-            $('#comment-content').append(data);
-            inst.open();
-        })
-        .fail(function(jqXHR, ajaxOptions, thrownError)
-        {
-            alert('failed to connect to server ...');
-        });
+            $('.ajax-load').show();
+        }
+    })
+    .done(function(data)
+    {
+        $('.ajax-load').hide();
+        $("#post-data").append(data);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        alert('failed to connect to server ...');
     });
+}
+
+function openSinglePost(e){
+    e.preventDefault();
+
+    var post_id = $(this).data('postid');
+
+    $.ajax({
+        url: '/loadCommentPage/'+post_id,
+        type: "get",
+        beforeSend: function()
+        {
+            postId = post_id
+        }
+    })
+    .done(function(data)
+    {
+        $('#comment-content').empty();
+        $('#comment-content').append(data);
+        inst.open();
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        alert('failed to connect to server ...');
+    });
+}
+
+$(function(){
+    $('body').on('click', '.open-single-post', openSinglePost);
 
     $('#post-data, #comment-content').on('click', 'a.like-button', function(e) {
         var postId = $(this).data('postid');
@@ -115,24 +140,4 @@ window.onload = function(){
             }
         }
     });
-
-    function loadMoreData(last_id){
-        $.ajax({
-            url: '/loadMorePost/'+last_id,
-            type: "get",
-            beforeSend: function()
-            {
-                $('.ajax-load').show();
-            }
-        })
-        .done(function(data)
-        {
-            $('.ajax-load').hide();
-            $("#post-data").append(data);
-        })
-        .fail(function(jqXHR, ajaxOptions, thrownError)
-        {
-            alert('failed to connect to server ...');
-        });
-    }
-} 
+});

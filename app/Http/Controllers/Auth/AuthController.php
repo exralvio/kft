@@ -114,7 +114,8 @@ class AuthController extends Controller{
                         /**
                          * this should be redirected to complete user's profiles views
                          * */
-                        return redirect()->to('/user/profile');
+                        Session::flash('register_success', 'Register Success! Please Login');
+                        return redirect('login');
                     }
                 }else{
                     dd('Signup failed');

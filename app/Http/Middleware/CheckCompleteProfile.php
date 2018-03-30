@@ -21,8 +21,9 @@ class CheckCompleteProfile
             if($user['is_active'] == true){
                 return $next($request);
             }else{
-                //redirect to edit profile
-                return redirect('/user/profile#editProfile');
+                \Session::flash('error', 'Please complete your profile before go to other page!');
+
+                return redirect('/user/edit');
             }
         }
     }

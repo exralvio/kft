@@ -3,7 +3,7 @@ var upload_images = [];
 var	first_time = 1;
 var upload_index = 0;
 var image_counter = 0;
-var remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true, hashTracking: false});
+var upload_remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true, hashTracking: false});
 
 function resetUploadForm(){
 	$('.form-uploader')[0].reset();
@@ -79,7 +79,7 @@ function submitUpload(e){
 		success: function(response){
 			$('.upload-publish').hide();
 			$('#uploadzone').show();
-			remodal.close();
+			upload_remodal.close();
 
 			setTimeout(function(){
 				location.reload();
@@ -95,10 +95,14 @@ function submitUpload(e){
 }
 
 $(function(){
+	$('.upload-btn').on('click', function(e){
+		e.preventDefault();
+		upload_remodal.open();
+	});
 
 	$(document).on('closed', '.remodal', function (e) {
 		// Reason: 'confirmation', 'cancellation'
-		console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
+		// console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
 	});
 
 	Dropzone.autoDiscover = false;
