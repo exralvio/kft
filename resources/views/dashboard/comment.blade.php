@@ -9,7 +9,7 @@
                 <img src="{{ url($post->user['photo']) }}">
             </div>
             <div class="comment-profile-name">
-                {{ $post->user['firstname'] }} {{ $post->user['lastname'] }}
+                {{ $post->user['fullname'] }}
             </div>
             @if(\Auth::check() and $post->user['id'] != \App\Models\User::current()['_id'])
             <div class="comment-profile-follow">

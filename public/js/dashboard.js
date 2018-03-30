@@ -27,7 +27,7 @@ function openSinglePost(e){
     var post_id = $(this).data('postid');
 
     $.ajax({
-        url: '/loadCommentPage/'+post_id,
+        url: '/loadMedia/'+post_id,
         type: "get",
         beforeSend: function()
         {

@@ -16,6 +16,7 @@ class User extends Eloquent
         
         $firstname = $user['firstname'];
         $lastname = $user['lastname'];
+        $fullname = $user['fullname'];
         $email = $user['email'];
         $photo = $user['photo'];
         $_id = $user['_id'];
@@ -24,7 +25,7 @@ class User extends Eloquent
         $about = $user['about'];
         $gender = $user['gender'];
 
-        return compact('_id','firstname','lastname','email','photo','department','birthday','gender','about');
+        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about');
     }
 
     public static function currentPhoto(){

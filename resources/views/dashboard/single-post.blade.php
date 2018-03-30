@@ -7,7 +7,7 @@
                 <img src="{{ isset($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
             </div>
             <div class="post-container font-alt">
-                <div class="poster">{{ $post->user['firstname'] }} {{ isset($post->user['lastname']) ? $post->user['lastname'] : '' }}</div>
+                <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post->user['id']) }}">{{ $post->user['firstname'] }} {{ isset($post->user['lastname']) ? $post->user['lastname'] : '' }}</a></div>
                 <div class="publish-date">{{ $post->created_at->diffForHumans() }}</div>
             </div>
         </div>

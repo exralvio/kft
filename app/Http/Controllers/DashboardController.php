@@ -83,12 +83,15 @@ class DashboardController extends Controller{
     /**
      * function for ajax rendering
     */
-    public function loadCommentPage($mediaId){
+    public function loadMedia($mediaId){
         $user = User::current();
-        $mediaId = new ObjectId($mediaId);
-        // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
+        
         $comments = Comment::where('photo_id','=',$mediaId)->get();
         $media = Media::find($mediaId);
+
+        if($media){
+            $media->updateView();
+        }
 
         if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
             $media['liked'] = true;
@@ -97,8 +100,6 @@ class DashboardController extends Controller{
         }
 
         return view('dashboard/comment', ["post"=>$media, "comments"=>$comments])->render();
-
-        echo $html;
     }
 
     public function postComment(Request $request){

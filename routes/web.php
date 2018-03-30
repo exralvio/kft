@@ -20,7 +20,7 @@ Route::get('/discover', function(){
 
 Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
-Route::get('/loadCommentPage/{mediaId}', 'DashboardController@loadCommentPage');
+Route::get('/loadMedia/{mediaId}', 'DashboardController@loadMedia');
 Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
 
 

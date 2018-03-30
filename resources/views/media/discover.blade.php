@@ -39,18 +39,18 @@
                   <div id="post-data" class="tab-content">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
                         <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
-                            @foreach(\App\Models\Media::discoverPopular() as $media)
+                            @foreach(\App\Models\Media::discoverPopular() as $popular)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="#" id="{{ $media->_id }}" class="comment-button mfp-image">
+                                <a href="" data-postid="{{ $popular['media']['id'] }}" class="comment-button mfp-image open-single-post">
                                     <div class="work-img">
-                                        <img src="{{ url($media['images']['medium']) }}" alt="Work">
+                                        <img src="{{ url($popular['images']['medium']) }}" alt="Work">
                                     </div>
                                 </a>
-                                    <div class="work-intro align-left">
-                                        <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
-                                        <h3 class="work-title">{{ $media->getName() }}</h3>
-                                    </div>
+                                <div class="work-intro align-left">
+                                    <div class="profile-icon"><img src="{{ $popular['user']['photo'] }}"></div>
+                                    <h3 class="work-title">{{ $popular['user']['fullname'] }}</h3>
+                                </div>
                             </li>
                             <!-- End Work Item -->
                             @endforeach
@@ -61,14 +61,14 @@
                             @foreach(\App\Models\Media::discoverFresh() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="#" id="{{ $media->_id }}" class="comment-button mfp-image">
+                                <a href="#" data-postid="{{ $media->_id }}" class="comment-button mfp-image open-single-post">
                                     <div class="work-img">
                                         <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                     </div>
                                 </a>
                                     <div class="work-intro align-left">
                                         <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
-                                        <h3 class="work-title">{{ $media->getName() }}</h3>
+                                        <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
                                     </div>
                             </li>
                             <!-- End Work Item -->
@@ -86,10 +86,11 @@
         <div id="comment-content"></div>
     </div>
     
-    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
+    
 @endsection
 
 @section('footer_script')
+    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
     <script type="text/javascript">
         // Select all tabs
         $(function(){

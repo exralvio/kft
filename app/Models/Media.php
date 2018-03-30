@@ -17,8 +17,7 @@ class Media extends Eloquent
 		$media = new Media;
     	$media->user = [
     		'id'=>$user['_id'],
-    		'firstname'=>$user['firstname'],
-    		'lastname'=>$user['lastname'],
+            'fullname'=>$user['fullname'],
     		'photo'=>$user['photo']
     	];
 
@@ -51,7 +50,9 @@ class Media extends Eloquent
     }
 
     public static function discoverPopular(){
-        return Media::get()->sortBy('view_count', null, true);
+        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->get()->sortBy('view_count', null, true)->toArray();
+
+        return $medias;
     }
 
     public static function selfMedia($user_id = null){
@@ -70,5 +71,18 @@ class Media extends Eloquent
         $count = Media::where('user.id', $user['_id'])->count();
 
         return $count;
+    }
+
+    public function updateView(){
+        $this->view_count += 1;
+        $this->save();
+
+        $popular_view_threshold = 10;
+
+        if($this->view_count == $popular_view_threshold){
+            \App\Models\MediaPopular::addNewMedia($this);
+        } else if($this->view_count > $popular_view_threshold){
+            \App\Models\MediaPopular::updatePopularView($this);
+        }
     }
 }
