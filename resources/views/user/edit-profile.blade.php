@@ -61,7 +61,7 @@
           <textarea  class="input-md round form-control" id="about" name="about" placeholder="About">{{ $profile['about'] }}</textarea>
         </div>
     </div>
-    <div class="profile-button col-md-12 text-right">
+    <div class="pt-20 pb-20 col-md-12 text-right">
       <div class="col-md-12">
         <button type="button" data-remodal-action="cancel" class="btn btn-mod btn-gray btn-small btn-round" id="cancel-btn">Cancel</button>
         <button class="btn btn-mod btn-small btn-round" id="save-profile-btn">Save</button>
