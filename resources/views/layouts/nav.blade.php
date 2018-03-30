@@ -66,7 +66,7 @@
                                 <a href="{{ url('user/profile') }}">My Profile</i></a>
                             </li>
                             <li>
-                                <a href="#">My Settings</i></a>
+                                <a href="" class="btn-open-setting">My Settings</i></a>
                             </li>
                             <li>
                                 <a href="{{ url('manage') }}">Manage Photos</i></a>
@@ -109,3 +109,7 @@
 </nav>
 
 <!-- End Navigation panel -->
+
+@if(\Auth::check())
+    @include('user/edit-profile')
+@endif

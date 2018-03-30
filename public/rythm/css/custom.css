@@ -2,6 +2,10 @@
 	text-transform: none;
 }
 
+a.btn {
+	text-decoration: none;
+}
+
 .main-nav.transparent ul li a {
 	color: #fff;
 }
@@ -382,4 +386,15 @@ a.nav-notification:hover .fa {
 
 .btn-follow.followed:hover {
 	background: #ff4c4c;
+}
+
+.comment-profile-follow {
+    margin-left: 60px;
+    text-align: left;
+}
+
+.comment-profile-follow .btn-follow {
+	width: 80px;
+    height: 25px;
+    line-height: 23px;
 }

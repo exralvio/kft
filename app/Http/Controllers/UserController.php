@@ -45,7 +45,19 @@ class UserController extends Controller{
             return Redirect::to('user/profile#editProfile')
                     ->withErrors($validator);
         }else{
-            $collection = collect($request->all() + ['is_active'=>true]);
+            $department = \App\Models\UserDepartment::find($request->department);
+            $input_department = [
+                'id'=>new ObjectID($department['_id']),
+                'name'=>$department['parent'].' '.$department['name']
+            ];
+
+            $request->merge([
+                'is_active'=>true, 
+                'department'=>$input_department,
+                'fullname'=>!empty($request->lastname) ? $request->firstname.' '.$request->lastname : $request->firstname
+            ]);
+            
+            $collection = collect($request->all());
             if($request->hasFile('photo')){
                 $savedFilename = $this->uploadProfilePict($request);
                 $collection->put('photo', $savedFilename);

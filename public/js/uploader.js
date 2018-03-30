@@ -3,7 +3,7 @@ var upload_images = [];
 var	first_time = 1;
 var upload_index = 0;
 var image_counter = 0;
-var remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true});
+var remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true, hashTracking: false});
 
 function resetUploadForm(){
 	$('.form-uploader')[0].reset();

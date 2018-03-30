@@ -11,6 +11,15 @@
             <div class="comment-profile-name">
                 {{ $post->user['firstname'] }} {{ $post->user['lastname'] }}
             </div>
+            @if(\Auth::check() and $post->user['id'] != \App\Models\User::current()['_id'])
+            <div class="comment-profile-follow">
+                @if(\App\Models\User::isFollower($post->user['id']))
+                <a class="btn btn-sm btn-follow followed follow-{{ $post->user['id'] }}" data-userid="{{ $post->user['id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
+                @else
+                <a class="btn btn-sm btn-follow follow-{{ $post->user['id'] }}" data-userid="{{ $post->user['id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
+                @endif
+            </div>
+            @endif
             <!-- <div class="following-status">
                 following
             </div> -->
@@ -64,6 +73,7 @@
             <!-- collapse end -->
         </div>
         <div class="row comment-block" style="border-top:1px solid #e8e8e8;">
+            @if(\Auth::check()) 
             <div class="comments" style="margin:10px 0;">
                 <div class="col-md-2 pp">
                     @if(Session::has('user')) 
@@ -76,6 +86,7 @@
                     <input id="commentPhoto" type="text" class="input-md round form-control input-comment-bg" name="comment" placeholder="Add a comment">
                 </div>
             </div>
+            @endif
 
             <div class="col-md-12 dynamicComment">
                 <!-- repeated comments -->
@@ -87,8 +98,10 @@
                     <div class="col-md-10 comment-input comment-text">
                         <div style="font-weight: bold;">{{ $comment->user_detail['first_name'] }} {{ $comment->user_detail['last_name'] }}</div>
                         {{ $comment->comment }}
-                        @if(Session::get('user')->_id == $comment->user_id)
-                        <div id="del-{{ $comment->_id }}" class="del-comment" style="width: 1px;height: 1px;float: right;cursor: pointer;display:none">x</div>
+                        @if(\Auth::check()) 
+                            @if(Session::get('user')->_id == $comment->user_id)
+                            <div id="del-{{ $comment->_id }}" class="del-comment" style="width: 1px;height: 1px;float: right;cursor: pointer;display:none">x</div>
+                            @endif
                         @endif
                     </div>
                 </div>

@@ -1,25 +1,25 @@
 $(function(){
-	$('.btn-follow.followed', 'body').on('mouseover', function(){
+	$('body').on('mouseover', '.btn-follow.followed', function(e){
 		$(this).text('Unfollow');
-	}).on('mouseout', function(){
+	}).on('mouseout', '.btn-follow.followed',function(e){
 		$(this).text('Followed');
 	});
 
-	$('.btn-follow').on('click', function(e){
+	$('body').on('click', '.btn-follow', function(e){
 		e.preventDefault();
 
-		$(this).prop('disabled', true);
+		$(e.target).prop('disabled', true);
 
-		var userid = $(this).data('userid');
-		var action = $(this).hasClass('followed') ? 'unfollow' : 'follow';
-		var postUrl = $(this).data('action');
+		var userid = $(e.target).data('userid');
+		var action = $(e.target).hasClass('followed') ? 'unfollow' : 'follow';
+		var postUrl = $(e.target).data('action');
 		var postData = {
 				"_token": $('meta[name="csrf-token"]').attr('content'),
 				"action": action, 
 				"user_id": userid
 		};
 
-		var that = this;
+		var that = e.target;
 
 		$.ajax({
 			url: postUrl,

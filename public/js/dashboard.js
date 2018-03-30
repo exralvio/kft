@@ -1,7 +1,9 @@
 window.onload = function(){
     var postId = $('#postId').val();
-    var inst = $('[data-remodal-id=commentPostModal]').remodal();
+    var inst = $('[data-remodal-id=commentPostModal]').remodal({hashTracking: false});
     $('#post-data').on('click', 'a.comment-button', function(e) {
+        e.preventDefault();
+
         $.ajax({
             url: '/loadCommentPage/'+e.currentTarget.id,
             type: "get",
