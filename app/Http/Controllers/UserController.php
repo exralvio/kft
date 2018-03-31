@@ -18,13 +18,10 @@ use \App\Models\Followed;
 
 class UserController extends Controller{
 
-    public function showProfile(Request $request){
-        $user_session = $request->session()->get('user');
-        $user_data = iterator_to_array($user_session);
-        $user = User::where('email', $user_data['email'])->first();
-        $medias = $this->getUploadedMedia();
+    public function showProfile(){
+        $user_id = User::current()['_id'];
 
-        return view('user/profile', compact('user','medias'));
+        return $this->getProfile($user_id);
     }
 
     private function getUploadedMedia(){

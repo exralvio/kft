@@ -115,6 +115,16 @@ class User extends Eloquent
         return 0;
     }
 
+    public function getMediaCount($user_id = null){
+        if(!isset($user_id)){
+            $user_id = new ObjectID($this->_id);
+        }
+
+        $media = \App\Models\Media::where('user.id', $user_id)->count();
+
+        return $media ? $media : 0;
+    }
+
     public static function updateView($user_id){
         $user = User::where(['_id'=>$user_id])->first();
         if($user){

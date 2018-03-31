@@ -9,7 +9,7 @@
                 <img src="{{ url($post->user['photo']) }}">
             </div>
             <div class="comment-profile-name">
-                {{ $post->user['fullname'] }}
+                <a class="profile-link" href="{{ url('profile/'.$post->user['id']) }}">{{ $post->user['fullname'] }}</a>
             </div>
             @if(\Auth::check() and $post->user['id'] != \App\Models\User::current()['_id'])
             <div class="comment-profile-follow">
