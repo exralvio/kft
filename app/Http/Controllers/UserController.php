@@ -162,7 +162,6 @@ class UserController extends Controller{
 
         $user = User::find($user_id);
         if($following){
-            
             $following = Following::find($following['_id']);
             $following->push('followings', [
                 'id'=>new ObjectID($user['_id']),
@@ -178,19 +177,7 @@ class UserController extends Controller{
                 'photo'=>$user['photo']
             ]];
             
-            if($following->save()){
-                $notification = [
-                    "sender"=>[
-                        "id"=>$me['_id'],
-                        'fullname'=>$user['fullname'],
-                        "photo"=>$me['photo'],
-                    ],
-                    "receiver"=>$following->user_id,
-                    "type"=>"follow",
-                    "media"=>[]
-                ];
-                \NotificationHelper::setNotification($notification);
-            }
+            $following->save();
         }
 
         /** Update followed **/
@@ -215,6 +202,21 @@ class UserController extends Controller{
 
             $followed->save();
         }
+
+        /** Set Notification **/
+        $notification = [
+            "sender"=>[
+                "id"=>$me['_id'],
+                'fullname'=>$me['fullname'],
+                "photo"=>$me['photo'],
+            ],
+            "receiver"=>$user_id,
+            "type"=>"follow",
+            "media"=>[]
+        ];
+
+        \NotificationHelper::setNotification($notification);
+        /** End Set Notification **/
 
         return Response::json([
             'status'=>'success',
