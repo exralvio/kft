@@ -130,3 +130,46 @@
     margin: auto;
     max-width: none;
 }
+
+.edit-pp-container label {
+    cursor: pointer;
+    float:none!important;
+}
+
+#pp-preview {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    background: url(../images/pp-icon.png);
+    color: #ecf0f1;
+    background-size: contain;
+    border-radius: 60px;
+    margin: 15px auto;
+}
+
+#pp-preview input {
+    line-height: 200px;
+    font-size: 200px;
+    position: absolute;
+    opacity: 0;
+    z-index: 10;
+}
+
+#pp-preview label {
+    position: absolute;
+    z-index: 5;
+    opacity: 0.8;
+    cursor: pointer;
+    width: 120px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 14px;
+}

@@ -111,8 +111,7 @@ class DashboardController extends Controller{
         $comment->photo_id = new ObjectId($media->_id);
         $comment->user = [
             'id' => $media->user['id'],
-            'firstname'=>$currentUser['firstname'],
-            'lastname'=>$currentUser['lastname'],
+            'fullname'=>$currentUser['fullname'],
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
@@ -121,8 +120,7 @@ class DashboardController extends Controller{
             $notification = [
                 "sender"=>[
                     "id"=>$currentUser['_id'],
-                    "firstname"=>$currentUser['firstname'],
-                    "lastname"=>$currentUser['lastname'],
+                    "fullname"=>$currentUser['fullname'],
                     "photo"=>$currentUser['photo'],
                 ],
                 "receiver"=>$media->user['id'],
@@ -156,16 +154,14 @@ class DashboardController extends Controller{
         }else{
             $media->push('like_users',Array(
                 "user_id"=> $user['_id'],
-                "firstname"=> $user['firstname'],
-                "lastname"=> $user['lastname'],
+                "fullname"=> $user['fullname'],
                 "created_at"=> Carbon::now()->toDateTimeString()
             ));
 
             $notification = [
                 "sender"=>[
                     "id"=>$user['_id'],
-                    "firstname"=>$user['firstname'],
-                    "lastname"=>$user['lastname'],
+                    "fullname"=>$user['fullname'],
                     "photo"=>$user['photo'],
                 ],
                 "receiver"=>$media->user['id'],

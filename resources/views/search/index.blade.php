@@ -78,7 +78,7 @@
                                         </div>
                                     </a>
                                     <div class="work-intro align-left">
-                                        {{ $user->firstname }} {{ $user->lastname }}
+                                        {{ $user['fullname'] }}
                                     </div>
                                 </li>
                                 <!-- End Work Item -->

@@ -21,7 +21,7 @@ class NotificationController  extends Controller{
                     $photo = url('/images/pp-icon.png');
                 }
                 $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
-                $sender = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['firstname']." ".$notif->sender['lastname']."</b></a>";
+                $sender = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
                 $action = '';
                 $media = '';
                 switch($notif->type){
