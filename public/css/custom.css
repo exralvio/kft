@@ -422,3 +422,29 @@ a.profile-link {
 .discover-grid .work-title, .search-grid .work-title {
 	text-transform: none;
 }
+
+/** Post modal **/
+.post-modal {
+	height: 90vh;
+	border-radius: 3px;
+}
+
+.post-modal .comment-photo {
+	height: 90vh;
+	border-right: 1px solid #e8e8e8;
+	line-height: 89vh;
+}
+
+.post-modal .comment-photo img {
+	padding: 0px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.post-modal .post-details {
+	margin-left: -15px;
+}
+
+.post-model .comment-buttons {
+	margin: 0px;
+}

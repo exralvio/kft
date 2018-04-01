@@ -95,11 +95,8 @@
     </div>
 </section>
 
+@include('partials/post-modal')
 
-<div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
-    <button data-remodal-action="close" class="remodal-close"></button>
-    <div id="comment-content"></div>
-</div>
 @endsection
 
 @section('footer_script')

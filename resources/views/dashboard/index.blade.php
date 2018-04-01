@@ -39,10 +39,8 @@
         </div>
     </div>
 </section>
-<div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
-    <button data-remodal-action="close" class="remodal-close"></button>
-    <div id="comment-content"></div>
-</div>
+
+@include('partials/post-modal')
 
 @endsection
 
