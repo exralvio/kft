@@ -91,7 +91,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#uploader" class="nav-upload upload-btn">
+                        <a href="{{ !\App\Models\User::isActive() ? url('/') : '' }}" class="nav-upload {{ \App\Models\User::isActive() ? 'upload-btn' : '' }}">
                            <i class="fa fa-cloud-upload"></i> Upload
                         </a>
                     </li>

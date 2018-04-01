@@ -24,8 +24,15 @@ class User extends Eloquent
         $birthday = $user['birthday'];
         $about = $user['about'];
         $gender = $user['gender'];
+        $is_active = $user['is_active'];
 
-        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about');
+        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about','is_active');
+    }
+
+    public static function isActive(){
+        $user = User::current();
+
+        return $user['is_active'];
     }
 
     public static function currentPhoto(){
