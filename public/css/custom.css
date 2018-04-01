@@ -402,3 +402,30 @@ a.nav-notification:hover .fa {
 a.profile-link {
 	text-decoration: none;
 }
+
+.discover-grid .work-item {
+    height: 200px;
+    position: relative;
+}
+
+.discover-grid .work-img {
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.discover-grid .work-img img {
+    /*width: 100%;
+    position: absolute;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+    max-width: none;*/
+
+    height: auto;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}

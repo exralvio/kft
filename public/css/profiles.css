@@ -114,21 +114,30 @@
 }
 
 .profile-grid .work-item {
-    height: 325px;
+    height: 275px;
 }
 
 .profile-grid .work-img {
-    height: 315px;
+    height: 265px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
 }
 
 .profile-grid .work-item img {
-    height: inherit;
+    /*height: inherit;
     width: auto;
     position: absolute;
     left: -9999px;
     right: -9999px;
     margin: auto;
-    max-width: none;
+    max-width: none;*/
+
+    height: auto;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .edit-pp-container label {

@@ -24,7 +24,14 @@ $('body').on('click',function(){
     $('#notification-content').hide();
 })
 
-$(document).ready(function(){
+var editProfile = $('[data-remodal-id=editProfile]').remodal({closeOnConfirm: true, hashTracking: false});
+
+$('.btn-open-setting').on('click', function(e){
+    e.preventDefault();
+    editProfile.open();
+});
+
+function loadNotification() {
     $.ajax({
         url: '/loadUnreadNotification',
         type: "get",
@@ -44,11 +51,4 @@ $(document).ready(function(){
     {
         alert('failed to connect to server ...');
     });
-})
-
-var editProfile = $('[data-remodal-id=editProfile]').remodal({closeOnConfirm: true, hashTracking: false});
-
-$('.btn-open-setting').on('click', function(e){
-    e.preventDefault();
-    editProfile.open();
-});
+}

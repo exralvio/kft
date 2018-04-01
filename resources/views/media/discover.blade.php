@@ -36,9 +36,9 @@
         <div class="relative">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
-                  <div id="post-data" class="tab-content">
+                  <div id="post-data" class="tab-content discover-grid">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
-                        <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
+                        <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
                             @foreach(\App\Models\Media::discoverPopular() as $popular)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
@@ -57,7 +57,7 @@
                         </ul>
                       </div>
                       <div role="tabpanel" id="fresh" class="tab-pane fade ">
-                        <ul class="works-grid work-grid-gut clearfix font-alt hide-titles masonry" id="fresh-grid" >
+                        <ul class="works-grid work-grid-gut clearfix font-alt hide-titles" id="fresh-grid" >
                             @foreach(\App\Models\Media::discoverFresh() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >

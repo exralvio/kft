@@ -52,7 +52,7 @@
                         <a href="#" class="mn-has-sub">
                             <span class="visible-xs">Account</span>
                             <span class="nav-avatar visible-lg">
-                                @if(Session::has('user')) 
+                                @if(!empty(\App\Models\User::currentPhoto())) 
                                 <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                                 @else
                                 <img src="{{ url('') }}/rythm/images/user-avatar.png">

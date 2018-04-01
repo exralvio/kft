@@ -82,6 +82,12 @@
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
         </script>
 
+        @if(\Auth::check())
+        <script type="text/javascript">
+            loadNotification();
+        </script>
+        @endif
+
         @yield('footer_script')
         
     </body>
