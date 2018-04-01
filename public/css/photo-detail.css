@@ -1,6 +1,6 @@
 a.button-rounded{
     border: 1px solid #ccc;
-    margin: 2px;
+    /*margin: 2px;*/
     border-radius: 15px;
     padding: 5px 15px 5px 17px;
     text-decoration: none;

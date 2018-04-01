@@ -1,33 +1,47 @@
 
 .timeline-post{
     max-width:650px;
-    margin: 0 auto 50px auto;
+    margin-left: auto;
+    margin-right: auto;
     background: #ffffff;
-    -webkit-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
+    /*-webkit-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
     -moz-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
-    box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
+    box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);*/
+    border-radius: 3px;
+    border: 1px solid #eeeff2;
 }
 .post-header{
-    padding: 10px;
+    padding: 15px;
 }
 .post-container{
     display: inline-block;
     vertical-align: top;
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 .poster{
     text-align: left;
     display: table;
     font-weight: bold;
+    padding-top: 5px;
+}
+.poster a {
+    font-size: 14px;
+    line-height: 14px;
 }
 .published-text, .post-date{
     text-align: left;
     font-size: 10px;
 }
+.publish-date {
+    color: #b9c1c7;
+    font-size: 12px;
+    line-height: 12px;
+}
 .poster-pp{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: inline-block;
+    margin-right: 10px;
 }
 .poster-pp img {
     border-radius: 50px;
@@ -44,16 +58,79 @@
     width: 100%;
 }
 .team-item-image {
-    margin: 0 5px;
     cursor: zoom-in;
+    border-top: 1px solid #eeeff2;
+    border-bottom: 1px solid #eeeff2;
+    text-align: center;
 }
+.team-item-image img {
+    max-height: 400px;
+    max-width: 100%;
+    width: auto;
+}
+
 .post-description{
     margin-top:10px;
 }
-.post-title{
+
+.timeline-post .post-title {
+    font-weight: bold;
+    color: #525558;
+    line-height: 30px;
+}
+
+.post-action a {
+    display: inline-block;
+}
+
+.post-action .comment-button {
+    width: 50px;
+    height: 30px;
+    border: 1px solid #c7ced2;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 15px;
+    color: #c7ced2;
+    margin-right: 5px;
+}
+
+.post-action .comment-button:hover {
+    background: #f7f8fa;
+}
+
+.post-action .like-button {
+    height: 30px;
+    border-radius: 15px;
+    padding: 0 20px 0 40px;
+    line-height: 30px;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    background: #0099e5;
+    border: 1px solid #0099e5;
+    color: #fff;
+}
+
+.post-action .like-button span {
     font-weight: bold;
 }
-.liked-bg{
+
+.post-action .like-button .fa {
+    position: absolute;
+    left: 15px;
+    line-height: 30px;
+}
+
+.post-action .liked {
     background-color: #ffffff;
-    color: #ff0000;
+    border-color: #c7ced2;
+}
+
+.post-action .liked .fa {
+    color: #ff4c4c;
+}
+
+.post-action .liked span {
+    font-weight: normal;
+    color: #aaa;
 }

@@ -49,7 +49,7 @@ function openSinglePost(e){
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
-    $('#post-data, #comment-content').on('click', 'a.like-button', function(e) {
+    $('body').on('click', 'a.like-button', function(e) {
         var postId = $(this).data('postid');
         $.ajax({
             url: '/likePost',
@@ -63,13 +63,15 @@ $(function(){
         })
         .done(function(data){
             if(data.status == 'liked'){
-                $('.like-'+postId).addClass('liked-bg');
-                $('.like-'+postId).removeClass('blue-sky-bg');
+                $('.like-'+postId).addClass('liked');
+                $('.like-'+postId+' .fa').addClass('fa-heart');
+                $('.like-'+postId+' .fa').removeClass('fa-heart-o');
             }else{
-                $('.like-'+postId).addClass('blue-sky-bg');
-                $('.like-'+postId).removeClass('liked-bg');
+                $('.like-'+postId).removeClass('liked');
+                $('.like-'+postId+' .fa').addClass('fa-heart-o');
+                $('.like-'+postId+' .fa').removeClass('fa-heart');
             }
-            console.log('#like-count-'+e.currentTarget.id);
+
             $('#like-count-'+postId).text(data.like_count);
         })
         .fail(function(jqXHR, ajaxOptions, thrownError){

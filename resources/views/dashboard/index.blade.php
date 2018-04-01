@@ -20,7 +20,7 @@
                             <div class="poster-pp">
                                 <img src="{{ isset($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
                             </div>
-                            <div class="post-container font-alt">
+                            <div class="post-container">
                                 <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post->user['fullname'] }}</a></div>
                                 <div class="publish-date">{{ $post->created_at->diffForHumans() }}</div>
                             </div>
@@ -30,15 +30,15 @@
                             <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
                         </div>
                 
-                        <div class="row post-footer">
-                            <div class="col-md-6 font-alt post-title">{{ $post->title }}</div>
-                            <div class="col-md-6 text-right" style="margin-top: 5px;">
+                        <div class="post-footer">
+                            <div class="col-md-6 post-title">{{ $post->title }}</div>
+                            <div class="col-md-6 text-right post-action">
                                 <a id="{{ $post->_id }}" class="button-rounded comment-button open-single-post" data-postid="{{ $post->_id }}" href="#">
                                     <i class="fa fa-comment-o"></i>
                                 </a>
-                                <a class="button-rounded">
+                                <!-- <a class="button-rounded">
                                     <i class="fa fa-plus-square-o"></i> 
-                                </a>
+                                </a> -->
                                 @if($post->liked)
                                 <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked-bg">
                                     <i class="fa fa-heart-o"></i> 
@@ -52,8 +52,9 @@
                                 @endif
                             </div>
                             <div class="col-md-12 post-description">{{ $post->description }}</div>
+                            <div class="clearfix"></div>
                         </div>
-                        
+
                     </div>
                 </div>
                 @endforeach
