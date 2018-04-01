@@ -24,7 +24,7 @@
   </form>
   <div class="col-sm-12 col-md-3 pull-right form-uploader-wrapper">
     <div class="row">
-      <form class="form form-uploader pt-20 pd-20 align-left" role="form" action="{{ url('media/confirm') }}">
+      <form class="form form-uploader pt-20 pd-20 align-left" role="form" action="{{ url('media/confirm') }}" data-redirect="{{ url('manage/all') }}">
         <div class="form-blocker"></div>
         <div class="col-sm-12">
           <div class="mb-20 mb-md-10 publish-section">

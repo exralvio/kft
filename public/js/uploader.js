@@ -64,6 +64,7 @@ function submitUpload(e){
 	$('#uploadzone').hide();
 	$('.upload-publish').show();
 
+	var redirect = $('.form-uploader').data('redirect');
 
 	var active_index = [];
 	$('.dz-preview').each(function(i, e){
@@ -90,7 +91,7 @@ function submitUpload(e){
 			upload_remodal.close();
 
 			setTimeout(function(){
-				location.reload();
+				window.location = redirect;
 			}, 1000);
 		},
 		error: function(){
