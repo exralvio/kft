@@ -403,12 +403,12 @@ a.profile-link {
 	text-decoration: none;
 }
 
-.discover-grid .work-item {
+.discover-grid .work-item, .search-grid .work-item {
     height: 200px;
     position: relative;
 }
 
-.discover-grid .work-img {
+.discover-grid .work-img, .search-grid .work-img {
     height: 190px;
     display: flex;
     justify-content: center;
@@ -416,7 +416,7 @@ a.profile-link {
     overflow: hidden
 }
 
-.discover-grid .work-img img {
+.discover-grid .work-img img, .search-grid .work-img img  {
     /*width: 100%;
     position: absolute;
     left: -9999px;
