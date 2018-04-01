@@ -1,8 +1,8 @@
 
 .timeline-post{
-    max-width:650px;
+    /*max-width:650px;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto;*/
     background: #ffffff;
     /*-webkit-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
     -moz-box-shadow: 0px 1px 10px 1px rgba(230,230,230,1);
@@ -133,4 +133,9 @@
 .post-action .liked span {
     font-weight: normal;
     color: #aaa;
+}
+
+.popular-alert {
+    border: 1px solid #f9ce75;
+    border-radius: 3px;
 }

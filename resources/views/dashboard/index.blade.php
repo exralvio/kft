@@ -9,61 +9,28 @@
 <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
 <section class="page-section pt-100">
     <div class="container relative">
-        <div class="col-xs-12 col-lg-10 col-lg-push-1 post-wrapper">
-
-            <div class="row" id="popular-media">
-                @foreach($popularMedias as $post)
-                <div class="timeline-post mb-xs-30 wow fadeInUp" id="{{ $post->_id }}">
-                    <div>
-                
-                        <div class="post-header">
-                            <div class="poster-pp">
-                                <img src="{{ isset($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
-                            </div>
-                            <div class="post-container">
-                                <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post->user['fullname'] }}</a></div>
-                                <div class="publish-date">{{ $post->created_at->diffForHumans() }}</div>
-                            </div>
-                        </div>
-                            
-                        <div class="team-item-image open-single-post" data-postid="{{ $post->_id }}" >
-                            <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
-                        </div>
-                
-                        <div class="post-footer">
-                            <div class="col-md-6 post-title">{{ $post->title }}</div>
-                            <div class="col-md-6 text-right post-action">
-                                <a id="{{ $post->_id }}" class="button-rounded comment-button open-single-post" data-postid="{{ $post->_id }}" href="#">
-                                    <i class="fa fa-comment-o"></i>
-                                </a>
-                                <!-- <a class="button-rounded">
-                                    <i class="fa fa-plus-square-o"></i> 
-                                </a> -->
-                                @if($post->liked)
-                                <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked-bg">
-                                    <i class="fa fa-heart-o"></i> 
-                                    <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
-                                </a>
-                                @else
-                                <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded blue-sky-bg">
-                                        <i class="fa fa-heart-o"></i> 
-                                        <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
-                                    </a>
-                                @endif
-                            </div>
-                            <div class="col-md-12 post-description">{{ $post->description }}</div>
-                            <div class="clearfix"></div>
-                        </div>
-
+        <div class="col-xs-12 col-md-6 col-md-push-3 post-wrapper">
+            @if(count(\App\Models\User::getFollowing()))
+                <?php $is_popular = false; ?>
+                <div class="row" id="post-data">
+                    @include('dashboard/single-post')
+                </div>
+            @else
+                <div class="row bg-white popular-alert mb-20">
+                    <div class="col-xs-12">
+                        <h2 class="mb-10"><i class="fa fa-lg fa-exclamation-triangle"></i> Now you're seeing popular post!</h2>
+                        <p>Follow someone to acquire your own feeds.</p>
                     </div>
                 </div>
-                @endforeach
-            </div>
-
-            <div class="row" id="post-data">
-                @include('dashboard/single-post')
-            </div>
-
+                
+                <?php $is_popular = true; ?>
+                <div class="row" id="popular-media">
+                    @foreach($popularMedias as $post)
+                        @include('partials/single-post')
+                    @endforeach
+                </div>
+            @endif
+            
             <!-- Ajax Loader -->
             <div class="text-center ajax-load"  style="display:none">
                 <p><img src="{{url('images/ajax-loader.gif')}}">Loading More post</p>
