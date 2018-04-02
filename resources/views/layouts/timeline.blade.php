@@ -30,7 +30,7 @@
 
     </head>
     <body class="appear-animate timeline">
-        
+        <!-- <script type="text/javascript" src="{{ url('') }}/js/fb-script.js"></script> -->
         <!-- Page Loader -->        
         <div class="page-loader">
             <div class="loader">Loading...</div>

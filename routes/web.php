@@ -34,6 +34,10 @@ Route::middleware('guest')->group(function(){
 	/** login **/
 	Route::get('/login', [ 'as' => 'login', 'uses' => 'Auth\AuthController@showLogin']);
 	Route::post('/login', 'Auth\AuthController@doLogin');
+
+	Route::get('login/{provider}', 'Auth\AuthController@redirectToProvider');
+	Route::get('login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
 });
 
 /**

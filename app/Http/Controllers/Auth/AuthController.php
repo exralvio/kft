@@ -8,13 +8,63 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use App\Services\SocialFacebookAccountService;
 use Mail;
 
+use Socialite;
 use Session;
 use Validator;
 use Auth;
 
 class AuthController extends Controller{
+
+    /**
+     * Redirect the user to the facebook authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        // return redirect($this->redirectTo('dashboard'));
+        return redirect()->intended('dashboard');
+    }
+
+    /**
+     * If a user has registered before using social auth, return the user
+     * else, create a new user object.
+     * @param  $user Socialite user object
+     * @param $provider Social auth provider
+     * @return  User
+     */
+    public function findOrCreateUser($user, $provider)
+    {
+        $authUser = User::where('provider_id', $user->id)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        return User::create([
+            'firstname'     => $user->name,
+            'lastname'     => $user->name,
+            'fullname'     => $user->name,
+            'email'    => $user->email,
+            'provider' => $provider,
+            'provider_id' => $user->id
+        ]);
+    }
 
     public function showIndex(){
         return view('landing/index');
@@ -128,6 +178,7 @@ class AuthController extends Controller{
 
     public function doLogout(){
         \Auth::logout();
+        // Session::flush();
         return Redirect::to('login');
     }
 
