@@ -21,7 +21,7 @@ class User extends Eloquent implements
     protected $collection = 'users';
 
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'email', 'password', 'provider', 'provider_id','is_active', 'firstname','lastname','fullname','email','photo','department','birthday','gender','about'
     ];
 
     public static function current(){

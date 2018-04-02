@@ -36,10 +36,8 @@ class AuthController extends Controller{
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        // return redirect($this->redirectTo('dashboard'));
         return redirect()->intended('dashboard');
     }
 
@@ -55,15 +53,23 @@ class AuthController extends Controller{
         $authUser = User::where('provider_id', $user->id)->first();
         if ($authUser) {
             return $authUser;
+        }else{
+            return User::create([
+                'email'         => $user->email,
+                'firstname'     => $user->name,
+                'lastname'      => $user->name,
+                'fullname'      => $user->name,
+                'is_active'     => true,
+                'birthday'      => '',
+                'gender'        => '',
+                'about'         => '',
+                'photo'         => $user->avatar,
+                'provider'      => $provider,
+                'provider_id'   => $user->id,
+                'view_count'    => 0,
+                'department'    => []
+            ]);
         }
-        return User::create([
-            'firstname'     => $user->name,
-            'lastname'     => $user->name,
-            'fullname'     => $user->name,
-            'email'    => $user->email,
-            'provider' => $provider,
-            'provider_id' => $user->id
-        ]);
     }
 
     public function showIndex(){
@@ -176,9 +182,9 @@ class AuthController extends Controller{
         }
     }
 
-    public function doLogout(){
+    public function doLogout(Request $request){
         \Auth::logout();
-        // Session::flush();
+        $request->session()->regenerate(true);
         return Redirect::to('login');
     }
 

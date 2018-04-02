@@ -15,7 +15,14 @@ class CheckCompleteProfile
             return redirect('/');
         }else{
             $user_session = $request->session()->get('user');
-            $user_arr = iterator_to_array($user_session);
+
+            $isJson = json_decode($user_session, true);
+            if (is_array($isJson)) {
+                $user_arr = $isJson;
+            } else {
+                $user_arr = iterator_to_array($user_session);
+            }
+
             $user = User::raw()->findOne(['_id' => $user_arr['_id']]);
 
             if($user['is_active'] == true){
