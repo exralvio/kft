@@ -85,8 +85,8 @@ class DashboardController extends Controller{
     */
     public function loadMedia($mediaId){
         $user = User::current();
-        
-        $comments = Comment::where('photo_id','=',$mediaId)->get();
+
+        $comments = Comment::where('photo_id','=',new ObjectId($mediaId))->get();
         $media = Media::find($mediaId);
 
         if($media){
