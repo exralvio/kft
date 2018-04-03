@@ -41,10 +41,6 @@ class Media extends Eloquent
     	$media->save();
     }
 
-    public function getName(){
-        return !empty($this->user['firstname']) ? $this->user['firstname'].' '.$this->user['lastname'] : $this->user['firstname'];
-    }
-
     public static function discoverFresh(){
         return Media::get()->sortBy('created_at', null, true);
     }
@@ -134,5 +130,13 @@ class Media extends Eloquent
         }
 
         return false;
+    }
+
+    public function isLiked($user_id){
+        if(in_array($user_id, array_map(function($v){ return $v['user_id']; }, $this->like_users))){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

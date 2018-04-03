@@ -78,7 +78,7 @@ $(function(){
                     $('.like-'+postId+' .fa').removeClass('fa-heart');
                 }
 
-                $('#like-count-'+postId).text(data.like_count);
+                $('span','.like-'+postId).text(data.like_count);
             }
         })
         .fail(function(jqXHR, ajaxOptions, thrownError){

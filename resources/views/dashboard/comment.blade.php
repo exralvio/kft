@@ -1,11 +1,11 @@
 <div class="row">
     <input id="postId" type="hidden" value="{{ $post->_id }}">
-    <div class="col-xs-12 col-md-10">
+    <div class="col-xs-12 col-md-9">
         <div class="comment-photo">
                 <img src="{{ url($post['images']['large']) }}">
         </div>
     </div>
-    <div class="col-xs-12 col-md-2">
+    <div class="col-xs-12 col-md-3">
         <div class="post-details">
             <div class="row comment-user-block">
                 <div class="mt-20">
@@ -27,18 +27,11 @@
                     @endif
                 </div>
                 @endif
-                <div class="comment-buttons mt-20">
-                    @if($post->liked)
-                    <a id="like-{{ $post->_id }}" data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked-bg">
-                        <i class="fa fa-heart-o"></i> 
-                        <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
+                <div class="comment-buttons post-action mt-20">
+                    <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }}">
+                        <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
+                        <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                     </a>
-                    @else
-                    <a id="like-{{ $post->_id }}" data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded blue-sky-bg">
-                            <i class="fa fa-heart-o"></i> 
-                            <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
-                        </a>
-                    @endif
                 </div>
             </div>
             <div class="row comment-photo-detail" style="padding:10px 0px;border-top:1px solid #e8e8e8;">

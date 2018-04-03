@@ -38,22 +38,14 @@ class DashboardController extends Controller{
 
         array_push($followings, $user['_id']);
         
-        $medias = Media::orderBy('_id','desc')
+        $posts = Media::orderBy('_id','desc')
         ->whereIn('user.id', $followings)
         ->limit(3)
         ->get();
 
+        $current_user_id = $user['_id'];
 
-        foreach($medias as $key=>$media){
-            if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-                $medias[$key]['liked'] = true;
-            }else{
-                $medias[$key]['liked'] = false;
-            }
-        }
-        
-
-        return view('dashboard/index',["posts"=>$medias, 'popularMedias'=>$popularMedias]);
+        return view('dashboard/index', compact('current_user_id', 'posts', 'popularMedias'));
     }
 
     /**
@@ -63,22 +55,15 @@ class DashboardController extends Controller{
         $user = User::current();
         $followings = User::getFollowing(true);
 
-        $medias = Media::orderBy('_id','desc')
+        $posts = Media::orderBy('_id','desc')
                 ->where('_id','<',$mediaId)
                 ->whereIn('user.id',$followings,'and')
                 ->take(3)
                 ->get();
 
-        foreach($medias as $key=>$media){
-            if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-                $medias[$key]['liked'] = true;
-            }else{
-                $medias[$key]['liked'] = false;
-            }
-        }
+        $current_user_id = $user['_id'];
 
-        $html = view('dashboard/single-post',["posts"=>$medias])->render();
-        echo $html;
+        return view('dashboard/single-post', compact('current_user_id', 'posts'))->render();
     }
 
     /**
@@ -88,19 +73,15 @@ class DashboardController extends Controller{
         $user = User::current();
 
         $comments = Comment::where('photo_id','=',new ObjectId($mediaId))->get();
-        $media = Media::find($mediaId);
+        $post = Media::find($mediaId);
 
-        if($media){
-            $media->updateView();
+        if($post){
+            $post->updateView();
         }
 
-        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-            $media['liked'] = true;
-        }else{
-            $media['liked'] = false;
-        }
+        $current_user_id = $user['_id'];
 
-        return view('dashboard/comment', ["post"=>$media, "comments"=>$comments])->render();
+        return view('dashboard/comment', compact('current_user_id', 'post', 'comments'))->render();
     }
 
     public function postComment(Request $request){

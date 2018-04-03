@@ -85,17 +85,11 @@
                             <!-- <a class="button-rounded">
                                 <i class="fa fa-plus-square-o"></i> 
                             </a> -->
-                            @if($post->liked)
-                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked">
-                                <i class="fa fa-heart"></i> 
+
+                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }}">
+                                <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                                 <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                             </a>
-                            @else
-                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button">
-                                    <i class="fa fa-heart-o"></i> 
-                                    <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
-                                </a>
-                            @endif
                         </div>
                     </div>
                     @if(!empty($post->description))
