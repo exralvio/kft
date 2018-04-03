@@ -15,7 +15,7 @@ class MediaPopular extends Eloquent
     	$popular = new MediaPopular();
     	$popular->media = [
     		'id'=> new ObjectID($media['_id']),
-            'created_at'=> $media['created_at']
+            'created_at'=> $media['created_at']->format('c')
         ];
         $popular->images = $media['images'];
     	$popular->user = $media['user'];

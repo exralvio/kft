@@ -29,8 +29,8 @@ class DashboardController extends Controller{
         $user = User::current();
         $followings = User::getFollowing(false);
         
-        if(count($followings) == 0){
-            $popularMedias = Media::where('user.id','!=',$user['_id'])->get()->sortBy('view_count', null, true);
+        if(!$followings){
+            $popularMedias =  Media::discoverPopular();
         }else{
             $popularMedias = [];
         }
