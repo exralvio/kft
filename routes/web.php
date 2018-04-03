@@ -19,7 +19,7 @@ Route::get('/discover', function(){
 });
 
 Route::get('/cekSession', function(){
-	return Session::all();
+	return Session::get('user');
 });
 
 Route::get('/search', 'SearchController@showSearchResult');

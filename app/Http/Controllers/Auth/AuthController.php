@@ -38,6 +38,7 @@ class AuthController extends Controller{
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+        Session::put('user',$authUser->toArray());
         return redirect()->intended('dashboard');
     }
 
@@ -51,24 +52,32 @@ class AuthController extends Controller{
     public function findOrCreateUser($user, $provider)
     {
         $authUser = User::where('provider_id', $user->id)->first();
+        // $authUser = User::raw()->findOne(Array('provider_id'=>$user->id));
         if ($authUser) {
             return $authUser;
         }else{
-            return User::create([
-                'email'         => $user->email,
-                'firstname'     => $user->name,
-                'lastname'      => $user->name,
-                'fullname'      => $user->name,
-                'is_active'     => true,
-                'birthday'      => '',
-                'gender'        => '',
-                'about'         => '',
-                'photo'         => $user->avatar,
-                'provider'      => $provider,
-                'provider_id'   => $user->id,
-                'view_count'    => 0,
-                'department'    => []
-            ]);
+
+            $newUser = new User();
+            $newUser->email = $user->email;
+            $fullName = explode(" ",$user->name);
+            $newUser->firstname = $fullName[0];
+            $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
+            $newUser->fullname = $user->name;
+            $newUser->is_active = true;
+            $newUser->birthday = '';
+            $newUser->gender = '';
+            $newUser->about = '';
+            $newUser->photo = $user->avatar;
+            $newUser->view_count = 0;
+            $newUser->provider = $provider;
+            $newUser->provider_id = $user->id;
+            $newUser->department = [];
+            if($newUser->save()){
+                $authUser = User::where('provider_id', $user->id)->first();
+                return $authUser;
+            }else{
+                dd('Signup failed');
+            }
         }
     }
 
@@ -112,8 +121,9 @@ class AuthController extends Controller{
                  * get users by email to store into session
                  * will be used by custom middleware later to check complete profile
                 */
-                $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
-                Session::put('user',$findUser);
+                // $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
+                $findUser = User::where('email',$request->get('email'))->first();
+                Session::put('user',$findUser->toArray());
                 return redirect()->intended('dashboard');
             } else {        
                 return Redirect::to('login')
@@ -183,8 +193,8 @@ class AuthController extends Controller{
     }
 
     public function doLogout(Request $request){
+        // $request->session()->forget('user');
         \Auth::logout();
-        $request->session()->regenerate(true);
         return Redirect::to('login');
     }
 

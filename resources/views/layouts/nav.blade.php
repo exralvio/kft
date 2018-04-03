@@ -92,7 +92,7 @@
                     </li>
                     <li>
                         <a href="#uploader" class="nav-upload upload-btn">
-                           <i class="fa fa-cloud-upload"></i> Upload
+                            <i class="fa fa-cloud-upload"></i> Upload
                         </a>
                     </li>
                 </ul>
@@ -110,6 +110,6 @@
 
 <!-- End Navigation panel -->
 
-@if(\Auth::check())
+<!-- @if(\Auth::check())
     @include('user/edit-profile')
-@endif
+@endif -->
