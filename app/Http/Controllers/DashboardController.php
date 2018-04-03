@@ -9,6 +9,7 @@ use App\Models\Following;
 use Illuminate\Http\Request;
 use Response;
 use Session;
+use Validator;
 use App\Models\User;
 use MongoDB\BSON\ObjectID;
 use Carbon\Carbon;
@@ -144,39 +145,42 @@ class DashboardController extends Controller{
     }
 
     public function likePost(Request $request){
+        $rules = array(
+            'post_id' => 'required',
+            'action' => 'required'
+        );
 
-        $user = User::current();
-        $media = Media::find($request->post_id);
-        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-            $media->pull('like_users',Array("user_id"=> $user['_id']));
-            $updatedMedia = Media::find($request->post_id);
-            return Response::json(['status'=>'unliked', 'like_count'=>count($updatedMedia->like_users)],200);
-        }else{
-            $media->push('like_users',Array(
-                "user_id"=> $user['_id'],
-                "fullname"=> $user['fullname'],
-                "created_at"=> Carbon::now()->toDateTimeString()
-            ));
+        $validator = Validator::make($request->all(), $rules);
 
-            $notification = [
-                "sender"=>[
-                    "id"=>$user['_id'],
-                    "fullname"=>$user['fullname'],
-                    "photo"=>$user['photo'],
-                ],
-                "receiver"=>$media->user['id'],
-                "type"=>"like",
-                "media"=>[
-                    "id"=> $media->_id,
-                    "title"=> $media->title,
-                ]
-                // "content"=>'<b>'.$user['firstname']." ".$user['lastname'].'</b> liked <b>'.$media->title.'</b>'
-            ];
-            \NotificationHelper::setNotification($notification);
-
-            $updatedMedia = Media::find($request->post_id);
-            return Response::json(['status'=>'liked', 'like_count'=>count($updatedMedia->like_users)],200);
+        if ($validator->fails())
+        {
+            return Response::json([
+                'status'=>'error',
+                'message'=>$validator->errors()->first()
+            ]);
         }
+
+        $action = $request->action;
+        $media = Media::find($request->post_id);
+        
+        if($media->updateLike($action)){
+            if($action == 'like'){
+                return Response::json([
+                    'status'=>'liked', 
+                    'like_count'=>$media->like_count
+                ]);
+            } elseif($action == 'unlike'){
+                return Response::json([
+                    'status'=>'unliked', 
+                    'like_count'=>$media->like_count
+                ]);
+            }
+        }
+
+        return Response::json([
+            'status'=>'error', 
+            'message'=>'Unexpected error.'
+        ], 400);
     }
 
 }

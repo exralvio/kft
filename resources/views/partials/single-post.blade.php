@@ -88,12 +88,12 @@
                             @if($post->liked)
                             <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button button-rounded liked">
                                 <i class="fa fa-heart"></i> 
-                                <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
+                                <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                             </a>
                             @else
                             <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button">
                                     <i class="fa fa-heart-o"></i> 
-                                    <span id="like-count-{{ $post->_id }}">{{ count($post->like_users) }}</span>
+                                    <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                                 </a>
                             @endif
                         </div>
