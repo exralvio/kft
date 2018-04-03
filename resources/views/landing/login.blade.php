@@ -5,8 +5,22 @@
 @endsection
      
 @section('content')       
+    <style type="text/css">
+        .or-login-with{
+            width: 100%;
+            border-bottom: 1px solid #000;
+            line-height: 0.1em;
+            margin: 20px 0px;
+        }
+        .or-login-with span{
+            background: #f8f8f8;
+            padding: 0 10px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+    </style>
     <!-- Section -->
-    <section class="page-section pb-50 mt-30">
+    <section class="page-section pb-50">
         <div class="container relative">
                 @if(Session::has('register_success'))
                 <div class="row">
@@ -73,6 +87,22 @@
                                     
                                 </div>
                                 
+                            </div>
+
+                            <div class="or-login-with" style="text-align: center;">
+                                <span>OR LOGIN WITH</span>
+                            </div>
+
+                            <div class="clearfix">
+                                <a class="btn btn-block btn-social btn-facebook" href="{{ url('login/facebook') }}">
+                                    <span class="fa fa-facebook"></span> Sign in with Facebook
+                                </a>
+                                <a class="btn btn-block btn-social btn-twitter" href="{{ url('login/twitter') }}">
+                                    <span class="fa fa-twitter"></span> Sign in with Twitter
+                                </a>
+                                <a class="btn btn-block btn-social btn-google" href="{{ url('login/google') }}">
+                                    <span class="fa fa-google"></span> Sign in with Google
+                                </a>
                             </div>
                             
                         </form>

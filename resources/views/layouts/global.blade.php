@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
+        <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
     </head>
     <body class="appear-animate">
         <!-- Page Loader -->        
