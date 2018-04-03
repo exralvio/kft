@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use MongoDB\BSON\ObjectID;
+use App\Models\Media;
 
 class MediaPopular extends Eloquent
 {
@@ -53,7 +54,12 @@ class MediaPopular extends Eloquent
       
     }
 
-    public function getName(){
-        return !empty($this->user['firstname']) ? $this->user['firstname'].' '.$this->user['lastname'] : $this->user['firstname'];
+    public function isLiked($user_id){
+        $media = Media::find($this->media['id']);
+        if(in_array($user_id, array_map(function($v){ return $v['user_id']; }, $media->like_users))){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

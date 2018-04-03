@@ -14,9 +14,7 @@
 Route::get('/', 'LandingController@showIndex');
 
 /** Discover **/
-Route::get('/discover', function(){
-	return view('media/discover');
-});
+Route::get('/discover', 'MediaController@getDiscover');
 
 Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');

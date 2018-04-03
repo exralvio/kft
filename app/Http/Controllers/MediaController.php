@@ -235,4 +235,10 @@ class MediaController extends Controller{
 
         return view('media/detail',["post"=>$media, "comments"=>$comments]);
     }
+
+    public function getDiscover(){
+        $user = User::current();
+        $current_user_id = $user['_id'];
+        return view('media/discover', compact('current_user_id'));
+    }
 }
