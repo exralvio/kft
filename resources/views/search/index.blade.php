@@ -40,7 +40,6 @@
         </div>
     </section>
     <!-- Section -->
-    <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
     <section class="page-section pt-0 pb-20">
         <div class="relative">
             <div class="row">

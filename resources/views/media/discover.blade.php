@@ -5,7 +5,6 @@
 @endsection
      
 @section('content')
-    <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">         
     <!-- Section -->
     <section class="small-section mt-80 bg-white pb-0 discover-tablist">
         <div class="relative container align-left">

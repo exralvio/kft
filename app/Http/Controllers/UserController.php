@@ -121,8 +121,9 @@ class UserController extends Controller{
         }
 
         $medias = Media::selfMedia($user['_id']);
+        $current_user_id = $user['_id'];
 
-        return view('user/profile', compact('user','medias'));
+        return view('user/profile', compact('user','medias','current_user_id'));
     }
 
     public function postRelation(Request $request){

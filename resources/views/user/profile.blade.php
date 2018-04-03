@@ -6,7 +6,6 @@
 
 @section('header_script')
 <link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
-<link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
 @endsection
 
 @section('content')
@@ -18,7 +17,7 @@
                 @if($user['_id'] == \App\Models\User::current()['_id'])
                 <div class="text-right profile-button">
                     <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
-                    <a href="" class="btn btn-primary btn-open-setting">Edit Profile</a>
+                    <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
                 </div>
                 @else
                 <div class="profile-follow">
@@ -67,30 +66,32 @@
 
 <section class="page-section pt-20">
     <div class="relative">
-        <div class="row">
-            <div class="col-md-10 col-md-push-1 col-sm-12">
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="photos">
-                        <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hide-titles profile-grid" id="work-grid">
-                            @foreach($medias as $media)
-                            <!-- Work Item (External Page) -->
-                            <li class="work-item">
-                                <a data-postid="{{ $media->_id }}" href="" class="comment-button work-ext-link open-single-post">
-                                    <div class="work-img">
-                                        <img class="work-img" src="{{ url('').'/'.$media->images['medium'] }}" alt="Work" />
+        <div class="col-xs-12">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="photos">
+                    <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hide-titles profile-grid" id="work-grid">
+                        @foreach($medias as $media)
+                        <!-- Work Item (External Page) -->
+                        <li class="work-item">
+                            <div data-postid="{{ $media->_id }}" class="work-item-inner work-ext-link open-single-post">
+                                <div class="work-img">
+                                    <img class="work-img" src="{{ url('').'/'.$media->images['medium'] }}" alt="Work" />
+                                </div>
+                                <div class="work-intro">
+                                    <div class="work-pp">
+                                        <img src="{{ url($media->user['photo']) }}">
                                     </div>
-                                    <div class="work-intro">
-                                        <h3 class="work-title">{{ $media->title }}</h3>
-                                    </div>
-                                </a>
-                            </li>
-                            <!-- End Work Item -->
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>   
-            </div>
+                                    <h3 class="work-title">{{ $media->title }}</h3>
+                                    <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }} {{ $media->isLiked($current_user_id) ? 'liked' : '' }}"><i class="fa fa-heart-o"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- End Work Item -->
+                        @endforeach
+                    </ul>
+                </div>
+            </div>   
         </div>
     </div>
 </section>
@@ -100,7 +101,6 @@
 @endsection
 
 @section('footer_script')
-<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 <script type="text/javascript">
     window.addEventListener("load", function(){
         $(document).ready(function() {

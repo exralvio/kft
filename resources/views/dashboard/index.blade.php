@@ -5,8 +5,6 @@
 @endsection
 
 @section('content')   
-<link rel="stylesheet" href="{{ url('') }}/css/dashboard.css">  
-<link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
 <section class="page-section pt-100">
     <div class="container relative">
         <div class="col-xs-12 col-md-6 col-md-push-3 post-wrapper">
@@ -41,9 +39,4 @@
 </section>
 
 @include('partials/post-modal')
-
-@endsection
-
-@section('footer_script')
-<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 @endsection

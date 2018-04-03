@@ -24,6 +24,10 @@ function loadMoreData(last_id){
 function openSinglePost(e){
     e.preventDefault();
 
+    if($(e.target).hasClass('like-button')){
+        return;
+    }
+
     var post_id = $(this).data('postid');
 
     $.ajax({
@@ -46,45 +50,50 @@ function openSinglePost(e){
     });
 }
 
+function addPostLike(e) {
+    e.preventDefault();
+    var postId = $(this).data('postid');
+    var postAction = !$(this).hasClass('liked') ? 'like' : 'unlike';
+
+    $.ajax({
+        url: '/likePost',
+        type: "post",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { 
+            post_id: postId,
+            action: postAction
+        }
+    })
+    .done(function(data){
+        if(data.status == 'error'){
+            alert(data.message);
+        } else {
+            if(data.status == 'liked'){
+                $('.like-'+postId).addClass('liked');
+                $('.like-'+postId+' .fa').addClass('fa-heart');
+                $('.like-'+postId+' .fa').removeClass('fa-heart-o');
+                $('.like-mini-'+postId).addClass('liked');
+            } else {
+                $('.like-'+postId).removeClass('liked');
+                $('.like-'+postId+' .fa').addClass('fa-heart-o');
+                $('.like-'+postId+' .fa').removeClass('fa-heart');
+                $('.like-mini-'+postId).removeClass('liked');
+            }
+
+            $('span','.like-'+postId).text(data.like_count);
+        }
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError){
+        alert('failed to connect to server ...');
+    });
+}
+
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
-    $('body').on('click', 'a.like-button', function(e) {
-        var postId = $(this).data('postid');
-        var postAction = !$(this).hasClass('liked') ? 'like' : 'unlike';
-
-        $.ajax({
-            url: '/likePost',
-            type: "post",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: { 
-                post_id: postId,
-                action: postAction
-            }
-        })
-        .done(function(data){
-            if(data.status == 'error'){
-                alert(data.message);
-            } else {
-                if(data.status == 'liked'){
-                    $('.like-'+postId).addClass('liked');
-                    $('.like-'+postId+' .fa').addClass('fa-heart');
-                    $('.like-'+postId+' .fa').removeClass('fa-heart-o');
-                } else {
-                    $('.like-'+postId).removeClass('liked');
-                    $('.like-'+postId+' .fa').addClass('fa-heart-o');
-                    $('.like-'+postId+' .fa').removeClass('fa-heart');
-                }
-
-                $('span','.like-'+postId).text(data.like_count);
-            }
-        })
-        .fail(function(jqXHR, ajaxOptions, thrownError){
-            alert('failed to connect to server ...');
-        });
-    });
+    $('body').on('click', 'a.like-button', addPostLike);
 
     $('#comment-content').on('keyup','#commentPhoto', function(e){
         if(e.keyCode == 13){

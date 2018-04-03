@@ -66,7 +66,7 @@
                                 <a href="{{ url('user/profile') }}">My Profile</i></a>
                             </li>
                             <li>
-                                <a href="" class="btn-open-setting">My Settings</i></a>
+                                <a href="{{ url('user/edit') }}">My Settings</i></a>
                             </li>
                             <li>
                                 <a href="{{ url('manage') }}">Manage Photos</i></a>
