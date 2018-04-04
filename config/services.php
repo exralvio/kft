@@ -19,6 +19,18 @@ return [
         'client_secret' => env('FB_APP_SECRET'),
         'redirect' => 'https://kft-web.local/login/facebook/callback',
     ],
+    
+    'google' => [
+        'client_id' => env('GOOGLE_APP_ID'),
+        'client_secret' => env('GOOGLE_APP_SECRET'),
+        'redirect' => 'https://kft-web.com/login/google/callback',
+    ],
+    
+    'twitter' => [
+        'client_id' => env('TWITTER_APP_ID'),
+        'client_secret' => env('TWITTER_APP_SECRET'),
+        'redirect' => 'https://kft-web.local/login/twitter/callback',
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
