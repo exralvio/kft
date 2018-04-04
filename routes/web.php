@@ -40,11 +40,11 @@ Route::middleware('guest')->group(function(){
 	Route::get('login/{provider}', 'Auth\AuthController@redirectToProvider');
 	Route::get('login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
-	Route::get('/recover-password', 'Auth\ForgotPasswordController@showResetForm');
-	// Route::post('/recover-password', 'Auth\ForgotPasswordController@recoverPassword');
-	// Route::get('/sendRecoverMail', 'Auth\ForgotPasswordController@sendRecoverPasswordMail');
+	Route::get('/recover-password', 'Auth\ForgotPasswordController@showRecoverPasswordForm');
+	Route::post('/recover-password-mail', 'Auth\ForgotPasswordController@sentResetPasswordMail');
+	Route::get('/recover-password/{token}', 'Auth\ResetPasswordController@showResetPasswordForm');
 
-	Route::get('/recover-password-mail', function(){
+	Route::get('/recover-password-mail-template', function(){
 		return view('emails/recover-password-mail');
 	});
 
