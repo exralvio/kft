@@ -45,6 +45,24 @@ class MediaPopular extends Eloquent
     	$popular->like_count = $media['like_count'];
 
     	$popular->save();
+
+        /** Send Notification **/
+        $notification = [
+            "sender"=>[
+                "id"=>$popular->user['id'],
+                "fullname"=>$popular->user['fullname'],
+                "photo"=>$popular->user['photo'],
+            ],
+            "receiver"=>$popular->user['id'],
+            "type"=>"popular",
+            "media"=>[
+                "id"=> $popular->media['id'],
+                "title"=> $popular->title,
+            ]
+        ];
+
+        \NotificationHelper::setNotification($notification);
+        /** End Send Notification **/
     }
 
     public static function updateLikeCount($media){

@@ -86,9 +86,13 @@
                             </span>
                             <span class="visible-xs"><i class="fa fa-bell-o"></i> Notification</span>
                         </a>
-                        <ul id="notification-content" style="display:none;">
-                            <li class="header-group">NOTIFICATION</li>
-                        </ul>
+                        <div class="notification-box">
+                            <h3>NOTIFICATIONS</h3>
+                            <div class="notification-inner">
+                                <ul class="notification-list">
+                                </ul>
+                            </div>
+                        </div>
                     </li>
                     <li>
                         <a href="{{ !\App\Models\User::isActive() ? url('/') : '' }}" class="nav-upload {{ \App\Models\User::isActive() ? 'upload-btn' : '' }}">

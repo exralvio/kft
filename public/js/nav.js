@@ -1,4 +1,6 @@
-$('.nav-notification').on('click', function(){
+function loadNotification(){
+    $('.notification-box').toggle();
+
     $.ajax({
         url: '/loadNotificationContent',
         type: "get",
@@ -8,9 +10,8 @@ $('.nav-notification').on('click', function(){
     })
     .done(function(data)
     {
-        $('#notification-content').empty();
-        $('#notification-content').append(data);
-        $('#notification-content').toggle();
+        $('.notification-list').empty();
+        $('.notification-list').append(data);
         $('#activeNotification').empty();
         $('#activeNotification').hide();
     })
@@ -18,20 +19,9 @@ $('.nav-notification').on('click', function(){
     {
         alert('failed to connect to server ...');
     });
-});
+}
 
-$('body').on('click',function(){
-    $('#notification-content').hide();
-})
-
-var editProfile = $('[data-remodal-id=editProfile]').remodal({closeOnConfirm: true, hashTracking: false});
-
-$('.btn-open-setting').on('click', function(e){
-    e.preventDefault();
-    editProfile.open();
-});
-
-function loadNotification() {
+function checkUnreadNotification() {
     $.ajax({
         url: '/loadUnreadNotification',
         type: "get",
@@ -52,3 +42,25 @@ function loadNotification() {
         alert('failed to connect to server ...');
     });
 }
+
+$('.nav-notification').on('click', loadNotification);
+
+$(function(){
+    $(document).mouseup(function(e) 
+    {
+        var container = $(".notification-box");
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) 
+        {
+            $(".notification-box").hide();
+        }
+    });
+});
+
+var editProfile = $('[data-remodal-id=editProfile]').remodal({closeOnConfirm: true, hashTracking: false});
+
+$('.btn-open-setting').on('click', function(e){
+    e.preventDefault();
+    editProfile.open();
+});

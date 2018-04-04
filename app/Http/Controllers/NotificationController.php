@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use Response;
+use App\Models\Media;
+use App\Models\User;
 
 class NotificationController  extends Controller{
 
@@ -15,33 +17,69 @@ class NotificationController  extends Controller{
         if(!empty($myNotifications)){
             foreach($myNotifications as $notif){
                 array_push($loadedCommentIds, $notif->_id);
-                if(isset($notif->sender['photo'])){
-                    $photo = url($notif->sender['photo']);
-                }else{
-                    $photo = url('/images/pp-icon.png');
-                }
-                $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
-                $sender = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
-                $action = '';
-                $media = '';
-                switch($notif->type){
-                    case 'like': $action = ' liked ';break; 
-                    case 'comment': $action = ' commented '; break;
-                    case 'follow': $action = ' followed you now'; break;
-                }
-                if(!empty($notif->media)){
-                    $media = "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>";
-                }
-                $html .= "<li>"."<div class='pull-left'>".$sender_photo."</div><div style='display:table;padding-left: 5px;'>".$sender.$action.$media."</div></li>";
+                
+                $content = $this->notificationContent($notif);
+
+                $html .= "<li>";
+                $html .= '<span class="sender-photo"><img src="'.url($content['first_photo']).'"></span>';
+                $html .= '<span class="receiver-photo"><img src="'.url($content['last_photo']).'"></span>';
+                $html .= '<div>'.$content['message'].'</div>';
+                $html .= "</li>";
             }
         }
 
         /**
          * set all opened notification as read
         */
-        Notification::whereIn('_id',$loadedCommentIds)->update(['is_read'=>true]);
+        Notification::whereIn('_id', $loadedCommentIds)->update(['is_read'=>true]);
 
         echo $html;
+        echo $html;
+        echo $html;
+        echo $html;
+    }
+
+    public function notificationContent($notif){
+        $msg = '';
+
+        $photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
+        $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
+        
+        $head = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
+        $tail = !empty($notif->media) ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : '';
+
+        $media = !empty($notif->media) ? Media::find($notif->media['id']) : [];
+
+
+        $action = $notif->type;
+
+        switch ($action) {
+            case 'like':
+                $msg = ' liked ' ;
+                $first_photo = $notif->sender['photo'];
+                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                break;
+            case 'comment':
+                $msg = ' commented ' ;
+                $first_photo = $notif->sender['photo'];
+                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                break;
+            case 'follow':
+                $msg = ' followed you now' ;
+                $first_photo = $notif->sender['photo'];
+                $last_photo = $notif->receiver['photo'];
+                $tail = '';
+                break;
+            case 'popular':
+                $msg = ' Your photo is Popular ';
+                $first_photo = $notif->sender['photo'];
+                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                break;
+        }
+
+        $message = $head.$msg.$tail;
+
+        return compact('message','first_photo','last_photo');
     }
 
     public function unreadNotification(){
