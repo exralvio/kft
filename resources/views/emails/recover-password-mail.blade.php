@@ -7,8 +7,8 @@
         <hr style="margin:10px 0">
         <p>You requested us to reset a password. Click on the link below to enter your new password.</p>
         <div style="background-color: #d5f9ff;padding: 5px;border: 1px solid #d8d8d8;">
-            <a style="text-decoration:none; font-weight:bold; color:deepbluesky;" href="https://kft-web.local/recover-password/next?token=srpQ_Ho55Poxgn5u27zy">
-                https://kft-web.local/recover-password/next?token=srpQ_Ho55Poxgn5u27zy
+            <a style="text-decoration:none; font-weight:bold; color:deepbluesky;" href="https://kft-web.local/recover-password/{{ $token }}">
+                https://kft-web.local/recover-password/{{ $token }}
             </a>
         </div>
         <hr style="margin:10px 0">

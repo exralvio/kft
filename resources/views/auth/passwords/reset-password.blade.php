@@ -19,6 +19,37 @@
 </style>
 <section class="page-section pb-50">
     <div class="container relative">
+        @if(Session::has('email_not_registered'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert error">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('email_not_registered') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @elseif(Session::has('reset_email_sent'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert success">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('reset_email_sent') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @elseif(Session::has('email_failed_to_send'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert error">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('email_failed_to_send') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-6 col-md-offset-3 bg-gray-lighter pb-40 reset-container">
                 <div class="reset-title align-center">Recover Password</div>
@@ -30,8 +61,8 @@
                         <!-- email -->
                         <div class="form-group">
                             <input type="text" name="email" id="email" class="input-md round form-control" placeholder="Enter Your Email" pattern=".{3,100}" required>
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @if ($errors->has('email_invalid'))
+                                <span class="text-danger">{{ $errors->first('email_invalid') }}</span>
                             @endif
                         </div>
 
