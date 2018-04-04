@@ -92,6 +92,7 @@
     border-radius: 15px;
     color: #c7ced2;
     margin-right: 5px;
+    vertical-align: top;
 }
 
 .post-action .comment-button:hover {
