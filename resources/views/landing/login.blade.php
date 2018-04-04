@@ -59,7 +59,7 @@
                                     
                                     <!-- Inform Tip -->                                        
                                     <div class="form-tip pt-20">
-                                        <a href="">Forgot Password?</a>
+                                        <a href="{{url('recover-password')}}">Forgot Password?</a>
                                     </div>
                                     
                                 </div>

@@ -267,4 +267,11 @@ class UserController extends Controller{
         return view('user/single-edit', compact('profile'));
     }
 
+    public function showRecoverPasswordForm(){
+        return view('user/recover-password');
+    }
+    
+    public function recoverPassword(Request $request){
+        dd($request);
+    }
 }

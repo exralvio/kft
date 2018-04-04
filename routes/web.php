@@ -32,6 +32,8 @@ Route::middleware('guest')->group(function(){
 	/** login **/
 	Route::get('/login', [ 'as' => 'login', 'uses' => 'Auth\AuthController@showLogin']);
 	Route::post('/login', 'Auth\AuthController@doLogin');
+	Route::get('/recover-password', 'UserController@showRecoverPasswordForm');
+	Route::post('/recover-password', 'UserController@recoverPassword');
 });
 
 /**
@@ -44,7 +46,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
 });
 
-/** User Login and profile complete **/
+/** User Login and is_active **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::get('user/profile', ['uses'=>'UserController@showProfile']);
 
