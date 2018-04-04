@@ -22,7 +22,9 @@ class NotificationController  extends Controller{
 
                 $html .= "<li>";
                 $html .= '<span class="sender-photo"><img src="'.url($content['first_photo']).'"></span>';
-                $html .= '<span class="receiver-photo"><img src="'.url($content['last_photo']).'"></span>';
+                if(!empty($content['last_photo'])){
+                    $html .= '<span class="receiver-photo"><img src="'.url($content['last_photo']).'"></span>';
+                }
                 $html .= '<div>'.$content['message'].'</div>';
                 $html .= "</li>";
             }
@@ -38,15 +40,19 @@ class NotificationController  extends Controller{
 
     public function notificationContent($notif){
         $msg = '';
+        $first_photo = '';
+        $last_photo = '';
 
         $photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
         $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
         
         $head = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
-        $tail = !empty($notif->media) ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : '';
+
+        $is_deleted = Media::find($notif->media['id']) ? false : true;
+
+        $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
 
         $media = !empty($notif->media) ? Media::find($notif->media['id']) : [];
-
 
         $action = $notif->type;
 
@@ -54,12 +60,18 @@ class NotificationController  extends Controller{
             case 'like':
                 $msg = ' liked ' ;
                 $first_photo = $notif->sender['photo'];
-                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+
+                if($media){
+                    $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                }
                 break;
             case 'comment':
                 $msg = ' commented ' ;
                 $first_photo = $notif->sender['photo'];
-                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+
+                if($media){
+                    $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                }
                 break;
             case 'follow':
                 $msg = ' followed you now' ;
@@ -70,7 +82,9 @@ class NotificationController  extends Controller{
             case 'popular':
                 $msg = ' Your photo is Popular ';
                 $first_photo = $notif->sender['photo'];
-                $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                if($media){
+                    $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                }
                 break;
         }
 
