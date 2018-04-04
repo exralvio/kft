@@ -73,7 +73,7 @@
                                     
                                     <!-- Inform Tip -->                                        
                                     <div class="form-tip pt-20">
-                                        <a href="">Forgot Password?</a>
+                                        <a href="{{url('recover-password')}}">Forgot Password?</a>
                                     </div>
                                     
                                 </div>
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="or-login-with" style="text-align: center;">
-                                <span>OR LOGIN WITH</span>
+                                <span>OR</span>
                             </div>
 
                             <div class="clearfix">

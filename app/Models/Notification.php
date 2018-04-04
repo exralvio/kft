@@ -6,7 +6,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class Notification extends Eloquent
 {
-    protected $collection = 'notification';
+    protected $collection = 'notifications';
 
-    protected $fillable = ['sender', 'receiver', 'type', 'content', 'is_read','media'];
+    protected $fillable = ['sender', 'receiver', 'type', 'is_read','media'];
 }

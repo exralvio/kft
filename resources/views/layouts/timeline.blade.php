@@ -20,12 +20,13 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style-responsive.css">
-        <link rel="stylesheet" href="{{ url('') }}/rythm/css/custom.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/custom.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/animate.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/media.css">   
         @yield('header_script')
 
     </head>
@@ -78,9 +79,16 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/masonry.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>       
-        <script type="text/javascript" src="{{ url('') }}/js/nav.js"></script>       
+        <script type="text/javascript" src="{{ url('') }}/js/nav.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>       
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
         </script>
+
+        @if(\Auth::check())
+        <script type="text/javascript">
+            loadNotification();
+        </script>
+        @endif
 
         @yield('footer_script')
         

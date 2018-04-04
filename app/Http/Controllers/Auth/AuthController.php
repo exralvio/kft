@@ -195,7 +195,7 @@ class AuthController extends Controller{
     public function doLogout(Request $request){
         // $request->session()->forget('user');
         \Auth::logout();
-        return Redirect::to('login');
+        return redirect('/');
     }
 
     /**

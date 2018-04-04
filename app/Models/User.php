@@ -37,8 +37,15 @@ class User extends Authenticatable{
         $birthday = $user['birthday'];
         $about = $user['about'];
         $gender = $user['gender'];
+        $is_active = $user['is_active'];
 
-        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about');
+        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about','is_active');
+    }
+
+    public static function isActive(){
+        $user = User::current();
+
+        return $user['is_active'];
     }
 
     public static function currentPhoto(){
@@ -55,20 +62,112 @@ class User extends Authenticatable{
 
     public static function updateUserPhoto($user_id, $photo){
         /** Update user media **/
-        $medias = \App\Models\Media::raw()->find(['user.id'=>$user_id]);
+        $datas = \App\Models\Media::raw()->find(['user.id'=>$user_id]);
 
-        if($medias){
-            foreach ($medias as $media) {
-                \DB::collection('medias')->where('_id', $media['_id'])->update(['user.photo'=>$photo]);
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('medias')->where('_id', $data['_id'])->update(['user.photo'=>$photo]);
             }   
         }
 
         /** Update user comments **/
-        $comments = \App\Models\Comment::raw()->find(['user.id'=>$user_id]);
+        $datas = \App\Models\Comment::raw()->find(['user.id'=>$user_id]);
 
-        if($comments){
-            foreach ($comments as $comment) {
-                \DB::collection('comments')->where('_id', $comment['_id'])->update(['user.photo'=>$photo]);
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('comments')->where('_id', $data['_id'])->update(['user.photo'=>$photo]);
+            }   
+        }
+
+        /** Update user notification **/
+        $datas = \App\Models\Notification::raw()->find(['sender.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('notifications')->where('_id', $data['_id'])->update(['sender.photo'=>$photo]);
+            }   
+        }
+
+        /** Update user media popular **/
+        $datas = \App\Models\MediaPopular::raw()->find(['user.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('media_popular')->where('_id', $data['_id'])->update(['user.photo'=>$photo]);
+            }   
+        }
+
+        /** Update user following **/
+        $datas = \App\Models\Following::raw()->find(['followings.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('following')->where(['followings.id'=>$user_id])->update(['followings.$.photo'=>$photo]);
+            }   
+        }
+
+        /** Update user followed **/
+        $datas = \App\Models\Followed::raw()->find(['followers.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('followed')->where(['followers.id'=>$user_id])->update(['followers.$.photo'=>$photo]);
+            }   
+        }
+    }
+
+    public static function updateUserFullname($user_id, $fullname){
+        /** Update user media **/
+        $datas = \App\Models\Media::raw()->find(['user.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('medias')->where('_id', $data['_id'])->update(['user.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update user comments **/
+        $datas = \App\Models\Comment::raw()->find(['user.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('comments')->where('_id', $data['_id'])->update(['user.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update user notification **/
+        $datas = \App\Models\Notification::raw()->find(['sender.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('notifications')->where('_id', $data['_id'])->update(['sender.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update user media popular **/
+        $datas = \App\Models\MediaPopular::raw()->find(['user.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('media_popular')->where('_id', $data['_id'])->update(['user.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update user following **/
+        $datas = \App\Models\Following::raw()->find(['followings.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('following')->where(['followings.id'=>$user_id])->update(['followings.$.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update user followed **/
+        $datas = \App\Models\Followed::raw()->find(['followers.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('followed')->where(['followers.id'=>$user_id])->update(['followers.$.fullname'=>$fullname]);
             }   
         }
     }
@@ -126,6 +225,16 @@ class User extends Authenticatable{
         }
 
         return 0;
+    }
+
+    public function getMediaCount($user_id = null){
+        if(!isset($user_id)){
+            $user_id = new ObjectID($this->_id);
+        }
+
+        $media = \App\Models\Media::where('user.id', $user_id)->count();
+
+        return $media ? $media : 0;
     }
 
     public static function updateView($user_id){

@@ -4,88 +4,103 @@
 {{ $user['fullname'] }}
 @endsection
 
-@section('content')
+@section('header_script')
 <link rel="stylesheet" href="{{ url('') }}/css/profiles.css">  
-<link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">  
-<section class="page-section pt-80" id="profile">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="pp-container pt-20">
-                <div class="pp-image">
-                    @if (isset($user['photo']))
-                        <img src="{{ url('').'/'.$user->photo }}"/>
+@endsection
+
+@section('content')
+<!-- Section -->
+<section class="small-section mt-80 bg-white pb-0 pt-0 profile-header">
+    <div class="relative mb-30 mt-30">
+        <div class="row">
+            <div class="col-sm-12 align-center">
+                @if($user['_id'] == \App\Models\User::current()['_id'])
+                <div class="text-right profile-button">
+                    <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
+                    <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
+                </div>
+                @else
+                <div class="profile-follow">
+                    @if(\App\Models\User::isFollower($user['_id']))
+                    <a class="btn btn-follow followed follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
                     @else
-                        <img src="{{ url('') }}/images/pp-icon.png"/>
+                    <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
+                    @endif
+                </div>
+                @endif
+
+                <div class="profile-avatar">
+                    @if (!empty($user['photo']))
+                        <img src="{{ url($user['photo']) }}" />
+                    @else
+                        <img src="{{ url('') }}/images/pp-icon.png" />
                     @endif
                 </div>
             </div>
-            @if($user['_id'] == \App\Models\User::current()['_id'])
-            <div class="text-right profile-button">
-                <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
-                <a href="" class="btn btn-primary btn-open-setting">Edit Profile</a>
-            </div>
-            @else
-            <div class="profile-follow">
-                @if(\App\Models\User::isFollower($user['_id']))
-                <a class="btn btn-follow followed follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
-                @else
-                <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
-                @endif
-            </div>
-            @endif
         </div>
+
     </div>
-    <div class="text-center user-profile">
-        <div class="profile-name">{{ $user->firstname }} {{ $user->lastname }}</div>
-        <div class="profile-social">
-            <ul>
-                <li>{{ $user->view_count }} Photo Views</li>
-                <li>{{ $user->getFollowerCount() }} Followers</li>
-                <li>{{ $user->getFollowingCount() }} Following</li>
-            </ul>
-        </div>
-    </div>
-    <div>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">PHOTOS</a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade in active" id="photos">
-                <!-- Works Grid -->
-                <ul id="post-data" class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" style="margin: 5px;">
-                    
-                    @foreach($medias as $media)
-                    <!-- Work Item (External Page) -->
-                    <li class="media-list work-item">
-                        <a id="{{ $media->_id }}" href="#" class="comment-button work-ext-link">
-                            <div class="work-img">
-                                <img class="work-img" src="{{ url('').'/'.$media->images['medium'] }}" alt="Work" />
-                            </div>
-                            <div class="work-intro">
-                                <h3 class="work-title">{{ $media->title }}</h3>
-                            </div>
-                        </a>
-                    </li>
-                    <!-- End Work Item -->
-                    @endforeach
-                    
+    <div class="relative container mb-20">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="align-center mt-0 mb-10">{{ $user['fullname'] }}</h1>
+                <ul class="details align-center mb-0">
+                    <li><span>{{ $user->view_count }}</span> Photo Views</li>
+                    <li><span>{{ $user->getFollowerCount() }}</span> Followers</li>
+                    <li><span>{{ $user->getFollowingCount() }}</span> Following</li>
                 </ul>
-                <!-- End Works Grid -->
+            </div>
+        </div>
+    </div>
+    <div class="relative profile-tabs pt-10">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-push-4 align-center profile-tab">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#photos" role="tab" data-toggle="tab">{{ $user->getMediaCount() }} Photos</a></li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
+<!-- End Section -->
 
-<div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
-    <button data-remodal-action="close" class="remodal-close"></button>
-    <div id="comment-content"></div>
-</div>
+<section class="page-section pt-20">
+    <div class="relative">
+        <div class="col-xs-12">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="photos">
+                    <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hide-titles profile-grid" id="work-grid">
+                        @foreach($medias as $media)
+                        <!-- Work Item (External Page) -->
+                        <li class="work-item">
+                            <div data-postid="{{ $media->_id }}" class="work-item-inner work-ext-link open-single-post">
+                                <div class="work-img">
+                                    <img class="work-img" src="{{ url('').'/'.$media->images['medium'] }}" alt="Work" />
+                                </div>
+                                <div class="work-intro">
+                                    <div class="work-pp">
+                                        <img src="{{ url($media->user['photo']) }}">
+                                    </div>
+                                    <h3 class="work-title">{{ $media->title }}</h3>
+                                    <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }} {{ $media->isLiked($current_user_id) ? 'liked' : '' }}"><i class="fa fa-heart-o"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- End Work Item -->
+                        @endforeach
+                    </ul>
+                </div>
+            </div>   
+        </div>
+    </div>
+</section>
+
+@include('partials/post-modal')
+
 @endsection
 
 @section('footer_script')
-<script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 <script type="text/javascript">
     window.addEventListener("load", function(){
         $(document).ready(function() {

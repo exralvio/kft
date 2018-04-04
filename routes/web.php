@@ -14,9 +14,7 @@
 Route::get('/', 'LandingController@showIndex');
 
 /** Discover **/
-Route::get('/discover', function(){
-	return view('media/discover');
-});
+Route::get('/discover', 'MediaController@getDiscover');
 
 Route::get('/cekSession', function(){
 	return Session::get('user');
@@ -42,6 +40,8 @@ Route::middleware('guest')->group(function(){
 	Route::get('login/{provider}', 'Auth\AuthController@redirectToProvider');
 	Route::get('login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
+	Route::get('/recover-password', 'UserController@showRecoverPasswordForm');
+	Route::post('/recover-password', 'UserController@recoverPassword');
 });
 
 /**
@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('logout', array('uses' => 'Auth\AuthController@doLogout'));
 });
 
-/** User Login and profile complete **/
+/** User Login and is_active **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::get('user/profile', ['uses'=>'UserController@showProfile']);
 

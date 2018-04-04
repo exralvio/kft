@@ -52,7 +52,7 @@
                         <a href="#" class="mn-has-sub">
                             <span class="visible-xs">Account</span>
                             <span class="nav-avatar visible-lg">
-                                @if(Session::has('user')) 
+                                @if(!empty(\App\Models\User::currentPhoto())) 
                                 <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                                 @else
                                 <img src="{{ url('') }}/rythm/images/user-avatar.png">
@@ -66,7 +66,7 @@
                                 <a href="{{ url('user/profile') }}">My Profile</i></a>
                             </li>
                             <li>
-                                <a href="" class="btn-open-setting">My Settings</i></a>
+                                <a href="{{ url('user/edit') }}">My Settings</i></a>
                             </li>
                             <li>
                                 <a href="{{ url('manage') }}">Manage Photos</i></a>
@@ -91,8 +91,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#uploader" class="nav-upload upload-btn">
-                            <i class="fa fa-cloud-upload"></i> Upload
+                        <a href="{{ !\App\Models\User::isActive() ? url('/') : '' }}" class="nav-upload {{ \App\Models\User::isActive() ? 'upload-btn' : '' }}">
+                           <i class="fa fa-cloud-upload"></i> Upload
                         </a>
                     </li>
                 </ul>

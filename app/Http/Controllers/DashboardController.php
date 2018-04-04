@@ -9,6 +9,7 @@ use App\Models\Following;
 use Illuminate\Http\Request;
 use Response;
 use Session;
+use Validator;
 use App\Models\User;
 use MongoDB\BSON\ObjectID;
 use Carbon\Carbon;
@@ -29,30 +30,22 @@ class DashboardController extends Controller{
         $user = User::current();
         $followings = User::getFollowing(false);
         
-        if(count($followings) == 0){
-            $popularMedias = Media::where('user.id','!=',$user['_id'])->get()->sortBy('view_count', null, true);
+        if(!$followings){
+            $popularMedias =  Media::discoverPopular();
         }else{
             $popularMedias = [];
         }
 
         array_push($followings, $user['_id']);
         
-        $medias = Media::orderBy('_id','desc')
+        $posts = Media::orderBy('_id','desc')
         ->whereIn('user.id', $followings)
         ->limit(3)
         ->get();
 
+        $current_user_id = $user['_id'];
 
-        foreach($medias as $key=>$media){
-            if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-                $medias[$key]['liked'] = true;
-            }else{
-                $medias[$key]['liked'] = false;
-            }
-        }
-        
-
-        return view('dashboard/index',["posts"=>$medias, 'popularMedias'=>$popularMedias]);
+        return view('dashboard/index', compact('current_user_id', 'posts', 'popularMedias'));
     }
 
     /**
@@ -62,22 +55,15 @@ class DashboardController extends Controller{
         $user = User::current();
         $followings = User::getFollowing(true);
 
-        $medias = Media::orderBy('_id','desc')
+        $posts = Media::orderBy('_id','desc')
                 ->where('_id','<',$mediaId)
                 ->whereIn('user.id',$followings,'and')
                 ->take(3)
                 ->get();
 
-        foreach($medias as $key=>$media){
-            if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-                $medias[$key]['liked'] = true;
-            }else{
-                $medias[$key]['liked'] = false;
-            }
-        }
+        $current_user_id = $user['_id'];
 
-        $html = view('dashboard/single-post',["posts"=>$medias])->render();
-        echo $html;
+        return view('dashboard/single-post', compact('current_user_id', 'posts'))->render();
     }
 
     /**
@@ -85,21 +71,17 @@ class DashboardController extends Controller{
     */
     public function loadMedia($mediaId){
         $user = User::current();
-        
-        $comments = Comment::where('photo_id','=',$mediaId)->get();
-        $media = Media::find($mediaId);
 
-        if($media){
-            $media->updateView();
+        $comments = Comment::where('photo_id','=',new ObjectId($mediaId))->get();
+        $post = Media::find($mediaId);
+
+        if($post){
+            $post->updateView();
         }
 
-        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-            $media['liked'] = true;
-        }else{
-            $media['liked'] = false;
-        }
+        $current_user_id = $user['_id'];
 
-        return view('dashboard/comment', ["post"=>$media, "comments"=>$comments])->render();
+        return view('dashboard/comment', compact('current_user_id', 'post', 'comments'))->render();
     }
 
     public function postComment(Request $request){
@@ -111,8 +93,7 @@ class DashboardController extends Controller{
         $comment->photo_id = new ObjectId($media->_id);
         $comment->user = [
             'id' => $media->user['id'],
-            'firstname'=>$currentUser['firstname'],
-            'lastname'=>$currentUser['lastname'],
+            'fullname'=>$currentUser['fullname'],
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
@@ -121,8 +102,7 @@ class DashboardController extends Controller{
             $notification = [
                 "sender"=>[
                     "id"=>$currentUser['_id'],
-                    "firstname"=>$currentUser['firstname'],
-                    "lastname"=>$currentUser['lastname'],
+                    "fullname"=>$currentUser['fullname'],
                     "photo"=>$currentUser['photo'],
                 ],
                 "receiver"=>$media->user['id'],
@@ -146,41 +126,42 @@ class DashboardController extends Controller{
     }
 
     public function likePost(Request $request){
+        $rules = array(
+            'post_id' => 'required',
+            'action' => 'required'
+        );
 
-        $user = User::current();
-        $media = Media::find($request->post_id);
-        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-            $media->pull('like_users',Array("user_id"=> $user['_id']));
-            $updatedMedia = Media::find($request->post_id);
-            return Response::json(['status'=>'unliked', 'like_count'=>count($updatedMedia->like_users)],200);
-        }else{
-            $media->push('like_users',Array(
-                "user_id"=> $user['_id'],
-                "firstname"=> $user['firstname'],
-                "lastname"=> $user['lastname'],
-                "created_at"=> Carbon::now()->toDateTimeString()
-            ));
+        $validator = Validator::make($request->all(), $rules);
 
-            $notification = [
-                "sender"=>[
-                    "id"=>$user['_id'],
-                    "firstname"=>$user['firstname'],
-                    "lastname"=>$user['lastname'],
-                    "photo"=>$user['photo'],
-                ],
-                "receiver"=>$media->user['id'],
-                "type"=>"like",
-                "media"=>[
-                    "id"=> $media->_id,
-                    "title"=> $media->title,
-                ]
-                // "content"=>'<b>'.$user['firstname']." ".$user['lastname'].'</b> liked <b>'.$media->title.'</b>'
-            ];
-            \NotificationHelper::setNotification($notification);
-
-            $updatedMedia = Media::find($request->post_id);
-            return Response::json(['status'=>'liked', 'like_count'=>count($updatedMedia->like_users)],200);
+        if ($validator->fails())
+        {
+            return Response::json([
+                'status'=>'error',
+                'message'=>$validator->errors()->first()
+            ]);
         }
+
+        $action = $request->action;
+        $media = Media::find($request->post_id);
+        
+        if($media->updateLike($action)){
+            if($action == 'like'){
+                return Response::json([
+                    'status'=>'liked', 
+                    'like_count'=>$media->like_count
+                ]);
+            } elseif($action == 'unlike'){
+                return Response::json([
+                    'status'=>'unliked', 
+                    'like_count'=>$media->like_count
+                ]);
+            }
+        }
+
+        return Response::json([
+            'status'=>'error', 
+            'message'=>'Unexpected error.'
+        ], 400);
     }
 
 }

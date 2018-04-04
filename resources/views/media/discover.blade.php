@@ -5,7 +5,6 @@
 @endsection
      
 @section('content')
-    <link rel="stylesheet" href="{{ url('') }}/css/photo-detail.css">         
     <!-- Section -->
     <section class="small-section mt-80 bg-white pb-0 discover-tablist">
         <div class="relative container align-left">
@@ -36,20 +35,23 @@
         <div class="relative">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
-                  <div id="post-data" class="tab-content">
+                  <div id="post-data" class="tab-content discover-grid">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
-                        <ul class="works-grid work-grid-gut  clearfix font-alt hide-titles masonry" id="popular-grid" >
+                        <ul class="works-grid work-grid-3 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
                             @foreach(\App\Models\Media::discoverPopular() as $popular)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="" data-postid="{{ $popular['media']['id'] }}" class="comment-button mfp-image open-single-post">
+                                <div data-postid="{{ $popular['media']['id'] }}" class="work-item-inner open-single-post">
                                     <div class="work-img">
                                         <img src="{{ url($popular['images']['medium']) }}" alt="Work">
                                     </div>
-                                </a>
-                                <div class="work-intro align-left">
-                                    <div class="profile-icon"><img src="{{ $popular['user']['photo'] }}"></div>
-                                    <h3 class="work-title">{{ $popular['user']['fullname'] }}</h3>
+                                    <div class="work-intro align-left">
+                                        <div class="work-pp">
+                                            <img src="{{ url($popular->user['photo']) }}">
+                                        </div>
+                                        <h3 class="work-title">{{ $popular['user']['fullname'] }}</h3>
+                                        <a data-postid="{{ $popular->media['id'] }}" class="like-button like-mini-{{ $popular->media['id'] }} {{ $popular->isLiked($current_user_id) ? 'liked' : '' }}"><i class="fa fa-heart-o"></i></a>
+                                    </div>
                                 </div>
                             </li>
                             <!-- End Work Item -->
@@ -57,19 +59,22 @@
                         </ul>
                       </div>
                       <div role="tabpanel" id="fresh" class="tab-pane fade ">
-                        <ul class="works-grid work-grid-gut clearfix font-alt hide-titles masonry" id="fresh-grid" >
+                        <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hide-titles" id="fresh-grid" >
                             @foreach(\App\Models\Media::discoverFresh() as $media)
                             <!-- Work Item (Lightbox) -->
                             <li class="work-item mix photography" >
-                                <a href="#" data-postid="{{ $media->_id }}" class="comment-button mfp-image open-single-post">
+                                <div data-postid="{{ $media->_id }}" class="work-item-inner open-single-post">
                                     <div class="work-img">
                                         <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                     </div>
-                                </a>
-                                    <div class="work-intro align-left">
-                                        <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
+                                    <div class="work-intro">
+                                        <div class="work-pp">
+                                            <img src="{{ url($media->user['photo']) }}">
+                                        </div>
                                         <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
+                                        <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }} {{ $media->isLiked($current_user_id) ? 'liked' : '' }}"><i class="fa fa-heart-o"></i></a>
                                     </div>
+                                </a>
                             </li>
                             <!-- End Work Item -->
                             @endforeach
@@ -80,17 +85,13 @@
             </div>
         </div>
     </section>
+
     <!-- End Section -->
-    <div class="modal-fs" id="commentPost" data-remodal-id="commentPostModal">
-        <button data-remodal-action="close" class="remodal-close"></button>
-        <div id="comment-content"></div>
-    </div>
     
-    
+    @include('partials/post-modal')
 @endsection
 
 @section('footer_script')
-    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
     <script type="text/javascript">
         // Select all tabs
         $(function(){

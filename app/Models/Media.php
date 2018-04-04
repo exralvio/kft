@@ -41,16 +41,12 @@ class Media extends Eloquent
     	$media->save();
     }
 
-    public function getName(){
-        return !empty($this->user['firstname']) ? $this->user['firstname'].' '.$this->user['lastname'] : $this->user['firstname'];
-    }
-
     public static function discoverFresh(){
         return Media::get()->sortBy('created_at', null, true);
     }
 
     public static function discoverPopular(){
-        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->get()->sortBy('view_count', null, true)->toArray();
+        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->get()->sortBy('view_count', null, true);
 
         return $medias;
     }
@@ -61,7 +57,8 @@ class Media extends Eloquent
         } else {
             $user = User::current();
         }
-        $medias = Media::where('user.id', $user['_id'])->get()->sortBy('created_at', null, true);
+
+        $medias = Media::where('user.id', new ObjectID((string) $user['_id']))->get()->sortBy('created_at', null, true);
 
         return $medias;
     }
@@ -78,13 +75,68 @@ class Media extends Eloquent
         $this->save();
 
         \App\Models\User::updateView($this->user['id']);
+    }
 
-        $popular_view_threshold = 10;
+    public function updateLike($action){
+        $user = User::current();
 
-        if($this->view_count == $popular_view_threshold){
-            \App\Models\MediaPopular::addNewMedia($this);
-        } else if($this->view_count > $popular_view_threshold){
-            \App\Models\MediaPopular::updatePopularView($this);
+        if($action == 'like'){
+            $this->push('like_users', [
+                "user_id"=> $user['_id'],
+                "fullname"=> $user['fullname'],
+                "created_at"=> now()->format('c')
+            ]);
+
+            $this->like_count += 1;
+
+            if($this->save()){
+                /** Send Notification **/
+                $notification = [
+                    "sender"=>[
+                        "id"=>$user['_id'],
+                        "fullname"=>$user['fullname'],
+                        "photo"=>$user['photo'],
+                    ],
+                    "receiver"=>$this->user['id'],
+                    "type"=>"like",
+                    "media"=>[
+                        "id"=> $this->_id,
+                        "title"=> $this->title,
+                    ]
+                ];
+
+                \NotificationHelper::setNotification($notification);
+                /** End Send Notification **/
+
+                /** Update Popular Post **/
+                MediaPopular::updateMedia($this);
+                /** End Update Popular **/
+
+                return true;
+            }
+        } elseif($action == 'unlike'){
+            if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $this->like_users))){
+                $this->pull('like_users', ["user_id"=> $user['_id']]);
+                $this->like_count -= 1;
+
+                if($this->save()){
+                    /** Update Popular Post **/
+                    MediaPopular::updateMedia($this);
+                    /** End Update Popular **/
+                    
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function isLiked($user_id){
+        if(in_array($user_id, array_map(function($v){ return $v['user_id']; }, $this->like_users))){
+            return true;
+        }else{
+            return false;
         }
     }
 }

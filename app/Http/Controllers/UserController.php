@@ -18,13 +18,10 @@ use \App\Models\Followed;
 
 class UserController extends Controller{
 
-    public function showProfile(Request $request){
-        $user_session = $request->session()->get('user');
-        $user_data = $user_session;
-        $user = User::where('email', $user_data['email'])->first();
-        $medias = $this->getUploadedMedia();
+    public function showProfile(){
+        $user_id = User::current()['_id'];
 
-        return view('user/profile', compact('user','medias'));
+        return $this->getProfile($user_id);
     }
 
     private function getUploadedMedia(){
@@ -63,11 +60,14 @@ class UserController extends Controller{
                 $collection->put('photo', $savedFilename);
             }
 
-            $departments = UserDepartment::get();
-            $user_session = $request->session()->get('user');
-            $user_data = iterator_to_array($user_session);
-            $user = \DB::collection('users')->where('email', $user_data['email'])->update($collection->all());
-            $updatedUser = User::where('email', $user_data['email'])->first();
+            $old_data = User::current();
+            $user_id = $old_data['_id'];
+
+            $update = \DB::collection('users')->where('_id', $user_id)->update($collection->all());
+
+            if($update && $old_data['fullname'] != $collection['fullname']){
+                User::updateUserFullname($user_id, $collection['fullname']);
+            }
 
             return redirect('user/profile');
         }
@@ -121,8 +121,9 @@ class UserController extends Controller{
         }
 
         $medias = Media::selfMedia($user['_id']);
+        $current_user_id = $user['_id'];
 
-        return view('user/profile', compact('user','medias'));
+        return view('user/profile', compact('user','medias','current_user_id'));
     }
 
     public function postRelation(Request $request){
@@ -162,12 +163,10 @@ class UserController extends Controller{
 
         $user = User::find($user_id);
         if($following){
-            
             $following = Following::find($following['_id']);
             $following->push('followings', [
                 'id'=>new ObjectID($user['_id']),
-                'firstname'=>$user['firstname'],
-                'lastname'=>$user['lastname'],
+                'fullname'=>$user['fullname'],
                 'photo'=>$user['photo']
             ]);
         } else {
@@ -175,25 +174,11 @@ class UserController extends Controller{
             $following->user_id = $self_id;
             $following->followings = [[
                 'id'=>new ObjectID($user['_id']),
-                'firstname'=>$user['firstname'],
-                'lastname'=>$user['lastname'],
+                'fullname'=>$user['fullname'],
                 'photo'=>$user['photo']
             ]];
             
-            if($following->save()){
-                $notification = [
-                    "sender"=>[
-                        "id"=>$me['_id'],
-                        "firstname"=>$me['firstname'],
-                        "lastname"=>$me['lastname'],
-                        "photo"=>$me['photo'],
-                    ],
-                    "receiver"=>$following->user_id,
-                    "type"=>"follow",
-                    "media"=>[]
-                ];
-                \NotificationHelper::setNotification($notification);
-            }
+            $following->save();
         }
 
         /** Update followed **/
@@ -204,8 +189,7 @@ class UserController extends Controller{
             $followed = Followed::find($followed['_id']);
             $followed->push('followers', [
                 'id'=>new ObjectID($user['_id']),
-                'firstname'=>$user['firstname'],
-                'lastname'=>$user['lastname'],
+                'fullname'=>$user['fullname'],
                 'photo'=>$user['photo']
             ]);
         } else {
@@ -213,13 +197,27 @@ class UserController extends Controller{
             $followed->user_id = $user_id;
             $followed->followers = [[
                 'id'=>new ObjectID($user['_id']),
-                'firstname'=>$user['firstname'],
-                'lastname'=>$user['lastname'],
+                'fullname'=>$user['fullname'],
                 'photo'=>$user['photo']
             ]];
 
             $followed->save();
         }
+
+        /** Set Notification **/
+        $notification = [
+            "sender"=>[
+                "id"=>$me['_id'],
+                'fullname'=>$me['fullname'],
+                "photo"=>$me['photo'],
+            ],
+            "receiver"=>$user_id,
+            "type"=>"follow",
+            "media"=>[]
+        ];
+
+        \NotificationHelper::setNotification($notification);
+        /** End Set Notification **/
 
         return Response::json([
             'status'=>'success',
@@ -269,4 +267,11 @@ class UserController extends Controller{
         return view('user/single-edit', compact('profile'));
     }
 
+    public function showRecoverPasswordForm(){
+        return view('user/recover-password');
+    }
+    
+    public function recoverPassword(Request $request){
+        dd($request);
+    }
 }
