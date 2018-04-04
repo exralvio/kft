@@ -244,4 +244,12 @@ class User extends Authenticatable implements CanResetPasswordContract{
             $user->save();
         }
     }
+
+    /**
+     * Send a password reset email to the user
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new MailResetPasswordToken($token));
+    }
 }

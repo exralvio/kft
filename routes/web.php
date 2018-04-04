@@ -41,8 +41,8 @@ Route::middleware('guest')->group(function(){
 	Route::get('login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
 	Route::get('/recover-password', 'Auth\ForgotPasswordController@showResetForm');
-	Route::post('/recover-password', 'Auth\ForgotPasswordController@recoverPassword');
-	Route::get('/sendRecoverMail', 'Auth\ForgotPasswordController@sendRecoverPasswordMail');
+	// Route::post('/recover-password', 'Auth\ForgotPasswordController@recoverPassword');
+	// Route::get('/sendRecoverMail', 'Auth\ForgotPasswordController@sendRecoverPasswordMail');
 
 	Route::get('/recover-password-mail', function(){
 		return view('emails/recover-password-mail');
