@@ -63,7 +63,7 @@ class DashboardController extends Controller{
 
         $current_user_id = $user['_id'];
 
-        return view('dashboard/single-post', compact('current_user_id', 'posts'))->render();
+        return view('dashboard/each-post', compact('current_user_id', 'posts'))->render();
     }
 
     /**

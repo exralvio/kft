@@ -80,4 +80,12 @@ class MediaPopular extends Eloquent
             return false;
         }
     }
+
+    public function isSelfBelong($user_id){
+        $media = Media::find($this->media['id']);
+        if($media->user['id'] == $user_id)
+            return true;
+
+        return false;
+    }
 }

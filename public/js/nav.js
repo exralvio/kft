@@ -1,5 +1,8 @@
-function loadNotification(){
+function loadNotification(e){
+    e.preventDefault();
+    console.log('masuk sini');
     $('.notification-box').toggle();
+    console.log('kesinikah');
 
     $.ajax({
         url: '/loadNotificationContent',

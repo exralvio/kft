@@ -34,9 +34,6 @@ class NotificationController  extends Controller{
         Notification::whereIn('_id', $loadedCommentIds)->update(['is_read'=>true]);
 
         echo $html;
-        echo $html;
-        echo $html;
-        echo $html;
     }
 
     public function notificationContent($notif){
