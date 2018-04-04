@@ -5,6 +5,7 @@ namespace App\Models;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use MongoDB\BSON\ObjectID;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\MailResetPassword;
 // use Illuminate\Auth\Authenticatable;
 use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -250,6 +251,6 @@ class User extends Authenticatable implements CanResetPasswordContract{
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new MailResetPasswordToken($token));
+        $this->notify(new MailResetPassword($token));
     }
 }

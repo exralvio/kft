@@ -30,7 +30,7 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function showResetForm(){
+    public function showRecoverPasswordForm(){
         return view('landing/reset-password');
     }
 }

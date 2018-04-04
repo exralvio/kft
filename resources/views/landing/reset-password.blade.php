@@ -24,7 +24,7 @@
                 <div class="reset-title align-center">Recover Password</div>
                 <hr>
                 <p>Please enter your username or email to reset your password. You’ll receive an email with instructions. If you are experiencing problems with remembering your username or email, please contact us at KFT Support.</p>
-                <form class="form contact-form" id="contact_form" method="post" action="{{ url('reset-password') }}">
+                <form class="form contact-form" id="contact_form" method="post" action="{{ url('recover-password-mail') }}">
                     {{ csrf_field() }}
                     <div class="clearfix">
                         <!-- email -->
