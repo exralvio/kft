@@ -267,31 +267,4 @@ class UserController extends Controller{
         
         return view('user/single-edit', compact('profile'));
     }
-
-    public function showRecoverPasswordForm(){
-        return view('user/recover-password');
-    }
-    
-    public function recoverPassword(Request $request){
-        dd($request);
-    }
-
-    private $mail;
-    public function sendRecoverPasswordMail($subject = 'testing', $redirectRoute = null)
-    {
-        $this->mail['to'] = 'fazrin.mutaqin@gmail.com'; //$user['email'];
-        $this->mail['subject'] = $subject;
-        Mail::send('emails.recover-password-mail', [], function($message)
-        {
-            $message->subject($this->mail['subject']);
-            $message->to($this->mail['to']);
-        });
-        
-        if(Mail::failures()){
-            //do something
-            dd('Mail failed to send, set handler here');
-        }else{
-            return true;
-        }
-    }
 }
