@@ -28,7 +28,7 @@
                 </div>
                 @endif
                 <div class="comment-buttons post-action mt-20">
-                    <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }}">
+                    <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }} {{ $post->isSelfBelong($current_user_id) ? 'disabled' : '' }}">
                         <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                         <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                     </a>
@@ -96,7 +96,7 @@
                             <div style="font-weight: bold;">{{ $comment->user_detail['first_name'] }} {{ $comment->user_detail['last_name'] }}</div>
                             {{ $comment->comment }}
                             @if(\Auth::check()) 
-                                @if(Session::get('user')->_id == $comment->user_id)
+                                @if($current_user_id == $comment->user_id)
                                 <div id="del-{{ $comment->_id }}" class="del-comment" style="width: 1px;height: 1px;float: right;cursor: pointer;display:none">x</div>
                                 @endif
                             @endif

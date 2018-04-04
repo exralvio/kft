@@ -86,7 +86,7 @@
                                 <i class="fa fa-plus-square-o"></i> 
                             </a> -->
 
-                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }}">
+                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }} {{ $post->isSelfBelong($current_user_id) ? 'disabled' : '' }}">
                                 <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                                 <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                             </a>

@@ -139,4 +139,11 @@ class Media extends Eloquent
             return false;
         }
     }
+
+    public function isSelfBelong($user_id){
+        if($this->user['id'] == $user_id)
+            return true;
+
+        return false;
+    }
 }
