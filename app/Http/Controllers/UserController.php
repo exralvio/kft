@@ -20,7 +20,7 @@ class UserController extends Controller{
 
     public function showProfile(Request $request){
         $user_session = $request->session()->get('user');
-        $user_data = iterator_to_array($user_session);
+        $user_data = $user_session;
         $user = User::where('email', $user_data['email'])->first();
         $medias = $this->getUploadedMedia();
 

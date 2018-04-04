@@ -110,6 +110,6 @@
 
 <!-- End Navigation panel -->
 
-<!-- @if(\Auth::check())
+@if(\Auth::check())
     @include('user/edit-profile')
-@endif -->
+@endif
