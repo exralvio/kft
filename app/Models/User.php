@@ -4,15 +4,28 @@ namespace App\Models;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use MongoDB\BSON\ObjectID;
+use Illuminate\Notifications\Notifiable;
+// use Illuminate\Auth\Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
+// use Illuminate\Auth\Passwords\CanResetPassword;
+// use Illuminate\Foundation\Auth\Access\Authorizable;
+// use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+// use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+// use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Eloquent
-{
+class User extends Authenticatable{
+
+    use Notifiable;
     protected $collection = 'users';
+
+    protected $fillable = [
+        'email', 'password', 'provider', 'provider_id','is_active', 'firstname','lastname','fullname','email','photo','department','birthday','gender','about'
+    ];
 
     public static function current(){
         $sess = session('user');
 
-        $user = User::raw()->findOne(['_id'=>$sess['_id']]);
+        $user = User::raw()->findOne(['_id'=>new ObjectId($sess['_id'])]);
         
         $firstname = $user['firstname'];
         $lastname = $user['lastname'];
@@ -38,7 +51,7 @@ class User extends Eloquent
     public static function currentPhoto(){
     	$sess = session('user');
 
-    	$user = User::raw()->findOne(['_id'=>$sess['_id']]);
+    	$user = User::raw()->findOne(['_id'=> new ObjectId($sess['_id'])]);
 
     	return $user['photo'];
     }

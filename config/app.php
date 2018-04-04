@@ -153,6 +153,7 @@ return [
         Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
         Jenssegers\Mongodb\Session\SessionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -215,6 +216,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'NotificationHelper' => App\Helpers\NotificationHelper::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

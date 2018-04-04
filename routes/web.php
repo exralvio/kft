@@ -16,6 +16,10 @@ Route::get('/', 'LandingController@showIndex');
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');
 
+Route::get('/cekSession', function(){
+	return Session::get('user');
+});
+
 Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadMedia/{mediaId}', 'DashboardController@loadMedia');
@@ -32,6 +36,10 @@ Route::middleware('guest')->group(function(){
 	/** login **/
 	Route::get('/login', [ 'as' => 'login', 'uses' => 'Auth\AuthController@showLogin']);
 	Route::post('/login', 'Auth\AuthController@doLogin');
+
+	Route::get('login/{provider}', 'Auth\AuthController@redirectToProvider');
+	Route::get('login/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
 	Route::get('/recover-password', 'UserController@showRecoverPasswordForm');
 	Route::post('/recover-password', 'UserController@recoverPassword');
 });

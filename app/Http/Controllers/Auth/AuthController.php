@@ -8,13 +8,78 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use App\Services\SocialFacebookAccountService;
 use Mail;
 
+use Socialite;
 use Session;
 use Validator;
 use Auth;
 
 class AuthController extends Controller{
+
+    /**
+     * Redirect the user to the facebook authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        Session::put('user',$authUser->toArray());
+        return redirect()->intended('dashboard');
+    }
+
+    /**
+     * If a user has registered before using social auth, return the user
+     * else, create a new user object.
+     * @param  $user Socialite user object
+     * @param $provider Social auth provider
+     * @return  User
+     */
+    public function findOrCreateUser($user, $provider)
+    {
+        $authUser = User::where('provider_id', $user->id)->first();
+        // $authUser = User::raw()->findOne(Array('provider_id'=>$user->id));
+        if ($authUser) {
+            return $authUser;
+        }else{
+
+            $newUser = new User();
+            $newUser->email = $user->email;
+            $fullName = explode(" ",$user->name);
+            $newUser->firstname = $fullName[0];
+            $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
+            $newUser->fullname = $user->name;
+            $newUser->is_active = true;
+            $newUser->birthday = '';
+            $newUser->gender = '';
+            $newUser->about = '';
+            $newUser->photo = $user->avatar;
+            $newUser->view_count = 0;
+            $newUser->provider = $provider;
+            $newUser->provider_id = $user->id;
+            $newUser->department = [];
+            if($newUser->save()){
+                $authUser = User::where('provider_id', $user->id)->first();
+                return $authUser;
+            }else{
+                dd('Signup failed');
+            }
+        }
+    }
 
     public function showIndex(){
         return view('landing/index');
@@ -56,8 +121,9 @@ class AuthController extends Controller{
                  * get users by email to store into session
                  * will be used by custom middleware later to check complete profile
                 */
-                $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
-                Session::put('user',$findUser);
+                // $findUser = User::raw()->findOne(Array('email'=>$request->get('email')));
+                $findUser = User::where('email',$request->get('email'))->first();
+                Session::put('user',$findUser->toArray());
                 return redirect()->intended('dashboard');
             } else {        
                 return Redirect::to('login')
@@ -126,7 +192,8 @@ class AuthController extends Controller{
         }
     }
 
-    public function doLogout(){
+    public function doLogout(Request $request){
+        // $request->session()->forget('user');
         \Auth::logout();
         return redirect('/');
     }
