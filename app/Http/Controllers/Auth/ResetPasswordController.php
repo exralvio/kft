@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class ResetPasswordController extends Controller
 {
@@ -40,23 +41,33 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function verifyResetToken($token){
-        $findToken = \DB::collection('password_resets')->where('token',$token)->first();
-        $user = User::where('email', $findToken['email'])->first();
+    public function showResetPasswordForm($token){
+        return view('auth/passwords/reset-password', ['token'=>$token]);
+    }
+
+    public function saveResetPassword(Request $request){
+        $data = $request->all();
+        $user = User::where('email', $data['email'])->first();
         if($user){
-            $tokenValid = \Password::getRepository()->exists($user, $token);
+            $tokenValid = \Password::getRepository()->exists($user, $data['reset_token']);
             if($tokenValid){
-                return view('auth/passwords/reset-password', ['email'=>$user['email']]);
+                if($data['password'] == $data['confirm_password']){
+                    $user->password = bcrypt($data['password']);
+                    if($user->save()){
+                        $request->session()->flash('password_changed', 'Password has been succesfully changed. Please Login to continue');
+                        return redirect('reset-password/'.$data['reset_token']);
+                    }
+                }else{
+                    return Redirect::to('reset-password/'.$data['reset_token'])
+                    ->withErrors(['confirmation_do_not_match'=>'Password and Confirmation do not match']);
+                }
             }else{
-                return view('errors/404');
+                $request->session()->flash('token_invalid', 'Your token is invalid or has been expired');
+                return redirect('reset-password/'.$data['reset_token']);
             }
         }else{
             dd('user not found or token invalid');
             return view('auth/passwords/reset-password', ['email'=>"fazrin.mutaqin@gmail.com"]);
         }
-    }
-
-    public function saveResetPassword(Request $request){
-        dd($request->all());
     }
 }
