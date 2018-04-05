@@ -86,7 +86,7 @@
 
         @if(\Auth::check())
         <script type="text/javascript">
-            loadNotification();
+            checkUnreadNotification();
         </script>
         @endif
 

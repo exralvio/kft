@@ -83,7 +83,10 @@
                                         <img src="{{ url($media->user['photo']) }}">
                                     </div>
                                     <h3 class="work-title">{{ $media->title }}</h3>
+
+                                    @if(!$media->isSelfBelong($current_user_id))
                                     <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }} {{ $media->isLiked($current_user_id) ? 'liked' : '' }}"><i class="fa fa-heart-o"></i></a>
+                                    @endif
                                 </div>
                             </div>
                         </li>

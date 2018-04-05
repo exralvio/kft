@@ -41,12 +41,12 @@ class Media extends Eloquent
     	$media->save();
     }
 
-    public static function discoverFresh(){
-        return Media::get()->sortBy('created_at', null, true);
+    public static function discoverFresh($limit = 0){
+        return Media::limit($limit)->get()->sortBy('created_at', null, true);
     }
 
-    public static function discoverPopular(){
-        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->get()->sortBy('view_count', null, true);
+    public static function discoverPopular($limit = 0){
+        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->limit($limit)->get()->sortBy('view_count', null, true);
 
         return $medias;
     }
@@ -138,5 +138,12 @@ class Media extends Eloquent
         }else{
             return false;
         }
+    }
+
+    public function isSelfBelong($user_id){
+        if($this->user['id'] == $user_id)
+            return true;
+
+        return false;
     }
 }

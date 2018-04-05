@@ -17,7 +17,7 @@
                 @endif
             </div>
                 
-            <div class="team-item-image open-single-post" data-postid="{{ $post->_id }}" >
+            <div class="team-item-image open-single-post" data-postid="{{ $post['media']['id'] }}" >
                 <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
             </div>
 
@@ -27,23 +27,16 @@
                     <div class="col-xs-6 text-right post-action" >
                         <div class="row">
                             
-                            <a id="{{ $post->_id }}" data-postid="{{ $post->_id }}" class=" comment-button open-single-post" href="#">
+                            <a data-postid="{{ $post['media']['id'] }}" class=" comment-button open-single-post" href="#">
                                 <i class="fa fa-comment-o"></i>
                             </a>
                             <!-- <a class="button-rounded">
                                 <i class="fa fa-plus-square-o"></i> 
                             </a> -->
-                            @if($post->liked)
-                            <a data-postid="{{ $post['media']['id'] }}" class="like-{{ $post['media']['id'] }} like-button button-rounded liked">
-                                <i class="fa fa-heart"></i> 
+                            <a data-postid="{{ $post['media']['id'] }}" class="like-{{ $post['media']['id'] }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }} {{ $post->isSelfBelong($current_user_id) ? 'disabled' : '' }}">
+                                <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                                 <span id="like-count-{{ $post['media']['id'] }}">10</span>
                             </a>
-                            @else
-                            <a data-postid="{{ $post['media']['id'] }}" class="like-{{ $post['media']['id'] }} like-button">
-                                    <i class="fa fa-heart-o"></i> 
-                                    <span id="like-count-{{ $post['media']['id'] }}">10</span>
-                                </a>
-                            @endif
                         </div>
                     </div>
                     @if(!empty($post->description))
@@ -86,7 +79,7 @@
                                 <i class="fa fa-plus-square-o"></i> 
                             </a> -->
 
-                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }}">
+                            <a data-postid="{{ $post->_id }}" class="like-{{ $post->_id }} like-button {{ $post->isLiked($current_user_id) ? 'liked' : '' }} {{ $post->isSelfBelong($current_user_id) ? 'disabled' : '' }}">
                                 <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                                 <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                             </a>

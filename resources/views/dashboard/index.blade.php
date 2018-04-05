@@ -11,7 +11,7 @@
             @if(count(\App\Models\User::getFollowing()))
                 <?php $is_popular = false; ?>
                 <div class="row" id="post-data">
-                    @include('dashboard/single-post')
+                    @include('dashboard/each-post')
                 </div>
             @else
                 <div class="row bg-white popular-alert mb-20">

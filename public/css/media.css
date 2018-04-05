@@ -285,6 +285,13 @@ a.button-rounded{
     opacity: 1;
 }
 
+.post-action .like-button.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #80CCF2;
+    border-color: #80CCF2;
+}
+
 /*******
 **** Discover
 ********/
@@ -307,6 +314,55 @@ a.button-rounded{
 
 .discover-grid .work-title, .search-grid .work-title {
     text-transform: none;
+}
+
+.discover-tablist {
+    border-bottom: 1px solid #eeeff2;
+}
+
+.discover-tablist .nav-tabs {
+    border-bottom: 0px;
+}
+
+.discover-tablist .nav-tabs>li>a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0px 0px 15px;
+    margin: 0 10px;
+    font-size: 15px;
+    border: none;
+}
+
+.discover-tablist .nav-tabs>li:first-child a {
+    margin-left: 0px;
+}
+
+.discover-tablist .nav-tabs>li.active>a, 
+.discover-tablist .nav-tabs>li.active>a:hover, 
+.discover-tablist .nav-tabs>li.active>a:focus{
+    text-decoration: none;
+    border: none;
+    border-bottom: 3px solid #0099e5 !important;
+}
+
+.discover-tablist .nav-tabs>li>a:hover {
+    border: none;
+    color: #0099e5;
+    background: none;
+}
+
+.dashboard-grid .work-item {
+    height: 360px;
+}
+
+.dashboard-grid .work-img {
+    height: 350px;
+}
+
+.dashboard-tablist .nav-tabs>li {
+    display: inline-block;
+    float: none;
 }
 
 /** Post modal **/

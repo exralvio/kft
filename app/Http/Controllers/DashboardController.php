@@ -63,7 +63,7 @@ class DashboardController extends Controller{
 
         $current_user_id = $user['_id'];
 
-        return view('dashboard/single-post', compact('current_user_id', 'posts'))->render();
+        return view('dashboard/each-post', compact('current_user_id', 'posts'))->render();
     }
 
     /**
@@ -143,6 +143,15 @@ class DashboardController extends Controller{
 
         $action = $request->action;
         $media = Media::find($request->post_id);
+
+        $user_id = User::current()['_id'];
+
+        if($media->user['id'] == $user_id){
+            return Response::json([
+                'status'=>'error',
+                'message'=>"You're not allowed to like own post!"
+            ]);
+        }
         
         if($media->updateLike($action)){
             if($action == 'like'){
@@ -161,7 +170,7 @@ class DashboardController extends Controller{
         return Response::json([
             'status'=>'error', 
             'message'=>'Unexpected error.'
-        ], 400);
+        ]);
     }
 
 }

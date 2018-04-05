@@ -35,125 +35,94 @@
     </section>
     <!-- End Home Section -->
 
-    <!-- Portfolio Section -->
-    <section class="page-section pb-0" id="discover">
-        <div class="relative">
-            
-            <h2 class="section-title font-alt mb-70 mb-sm-40">
-                Discover
-            </h2>
-            
-            <!-- Works Filter -->                    
-            <div class="works-filter font-alt align-center">
-                <a href="#" class="filter active" data-filter="*">All types</a>
-                <a href="#branding" class="filter" data-filter=".branding">Fresh</a>
-                <a href="#design" class="filter" data-filter=".design">Popular</a>
-            </div>                    
-            <!-- End Works Filter -->
-            
-            <!-- Works Grid -->
-            <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid">
-                
-                <!-- Work Item (Lightbox) -->
-                <li class="work-item mix photography">
-                    <a href="{{ url('') }}/rythm/images/portfolio/full-project-1.jpg" class="work-lightbox-link mfp-image">
-                        <div class="work-img">
-                            <img src="{{ url('') }}/rythm/images/portfolio/projects-1.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Portrait</h3>
-                            <div class="work-descr">
-                                Lightbox 
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-                <!-- Work Item (External Page) -->
-                <li class="work-item mix branding design">
-                    <a href="portfolio-single-1.html" class="work-ext-link">
-                        <div class="work-img">
-                            <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-2.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Vase 3D</h3>
-                            <div class="work-descr">
-                                External Page
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-                <!-- Work Item (External Page) -->
-                <li class="work-item mix branding">
-                    <a href="portfolio-single-1.html" class="work-ext-link">
-                        <div class="work-img">
-                            <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-3.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Boy in T-shirt</h3>
-                            <div class="work-descr">
-                                External Page
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-                <!-- Work Item (External Page) -->
-                <li class="work-item mix design photography">
-                    <a href="portfolio-single-1.html" class="work-ext-link">
-                        <div class="work-img">
-                            <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-4.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Space</h3>
-                            <div class="work-descr">
-                                External Page
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-                <!-- Work Item (External Page) -->
-                <li class="work-item mix design">
-                    <a href="portfolio-single-1.html" class="work-ext-link">
-                        <div class="work-img">
-                            <img class="work-img" src="{{ url('') }}/rythm/images/portfolio/projects-5.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Model</h3>
-                            <div class="work-descr">
-                                External Page
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-                <!-- Work Item (Lightbox) -->
-                <li class="work-item mix design branding">
-                    <a href="{{ url('') }}/rythm/images/portfolio/full-project-3.jpg" class="work-lightbox-link mfp-image">
-                        <div class="work-img">
-                            <img src="{{ url('') }}/rythm/images/portfolio/projects-6.jpg" alt="Work" />
-                        </div>
-                        <div class="work-intro">
-                            <h3 class="work-title">Young Man</h3>
-                            <div class="work-descr">
-                                Lightbox
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <!-- End Work Item -->
-                
-            </ul>
-            <!-- End Works Grid -->
-            
+    <!-- Section -->
+    <section class="page-section pb-0 discover-tablist dashboard-tablist" id="discover">
+        <div class="relative container">
+            <div class="row">
+                <div class="col-xs-12 align-center">
+                    <h1 class="hs-line-15 font-alt mb-20 mb-xs-0">The top photos, chosen by you</h1>
+                    <div class="hs-line-4 font-alt black">
+                        Discover what’s trending according to photographers around the world.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative container align-left mt-50">
+            <div class="row">
+                <div class="col-xs-12 align-center">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#popular">Popular</a></li>
+                        <li ><a href="#fresh">Fresh</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
-    <!-- End Portfolio Section -->
+    <section class="page-section pt-20 pb-20">
+        <div class="relative">
+            <div class="">
+                <div class="col-sm-12">
+                  <div id="post-data" class="tab-content discover-grid dashboard-grid">
+                      <div role="tabpanel" id="popular" class="tab-pane fade in active">
+                        <ul class="works-grid work-grid-2 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
+                            @foreach(\App\Models\Media::discoverPopular(4) as $popular)
+                            <!-- Work Item (Lightbox) -->
+                            <li class="work-item" >
+                                <div data-postid="{{ $popular['media']['id'] }}" class="work-item-inner open-single-post">
+                                    <div class="work-img">
+                                        <img src="{{ url($popular['images']['medium']) }}" alt="Work">
+                                    </div>
+                                    <div class="work-intro align-left">
+                                        <div class="work-pp">
+                                            <img src="{{ url($popular->user['photo']) }}">
+                                        </div>
+                                        <h3 class="work-title">{{ $popular['user']['fullname'] }}</h3>
+                                        <a data-postid="{{ $popular->media['id'] }}" class="like-button like-mini-{{ $popular->media['id'] }}"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- End Work Item -->
+                            @endforeach
+                        </ul>
+                      </div>
+                      <div role="tabpanel" id="fresh" class="tab-pane fade ">
+                        <ul class="works-grid work-grid-2 work-grid-gut clearfix font-alt hide-titles" id="fresh-grid" >
+                            @foreach(\App\Models\Media::discoverFresh(4) as $media)
+                            <!-- Work Item (Lightbox) -->
+                            <li class="work-item" >
+                                <div data-postid="{{ $media->_id }}" class="work-item-inner open-single-post">
+                                    <div class="work-img">
+                                        <img src="{{ url($media['images']['medium']) }}" alt="Work">
+                                    </div>
+                                    <div class="work-intro">
+                                        <div class="work-pp">
+                                            <img src="{{ url($media->user['photo']) }}">
+                                        </div>
+                                        <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
+                                        <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }}"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                </a>
+                            </li>
+                            <!-- End Work Item -->
+                            @endforeach
+                        </ul>
+                      </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Section -->
+@endsection
+
+@section('footer_script')
+<script type="text/javascript">
+    // Select all tabs
+    $(function(){
+        $('.nav-tabs a').on('click', function(e){
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>
 @endsection

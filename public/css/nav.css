@@ -32,3 +32,86 @@
     font-weight: bold;
     padding: 3px 6px;
 }
+
+.notification-box {
+    position: fixed;
+    width: 350px;
+    right: 100px;
+    top: 75px;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 25px rgba(0,0,0,0.2);
+    border: 2px solid rgba(160,160,160,0.4);
+    overflow-y: hidden;
+    transition: top 0.2s;
+    display: none;
+}
+
+.main-nav.small-height .notification-box {
+    top: 55px;
+}
+
+.notification-box h3 {
+    background: #F7F8FA;
+    border-bottom: 1px solid #ccc;
+    padding: 12px 10px;
+    margin: 0px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: #71767a;
+}
+
+.notification-inner {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+ul.notification-list {
+    padding: 0px;
+    margin: 0px;
+    float: none;
+}
+
+ul.notification-list li {
+    margin: 0px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
+ul.notification-list li .sender-photo, ul.notification-list li .receiver-photo {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+ul.notification-list li .sender-photo {
+    position: absolute;
+    left: 10px;
+}
+
+ul.notification-list li .receiver-photo {
+    position: absolute;
+    right: 10px;
+}
+
+ul.notification-list li img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+ul.notification-list li div {
+    height: 50px;
+    padding: 0 60px;
+    text-align: left;
+    text-transform: none;
+}
+
+.small-height .inner-nav ul.notification-list li a {
+    height: auto !important;
+    line-height: normal !important;
+}

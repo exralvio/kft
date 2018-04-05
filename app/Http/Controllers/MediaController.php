@@ -221,19 +221,20 @@ class MediaController extends Controller{
     }
 
     public function mediaDetail($mediaId){
-        $user = User::current();
         $mediaId = new ObjectId($mediaId);
+        $post = Media::find($mediaId);
+
+        if(!$post){
+            return abort(404);
+        }
+        
+        $user = User::current();
         // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
         $comments = Comment::where('photo_id','=',$mediaId)->get();
-        $media = Media::find($mediaId);
 
-        if(in_array($user['_id'], array_map(function($v){ return $v['user_id']; }, $media->like_users))){
-            $media['liked'] = true;
-        }else{
-            $media['liked'] = false;
-        }
+        $current_user_id = $user['_id'];
 
-        return view('media/detail',["post"=>$media, "comments"=>$comments]);
+        return view('media/detail', compact('current_user_id','post','comments'));
     }
 
     public function getDiscover(){
