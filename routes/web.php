@@ -42,7 +42,7 @@ Route::middleware('guest')->group(function(){
 
 	Route::get('/recover-password', 'Auth\ForgotPasswordController@showRecoverPasswordForm');
 	Route::post('/recover-password', 'Auth\ForgotPasswordController@sentResetPasswordMail');
-	Route::get('/recover-password/{token?}', 'Auth\ResetPasswordController@showResetPasswordForm')->where('token', '(.*)');;
+	Route::get('/recover-password/{token?}', 'Auth\ResetPasswordController@verifyResetToken')->where('token', '(.*)');;
 	Route::post('/reset-password', 'Auth\ResetPasswordController@saveResetPassword');
 
 	Route::get('/recover-password-mail-template', function(){

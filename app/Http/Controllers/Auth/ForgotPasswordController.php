@@ -58,7 +58,7 @@ class ForgotPasswordController extends Controller
             $this->mail = Array(
                 'to'=>$email,
                 'subject'=>'Reset Password Request',
-                'reset_token'=>$reset_data['token']
+                'reset_token'=>$token
             );
             
             if($this->sendResetMail()){

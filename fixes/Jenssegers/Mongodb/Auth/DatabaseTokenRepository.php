@@ -13,10 +13,10 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository {
     /**
      * @inheritdoc
      */
-    protected function getPayload($email, $token)
-    {
-    return ['email' => $email, 'token' => $this->hasher->make($token), 'created_at' => Carbon::now()];
-    }
+    // protected function getPayload($email, $token)
+    // {
+    // return ['email' => $email, 'token' => $token, 'created_at' => new UTCDateTime(time() * 1000)];
+    // }
 
     /**
      * @inheritdoc

@@ -40,19 +40,19 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function showResetPasswordForm($token){
+    public function verifyResetToken($token){
         $findToken = \DB::collection('password_resets')->where('token',$token)->first();
         $user = User::where('email', $findToken['email'])->first();
         if($user){
             $tokenValid = \Password::getRepository()->exists($user, $token);
             if($tokenValid){
-                return view('errors/404');
-            }else{
                 return view('auth/passwords/reset-password', ['email'=>$user['email']]);
+            }else{
+                return view('errors/404');
             }
         }else{
-            // dd('user not found or token invalid');
-            return view('auth/passwords/reset-password');
+            dd('user not found or token invalid');
+            return view('auth/passwords/reset-password', ['email'=>"fazrin.mutaqin@gmail.com"]);
         }
     }
 
