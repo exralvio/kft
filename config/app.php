@@ -152,6 +152,7 @@ return [
          */
         Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
         Jenssegers\Mongodb\Session\SessionServiceProvider::class,
+        Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 

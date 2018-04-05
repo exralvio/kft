@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Contracts\Auth\PasswordBroker;
+use Illuminate\Http\Request;
+use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -37,7 +40,23 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function showResetPasswordForm(){
-        return 'this is showResetPasswordForm controller';
+    public function showResetPasswordForm($token){
+        $findToken = \DB::collection('password_resets')->where('token',$token)->first();
+        $user = User::where('email', $findToken['email'])->first();
+        if($user){
+            $tokenValid = \Password::getRepository()->exists($user, $token);
+            if($tokenValid){
+                return view('errors/404');
+            }else{
+                return view('auth/passwords/reset-password', ['email'=>$user['email']]);
+            }
+        }else{
+            // dd('user not found or token invalid');
+            return view('auth/passwords/reset-password');
+        }
+    }
+
+    public function saveResetPassword(Request $request){
+        dd($request->all());
     }
 }

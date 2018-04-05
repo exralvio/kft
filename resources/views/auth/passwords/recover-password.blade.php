@@ -20,6 +20,37 @@
 </style>
 <section class="page-section pb-50 mt-30">
     <div class="container relative">
+        @if(Session::has('email_not_registered'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert error">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('email_not_registered') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @elseif(Session::has('reset_email_sent'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert success">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('reset_email_sent') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @elseif(Session::has('email_failed_to_send'))
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-md-offset-4">
+                <div class="row">
+                    <div class="alert error">
+                        <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('email_failed_to_send') }}
+                    </div>
+                </div>
+            </div>    
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-6 col-md-offset-3 bg-gray-lighter">
                 <div class="col-md-10 col-md-offset-1 forgot-password-container pb-30">

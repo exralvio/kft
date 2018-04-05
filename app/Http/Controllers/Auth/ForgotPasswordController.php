@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Mail;
 use Session;
+use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 
 class ForgotPasswordController extends Controller
 {
@@ -38,7 +39,7 @@ class ForgotPasswordController extends Controller
     }
 
     public function showRecoverPasswordForm(){
-        return view('auth/passwords/reset-password');
+        return view('auth/passwords/recover-password');
     }
 
     private $mail;
@@ -51,16 +52,22 @@ class ForgotPasswordController extends Controller
             //so we can have dependency 
             $password_broker = app(PasswordBroker::class);
             //create reset password token 
-            $token = $password_broker->createToken($user); 
-            \DB::collection('password_resets')->insert(['email' => $user->email, 'token' => $token, 'created_at' => new Carbon]);
-
+            $token = $password_broker->createToken($user);
+            $reset_data = \DB::collection('password_resets')->where('email',$email)->first();
+            
             $this->mail = Array(
                 'to'=>$email,
                 'subject'=>'Reset Password Request',
-                'reset_token'=>$token
+                'reset_token'=>$reset_data['token']
             );
-
-            $this->sendResetMail();
+            
+            if($this->sendResetMail()){
+                $request->session()->flash('reset_email_sent', 'Reset Password Link has been sent to your email');
+                return redirect('recover-password');
+            }else{
+                $request->session()->flash('email_failed_to_send', 'Email failed to send, please try again later.');
+                return redirect('recover-password');
+            }
         }else{
             $request->session()->flash('email_not_registered', 'Email Not Registered on KFT');
             return redirect('recover-password');
@@ -78,11 +85,9 @@ class ForgotPasswordController extends Controller
         });
         
         if(Mail::failures()){
-            Session::flash('email_failed_to_send', 'Email failed to send, please try again later.');
-            return redirect('recover-password');
+            return false;
         }else{
-            Session::flash('reset_email_sent', 'Reset Password Link has been sent to your email');
-            return redirect('recover-password');
+            return true;
         }
     }
 
