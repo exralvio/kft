@@ -85,7 +85,6 @@
             </div>
         </div>
     </section>
-
     <!-- End Section -->
     
     @include('partials/post-modal')
@@ -101,15 +100,9 @@
                 if($(this).attr('href') == '#fresh'){
                     $('.discover-text1').text("The newest uploads");
                     $('.discover-text2').text("Be one of the first to discover the photos just added to 500px.");
-                    setTimeout(function(){
-                        $('#fresh-grid').masonry();
-                    }, 300);
                 } else if($(this).attr('href') == '#popular'){
                     $('.discover-text1').text("What's popular today");
                     $('.discover-text2').text("See recently added photos with the highest views.");
-                    setTimeout(function(){
-                        $('#popular-grid').masonry();
-                    }, 300);
                 }
             });
         });

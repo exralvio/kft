@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
         <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/media.css">
     </head>
     <body class="appear-animate">
         <!-- Page Loader -->        
@@ -112,5 +113,7 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>       
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
+
+        @yield('footer_script')
     </body>
 </html>

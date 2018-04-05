@@ -293,42 +293,6 @@ a.nav-notification:hover .fa {
 	background: #fff;
 }
 
-.discover-tablist {
-	border-bottom: 1px solid #eeeff2;
-}
-
-.discover-tablist .nav-tabs {
-	border-bottom: 0px;
-}
-
-.discover-tablist .nav-tabs>li>a {
-	text-decoration: none;
-	text-transform: uppercase;
-	font-weight: bold;
-    padding: 0px 0px 15px;
-    margin: 0 10px;
-    font-size: 15px;
-    border: none;
-}
-
-.discover-tablist .nav-tabs>li:first-child a {
-	margin-left: 0px;
-}
-
-.discover-tablist .nav-tabs>li.active>a, 
-.discover-tablist .nav-tabs>li.active>a:hover, 
-.discover-tablist .nav-tabs>li.active>a:focus{
-	text-decoration: none;
-	border: none;
-    border-bottom: 3px solid #0099e5 !important;
-}
-
-.discover-tablist .nav-tabs>li>a:hover {
-	border: none;
-	color: #0099e5;
-	background: none;
-}
-
 .footer {
 	background: url(../../images/bg-footer.jpg) no-repeat center bottom;
 	padding-bottom: 300px;
