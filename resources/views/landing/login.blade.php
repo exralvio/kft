@@ -32,8 +32,27 @@
                         </div>
                     </div>    
                 </div>
+                @elseif(Session::has('activation_success'))
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="alert success">
+                                <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('activation_success') }}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                @elseif(Session::has('activation_failed'))
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-md-offset-4">
+                        <div class="row">
+                            <div class="alert error">
+                                <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('activation_failed') }}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
                 @endif
-
 
                 <!-- Login Form -->                            
                 <div class="row">

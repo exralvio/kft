@@ -35,7 +35,7 @@ class DashboardController extends Controller{
         }else{
             $popularMedias = [];
         }
-
+        
         array_push($followings, $user['_id']);
         
         $posts = Media::orderBy('_id','desc')

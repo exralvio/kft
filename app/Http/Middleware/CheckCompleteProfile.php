@@ -20,7 +20,7 @@ class CheckCompleteProfile
 
             $user = User::raw()->findOne(['_id' => new ObjectId($user_arr['_id'])]);
 
-            if($user['is_active'] == true){
+            if($user['is_active'] == true && !empty($user['firstname']) && !empty($user['department'])){
                 return $next($request);
             }else{
                 \Session::flash('error', 'Please complete your profile before go to other page!');

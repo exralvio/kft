@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Activation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use App\Services\SocialFacebookAccountService;
-use Mail;
+use MongoDB\BSON\ObjectID;
 
+use Mail;
 use Socialite;
 use Session;
 use Validator;
@@ -139,7 +141,6 @@ class AuthController extends Controller{
     }
 
     public function doSignup(Request $request){
-        
         $validator = Validator::make($request->all(), $this->authRules);
         if($validator->fails()){
             return Redirect::to('signup')
@@ -177,13 +178,11 @@ class AuthController extends Controller{
                 $newUser->department = [];
 
                 if($newUser->save()){
-                    if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
-                        /**
-                         * this should be redirected to complete user's profiles views
-                         * */
-                        Session::flash('register_success', 'Register Success! Please Login');
-                        return redirect('login');
-                    }
+                    // if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
+                    //     Session::flash('register_success', 'Register Success! Please Login');
+                    //     return redirect('login');
+                    // }
+                    $this->createTokenAndSendEmail($newUser);
                 }else{
                     dd('Signup failed');
                 }
@@ -221,4 +220,39 @@ class AuthController extends Controller{
             return true;
         }
     }
+
+    public function createTokenAndSendEmail(User $user)
+    {  
+        // Create new Activation record for this user/email
+        $activation = new Activation;
+        $activation->user_id = new ObjectId($user->id);
+        $activation->email = $user->email;
+        $activation->token = str_random(64);
+        $activation->save();
+
+        // Send activation email notification
+        if($this->sendActivationMail($activation)){
+            Session::flash('activation_email_sent', 'Activation email has been sent into your email');
+            return redirect('signup');
+        }
+    }
+
+    public function sendActivationMail($activation)
+    {   
+        $this->mail['to'] = $activation->email;
+        $this->mail['subject'] = 'User Activation';
+        $this->mail['token'] = $activation->token;
+        Mail::send('emails.activation-mail', ['token' => $this->mail['token']], function($message)
+        {
+            $message->subject($this->mail['subject']);
+            $message->to($this->mail['to']);
+        });
+        
+        if(Mail::failures()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
 }

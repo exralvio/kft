@@ -8,7 +8,17 @@
     <!-- Section -->
     <section class="page-section">
         <div class="container relative">
-             
+            @if(Session::has('activation_email_sent'))
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-md-offset-4">
+                    <div class="row">
+                        <div class="alert success">
+                            <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('activation_email_sent') }}
+                        </div>
+                    </div>
+                </div>    
+            </div>
+            @endif
             <!-- Registry Form -->                            
             <div class="row">
                 <div class="col-md-4 col-md-offset-4  bg-gray-lighter pb-40">
