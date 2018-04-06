@@ -63,7 +63,6 @@
 
 </div>
 
-<script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/dropzone.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/bootstrap-tagsinput.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/uploader.js"></script>

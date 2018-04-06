@@ -1,30 +1,15 @@
-#notification-content{
-    color: #f5f5f5 !important;
+.main-nav .logo {
     display: none;
-    width: 300px;
-    position: absolute;
-    top: 100%;
-    right: -150px;
-    text-align: left;
-    padding: 0;
-    background: rgba(30,30,30, .97)
 }
-#notification-content .header-group{
-    font-size: 16px;
-    height: 38px;
-    line-height: 32px;
-    text-align: center;
-    border-bottom: 1px solid #e8e8e8
+
+.main-nav:not(.transparent) .logo-gray {
+    display: table-cell;
 }
-#notification-content li{
-    display: block;
-    width: 100%;
-    margin: 0 !important;
-    padding: 5px;
+
+.main-nav.transparent .logo-white {
+    display: table-cell;
 }
-#notification-content a {
-    color: #ffe4c4;
-}
+
 #activeNotification{
     background-color: #ff0000;
     border-radius: 15px;

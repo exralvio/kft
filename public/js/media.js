@@ -17,6 +17,11 @@ function loadMoreData(last_id){
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
         alert('failed to connect to server ...');
     });
 }
@@ -46,6 +51,11 @@ function openSinglePost(e){
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
         alert('failed to connect to server ...');
     });
 }
@@ -86,6 +96,11 @@ function addPostLike(e) {
         }
     })
     .fail(function(jqXHR, ajaxOptions, thrownError){
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
         alert('failed to connect to server ...');
     });
 }
@@ -116,6 +131,11 @@ $(function(){
             })
             .fail(function(jqXHR, ajaxOptions, thrownError)
             {
+                if(thrownError == 'Unauthorized'){
+                    window.location = '/login';
+                    return;
+                }
+
                 alert('failed to connect to server ...');
             });
         }
@@ -140,6 +160,11 @@ $(function(){
         })
         .fail(function(jqXHR, ajaxOptions, thrownError)
         {
+            if(thrownError == 'Unauthorized'){
+                window.location = '/login';
+                return;
+            }
+            
             alert('failed to connect to server ...');
         });
     });

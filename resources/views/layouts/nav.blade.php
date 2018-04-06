@@ -4,8 +4,11 @@
     <div class="full-wrapper relative clearfix">
         <!-- Logo ( * your text or image into link tag *) -->
         <div class="nav-logo-wrap local-scroll">
-            <a href="{{ url('/') }}" class="logo">
-                <img src="{{ url('') }}/images/logo-kft.png" alt="" />
+            <a href="{{ url('/') }}" class="logo logo-white">
+                <img src="{{ url('') }}/images/logo-white.png" alt="" />
+            </a>
+            <a href="{{ url('/') }}" class="logo logo-gray">
+                <img src="{{ url('') }}/images/logo-gray.png" alt="" />
             </a>
         </div>
         <div class="mobile-nav">
