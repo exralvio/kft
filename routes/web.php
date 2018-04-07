@@ -84,3 +84,9 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
 	Route::post('/user/relation', 'UserController@postRelation');
 });
+
+Route::prefix('admin')->group(function () {
+	Route::get('dashboard', function(){
+		return view('admin/dashboard');
+	});
+});
