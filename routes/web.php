@@ -46,6 +46,8 @@ Route::middleware('guest')->group(function(){
 	Route::post('/reset-password', 'Auth\ResetPasswordController@saveResetPassword');
 	Route::get('/activate/{token}', 'ActivateController@activate');
 
+	Route::get('/admin/login','Auth\AdminAuthController@showLoginForm');
+	Route::post('/admin/login','Auth\AdminAuthController@doLogin');
 });
 
 /**
@@ -85,8 +87,12 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/user/relation', 'UserController@postRelation');
 });
 
-Route::prefix('admin')->group(function () {
+/** for development purpose only, must be removed later **/
+Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
+
+Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('dashboard', function(){
 		return view('admin/dashboard');
 	});
+	Route::get('logout','Auth\AdminAuthController@doLogout');
 });
