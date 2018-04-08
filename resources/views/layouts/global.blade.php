@@ -72,8 +72,6 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/js/jquery.uploadPreview.js"></script>
 
-        @include('partials/uploader')
-        @include('partials/relation')
         
         <script type="text/javascript" src="{{ url('') }}/rythm/js/wow.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/masonry.pkgd.min.js"></script>
@@ -84,6 +82,9 @@
         <script type="text/javascript" src="{{ url('') }}/js/media.js"></script>       
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
         </script>
+        
+        @include('partials/uploader')
+        @include('partials/relation')
 
         @if(\Auth::check())
         <script type="text/javascript">
