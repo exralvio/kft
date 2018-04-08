@@ -1,4 +1,4 @@
-@extends('layouts/timeline')
+@extends('layouts/global')
 
 @section('header_script')
     <link rel="stylesheet" type="text/css" href="{{ url('css/manage.css') }}">

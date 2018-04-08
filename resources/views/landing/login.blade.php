@@ -1,4 +1,4 @@
-@extends('layouts/global')
+@extends('layouts/landing')
  
 @section('page-title')
  Login

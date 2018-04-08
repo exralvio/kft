@@ -20,16 +20,18 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style-responsive.css">
-        <link rel="stylesheet" href="{{ url('') }}/rythm/css/custom.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/custom.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/animate.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
-        <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
-        <link rel="stylesheet" href="{{ url('') }}/css/media.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/media.css">   
+        @yield('header_script')
+
     </head>
-    <body class="appear-animate">
+    <body class="appear-animate timeline">
+        <!-- <script type="text/javascript" src="{{ url('') }}/js/fb-script.js"></script> -->
         <!-- Page Loader -->        
         <div class="page-loader">
             <div class="loader">Loading...</div>
@@ -39,8 +41,6 @@
         <!-- Page Wrap -->
         <div class="page" id="top">
             
-            <?php $route = Route::current()->uri; ?>
-
             <!-- Begin Navigation -->
             @include('layouts/nav')
             <!-- End Navigation -->
@@ -48,50 +48,13 @@
             <!-- Begin Content -->
             @yield('content')
             <!-- End Content -->
-
-            <!-- Foter -->
-            <footer class="page-section bg-gray-lighter footer">
-                <div class="container">
-                    
-                   
-                    
-                    <!-- Footer Text -->
-                    <div class="footer-text">
-                        
-                        <!-- Copyright -->
-                        <div class="footer-copy font-alt">
-                            &copy; Komunitas Fotografi Telkom 2018.
-                        </div>
-                        <!-- End Copyright -->
-                        
-                    </div>
-                    <!-- End Footer Text --> 
-                    
-                    <!-- Footer Logo -->
-                    <div class="footer-sponsor">
-                        <p>Sponsored By</p>
-                        <img src="{{ url('') }}/images/telkom.png" alt="Telkom Indonesia" />
-                    </div>
-                    <!-- End Footer Logo -->
-                 </div>
-                 
-                 
-                 <!-- Top Link -->
-                 <div class="local-scroll">
-                     <a href="#top" class="link-to-top"><i class="fa fa-caret-up"></i></a>
-                 </div>
-                 <!-- End Top Link -->
-                 
-            </footer>
-            <!-- End Foter -->
-        
         
         </div>
         <!-- End Page Wrap -->
         
-        
+
         <!-- JS -->
-        <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/bootstrap.min.js"></script>        
         <script type="text/javascript" src="{{ url('') }}/rythm/js/SmoothScroll.js"></script>
@@ -107,17 +70,28 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/isotope.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/imagesloaded.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
-        <!-- Replace test API Key "AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg" with your own one below 
-        **** You can get API Key here - https://developers.google.com/maps/documentation/javascript/get-api-key -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZsDkJFLS0b59q7cmW0EprwfcfUA8d9dg"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/jquery.uploadPreview.js"></script>
+
+        @include('partials/uploader')
+        @include('partials/relation')
+        
         <script type="text/javascript" src="{{ url('') }}/rythm/js/wow.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/masonry.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.simple-text-rotator.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>
         <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>       
-        <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
+        <script type="text/javascript" src="{{ url('') }}/js/nav.js"></script>
         <script type="text/javascript" src="{{ url('') }}/js/media.js"></script>       
+        <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
+        </script>
+
+        @if(\Auth::check())
+        <script type="text/javascript">
+            checkUnreadNotification();
+        </script>
+        @endif
 
         @yield('footer_script')
+        
     </body>
 </html>

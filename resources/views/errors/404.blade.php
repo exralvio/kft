@@ -1,5 +1,4 @@
-@extends('layouts/timeline')
-
+@extends('layouts/global')
 
 @section('page-title')
 Komunitas Fotografi Telkom
