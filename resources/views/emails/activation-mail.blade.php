@@ -7,8 +7,8 @@
             <hr style="margin:10px 0">
             <p>Click on the link below to activate your account.</p>
             <div style="background-color: #d5f9ff;padding: 5px;border: 1px solid #d8d8d8;">
-                <a style="text-decoration:none; font-weight:bold; color:deepbluesky;" href="https://kft-web.local/activate/{{ $token }}">
-                    https://kft-web.local/activate/{{ $token }}
+                <a style="text-decoration:none; font-weight:bold; color:deepbluesky;" href="https://kft.id/activate/{{ $token }}">
+                    https://kft.id/activate/{{ $token }}
                 </a>
             </div>
             <hr style="margin:10px 0">
