@@ -178,11 +178,10 @@ class AuthController extends Controller{
                 $newUser->department = [];
 
                 if($newUser->save()){
-                    // if($this->sendSignUpMail($newUser, 'KFT Registration','login')){
-                    //     Session::flash('register_success', 'Register Success! Please Login');
-                    //     return redirect('login');
-                    // }
-                    $this->createTokenAndSendEmail($newUser);
+                    if($this->createTokenAndSendEmail($newUser)){
+                        Session::flash('activation_email_sent', 'Activation email has been sent into your email');
+                        return redirect('signup');
+                    }
                 }else{
                     dd('Signup failed');
                 }
@@ -232,8 +231,9 @@ class AuthController extends Controller{
 
         // Send activation email notification
         if($this->sendActivationMail($activation)){
-            Session::flash('activation_email_sent', 'Activation email has been sent into your email');
-            return redirect('signup');
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -244,6 +244,7 @@ class AuthController extends Controller{
         $this->mail['token'] = $activation->token;
         Mail::send('emails.activation-mail', ['token' => $this->mail['token']], function($message)
         {
+            $message->from('mail@kft.id');
             $message->subject($this->mail['subject']);
             $message->to($this->mail['to']);
         });

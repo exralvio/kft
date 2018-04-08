@@ -80,6 +80,7 @@ class ForgotPasswordController extends Controller
         $this->mail['subject'] = $this->mail['subject'];
         Mail::send('emails.recover-password-mail', ['token' => $this->mail['reset_token']], function($message)
         {
+            $message->from('mail@kft.id');
             $message->subject($this->mail['subject']);
             $message->to($this->mail['to']);
         });
