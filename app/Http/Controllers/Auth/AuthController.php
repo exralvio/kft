@@ -205,7 +205,7 @@ class AuthController extends Controller{
     private $mail;
     public function sendSignUpMail($user = [], $subject, $redirectRoute = null)
     {
-        $this->mail['to'] = 'fazrin.mutaqin@gmail.com'; //$user['email'];
+        $this->mail['to'] = $user['email'];
         $this->mail['subject'] = $subject;
         Mail::send('emails.signup-mail', ['user' => $user], function($message)
         {

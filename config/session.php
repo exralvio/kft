@@ -151,7 +151,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', 'kft-web.local'),
+    'domain' => env('SESSION_DOMAIN', 'kft.id'),
 
     /*
     |--------------------------------------------------------------------------
