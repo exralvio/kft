@@ -159,30 +159,125 @@ a.button-rounded{
     background-color: #1fb5ff;
     color: #ffffff;
 }
-#comment-content{text-align: center;}
-.modal-fs{max-width: none!important;}
-.border-right{border-right:1px solid #cccccc;}
-.comment-photo img{padding:5px;max-height: 579px;}
-.comment-block{margin-top:10px;}
-.comment-photo-detail, .comment-block{margin-right: 0;}
-.comment-block .pp{padding: 0px;height: 35px;overflow: hidden;}
-.comment-block .pp img{height:30px;width: auto; border-radius:30px;}
-.comment-user-block{margin: 10px 0 0 0; padding-left: 0;}
-.comment-user-block .pp{height: 50px;width: 50px;overflow: hidden; float: left;}
-.comment-user-block .pp img{border-radius: 25px;}
-.comment-input{padding-left:0px;text-align: left;font-size:12px}
-.comment-profile-name, .following-status{text-align: left;margin-left: 60px;font-weight: bold;}
-.comment-buttons{margin-top: 40px;text-align: left;margin-bottom: 10px;}
-.comments{width: 100%;padding: 2px;float: left;}
-.remodal-close {right: 0;z-index: 9999;left:inherit!important;}
-.dynamicComment{max-height: 400px;overflow-y: scroll;padding:0;}
-.comment-text:hover .del-comment{font-weight: bold; display: block!important;}
-.input-comment-bg{
-    background: url('../images/chat-bubble.png');
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
+#comment-content{
+    text-align: center;
 }
+.modal-fs{
+    max-width: none!important;
+}
+
+.border-right{
+    border-right:1px solid #cccccc;
+}
+
+/** Comment Section **/
+.comment-section {
+    background: #F6F7F9;
+    font-size: 12px;
+}
+
+.media-photo-detail, .comment-section{
+    margin-right: 0;
+}
+
+.comment-section .pp{
+    padding: 0px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.comment-section .pp img{
+    height:30px;
+    width: auto;
+    border-radius:30px;
+}
+
+.comment-user-block{
+    margin: 10px 0 0 0;
+    padding-left: 0;
+}
+
+.comment-user-block .pp{
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    float: left;
+}
+
+.comment-user-block .pp img{
+    border-radius: 25px;
+}
+
+.comment-input{
+    padding-left:0px;
+    text-align: left;
+    font-size:12px;
+}
+
+.comment-profile-name, .following-status{
+    text-align: left;
+    margin-left: 60px;
+    font-weight: bold;
+}
+
+.comment-buttons{
+    margin-top: 40px;
+    text-align: left;
+    margin-bottom: 10px;
+    }
+
+.comments{
+    width: 100%;
+    padding: 2px;
+    float: left;
+}
+
+.remodal-close {
+    right: 0;
+    z-index: 9999;
+    left:inherit!important;
+}
+
+.dynamicComment{
+    max-height: 400px;
+    overflow-y: scroll;
+    padding:0;
+}
+
+.comment-each:hover .del-comment {
+    display: block!important;
+}
+
+.comment-content {
+    padding-left: 0px;
+}
+
+.comment-action .del-comment {
+    display: none;
+}
+
+
+.comment-input:after {
+    content: "\f075";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 15px;
+    color: #B8C0C6;
+}
+
+.comment-name {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.comment-name a {
+    text-decoration: none;
+    color: #525558;
+}
+/** End Comment Section **/
+
 .post-title{
     font-weight: bold;
 }
@@ -371,19 +466,19 @@ a.button-rounded{
     border-radius: 3px;
 }
 
-.post-modal .comment-photo {
+.post-modal .media-photo, #media-single .media-photo {
     height: 90vh;
     border-right: 1px solid #e8e8e8;
     line-height: 89vh;
 }
 
-.post-modal .comment-photo img {
+.post-modal .media-photo img, #media-single .media-photo img {
     padding: 0px;
     max-width: 100%;
     max-height: 100%;
 }
 
-.post-modal .post-details {
+.post-modal .post-details, #media-single .post-details {
     margin-left: -15px;
 }
 

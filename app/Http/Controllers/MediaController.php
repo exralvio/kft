@@ -228,10 +228,9 @@ class MediaController extends Controller{
             return abort(404);
         }
         
-        $user = User::current();
-        // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
-        $comments = Comment::where('photo_id','=',$mediaId)->get();
+        $comments = Comment::where('photo_id', $mediaId)->get();
 
+        $user = User::current();
         $current_user_id = $user['_id'];
 
         return view('media/detail', compact('current_user_id','post','comments'));
