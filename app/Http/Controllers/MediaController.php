@@ -17,6 +17,8 @@ use MongoDB\BSON\ObjectID;
 class MediaController extends Controller{
 
     public function postUpload(Request $request){
+        set_time_limit(1800);
+
 		$input = $request->all();
 
 		$rules = array(

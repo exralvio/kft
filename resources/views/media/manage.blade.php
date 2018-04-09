@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-2 manage-left">
                     <div class="manage-header row first-row">
-                        <a href="#uploader" class="manage-uploadbtn">
+                        <a href="#" class="manage-uploadbtn upload-btn">
                           @if($media_type == 'public')
                             Upload to Profile
                           @else
