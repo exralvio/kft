@@ -122,7 +122,8 @@ $(function(){
 		clickable: ".dz-addfile",
 		thumbnailWidth: 170,
 		thumbnailHeight: 110,
-		acceptedFiles: "image/jpeg,image/png"
+		acceptedFiles: "image/jpeg,image/png",
+		timeout: 1800
 	};
 	
 	var mydropzone = new Dropzone('#uploadzone', dropzoneOptions);
