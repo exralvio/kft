@@ -32,7 +32,7 @@ Class NotificationHelper{
     
     public static function getNotification(){
         $user = User::current();
-        $notification = Notification::where('receiver','=',$user['_id'])
+        $notification = Notification::where('receiver.id', $user['_id'])
                         ->orderBy('created_at', 'desc')
                         ->orderBy('is_read', 'desc')
                         ->get();
@@ -41,7 +41,7 @@ Class NotificationHelper{
     
     public static function getUnreadNotification(){
         $user = User::current();
-        $notification = Notification::where('receiver','=',$user['_id'])
+        $notification = Notification::where('receiver.id', $user['_id'])
                         ->where('is_read',false)
                         ->count();
         return $notification;
