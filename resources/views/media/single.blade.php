@@ -24,6 +24,8 @@
                         <a class="btn btn-sm btn-follow follow-{{ $post->user['id'] }}" data-userid="{{ $post->user['id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
                         @endif
                     </div>
+                    @else
+                    <div class="comment-profile-followers">{{ \App\Models\User::followerCount($post->user['id']) }} Followers</div>
                     @endif
 
                     <div class="clearfix"></div>

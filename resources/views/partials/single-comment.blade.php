@@ -7,7 +7,7 @@
             <div class="comment-name"><a href="{{ url('profile/'.$comment->user['id']) }}">{{ $comment->user['fullname'] }}</a></div>
             <p class="mb-0">{{ $comment->comment }}</p>
             <div class="comment-action">
-                <a href="#">Reply</a> <span>- {{ $comment->created_at->format('M d') }}</span>
+                <a href="#" class="comment-reply">Reply</a> <span>- {{ $comment->created_at->format('M d') }}</span>
                 
                 @if(\Auth::check()) 
                     @if($current_user_id == $comment->user['id'])

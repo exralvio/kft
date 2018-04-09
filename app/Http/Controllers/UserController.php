@@ -34,13 +34,14 @@ class UserController extends Controller{
 
         $profileRules = array(
             'firstname' => 'required',
-            'department' => 'required'
+            'department' => 'required',
+            'photo' => 'image|mimes:png,jpg,jpeg'
         );
 
         $validator = Validator::make($request->all(), $profileRules);
 
         if($validator->fails()){
-            return Redirect::to('user/profile#editProfile')
+            return Redirect::to('user/edit')
                     ->withErrors($validator);
         }else{
             $department = \App\Models\UserDepartment::find($request->department);

@@ -177,7 +177,12 @@ $(function(){
 
     $('body').on('click','#showPhotoDetail', function(e){
         $('#exifData').toggle();
-    })
+    });
+
+    $('body').on('click', '.comment-reply', function(e){
+        e.preventDefault();
+        $('#commentPhoto').focus();
+    });
 
     var prev_id = null;
     $(window).scroll(function() {

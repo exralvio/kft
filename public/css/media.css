@@ -220,6 +220,12 @@ a.button-rounded{
     font-weight: bold;
 }
 
+.comment-profile-followers {
+    text-align: left;
+    margin-left: 60px;
+    font-size: 12px;
+}
+
 .comment-buttons{
     margin-top: 40px;
     text-align: left;
