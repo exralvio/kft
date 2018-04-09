@@ -91,21 +91,12 @@ class Media extends Eloquent
 
             if($this->save()){
                 /** Send Notification **/
-                $notification = [
-                    "sender"=>[
-                        "id"=>$user['_id'],
-                        "fullname"=>$user['fullname'],
-                        "photo"=>$user['photo'],
-                    ],
-                    "receiver"=>$this->user['id'],
-                    "type"=>"like",
-                    "media"=>[
+                \NotificationHelper::setNotification('like', $user['_id'], $this->user['id'], 
+                    [
                         "id"=> $this->_id,
                         "title"=> $this->title,
                     ]
-                ];
-
-                \NotificationHelper::setNotification($notification);
+                );
                 /** End Send Notification **/
 
                 /** Update Popular Post **/

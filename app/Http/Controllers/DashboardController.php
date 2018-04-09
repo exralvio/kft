@@ -97,26 +97,16 @@ class DashboardController extends Controller{
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
-        if($comment->save()){
 
-            $notification = [
-                "sender"=>[
-                    "id"=>$currentUser['_id'],
-                    "fullname"=>$currentUser['fullname'],
-                    "photo"=>$currentUser['photo'],
-                ],
-                "receiver"=>$media->user['id'],
-                "type"=>"comment",
-                "media"=>[
+        if($comment->save()){
+            \NotificationHelper::setNotification('comment', $currentUser['_id'], $media->user['id'],
+                [
                     "id"=> $media->_id,
                     "title"=> $media->title,
                 ]
-                // "content"=>'<b>'.$currentUser['firstname']." ".$currentUser['lastname'].'</b> commented on <b>'.$media->title.'</b>'
-            ];
-            \NotificationHelper::setNotification($notification);
+            );
 
-            $html = view('dashboard/single-comment',["comment"=>$comment])->render();
-            echo $html;
+            return view('dashboard/single-comment',["comment"=>$comment])->render();
         }
     }
 

@@ -47,21 +47,12 @@ class MediaPopular extends Eloquent
     	$popular->save();
 
         /** Send Notification **/
-        $notification = [
-            "sender"=>[
-                "id"=>$popular->user['id'],
-                "fullname"=>$popular->user['fullname'],
-                "photo"=>$popular->user['photo'],
-            ],
-            "receiver"=>$popular->user['id'],
-            "type"=>"popular",
-            "media"=>[
-                "id"=> $popular->media['id'],
-                "title"=> $popular->title,
+        \NotificationHelper::setNotification('popular', $popular->user['id'], $popular->user['id'], 
+            [
+                'id'=>$popular->media['id'], 
+                'title'=>$popular->title
             ]
-        ];
-
-        \NotificationHelper::setNotification($notification);
+        );
         /** End Send Notification **/
     }
 

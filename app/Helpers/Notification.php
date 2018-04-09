@@ -7,11 +7,27 @@ Use App\Models\User;
 
 Class NotificationHelper{
 
-    public static function setNotification($notification){
-        if($notification['sender'] != $notification['receiver'] ){
-            $notification['is_read'] = false;
-            Notification::create($notification);
-        }
+    public static function setNotification($type, $sender_id, $receiver_id, $media=[]){
+        $sender = User::raw()->findOne(['_id'=>$sender_id]);
+        $receiver = User::raw()->findOne(['_id'=>$receiver_id]);
+
+        $input = [
+            'type'=>$type,
+            'sender'=>[
+                'id'=>$sender['_id'],
+                'fullname'=>$sender['fullname'],
+                'photo'=>$sender['photo']
+            ],
+            'receiver'=>[
+                'id'=>$receiver['_id'],
+                'fullname'=>$receiver['fullname'],
+                'photo'=>$receiver['photo']
+            ],
+            'media'=>$media,
+            'is_read'=>false
+        ];
+
+        Notification::create($input);
     }
     
     public static function getNotification(){
