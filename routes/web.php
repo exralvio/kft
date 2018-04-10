@@ -24,8 +24,8 @@ Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadMedia/{mediaId}', 'DashboardController@loadMedia');
 
-Route::get('/loadDiscoverFresh/{limit?}/{skip?}', 'MediaController@loadDiscoverFresh');
-Route::get('/loadDiscoverPopular/{limit?}/{skip?}', 'MediaController@loadDiscoverPopular');
+Route::get('/loadDiscoverFresh/{limit?}/{skip?}/{category?}', 'MediaController@loadDiscoverFresh');
+Route::get('/loadDiscoverPopular/{limit?}/{skip?}/{category?}', 'MediaController@loadDiscoverPopular');
 
 Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
 

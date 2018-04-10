@@ -5,6 +5,7 @@ var fresh_limit = 9;
 var fresh_skip = 0;
 var fresh_end = false;
 var on_progress = false;
+var discover_category = '';
 
 function resetFresh(){
     fresh_end = false;
@@ -19,12 +20,9 @@ function resetPopular(){
 }
 
 function loadMoreFresh(){
-    console.log('sampe sini');
     if(fresh_end){
         return;
     }
-
-    console.log('masuk sini');
 
     var limit = fresh_limit;
     var skip = limit * fresh_skip;
@@ -32,7 +30,7 @@ function loadMoreFresh(){
     fresh_skip++;
 
     $.ajax({
-        url: '/loadDiscoverFresh/'+limit+'/'+skip,
+        url: '/loadDiscoverFresh/'+limit+'/'+skip+'/'+discover_category,
         type: 'get',
         beforeSend: function(){
             $('#fresh .load-more').show();
@@ -62,7 +60,7 @@ function loadMorePopular(){
     popular_skip++;
 
     $.ajax({
-        url: '/loadDiscoverPopular/'+limit+'/'+skip,
+        url: '/loadDiscoverPopular/'+limit+'/'+skip+'/'+discover_category,
         type: 'get',
         beforeSend: function(){
             $('#popular .load-more').show();
@@ -81,6 +79,20 @@ function loadMorePopular(){
     });
 }
 
+function changeDiscoverCategory(e){
+    e.preventDefault();
+
+    discover_category = $(this).val();
+
+    if($('#popular').hasClass('active')){
+        resetPopular();
+        loadMorePopular();
+    } else if($('#fresh').hasClass('active')){
+        resetFresh();
+        loadMoreFresh();
+    }
+}
+
 $(function(){
     loadMorePopular();
 
@@ -88,15 +100,16 @@ $(function(){
         e.preventDefault();
         $(this).tab('show');
 
+        $('.discover-category').val('');
+        discover_category = '';
+
         if($(this).attr('href') == '#fresh'){
-            console.log('masuk ini');
             $('.discover-text1').text("The newest uploads");
             $('.discover-text2').text("Be one of the first to discover the photos just added to KFT.");
 
             resetFresh();
             loadMoreFresh();
         } else if($(this).attr('href') == '#popular'){
-            console.log('masuk popular');
             $('.discover-text1').text("What's popular today");
             $('.discover-text2').text("See recently added photos with the highest views.");
 
@@ -104,11 +117,12 @@ $(function(){
             loadMorePopular();
         }
     });
+
+    $('.discover-category').on('change', changeDiscoverCategory);
 });
 
 $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-        console.log(on_progress);
         if(!on_progress){ 
             if($('#popular').hasClass('active')){
                 loadMorePopular();

@@ -19,11 +19,19 @@
         </div>
         <div class="relative container align-left mt-50">
             <div class="row">
-                <div class="col-sm-12 col-md-8">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <form class="form">
+                            {{ Form::select('discover_category', App\Models\MediaCategory::pluck('name', '_id'), null, ['placeholder'=>'Category', 'class'=>'input-md form-control discover-category']) }}
+                            
+                        </form>
+                    </div>
+
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active"><a href="#popular">Popular</a></li>
                         <li ><a href="#fresh">Fresh</a></li>
                     </ul>
+
                 </div>
             </div>
         </div>
