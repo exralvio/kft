@@ -17,19 +17,19 @@ return [
     'facebook' => [
         'client_id' => env('FB_APP_ID'),
         'client_secret' => env('FB_APP_SECRET'),
-        'redirect' => 'https://kft-web.local/login/facebook/callback',
+        'redirect' => 'https://kft.id/login/facebook/callback',
     ],
     
     'google' => [
         'client_id' => env('GOOGLE_APP_ID'),
         'client_secret' => env('GOOGLE_APP_SECRET'),
-        'redirect' => 'https://kft-web.com/login/google/callback',
+        'redirect' => 'https://kft.id/login/google/callback',
     ],
     
     'twitter' => [
         'client_id' => env('TWITTER_APP_ID'),
         'client_secret' => env('TWITTER_APP_SECRET'),
-        'redirect' => 'https://kft-web.local/login/twitter/callback',
+        'redirect' => 'https://kft.id/login/twitter/callback',
     ],
 
     'mailgun' => [
