@@ -17,6 +17,8 @@ use MongoDB\BSON\ObjectID;
 class MediaController extends Controller{
 
     public function postUpload(Request $request){
+        set_time_limit(1800);
+
 		$input = $request->all();
 
 		$rules = array(
@@ -228,10 +230,9 @@ class MediaController extends Controller{
             return abort(404);
         }
         
-        $user = User::current();
-        // $comments = Comment::raw()->findOne(['photo_id'=>$mediaId]);
-        $comments = Comment::where('photo_id','=',$mediaId)->get();
+        $comments = Comment::where('photo_id', $mediaId)->get();
 
+        $user = User::current();
         $current_user_id = $user['_id'];
 
         return view('media/detail', compact('current_user_id','post','comments'));

@@ -110,7 +110,7 @@ $(function(){
 
     $('body').on('click', 'a.like-button', addPostLike);
 
-    $('#comment-content').on('keyup','#commentPhoto', function(e){
+    $('body').on('keyup','#commentPhoto', function(e){
         if(e.keyCode == 13){
             $.ajax({
                 url: '/postComment',
@@ -141,8 +141,14 @@ $(function(){
         }
     })
     
-    $('#comment-content').on('click','.del-comment', function(e){
-        var id = e.currentTarget.id.replace('del-','');
+    $('body').on('click','.del-comment', function(e){
+        e.preventDefault();
+
+        if(!confirm("Are you sure want to delete comment?")){
+            return;
+        }
+        
+        var media_id = $(this).data('mediaid');
         $.ajax({
             url: '/deleteComment',
             type: "post",
@@ -151,12 +157,12 @@ $(function(){
             },
             data: { 
                 // _token: '{{csrf_token()}}',
-                comment_id: id
+                comment_id: media_id
             }
         })
         .done(function(data)
         {
-            $('#comment-'+id).remove();
+            $('.comment-'+media_id).remove();
         })
         .fail(function(jqXHR, ajaxOptions, thrownError)
         {
@@ -169,9 +175,14 @@ $(function(){
         });
     });
 
-    $('#comment-content').on('click','#showPhotoDetail', function(e){
+    $('body').on('click','#showPhotoDetail', function(e){
         $('#exifData').toggle();
-    })
+    });
+
+    $('body').on('click', '.comment-reply', function(e){
+        e.preventDefault();
+        $('#commentPhoto').focus();
+    });
 
     var prev_id = null;
     $(window).scroll(function() {

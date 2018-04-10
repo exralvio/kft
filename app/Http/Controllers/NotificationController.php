@@ -47,10 +47,7 @@ class NotificationController  extends Controller{
         $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
         
         $head = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
-
-        $is_deleted = Media::find($notif->media['id']) ? false : true;
-
-        $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
+        $tail = '';
 
         $media = !empty($notif->media) ? Media::find($notif->media['id']) : [];
 
@@ -63,7 +60,10 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                } else {
+                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
                 }
+                
                 break;
             case 'comment':
                 $msg = ' commented ' ;
@@ -71,6 +71,8 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                } else {
+                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
                 }
                 break;
             case 'follow':
@@ -84,6 +86,8 @@ class NotificationController  extends Controller{
                 $first_photo = $notif->sender['photo'];
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                } else {
+                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
                 }
                 break;
         }

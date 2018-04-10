@@ -1,4 +1,4 @@
-@extends('layouts/timeline')
+@extends('layouts/global')
  
 @section('page-title')
  Komunitas Fotografi Telkom
@@ -94,8 +94,4 @@
     <!-- End Section -->
 
     @include('partials/post-modal')
-@endsection
-
-@section('footer_script')
-    <script type="text/javascript" src="{{ url('') }}/js/dashboard.js"></script>
 @endsection

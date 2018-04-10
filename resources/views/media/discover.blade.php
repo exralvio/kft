@@ -1,4 +1,4 @@
-@extends('layouts/timeline')
+@extends('layouts/global')
  
 @section('page-title')
  Discover

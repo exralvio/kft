@@ -34,13 +34,14 @@ class UserController extends Controller{
 
         $profileRules = array(
             'firstname' => 'required',
-            'department' => 'required'
+            'department' => 'required',
+            'photo' => 'image|mimes:png,jpg,jpeg'
         );
 
         $validator = Validator::make($request->all(), $profileRules);
 
         if($validator->fails()){
-            return Redirect::to('user/profile#editProfile')
+            return Redirect::to('user/edit')
                     ->withErrors($validator);
         }else{
             $department = \App\Models\UserDepartment::find($request->department);
@@ -207,19 +208,8 @@ class UserController extends Controller{
             $followed->save();
         }
 
-        /** Set Notification **/
-        $notification = [
-            "sender"=>[
-                "id"=>$me['_id'],
-                'fullname'=>$me['fullname'],
-                "photo"=>$me['photo'],
-            ],
-            "receiver"=>$user_id,
-            "type"=>"follow",
-            "media"=>[]
-        ];
-
-        \NotificationHelper::setNotification($notification);
+        /** Send Notification **/
+        \NotificationHelper::setNotification('follow', $me['_id'], $user_id);
         /** End Set Notification **/
 
         return Response::json([

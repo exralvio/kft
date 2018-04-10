@@ -1,4 +1,4 @@
-@extends('layouts/timeline')
+@extends('layouts/global')
 
 @section('page-title')
 Edit Profile
@@ -11,19 +11,19 @@ Edit Profile
 @section('content')
 <section class="page-section pt-80">
   <div class="col-md-6 col-md-push-3 col-sm-12">
-    @if(Session::has('error'))
-    <div class="row">
-      
-      <div class="alert error mt-20">
-          <i class="fa fa-lg fa-times-circle"></i> {{ Session::get('error') }}
-      </div>
-    </div>
+    @if ($errors->any())
+      @foreach ($errors->all() as $error)
+        <div class="alert error">
+          {{ $error }}
+        </div>
+      @endforeach
     @endif
+
     <form class="form profile-form" id="profile_form" method="post" action="{{ url('user/profile') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="col-md-12 edit-pp-container">
             <div id="pp-preview">
-              <input type="file" name="photo" id="image-upload" />
+              <input type="file" name="photo" id="image-upload" accept="image/x-png,image/jpeg" />
             </div>
             <div class="col-md-12 mb-10 align-center" >
               <label for="image-upload" id="pp-image-label">Change Profile Picture</label>

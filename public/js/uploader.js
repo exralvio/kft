@@ -121,7 +121,9 @@ $(function(){
 		addRemoveLinks: true,
 		clickable: ".dz-addfile",
 		thumbnailWidth: 170,
-		thumbnailHeight: 110
+		thumbnailHeight: 110,
+		acceptedFiles: "image/jpeg,image/png",
+		timeout: 1800000
 	};
 	
 	var mydropzone = new Dropzone('#uploadzone', dropzoneOptions);

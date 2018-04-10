@@ -81,7 +81,7 @@ class DashboardController extends Controller{
 
         $current_user_id = $user['_id'];
 
-        return view('dashboard/comment', compact('current_user_id', 'post', 'comments'))->render();
+        return view('media/single', compact('current_user_id', 'post', 'comments'))->render();
     }
 
     public function postComment(Request $request){
@@ -92,31 +92,23 @@ class DashboardController extends Controller{
         $comment = new Comment;
         $comment->photo_id = new ObjectId($media->_id);
         $comment->user = [
-            'id' => $media->user['id'],
+            'id' => $currentUser['_id'],
             'fullname'=>$currentUser['fullname'],
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
-        if($comment->save()){
 
-            $notification = [
-                "sender"=>[
-                    "id"=>$currentUser['_id'],
-                    "fullname"=>$currentUser['fullname'],
-                    "photo"=>$currentUser['photo'],
-                ],
-                "receiver"=>$media->user['id'],
-                "type"=>"comment",
-                "media"=>[
+        if($comment->save()){
+            \NotificationHelper::setNotification('comment', $currentUser['_id'], $media->user['id'],
+                [
                     "id"=> $media->_id,
                     "title"=> $media->title,
                 ]
-                // "content"=>'<b>'.$currentUser['firstname']." ".$currentUser['lastname'].'</b> commented on <b>'.$media->title.'</b>'
-            ];
-            \NotificationHelper::setNotification($notification);
+            );
 
-            $html = view('dashboard/single-comment',["comment"=>$comment])->render();
-            echo $html;
+            $current_user_id = $currentUser['_id'];
+
+            return view('partials/single-comment', compact('current_user_id', 'comment'))->render();
         }
     }
 
