@@ -60,7 +60,7 @@
                         
                         <!-- Copyright -->
                         <div class="footer-copy font-alt">
-                            &copy; Komunitas Fotografi Telkom 2018.
+                            &copy; Komunitas Fotografi Telkom Group 2018.
                         </div>
                         <!-- End Copyright -->
                         

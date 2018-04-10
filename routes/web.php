@@ -13,6 +13,10 @@
 
 Route::get('/', 'LandingController@showIndex');
 
+Route::get('/about', function(){
+	return view('landing/about');
+});
+
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');
 
