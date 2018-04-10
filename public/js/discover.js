@@ -91,7 +91,7 @@ $(function(){
         if($(this).attr('href') == '#fresh'){
             console.log('masuk ini');
             $('.discover-text1').text("The newest uploads");
-            $('.discover-text2').text("Be one of the first to discover the photos just added to 500px.");
+            $('.discover-text2').text("Be one of the first to discover the photos just added to KFT.");
 
             resetFresh();
             loadMoreFresh();
