@@ -1,3 +1,13 @@
+.load-more {
+    text-align: center;
+    width: 100%;
+    background: #EEEFF2;
+    border-radius: 5px;
+}
+
+.load-more img {
+    height: 50px;
+}
 
 .timeline-post{
     /*max-width:650px;

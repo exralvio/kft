@@ -23,8 +23,11 @@ Route::get('/cekSession', function(){
 Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadMedia/{mediaId}', 'DashboardController@loadMedia');
-Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
 
+Route::get('/loadDiscoverFresh/{limit?}/{skip?}', 'MediaController@loadDiscoverFresh');
+Route::get('/loadDiscoverPopular/{limit?}/{skip?}', 'MediaController@loadDiscoverPopular');
+
+Route::get('/media/{mediaId}', 'MediaController@mediaDetail');
 
 /** user profile **/
 Route::get('/profile/{user_id}', 'UserController@getProfile');
