@@ -8,6 +8,7 @@
         <meta name="author" content="Roman Kirichik">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="google-signin-client_id" content="859547891790-3i4v7ltdrgmp35c7kcitth2fadqgvmiq.apps.googleusercontent.com">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         
         <!-- Favicons -->
@@ -79,7 +80,8 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>
         <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>       
         <script type="text/javascript" src="{{ url('') }}/js/nav.js"></script>
-        <script type="text/javascript" src="{{ url('') }}/js/media.js"></script>       
+        <script type="text/javascript" src="{{ url('') }}/js/media.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
         </script>
         
