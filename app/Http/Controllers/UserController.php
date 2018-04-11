@@ -34,7 +34,7 @@ class UserController extends Controller{
 
         $profileRules = array(
             'firstname' => 'required',
-            'department' => 'required',
+            'company' => 'required',
             'photo' => 'image|mimes:png,jpg,jpeg'
         );
 
@@ -50,9 +50,25 @@ class UserController extends Controller{
                 'name'=>$department['parent'].' '.$department['name']
             ];
 
+            $sister_company = \App\Models\SisterCompany::find($request->sister_company);
+            $input_sister_company = [
+                'id'=>new ObjectID($sister_company['_id']),
+                'name'=>$sister_company['name']
+            ];
+
+            /**
+             * set one child to null
+            */
+            if($request->company == 'sister_company'){
+                $input_department = [];
+            }else if($request->company == 'telkom'){
+                $input_sister_company = [];
+            }
+
             $request->merge([
                 'is_active'=>true, 
                 'department'=>$input_department,
+                'sister_company'=>$input_sister_company,
                 'fullname'=>!empty($request->lastname) ? $request->firstname.' '.$request->lastname : $request->firstname
             ]);
             

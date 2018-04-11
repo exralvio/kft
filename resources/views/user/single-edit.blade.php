@@ -44,7 +44,20 @@ Edit Profile
         </div>
         <div class="col-md-12  mb-10">
           <div class="col-md-6">
-            <label for="department">Department*</label>
+              <label for="company">Company*</label>
+              <select id="company" name="company" class="input-md round form-control" required>
+                <option value="">-- Select Company --</option>
+                @if(isset($profile['company']))
+                  <option value="telkom" {{ $profile['company'] == 'telkom' ? 'selected' : ''}}>Telkom</option>
+                  <option value="sister_company" {{ $profile['company'] == 'sister_company' ? 'selected' : ''}}>Sister Company</option>
+                @else
+                  <option value="telkom">Telkom</option>
+                  <option value="sister_company">Sister Company</option>
+                @endif
+              </select>
+          </div>
+          <div class="col-md-6">
+            <label id="department_lbl" for="department">Department*</label>
             <select id="department" name="department" class="input-md round form-control" required>
               <option value="">-- Select Department --</option>
               @foreach (\App\Models\UserDepartment::all() as $department)
@@ -59,12 +72,28 @@ Edit Profile
                 <span class="text-danger" style="float:left;">{{ $errors->first('department') }}</span>
             @endif
           </div>
+          <div class="col-md-6">
+            <label id="sister_company_lbl" for="department">Sister Company*</label>
+            <select id="sister_company" name="sister_company" class="input-md round form-control">
+              <option value="">-- Select sister company --</option>
+              @foreach (\App\Models\SisterCompany::all() as $sister_company)
+                @if(isset($profile['sister_company']['id']))
+                  <option value="{{ $sister_company['_id'] }}" {{ $profile['sister_company']['id'] == $sister_company['_id'] ? 'selected' : ''}}>{{ $sister_company->name }}</option>
+                @else
+                  <option value="{{ $sister_company['_id'] }}" >{{ $sister_company->name }}</option>
+                @endif
+              @endforeach
+            </select>
+            @if ($errors->has('sister_company'))
+                <span class="text-danger" style="float:left;">{{ $errors->first('sister_company') }}</span>
+            @endif
+          </div>
+        </div>
+        <div class="col-md-12  mb-10">
           <div class="col-md-6 mb-10">
             <label for="birthday">Birthday</label>
             <input type="date" name="birthday" id="birthday" name="birthday" class="input-md round form-control" value="{{ $profile['birthday'] }}">
           </div>
-        </div>
-        <div class="col-md-12 mb-10">
           <div class="col-md-6">
             <label for="gender">Gender</label>
             <select id="gender" name="gender" class="input-md round form-control">
@@ -95,7 +124,7 @@ Edit Profile
 
 @section('footer_script')
 <script type="text/javascript">
-    window.addEventListener("load", function(){
+    // window.addEventListener("load", function(){
         $(document).ready(function() {
             var photo = "<?php echo $profile['photo']; ?>";
             var photoUrl = "";
@@ -109,7 +138,46 @@ Edit Profile
                 input_field: "#image-upload",
                 preview_box: "#pp-preview"
             });
+
+            if($('#company').val() == 'telkom'){
+              $('#department').show();
+              $('#sister_company').hide();
+              $('#department_lbl').show();
+              $('#sister_company_lbl').hide();
+            }else if($('#company').val() == 'sister_company'){
+              $('#department').hide();
+              $('#sister_company').show();
+              $('#department_lbl').hide();
+              $('#sister_company_lbl').show();
+            }else{
+              $('#department').hide();
+              $('#sister_company').hide();
+              $('#department_lbl').hide();
+              $('#sister_company_lbl').hide();
+            }
+
+            $('#company').change(function(){
+              if($(this).val() == 'telkom'){
+                //show department & hide sister
+                $('#department').show();
+                $('#sister_company').hide();
+                $('#department_lbl').show();
+                $('#sister_company_lbl').hide();
+              }else if($(this).val() == 'sister_company'){
+                //hide department & show sister
+                $('#department').hide();
+                $('#sister_company').show();
+                $('#department_lbl').hide();
+                $('#sister_company_lbl').show();
+              }else{
+                //hide all
+                $('#department').hide();
+                $('#sister_company').hide();
+                $('#department_lbl').hide();
+                $('#sister_company_lbl').hide();
+              }
+            })
         });
-    });
+    // });
 </script>
 @endsection
