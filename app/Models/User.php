@@ -31,12 +31,14 @@ class User extends Authenticatable implements CanResetPasswordContract{
         $photo = $user['photo'];
         $_id = $user['_id'];
         $department = $user['department'];
+        $company = $user['company'];
+        $sister_company = $user['sister_company'];
         $birthday = $user['birthday'];
         $about = $user['about'];
         $gender = $user['gender'];
         $is_active = $user['is_active'];
 
-        return compact('_id','firstname','lastname','fullname','email','photo','department','birthday','gender','about','is_active');
+        return compact('_id','firstname','lastname','fullname','email','photo','department','company','sister_company','birthday','gender','about','is_active');
     }
 
     public static function isActive(){
