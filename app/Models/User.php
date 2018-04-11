@@ -216,11 +216,7 @@ class User extends Authenticatable implements CanResetPasswordContract{
         return $followings;
     }
 
-    public static function followerCount($user_id = null){
-        if(!isset($user_id)){
-            $user_id = new ObjectID($this->_id);
-        }
-
+    public static function followerCount($user_id){
         $follower = \App\Models\Followed::where('user_id', $user_id)->first();
 
         if($follower){
