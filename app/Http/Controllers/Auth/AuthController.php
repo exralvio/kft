@@ -68,6 +68,8 @@ class AuthController extends Controller{
             $newUser->is_active = true;
             $newUser->birthday = '';
             $newUser->gender = '';
+            $newUser->company = '';
+            $newUser->sister_company = '';
             $newUser->about = '';
             $newUser->photo = $user->avatar;
             $newUser->view_count = 0;
