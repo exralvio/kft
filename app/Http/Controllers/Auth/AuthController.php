@@ -171,6 +171,8 @@ class AuthController extends Controller{
                 $newUser->fullname = '';
                 $newUser->is_active = false;
                 $newUser->birthday = '';
+                $newUser->company = '';
+                $newUser->sister_company = '';
                 $newUser->gender = '';
                 $newUser->about = '';
                 $newUser->photo = '';
