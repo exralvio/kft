@@ -76,12 +76,21 @@ class User extends Authenticatable implements CanResetPasswordContract{
             }   
         }
 
-        /** Update user notification **/
+        /** Update sender notification **/
         $datas = \App\Models\Notification::raw()->find(['sender.id'=>$user_id]);
 
         if($datas){
             foreach ($datas as $data) {
                 \DB::collection('notifications')->where('_id', $data['_id'])->update(['sender.photo'=>$photo]);
+            }   
+        }
+
+        /** Update receiver notification **/
+        $datas = \App\Models\Notification::raw()->find(['receiver.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('notifications')->where('_id', $data['_id'])->update(['receiver.photo'=>$photo]);
             }   
         }
 
@@ -132,12 +141,21 @@ class User extends Authenticatable implements CanResetPasswordContract{
             }   
         }
 
-        /** Update user notification **/
+        /** Update sender notification **/
         $datas = \App\Models\Notification::raw()->find(['sender.id'=>$user_id]);
 
         if($datas){
             foreach ($datas as $data) {
                 \DB::collection('notifications')->where('_id', $data['_id'])->update(['sender.fullname'=>$fullname]);
+            }   
+        }
+
+        /** Update receiver notification **/
+        $datas = \App\Models\Notification::raw()->find(['receiver.id'=>$user_id]);
+
+        if($datas){
+            foreach ($datas as $data) {
+                \DB::collection('notifications')->where('_id', $data['_id'])->update(['receiver.fullname'=>$fullname]);
             }   
         }
 

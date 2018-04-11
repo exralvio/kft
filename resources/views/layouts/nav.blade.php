@@ -17,8 +17,8 @@
         <!-- Main Menu -->
         <div class="inner-nav desktop-nav">
             <ul class="clearlist scroll-nav local-scroll">
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Help</a></li>
+                <li><a href="{{ url('about') }}">About</a></li>
+                <!-- <li><a href="#services">Help</a></li> -->
                 <li><a href="{{ url('discover') }}">Discover</a></li>
             </ul>
         </div>

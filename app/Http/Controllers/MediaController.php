@@ -8,6 +8,7 @@ use Validator;
 use File;
 use Response;
 use App\Models\Media;
+use App\Models\MediaPopular;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\MediaCategory;
@@ -242,5 +243,48 @@ class MediaController extends Controller{
         $user = User::current();
         $current_user_id = $user['_id'];
         return view('media/discover', compact('current_user_id'));
+    }
+
+
+    public function loadDiscoverFresh(int $limit=9, int $skip=0, $category = ''){
+        if(!empty($category)){
+            $medias = Media::orderBy('_id','desc')
+                ->where('category.id', $category)
+                ->skip($skip)
+                ->take($limit)
+                ->get();
+        } else {
+            $medias = Media::orderBy('_id','desc')
+                ->skip($skip)
+                ->take($limit)
+                ->get();
+        }
+
+        $user = User::current();
+        $current_user_id = $user['_id'];
+
+        return view('media/discover-fresh', compact('medias', 'current_user_id'))->render();
+    }
+
+    public function loadDiscoverPopular(int $limit=9, int $skip=0, $category = ''){
+        if(!empty($category)){ 
+            $medias = MediaPopular::orderBy('like_count', 'desc')
+                        ->where('category.id', $category)
+                        ->where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))
+                        ->skip($skip)
+                        ->take($limit)
+                        ->get();
+        } else {
+            $medias = MediaPopular::orderBy('like_count', 'desc')
+                        ->where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))
+                        ->skip($skip)
+                        ->take($limit)
+                        ->get();
+        }
+
+        $user = User::current();
+        $current_user_id = $user['_id'];
+
+        return view('media/discover-popular', compact('medias', 'current_user_id'))->render();
     }
 }
