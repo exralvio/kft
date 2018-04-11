@@ -15,6 +15,9 @@ Route::get('/', 'LandingController@showIndex');
 Route::get('/term-of-service', function(){
 	return view('other/term-service');
 });
+Route::get('/privacy-policy', function(){
+	return view('other/privacy-policy');
+});
 
 Route::get('/about', function(){
 	return view('landing/about');
