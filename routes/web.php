@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'LandingController@showIndex');
+Route::get('/term-of-service', function(){
+	return view('other/term-service');
+});
 
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');
