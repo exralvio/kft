@@ -60,8 +60,9 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                    $tail = "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>";
                 } else {
-                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
+                    $tail = 'Deleted Photo';
                 }
                 
                 break;
@@ -71,9 +72,12 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
+                    $tail = "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>";
                 } else {
-                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
+                    $last_photo = url('images/not-found.jpg');
+                    $tail = 'Deleted Photo';
                 }
+
                 break;
             case 'follow':
                 $msg = ' followed you now' ;
@@ -87,7 +91,7 @@ class NotificationController  extends Controller{
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
                 } else {
-                    $tail = !empty($notif->media) && !$is_deleted ? "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>" : 'Deleted Photo';
+                    $tail = 'Deleted Photo';
                 }
                 break;
         }
