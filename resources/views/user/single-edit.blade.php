@@ -49,10 +49,10 @@ Edit Profile
                 <option value="">-- Select Company --</option>
                 @if(isset($profile['company']))
                   <option value="telkom" {{ $profile['company'] == 'telkom' ? 'selected' : ''}}>Telkom</option>
-                  <option value="sister_company" {{ $profile['company'] == 'sister_company' ? 'selected' : ''}}>Sister Company</option>
+                  <option value="subsidiaries" {{ $profile['company'] == 'subsidiaries' ? 'selected' : ''}}>Subsidiaries</option>
                 @else
                   <option value="telkom">Telkom</option>
-                  <option value="sister_company">Sister Company</option>
+                  <option value="subsidiaries">subsidiaries</option>
                 @endif
               </select>
           </div>
@@ -73,9 +73,9 @@ Edit Profile
             @endif
           </div>
           <div class="col-md-6">
-            <label id="sister_company_lbl" for="department">Sister Company*</label>
+            <label id="sister_company_lbl" for="department">Subsidiaries*</label>
             <select id="sister_company" name="sister_company" class="input-md round form-control">
-              <option value="">-- Select sister company --</option>
+              <option value="">-- Select Subsidiaries --</option>
               @foreach (\App\Models\SisterCompany::all() as $sister_company)
                 @if(isset($profile['sister_company']['id']))
                   <option value="{{ $sister_company['_id'] }}" {{ $profile['sister_company']['id'] == $sister_company['_id'] ? 'selected' : ''}}>{{ $sister_company->name }}</option>
@@ -144,7 +144,7 @@ Edit Profile
               $('#sister_company').hide();
               $('#department_lbl').show();
               $('#sister_company_lbl').hide();
-            }else if($('#company').val() == 'sister_company'){
+            }else if($('#company').val() == 'subsidiaries'){
               $('#department').hide();
               $('#sister_company').show();
               $('#department_lbl').hide();
@@ -163,7 +163,7 @@ Edit Profile
                 $('#sister_company').hide();
                 $('#department_lbl').show();
                 $('#sister_company_lbl').hide();
-              }else if($(this).val() == 'sister_company'){
+              }else if($(this).val() == 'subsidiaries'){
                 //hide department & show sister
                 $('#department').hide();
                 $('#sister_company').show();

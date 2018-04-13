@@ -116,9 +116,9 @@
                                 <a class="btn btn-block btn-social btn-facebook" href="{{ url('login/facebook') }}">
                                     <span class="fa fa-facebook"></span> Sign in with Facebook
                                 </a>
-                                <a class="btn btn-block btn-social btn-twitter" href="{{ url('login/twitter') }}">
+                                <!-- <a class="btn btn-block btn-social btn-twitter" href="{{ url('login/twitter') }}">
                                     <span class="fa fa-twitter"></span> Sign in with Twitter
-                                </a>
+                                </a> -->
                                 <a class="btn btn-block btn-social btn-google" href="{{ url('login/google') }}">
                                     <span class="fa fa-google"></span> Sign in with Google
                                 </a>
