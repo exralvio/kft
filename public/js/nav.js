@@ -1,8 +1,7 @@
 function loadNotification(e){
     e.preventDefault();
-    console.log('masuk sini');
-    $('.notification-box').toggle();
-    console.log('kesinikah');
+
+    $('.notification-box').toggleClass('open');
 
     $.ajax({
         url: '/loadNotificationContent',
@@ -54,9 +53,11 @@ $(function(){
         var container = $(".notification-box");
 
         // if the target of the click isn't the container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0) 
+        if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('nav-notification-icon') && !$(e.target).hasClass('nav-notification')) 
         {
-            $(".notification-box").hide();
+            if($(".notification-box").hasClass('open')){
+                $(".notification-box").removeClass('open');
+            }
         }
     });
 });

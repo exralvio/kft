@@ -34,6 +34,10 @@
     display: none;
 }
 
+.notification-box.open {
+    display: block;
+}
+
 .main-nav.small-height .notification-box {
     top: 55px;
 }
@@ -62,9 +66,18 @@ ul.notification-list {
 
 ul.notification-list li {
     margin: 0px;
-    padding: 10px;
+    padding: 0px;
     border-bottom: 1px solid #ccc;
     width: 100%;
+}
+
+ul.notification-list li a {
+    padding: 10px;
+    display: block;
+}
+
+ul.notification-list li a:hover {
+    background: #eee;
 }
 
 ul.notification-list li .sender-photo, ul.notification-list li .receiver-photo {

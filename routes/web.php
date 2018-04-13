@@ -100,6 +100,9 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::post('/user/relation', 'UserController@postRelation');
 });
 
+/** user profile **/
+Route::get('/user/{user_id}', 'UserController@getProfile');
+
 /** for development purpose only, must be removed later **/
 Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
 

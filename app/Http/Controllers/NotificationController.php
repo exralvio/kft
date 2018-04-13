@@ -21,11 +21,12 @@ class NotificationController  extends Controller{
                 $content = $this->notificationContent($notif);
 
                 $html .= "<li>";
+                $html .= "<a href='".url($notif['type'] == 'follow' ? 'user/'.$notif['sender']['id'] : 'media/'.$notif['media']['id'])."'>";
                 $html .= '<span class="sender-photo"><img src="'.url($content['first_photo']).'"></span>';
                 if(!empty($content['last_photo'])){
                     $html .= '<span class="receiver-photo"><img src="'.url($content['last_photo']).'"></span>';
                 }
-                $html .= '<div>'.$content['message'].'</div>';
+                $html .= '<div>'.$content['message'].'</div></a>';
                 $html .= "</li>";
             }
         }
@@ -46,7 +47,7 @@ class NotificationController  extends Controller{
         $photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
         $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
         
-        $head = "<a href=".url("/profile/{$notif->sender['id']}")."><b>".$notif->sender['fullname']."</b></a>";
+        $head = "<b>".$notif->sender['fullname']."</b>";
         $tail = '';
 
         $media = !empty($notif->media) ? Media::find($notif->media['id']) : [];
@@ -60,7 +61,7 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
-                    $tail = "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>";
+                    $tail = "<b>".$notif->media['title']."</b>";
                 } else {
                     $tail = 'Deleted Photo';
                 }
@@ -72,7 +73,7 @@ class NotificationController  extends Controller{
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
-                    $tail = "<a href=".url("/media/{$notif->media['id']}")."><b>".$notif->media['title']."</b></a>";
+                    $tail = "<b>".$notif->media['title']."</b>";
                 } else {
                     $last_photo = url('images/not-found.jpg');
                     $tail = 'Deleted Photo';
