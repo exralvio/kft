@@ -128,8 +128,10 @@ Edit Profile
         $(document).ready(function() {
             var photo = "<?php echo $profile['photo']; ?>";
             var photoUrl = "";
-            if(photo.length){
-                photoUrl = "../"+photo;
+            if(photo.length && photo.indexOf('http') == -1){
+              photoUrl = "../"+photo;
+            }else if(photo.length && photo.indexOf('http') != -1){
+              photoUrl = photo;
             }else{
                 photoUrl = "../images/pp-icon.png";
             }

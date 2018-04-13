@@ -65,7 +65,7 @@ class AuthController extends Controller{
             $newUser->firstname = $fullName[0];
             $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
             $newUser->fullname = $user->name;
-            $newUser->is_active = true;
+            $newUser->is_active = false;
             $newUser->birthday = '';
             $newUser->gender = '';
             $newUser->company = '';
