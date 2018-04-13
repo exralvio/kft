@@ -145,6 +145,12 @@
     margin: 15px auto;
 }
 
+#pp-preview:hover {
+    /* border: 2px solid #1955ff; */
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 #pp-preview input {
     line-height: 200px;
     font-size: 200px;
