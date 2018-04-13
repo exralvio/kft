@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/style-responsive.css">
-        <link rel="stylesheet" href="{{ url('') }}/rythm/css/custom.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/custom.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/animate.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/vertical-rhythm.min.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
