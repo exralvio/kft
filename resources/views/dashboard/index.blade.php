@@ -7,7 +7,7 @@
 @section('content')   
 <section class="page-section pt-100">
     <div class="container relative">
-        <div class="col-xs-12 col-md-6 col-md-push-3 post-wrapper">
+        <div class="col-xs-12 col-md-10 col-md-push-1 post-wrapper">
             @if(count(\App\Models\User::getFollowing()))
                 <?php $is_popular = false; ?>
                 <div class="row" id="post-data">

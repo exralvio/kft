@@ -18,7 +18,9 @@
             </div>
                 
             <div class="team-item-image open-single-post" data-postid="{{ $post['media']['id'] }}" >
-                <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
+                <div class="single-post-inner">                
+                    <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
+                </div>
             </div>
 
             <div class="row post-footer">
@@ -63,7 +65,9 @@
             </div>
                 
             <div class="team-item-image open-single-post" data-postid="{{ $post->_id }}" >
-                <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
+                <div class="single-post-inner">
+                    <img src="{{ $post->images['medium'] }}" alt="{{ $post->title }}" />
+                </div>
             </div>
 
             <div class="row post-footer">

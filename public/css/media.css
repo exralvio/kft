@@ -72,11 +72,37 @@
     border-top: 1px solid #eeeff2;
     border-bottom: 1px solid #eeeff2;
     text-align: center;
+    /*height: 550px;*/
+    /*line-height: 549px;*/
 }
+
+.team-item-image.open-single-post:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 56.25%;
+}
+
+.team-item-image.open-single-post .single-post-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
 .team-item-image.open-single-post img {
-    max-height: 400px;
+    max-height: 100%;
     max-width: 100%;
     width: auto;
+    position: absolute;
+    top: 49%;
+    left: 51%;
+    transform: translate(-51%, -49%);
+    -webkit-transform: translate(-51%, -49%);
+    -ms-transform: translate(-51%, -49%);
+    transform: translate(-51%, -49%);
 }
 
 .post-description{

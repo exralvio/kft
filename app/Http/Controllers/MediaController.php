@@ -136,10 +136,12 @@ class MediaController extends Controller{
         $old_path = storage_path('upload_tmp/'.$input['filename']);
 
         $ori_name = 'uploads/original/'.$input['filename'];
+        $sm_name = 'uploads/medias/'.$basename.'-sm.'.$extension;
         $md_name = 'uploads/medias/'.$basename.'-md.'.$extension;
         $lg_name = 'uploads/medias/'.$basename.'-lg.'.$extension;
 
         $ori_path = public_path($ori_name);
+        $sm_path = public_path($sm_name);
         $md_path = public_path($md_name);
         $lg_path = public_path($lg_name);
 
@@ -147,8 +149,14 @@ class MediaController extends Controller{
             return Response::json(['status'=>'error','message'=>'Unable to process the file.'], 200);
         }
 
+        $sm = Image::make($ori_path);
+        $sm->fit(150, 150);
+        if($sm->save($sm_path)){
+            // echo 'success';
+        }
+
         $md = Image::make($ori_path);
-        $md->resize(null, 250, function ($constraint) {
+        $md->resize(null, 550, function ($constraint) {
             $constraint->aspectRatio();
         });
         if($md->save($md_path)){
@@ -165,6 +173,7 @@ class MediaController extends Controller{
         }
 
         $input['images'] = [
+            'small'=>$sm_name,
             'original'=>$ori_name,
             'medium'=>$md_name,
             'large'=>$lg_name
