@@ -27,30 +27,6 @@
             <!-- Main Menu -->
             <div class="inner-nav desktop-nav login-nav">
                 <ul class="clearlist scroll-nav local-scroll">
-                    <!-- Search -->
-                    <li>
-                        <a href="#" class="mn-has-sub"><i class="fa fa-search"></i> Search</a>
-                        
-                        <ul class="mn-sub">
-                            
-                            <li>
-                                <div class="mn-wrap">
-                                    <form class="form" method="get" action="{{ url('search') }}">
-                                        <div class="search-wrap">
-                                            <button class="search-button animate" type="submit" title="Start Search">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                            <input type="text" name="q" class="form-control search-field" placeholder="Search...">
-                                            <input type="hidden" name="type" value="photos">
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            
-                        </ul>
-                        
-                    </li>
-                    <!-- Item With Sub -->
                     <li>
                         <a href="#" class="mn-has-sub">
                             <span class="visible-xs">Account</span>
@@ -103,6 +79,17 @@
                         </a>
                     </li>
                 </ul>
+            </div>
+
+            <div class="search-box visible-md visible-lg pull-right col-md-4">
+                <form action="{{ url('search') }}" class="form">
+                    <input type="text" name="q" class="form-control form-md" autocomplete="off" value="{{ isset($_GET['q']) ? $_GET['q'] : '' }}" >
+                    <select name="type" class="form-control form-md">
+                        <option value="photos" {{ isset($_GET['type']) && $_GET['type'] == 'photos' ? 'selected' : '' }}>Photo</option>
+                        <option value="users" {{ isset($_GET['type']) && $_GET['type'] == 'users' ? 'selected' : '' }}>User</option>
+                    </select>
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                </form>
             </div>
         @else
             <div class="inner-nav desktop-nav login-nav">

@@ -113,3 +113,37 @@ ul.notification-list li div {
     height: auto !important;
     line-height: normal !important;
 }
+
+.search-box {
+    margin-top: 20px;
+}
+
+.search-box .form input, .search-box .form select, .search-box .form button {
+    float: left;
+    height: 35px;
+}
+
+.search-box .form input {
+    width: 60%;
+    border-radius: 3px 0 0 3px;
+    border-right: 0px;
+    border-color: #D6D6D6;
+    background: #fff;
+}
+
+.search-box .form select {
+    width: 30%;
+    border-color: #D6D6D6;
+}
+
+.search-box .form input:focus, .search-box .form select:focus {
+    border-color: #D6D6D6;
+    box-shadow: none;
+    background: #F7F8FA;
+}
+
+.search-box .form button {
+    border-radius: 0 3px 3px 0;
+    width: 10%;
+    background: #6D6E71;
+}
