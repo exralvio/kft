@@ -113,6 +113,8 @@
         </div>
     </section>
     <!-- End Section -->
+
+    @include('partials/post-modal')
 @endsection
 
 @section('footer_script')

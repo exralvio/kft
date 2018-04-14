@@ -26,6 +26,9 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/owl.carousel.css">
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
         <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
+        <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
+
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
         <link rel="stylesheet" href="{{ url('') }}/css/media.css">
     </head>

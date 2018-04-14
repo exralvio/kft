@@ -1,6 +1,4 @@
 <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/basic.css">
-<link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
-<link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
 <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/bootstrap-tagsinput.css">
 
 <div class="remodal upload-modal" data-remodal-id="uploader">
