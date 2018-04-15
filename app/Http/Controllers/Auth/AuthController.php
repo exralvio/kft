@@ -59,7 +59,9 @@ class AuthController extends Controller{
     public function findOrCreateUser($user, $provider)
     {
         //find user by provider id
-        $authUser = User::where("provider.".$provider."_id", $user->id)->first();
+        $authUser = User::where("provider.".$provider."_id", $user->id)
+                ->orWhere('email',$user->email)
+                ->first();
         if ($authUser) {
             return $authUser;
         }else{
