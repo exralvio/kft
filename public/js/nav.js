@@ -45,7 +45,14 @@ function checkUnreadNotification() {
     });
 }
 
+function openSetting(e){
+    e.preventDefault();
+
+    $('.setting-box').toggleClass('open');
+}
+
 $('.nav-notification').on('click', loadNotification);
+$('.nav-avatar').on('click', openSetting);
 
 $(function(){
     $(document).mouseup(function(e) 
@@ -53,10 +60,17 @@ $(function(){
         var container = $(".notification-box");
 
         // if the target of the click isn't the container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('nav-notification-icon') && !$(e.target).hasClass('nav-notification')) 
+        if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('nav-notification-icon')) 
         {
             if($(".notification-box").hasClass('open')){
                 $(".notification-box").removeClass('open');
+            }
+        }
+
+        if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('nav-avatar-image')) 
+        {
+            if($(".setting-box").hasClass('open')){
+                $(".setting-box").removeClass('open');
             }
         }
     });

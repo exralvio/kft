@@ -31,30 +31,53 @@
                         <a href="#" class="mn-has-sub">
                             <span class="visible-xs">Account</span>
                             <span class="nav-avatar visible-lg">
-                                @if(!empty(\App\Models\User::currentPhoto())) 
-                                <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
-                                @else
-                                <img src="{{ url('') }}/rythm/images/user-avatar.png">
-                                @endif
+                                <span class="nav-avatar-inner">
+                                    @if(!empty(\App\Models\User::currentPhoto())) 
+                                    <img class="nav-avatar-image" src="{{ url(\App\Models\User::currentPhoto()) }}" />
+                                    @else
+                                    <img class="nav-avatar-image" src="{{ url('') }}/rythm/images/user-avatar.png">
+                                    @endif
+                                </span>
                             </span>
                         </a>
                         
-                        <!-- Sub -->
-                        <ul class="mn-sub">
-                            <li>
-                                <a href="{{ url('user/profile') }}">My Profile</i></a>
-                            </li>
-                            <li>
-                                <a href="{{ url('user/edit') }}">My Settings</i></a>
-                            </li>
-                            <li>
-                                <a href="{{ url('manage') }}">Manage Photos</i></a>
-                            </li>
-                            <li>
-                                <a href="{{ url('logout') }}">Logout</i></a>
-                            </li>
-                        </ul>
-                        <!-- End Sub -->
+                        <div class="visible-xs visibile-sm">
+                            <!-- Sub -->
+                            <ul class="mn-sub">
+                                <li>
+                                    <a href="{{ url('user/profile') }}">My Profile</i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('user/edit') }}">My Settings</i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('manage') }}">Manage Photos</i></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url('logout') }}">Logout</i></a>
+                                </li>
+                            </ul>
+                            <!-- End Sub -->
+                        </div>
+
+                        <div class="visible-md visible-lg">
+                            <div class="setting-box">
+                                <ul>
+                                    <li>
+                                        <a href="{{ url('user/profile') }}">My Profile</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('user/edit') }}">My Settings</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('manage') }}">Manage Photos</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('logout') }}">Logout</i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         
                     </li>
                     <!-- End Item With Sub -->

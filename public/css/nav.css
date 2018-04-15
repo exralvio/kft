@@ -10,6 +10,40 @@
     display: table-cell;
 }
 
+
+.nav-avatar-inner {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.nav-avatar-inner:before {
+    content:"";
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    left: -3px;
+    top: -3px;
+    z-index: -1;
+    border-radius: 23px;
+    transition: background 0.2s;
+}
+
+.nav-avatar-inner:hover:before {
+    background: #e65157;
+}
+
+.nav-avatar img {
+    vertical-align: top;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
 #activeNotification{
     background-color: #ff0000;
     border-radius: 15px;
@@ -109,7 +143,59 @@ ul.notification-list li div {
     text-transform: none;
 }
 
-.small-height .inner-nav ul.notification-list li a {
+.setting-box {
+    position: fixed;
+    width: 140px;
+    right: 160px;
+    top: 75px;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 2px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 25px rgba(0,0,0,0.2);
+    border: 2px solid rgba(160,160,160,0.4);
+    overflow-y: hidden;
+    display: none;
+    transition: top 0.2s;
+}
+
+.setting-box.open {
+    display: block;
+}
+
+.main-nav.small-height .setting-box {
+    top: 55px;
+}
+
+.setting-box ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.setting-box ul li{
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.setting-box ul li a{
+    padding: 10px;
+    width: 100%;
+    text-transform: none;
+    font-weight: bold;
+}
+
+.setting-box ul li a:hover {
+    background: #f3f1f1;
+}
+
+.inner-nav ul.notification-list li a,
+.inner-nav .setting-box ul li a,
+.small-height .inner-nav ul.notification-list li a, 
+.small-height .inner-nav .setting-box ul li a {
     height: auto !important;
     line-height: normal !important;
 }
