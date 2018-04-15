@@ -4,12 +4,12 @@
 
             <div class="post-header">
                 <div class="poster-pp">
-                    <a href="{{ url('profile/'.$post['user']['id']) }}">
-                        <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    <a href="{{ url('user/'.$post['user']['id']) }}">
+                        <img src="{{ !empty($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
                     </a>
                 </div>
                 <div class="post-container">
-                    <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
+                    <div class="poster"><a class="profile-link" href="{{ url('user/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
                     <div class="publish-date">{{ \Carbon\Carbon::parse($post['media']['created_at']['date'])->diffForHumans() }}</div>
                 </div>
                 @if(isset($is_popular) and $is_popular == true)
@@ -58,12 +58,12 @@
 
             <div class="post-header">
                 <div class="poster-pp">
-                    <a href="{{ url('profile/'.$post['user']['id']) }}">
-                        <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    <a href="{{ url('user/'.$post['user']['id']) }}">
+                        <img src="{{ !empty($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
                     </a>
                 </div>
                 <div class="post-container">
-                    <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
+                    <div class="poster"><a class="profile-link" href="{{ url('user/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
                     <div class="publish-date">{{ $post['created_at']->diffForHumans() }}</div>
                 </div>
             </div>

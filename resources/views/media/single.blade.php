@@ -10,12 +10,12 @@
             <div class="row comment-user-block">
                 <div class="mt-20 mb-10">
                     <div class="pp">
-                        <a href="{{ url('profile/'.$post['user']['id']) }}">
-                            <img src="{{ url($post->user['photo']) }}">
+                        <a href="{{ url('user/'.$post['user']['id']) }}">
+                            <img src="{{ !empty($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
                         </a>
                     </div>
                     <div class="comment-profile-name">
-                        <a class="profile-link" href="{{ url('profile/'.$post->user['id']) }}">{{ $post->user['fullname'] }}</a>
+                        <a class="profile-link" href="{{ url('user/'.$post->user['id']) }}">{{ $post->user['fullname'] }}</a>
                     </div>    
 
                     @if(\Auth::check() and $post->user['id'] != \App\Models\User::current()['_id'])
@@ -79,7 +79,7 @@
                 @if(\Auth::check()) 
                 <div class="comments" style="margin:10px 0;">
                     <div class="col-md-2 pp text-center">
-                        <a href="{{ url('profile/'.$post['user']['id']) }}">
+                        <a href="{{ url('user/'.$post['user']['id']) }}">
                         @if(\App\Models\User::currentPhoto())
                             <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                         @else

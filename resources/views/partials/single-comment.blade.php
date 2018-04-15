@@ -1,12 +1,12 @@
 <div class="comment-each comment-{{ $comment->_id }} col-xs-12 mb-10">
     <div class="row">
         <div class="col-xs-2 pp text-center">
-            <a href="{{ url('profile/'.$comment->user['id']) }}">
-                <img src="{{ url($comment->user['photo']) }}"/>
+            <a href="{{ url('user/'.$comment->user['id']) }}">
+                <img src="{{ !empty($comment->user['photo']) ? $comment->user['photo'] : url('images/pp-icon.png') }}"/>
             </a>
         </div>
         <div class="col-xs-10 comment-content align-left">
-            <div class="comment-name"><a href="{{ url('profile/'.$comment->user['id']) }}">{{ $comment->user['fullname'] }}</a></div>
+            <div class="comment-name"><a href="{{ url('user/'.$comment->user['id']) }}">{{ $comment->user['fullname'] }}</a></div>
             <p class="mb-0">{{ $comment->comment }}</p>
             <div class="comment-action">
                 <a href="#" class="comment-reply">Reply</a> <span>- {{ $comment->created_at->format('M d') }}</span>
