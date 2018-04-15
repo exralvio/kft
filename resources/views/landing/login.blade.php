@@ -37,7 +37,7 @@
                     <div class="col-sm-12 col-md-4 col-md-offset-4">
                         <div class="row">
                             <div class="alert error">
-                                <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('not_activated') }}
+                                <i class="fa fa-lg fa-check-circle-o"></i> {!! Session::get('not_activated') !!}
                             </div>
                         </div>
                     </div>    

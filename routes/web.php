@@ -26,10 +26,6 @@ Route::get('/about', function(){
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');
 
-Route::get('/cekSession', function(){
-	return Session::get('user');
-});
-
 Route::get('/search', 'SearchController@showSearchResult');
 Route::get('/loadMorePost/{mediaId}', 'DashboardController@loadMoreMedia');
 Route::get('/loadMedia/{mediaId}', 'DashboardController@loadMedia');
@@ -102,6 +98,7 @@ Route::group(['middleware'=>["auth","complete.profile"]],function(){
 
 /** user profile **/
 Route::get('/user/{user_id}', 'UserController@getProfile');
+Route::get('/resendActivation/{email}', 'Auth\AuthController@resendActivationMail');
 
 /** for development purpose only, must be removed later **/
 Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');

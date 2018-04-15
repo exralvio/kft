@@ -40,7 +40,7 @@ class AuthController extends Controller{
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
         if(is_bool($authUser) && $authUser == false){
-            Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email.");
+            Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email. <a href='".url('resendActivation/'.$authUser->email)."'>Resend Email</a>");
             return redirect('login');
         }else{
             Auth::login($authUser, true);
@@ -157,7 +157,7 @@ class AuthController extends Controller{
             */
             $findUser = User::where('email',$request->get('email'))->first();
             if($findUser && $findUser->is_verified == false){
-                Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email.");
+                Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email. <a href='".url('resendActivation/'.$findUser->email)."'>Resend Email</a>");
                 return Redirect::to('login');
             }
 
@@ -267,8 +267,21 @@ class AuthController extends Controller{
         }
     }
 
+    public function resendActivationMail($email){
+        $user = User::where('email',$email)->first();
+        if($user){
+            if($this->createTokenAndSendEmail($user)){
+                Session::flash('activation_email_sent', 'Activation email has been sent into your email');
+                return redirect('signup');
+            }
+        }else{
+            Session::flash('not_activated', 'Email Not Registered');
+            return redirect('login');
+        }
+    }
+
     public function createTokenAndSendEmail(User $user)
-    {  
+    { 
         // Create new Activation record for this user/email
         $activation = new Activation;
         $activation->user_id = new ObjectId($user->id);
