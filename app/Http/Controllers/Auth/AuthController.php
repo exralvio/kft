@@ -83,6 +83,7 @@ class AuthController extends Controller{
                 $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
                 $newUser->fullname = $user->name;
                 $newUser->is_active = false;
+                $newUser->is_verified = true;
                 $newUser->birthday = '';
                 $newUser->gender = '';
                 $newUser->company = '';
@@ -95,10 +96,7 @@ class AuthController extends Controller{
                 $newUser->provider = [$provider."_id" => $user->id];
                 $newUser->department = [];
                 if($newUser->save()){
-                    $isNewUser = true;
-                    if($this->createTokenAndSendEmail($newUser)){
-                        return $isNewUser;
-                    }
+                    return $newUser;
                 }else{
                     dd('Signup failed');
                 }
@@ -145,7 +143,7 @@ class AuthController extends Controller{
              * check wether the account is activated
             */
             $findUser = User::where('email',$request->get('email'))->first();
-            if($findUser && $findUser->is_active == false){
+            if($findUser && $findUser->is_verified == false){
                 Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email.");
                 return Redirect::to('login');
             }
@@ -203,6 +201,7 @@ class AuthController extends Controller{
                 $newUser->lastname = '';
                 $newUser->fullname = '';
                 $newUser->is_active = false;
+                $newUser->is_verified = false;
                 $newUser->birthday = '';
                 $newUser->company = '';
                 $newUser->sister_company = '';

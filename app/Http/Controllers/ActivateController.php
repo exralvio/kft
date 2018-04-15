@@ -17,7 +17,7 @@ class ActivateController extends Controller
         }
 
         $user = User::find($activation->user_id);
-        $user->is_active = true;
+        $user->is_verified = true;
         $user->save();
 
         $activation->delete();
