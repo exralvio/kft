@@ -65,7 +65,9 @@ class AuthController extends Controller{
         if ($authUser) {
             if($authUser->is_verified == false){
                 return false;
-            }else if(isset($authUser->provider[$provider."_id"])){
+            }
+            
+            if(!isset($authUser->provider[$provider."_id"])){
                 $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
                 $authUser->update();
             }
