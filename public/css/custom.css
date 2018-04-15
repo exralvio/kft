@@ -374,6 +374,15 @@ a.profile-link {
 	border-radius: 185px;
 }
 
+.team-item-detail p {
+	padding-left: 20px;
+	font-size: 12px;
+}
+
+.team-item-detail p img {
+	width: auto;
+}
+
 .hs-hr:before {
 	content: "";
 	position: absolute;

@@ -38,7 +38,7 @@
             </div>
 
             <div>
-                <h3 class="hs-line-11 font-alt mb-20 text-center hs-hr">Our Teams</h3>
+                <h3 class="hs-line-11 font-alt mb-40 mb-sm-20 text-center hs-hr">Our Teams</h3>
             </div>
             
             <!-- Team -->
@@ -51,13 +51,21 @@
                             
                             <img src="{{ url('images/team/team-irfan.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                <p>
-                                    Email: irfan.tachrir@gmail.com<br>
-                                    Facebook: Irfan A. Tachrir<br>
-                                    Twitter: -<br>
-                                    Instagram: irfantachrir<br>
-                                    Website: -
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> irfan.tachrir@gmail.com
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/tumiskangkung" target="_blank">Irfan A. Tachrir</a> 
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> -
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/irfantachrir" target="_blank">irfantachrir</a>
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> -
                                 </p>
                             </div>
                         </div>
@@ -159,16 +167,22 @@
                             
                             <img src="{{ url('images/team/team-arif.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Email: arifrudiana@gmail.com<br>
-                                    Facebook: N/A<br>
-                                    Twitter: N/A<br>
-                                    Instagram: arifrudiana<br>
-                                    Website: www.photoblog.com/arifrudiana
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> arifrudiana@gmail.com
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> N/A
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> N/A
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/arifrudiana" target="_blank">arifrudiana</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> <a href="http://photoblog.com/arifrudiana" target="_blank">photoblog.com/arifrudiana</a> 
+                                </p>
                             </div>
                         </div>
                         
@@ -196,17 +210,22 @@
                             
                             <img src="{{ url('images/team/team-taufik.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Email: taufikzamzami@gmail.com<br>
-                                    facebook: facebook.com/taufikz<br>
-                                    Twitter: @taufikzamzami73<br>
-                                    IG: taufikzamzami and taufikzamzami.daily<br>
-                                    Website: N/A
-
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> taufikzamzami@gmail.com
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/taufikz" target="_blank">taufikz</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/taufikzamzami73" target="_blank">taufikzamzami73</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/taufikzamzami" target="_blank">taufikzamzami</a>
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/taufikzamzami.daily" target="_blank">taufikzamzami.daily</a>
+                                </p>
                             </div>
                         </div>
                         
@@ -234,17 +253,22 @@
                             
                             <img src="{{ url('images/team/team-ichwan.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Mail: icha7203@gmail.com<br>
-                                    facebook: facebook.com/ichwanmuttaqin <br>
-                                    Twitter: @icha7203<br>
-                                    IG: icha7203<br>
-                                    Website: N/A
-
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> icha7203@gmail.com
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/ichwanmuttaqin" target="_blank">ichwanmuttaqin</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/icha7203" target="_blank">icha7203</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/icha7203" target="_blank">icha7203</a>
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
+                                </p>
                             </div>
                         </div>
                         
@@ -273,15 +297,22 @@
                         <div class="team-item-image">
                             
                             <img src="{{ url('images/team/team-julius.jpg') }}" alt="" />
-                            
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Mail: romedly@gmail.com<br>
-                                    facebook: facebook.com/romedly<br>
-                                    Twitter: @romi_psyche<br>
-                                    IG: romedly<br>
-                                    Website: N/A
+
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> romedly@gmail.com
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/romedly" target="_blank">romedly</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/romi_psyche" target="_blank">romi_psyche</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/romedly">romedly</a>
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
                                 </p>
                             </div>
                         </div>
@@ -309,16 +340,22 @@
                         <div class="team-item-image">
                             
                             <img src="{{ url('images/team/team-firdaus.jpg') }}" alt="" />
-                            
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Email: nutrihadi@gmail.com<br>
-                                    facebook: facebook.com/nutrihadi<br>
-                                    Twitter: @Nutrihadi<br>
-                                    IG: firdausnutrihadi<br>
-                                    Website: N/A
 
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> nutrihadi@gmail.com
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/nutrihadi" target="_blank">nutrihadi</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/Nutrihadi" target="_blank">Nutrihadi</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/firdausnutrihadi" target="_blank">firdausnutrihadi</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
                                 </p>
                             </div>
                         </div>
@@ -380,18 +417,23 @@
                         <div class="team-item-image">
                             
                             <img src="{{ url('images/team/team-bhimo.jpg') }}" alt="" />
-                            
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    Email : bhiezoel@gmail.com<br>
-                                    facebook :facebook.com/bhiezoel<br>
-                                    twitter : @bhiezoel<br>
-                                    ig : bhiezoel<br>
-                                    website : N/A
 
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> bhiezoel@gmail.com
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/bhiezoel" target="_blank">bhiezoel</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/bhiezoel" target="_blank">bhiezoel</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/bhiezoel" target="_blank">bhiezoel</a>
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
+                                </p>
                             </div>
                         </div>
                         
