@@ -58,7 +58,7 @@ Edit Profile
           </div>
           <div class="col-md-6">
             <label id="department_lbl" for="department">Department*</label>
-            <select id="department" name="department" class="input-md round form-control" required>
+            <select id="department" name="department" class="input-md round form-control">
               <option value="">-- Select Department --</option>
               @foreach (\App\Models\UserDepartment::all() as $department)
                 @if(isset($profile['department']['id']))
