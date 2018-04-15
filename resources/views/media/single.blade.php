@@ -10,7 +10,9 @@
             <div class="row comment-user-block">
                 <div class="mt-20 mb-10">
                     <div class="pp">
-                        <img src="{{ url($post->user['photo']) }}">
+                        <a href="{{ url('profile/'.$post['user']['id']) }}">
+                            <img src="{{ url($post->user['photo']) }}">
+                        </a>
                     </div>
                     <div class="comment-profile-name">
                         <a class="profile-link" href="{{ url('profile/'.$post->user['id']) }}">{{ $post->user['fullname'] }}</a>
@@ -77,11 +79,13 @@
                 @if(\Auth::check()) 
                 <div class="comments" style="margin:10px 0;">
                     <div class="col-md-2 pp text-center">
+                        <a href="{{ url('profile/'.$post['user']['id']) }}">
                         @if(\App\Models\User::currentPhoto())
                             <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
                         @else
                             <img src="{{ url('') }}/rythm/images/user-avatar.png">
                         @endif
+                        </a>
                     </div>
                     <div class="col-md-10 comment-input">
                         <input id="commentPhoto" type="text" class="input-md round form-control" name="comment" placeholder="Add a comment">

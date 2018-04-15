@@ -1,7 +1,9 @@
 <div class="comment-each comment-{{ $comment->_id }} col-xs-12 mb-10">
     <div class="row">
         <div class="col-xs-2 pp text-center">
-            <img src="{{ url($comment->user['photo']) }}"/>
+            <a href="{{ url('profile/'.$post['user']['id']) }}">
+                <img src="{{ url($comment->user['photo']) }}"/>
+            </a>
         </div>
         <div class="col-xs-10 comment-content align-left">
             <div class="comment-name"><a href="{{ url('profile/'.$comment->user['id']) }}">{{ $comment->user['fullname'] }}</a></div>
