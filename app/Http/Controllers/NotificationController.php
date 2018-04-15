@@ -44,9 +44,6 @@ class NotificationController  extends Controller{
         $first_photo = '';
         $last_photo = '';
 
-        $photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
-        $sender_photo = "<span class='nav-avatar'><img src=".$photo."></span>";
-        
         $head = "<b>".$notif->sender['fullname']."</b>";
         $tail = '';
 
@@ -57,7 +54,7 @@ class NotificationController  extends Controller{
         switch ($action) {
             case 'like':
                 $msg = ' liked ' ;
-                $first_photo = $notif->sender['photo'];
+                $first_photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
@@ -69,7 +66,7 @@ class NotificationController  extends Controller{
                 break;
             case 'comment':
                 $msg = ' commented ' ;
-                $first_photo = $notif->sender['photo'];
+                $first_photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
 
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
@@ -82,13 +79,13 @@ class NotificationController  extends Controller{
                 break;
             case 'follow':
                 $msg = ' followed you now' ;
-                $first_photo = $notif->sender['photo'];
-                $last_photo = $notif->receiver['photo'];
+                $first_photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
+                $last_photo = !empty($notif->receiver['photo']) ? $notif->receiver['photo'] : url('/images/pp-icon.png');
                 $tail = '';
                 break;
             case 'popular':
                 $msg = ' Your photo is Popular ';
-                $first_photo = $notif->sender['photo'];
+                $first_photo = !empty($notif->sender['photo']) ? $notif->sender['photo'] : url('/images/pp-icon.png');
                 if($media){
                     $last_photo = isset($media->images['small']) ? $media->images['small'] : $media->images['medium'];
                 } else {
