@@ -39,9 +39,9 @@ class AuthController extends Controller{
     {
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
-        if(is_bool($authUser)){
-            Session::flash('activation_email_sent', 'Activation email has been sent into your email');
-            return redirect('signup');
+        if(is_bool($authUser) && $authUser == false){
+            Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email.");
+            return redirect('login');
         }else{
             Auth::login($authUser, true);
             Session::put('user',$authUser->toArray());
@@ -63,6 +63,12 @@ class AuthController extends Controller{
                 ->orWhere('email',$user->email)
                 ->first();
         if ($authUser) {
+            if($authUser->is_verified == false){
+                return false;
+            }else if(isset($authUser->provider[$provider."_id"])){
+                $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
+                $authUser->update();
+            }
             return $authUser;
         }else{
             /**
