@@ -56,10 +56,14 @@
                                             <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                         </div>
                                     </a>
-                                    <div class="work-intro align-left">
-                                        <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
-                                        <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
+                                    
+                                    <div class="work-intro align-left" style="padding-top:0px;">
+                                        <div class="profile-icon">
+                                            <a href="{{ url('/profile').'/'.$media['user']['id'] }}"><img src="{{ $media['user']['photo'] }}"></a>
+                                        </div>
+                                        <h3 class="work-title" style="padding:10px;">{{ $media['user']['fullname'] }}</h3>
                                     </div>
+                                    
                                 </li>
                                 <!-- End Work Item -->
                                 @endforeach
