@@ -23,7 +23,7 @@
         font-size: 12px;
     }
 </style>
-    <section class="page-section pt-75 pb-20">
+    <!-- <section class="page-section pt-75 pb-20">
         <div class="relative">
             <div class="row">
                 <div class="col-md-12">
@@ -38,9 +38,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Section -->
-    <section class="page-section pt-0 pb-20">
+    <section class="page-section pt-80 pb-20">
         <div class="relative">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
@@ -76,7 +76,7 @@
                                             @endif
                                         </div>
                                     </a>
-                                    <div class="work-intro align-left">
+                                    <div class="work-intro align-left" style="padding: 15px">
                                         {{ $user['fullname'] }}
                                     </div>
                                 </li>
