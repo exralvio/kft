@@ -4,7 +4,9 @@
 
             <div class="post-header">
                 <div class="poster-pp">
-                    <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    <a href="{{ url('profile/'.$post['user']['id']) }}">
+                        <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    </a>
                 </div>
                 <div class="post-container">
                     <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
@@ -56,7 +58,9 @@
 
             <div class="post-header">
                 <div class="poster-pp">
-                    <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    <a href="{{ url('profile/'.$post['user']['id']) }}">
+                        <img src="{{ isset($post['user']['photo']) ? $post['user']['photo'] : url('images/pp-icon.png') }}"/>
+                    </a>
                 </div>
                 <div class="post-container">
                     <div class="poster"><a class="profile-link" href="{{ url('profile/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>

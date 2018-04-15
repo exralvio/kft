@@ -99,13 +99,15 @@ class DashboardController extends Controller{
         $comment->comment = $request->get('comment');
 
         if($comment->save()){
-            \NotificationHelper::setNotification('comment', $currentUser['_id'], $media->user['id'],
-                [
-                    "id"=> $media->_id,
-                    "title"=> $media->title,
-                ]
-            );
-
+            if($currentUser['_id'] != $media->user['id']){
+              \NotificationHelper::setNotification('comment', $currentUser['_id'], $media->user['id'],
+                    [
+                        "id"=> $media->_id,
+                        "title"=> $media->title,
+                    ]
+                );  
+            }
+            
             $current_user_id = $currentUser['_id'];
 
             return view('partials/single-comment', compact('current_user_id', 'comment'))->render();

@@ -41,18 +41,16 @@
                     </div>
                     <div class="manage-media pt-20 row">
                       @foreach(\App\Models\Media::selfMedia() as $media)
-                        <div class="col-sm-3 mb-20 manage-item">
+                        <div class="col-sm-3 mb-20 manage-item manage-item-{{ $media['_id'] }}">
                           <div class="manage-item-inner" data-media-id="{{ $media['_id'] }}">
                             <div class="manage-item-icon">
                               <a href="{{ url($media['images']['large']) }}" class="manage-item-zoom pull-left work-lightbox-link mfp-image"><i class="fa fa-search-plus"></i></a>
                               <a href="{{ url('/media/'.$media['_id']) }}" target="_blank" class="manage-item-detail pull-right"><i class="fa fa-external-link"></i></a>
                             </div>
+                            <a class="manage-item-remove" href="" data-mediaid="{{ $media['_id'] }}" data-action="{{ url('media/remove') }}"><i class="fa fa-times"></i></a>
                             <img src="{{ url($media['images']['medium']) }}">
                           </div>
                         </div>
-                        @if($loop->iteration % 4 == 0)
-                          <div class="clearfix"></div>
-                        @endif
                       @endforeach
                     </div>
                 </div>

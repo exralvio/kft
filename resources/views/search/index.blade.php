@@ -23,7 +23,7 @@
         font-size: 12px;
     }
 </style>
-    <section class="page-section pt-75 pb-20">
+    <!-- <section class="page-section pt-75 pb-20">
         <div class="relative">
             <div class="row">
                 <div class="col-md-12">
@@ -38,9 +38,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Section -->
-    <section class="page-section pt-0 pb-20">
+    <section class="page-section pt-80 pb-20">
         <div class="relative">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
@@ -56,10 +56,14 @@
                                             <img src="{{ url($media['images']['medium']) }}" alt="Work">
                                         </div>
                                     </a>
-                                    <div class="work-intro align-left">
-                                        <div class="profile-icon"><img src="{{ $media['user']['photo'] }}"></div>
-                                        <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
+                                    
+                                    <div class="work-intro align-left" style="padding-top:0px;">
+                                        <div class="profile-icon">
+                                            <a href="{{ url('/profile').'/'.$media['user']['id'] }}"><img src="{{ $media['user']['photo'] }}"></a>
+                                        </div>
+                                        <h3 class="work-title" style="padding:10px;">{{ $media['user']['fullname'] }}</h3>
                                     </div>
+                                    
                                 </li>
                                 <!-- End Work Item -->
                                 @endforeach
@@ -76,7 +80,7 @@
                                             @endif
                                         </div>
                                     </a>
-                                    <div class="work-intro align-left">
+                                    <div class="work-intro align-left" style="padding: 15px">
                                         {{ $user['fullname'] }}
                                     </div>
                                 </li>

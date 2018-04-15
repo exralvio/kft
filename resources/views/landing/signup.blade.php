@@ -61,13 +61,13 @@
 
                         <div class="clearfix">
                             <a class="btn btn-block btn-social btn-facebook" href="{{ url('login/facebook') }}">
-                                <span class="fa fa-facebook"></span> Sign in with Facebook
+                                <span class="fa fa-facebook"></span> Sign up with Facebook
                             </a>
                             <!-- <a class="btn btn-block btn-social btn-twitter" href="{{ url('login/twitter') }}">
                                 <span class="fa fa-twitter"></span> Sign in with Twitter
                             </a> -->
                             <a class="btn btn-block btn-social btn-google" href="{{ url('login/google') }}">
-                                <span class="fa fa-google"></span> Sign in with Google
+                                <span class="fa fa-google"></span> Sign up with Google
                             </a>
                         </div>
                         

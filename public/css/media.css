@@ -299,14 +299,20 @@ a.button-rounded{
 }
 
 
-.comment-input:after {
-    content: "\f075";
+.add-new-comment {
+    content: "\f1d8";
     font-family: FontAwesome;
     position: absolute;
     top: 5px;
     right: 25px;
     font-size: 15px;
     color: #B8C0C6;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.add-new-comment:hover {
+    color: #0999E3;
 }
 
 .comment-name {
