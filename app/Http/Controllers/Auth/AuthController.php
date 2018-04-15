@@ -39,9 +39,14 @@ class AuthController extends Controller{
     {
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
-        Auth::login($authUser, true);
-        Session::put('user',$authUser->toArray());
-        return redirect()->intended('dashboard');
+        if(is_bool($authUser)){
+            Session::flash('activation_email_sent', 'Activation email has been sent into your email');
+            return redirect('signup');
+        }else{
+            Auth::login($authUser, true);
+            Session::put('user',$authUser->toArray());
+            return redirect()->intended('dashboard');
+        }
     }
 
     /**
@@ -53,38 +58,52 @@ class AuthController extends Controller{
      */
     public function findOrCreateUser($user, $provider)
     {
-        // $authUser = User::where('provider_id', $user->id)->first();
-        // $authUser = User::raw()->findOne(Array('provider_id'=>$user->id));
-        $authUser = User::where('email', $user->email)->first();
+        //find user by provider id
+        $authUser = User::where("provider.".$provider."_id", $user->id)->first();
         if ($authUser) {
             return $authUser;
         }else{
-
-            $newUser = new User();
-            $newUser->email = $user->email;
-            $fullName = explode(" ",$user->name);
-            $newUser->firstname = $fullName[0];
-            $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
-            $newUser->fullname = $user->name;
-            $newUser->is_active = false;
-            $newUser->birthday = '';
-            $newUser->gender = '';
-            $newUser->company = '';
-            $newUser->sister_company = '';
-            $newUser->about = '';
-            $newUser->photo = $user->avatar;
-            $newUser->view_count = 0;
-            $newUser->provider = $provider;
-            $newUser->provider_id = $user->id;
-            $newUser->department = [];
-            if($newUser->save()){
-                if($this->createTokenAndSendEmail($newUser)){
-                    Session::flash('activation_email_sent', 'Activation email has been sent into your email');
-                    return redirect('signup');
-                }
+            /**
+             * if search by provider id not found
+             * then
+             * search by email then update the provider
+            */
+            $authUser = User::where("email", $user->email)->first();
+            if($authUser){
+                //if exist, have been login by different provider but different email address
+                $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
+                $authUser->update();
+                return $authUser;
             }else{
-                dd('Signup failed');
+                //totally new record on database
+                $newUser = new User();
+                $newUser->email = $user->email;
+                $fullName = explode(" ",$user->name);
+                $newUser->firstname = $fullName[0];
+                $newUser->lastname = isset($fullName[1]) ? $fullName[1] : '';
+                $newUser->fullname = $user->name;
+                $newUser->is_active = false;
+                $newUser->birthday = '';
+                $newUser->gender = '';
+                $newUser->company = '';
+                $newUser->sister_company = '';
+                $newUser->about = '';
+                $newUser->photo = $user->avatar;
+                $newUser->view_count = 0;
+                // $newUser->provider = $provider;
+                // $newUser->provider_id = $user->id;
+                $newUser->provider = [$provider."_id" => $user->id];
+                $newUser->department = [];
+                if($newUser->save()){
+                    $isNewUser = true;
+                    // if($this->createTokenAndSendEmail($newUser)){
+                        return $isNewUser;
+                    // }
+                }else{
+                    dd('Signup failed');
+                }
             }
+            
         }
     }
 
