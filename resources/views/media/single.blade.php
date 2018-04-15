@@ -85,6 +85,7 @@
                     </div>
                     <div class="col-md-10 comment-input">
                         <input id="commentPhoto" type="text" class="input-md round form-control" name="comment" placeholder="Add a comment">
+                        <a class="add-new-comment"><i class="fa fa-send"></i></a>
                     </div>
                 </div>
                 @endif

@@ -105,41 +105,54 @@ function addPostLike(e) {
     });
 }
 
+function addNewComment(e, bypass = false){
+    if(e.keyCode != 13 && bypass == false){
+        return;
+    }
+
+    var message = $('#commentPhoto').val();
+
+    if(message.trim() == ""){
+        return;
+    }
+
+    $.ajax({
+        url: '/postComment',
+        type: "post",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { 
+            // _token: '{{csrf_token()}}',
+            comment : message,
+            post_id: postId
+        }
+    })
+    .done(function(data)
+    {
+        $('#commentPhoto').val('');
+        $('#dynamicComment').append(data);
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
+        alert('failed to connect to server ...');
+    });
+}
+
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
     $('body').on('click', 'a.like-button', addPostLike);
 
-    $('body').on('keyup','#commentPhoto', function(e){
-        if(e.keyCode == 13){
-            $.ajax({
-                url: '/postComment',
-                type: "post",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: { 
-                    // _token: '{{csrf_token()}}',
-                    comment : e.target.value,
-                    post_id: postId
-                }
-            })
-            .done(function(data)
-            {
-                e.currentTarget.value = "";
-                $('#dynamicComment').append(data);
-            })
-            .fail(function(jqXHR, ajaxOptions, thrownError)
-            {
-                if(thrownError == 'Unauthorized'){
-                    window.location = '/login';
-                    return;
-                }
-
-                alert('failed to connect to server ...');
-            });
-        }
-    })
+    $('body').on('keyup','#commentPhoto', addNewComment);
+    $('body').on('click','.add-new-comment', function(e){
+        addNewComment(e, true);
+    });
     
     $('body').on('click','.del-comment', function(e){
         e.preventDefault();
