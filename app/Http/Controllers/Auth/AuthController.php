@@ -78,8 +78,10 @@ class AuthController extends Controller{
             $newUser->provider_id = $user->id;
             $newUser->department = [];
             if($newUser->save()){
-                $authUser = User::where('provider_id', $user->id)->first();
-                return $authUser;
+                if($this->createTokenAndSendEmail($newUser)){
+                    Session::flash('activation_email_sent', 'Activation email has been sent into your email');
+                    return redirect('signup');
+                }
             }else{
                 dd('Signup failed');
             }
@@ -119,6 +121,15 @@ class AuthController extends Controller{
                 'email'     => Input::get('email'),
                 'password'  => Input::get('password')
             );
+
+            /**
+             * check wether the account is activated
+            */
+            $findUser = User::where('email',$request->get('email'))->first();
+            if($findUser && $findUser->is_active == false){
+                Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email.");
+                return Redirect::to('login');
+            }
 
             if (Auth::attempt($userdata)) {
                 $loginUser = Auth::User();
