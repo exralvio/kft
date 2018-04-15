@@ -102,7 +102,7 @@ function removeMedia(e){
 		type: 'post',
 		success: function(response){
 			alert("Delete photo success!");
-			location.reload();
+			$('.manage-item-'+media_id).remove();
 		}
 	});
 }
@@ -129,4 +129,5 @@ $(function(){
 	});
 
 	$('.btn-remove-media').on('click', removeMedia);
+	$('.manage-item-remove').on('click', removeMedia);
 });

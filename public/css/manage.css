@@ -225,3 +225,18 @@ body.timeline {
 .manage-item-icon a:last-child {
 	margin-right: 10px;
 }
+
+a.manage-item-remove {
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+    color: #fff;
+    width: 20px;
+    text-align: center;
+    background: #F48387;
+}
+
+a.manage-item-remove:hover {
+	color: #fff;
+	background: #ff0000;
+}
