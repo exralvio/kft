@@ -96,9 +96,9 @@ class AuthController extends Controller{
                 $newUser->department = [];
                 if($newUser->save()){
                     $isNewUser = true;
-                    // if($this->createTokenAndSendEmail($newUser)){
+                    if($this->createTokenAndSendEmail($newUser)){
                         return $isNewUser;
-                    // }
+                    }
                 }else{
                     dd('Signup failed');
                 }
