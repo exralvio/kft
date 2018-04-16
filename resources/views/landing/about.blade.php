@@ -382,12 +382,23 @@
                         
                         <div class="team-item-image">
                             
-                            <img src="{{ url('images/team/team-blank.jpg') }}" alt="" />
+                            <img src="{{ url('images/team/team-kenneth.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    -
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> kennmoto@outlook.com
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/liyinshen" target="_blank">liyinshen</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/kennethlii" target="_blank">kennethlii</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/kennmoto" target="_blank">kennmoto</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
                                 </p>
                             </div>
                         </div>
@@ -395,7 +406,7 @@
                         <div class="team-item-descr font-alt">
                             
                             <div class="team-item-name">
-                                -
+                                Kenneth Li
                             </div>
                             
                             <div class="team-item-role">
@@ -459,21 +470,31 @@
                         
                         <div class="team-item-image">
                             
-                            <img src="{{ url('images/team/team-blank.jpg') }}" alt="" />
+                            <img src="{{ url('images/team/team-suleksono.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    -
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> suleksono@gmail.com
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/Sulek" target="_blank">Sulek</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> N/A
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/suleksono" target="_blank">suleksono</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
+                                </p>
                             </div>
                         </div>
                         
                         <div class="team-item-descr font-alt">
                             
                             <div class="team-item-name">
-                                -
+                                Suleksono
                             </div>
                             
                             <div class="team-item-role">
@@ -492,21 +513,31 @@
                         
                         <div class="team-item-image">
                             
-                            <img src="{{ url('images/team/team-blank.jpg') }}" alt="" />
+                            <img src="{{ url('images/team/team-andreas.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                
-                                <p>
-                                    -
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> N/A
                                 </p>
-                                
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/andreas.arfianto" target="_blank">andreas.arfianto</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> N/A
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/andreas0718" target="_blank">andreas0718</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
+                                </p>
                             </div>
                         </div>
                         
                         <div class="team-item-descr font-alt">
                             
                             <div class="team-item-name">
-                                -
+                                Andreas Arfianto
                             </div>
                             
                             <div class="team-item-role">
