@@ -451,7 +451,7 @@
                         <div class="team-item-descr font-alt">
                             
                             <div class="team-item-name">
-                                BHIMO SULISTYO
+                                BIMO SULISTYO
                             </div>
                             
                             <div class="team-item-role">
