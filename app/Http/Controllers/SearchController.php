@@ -14,19 +14,22 @@ class SearchController extends Controller{
 
             $user = User::current();
             $current_user_id = $user['_id'];
-            // return view('media/discover', compact('current_user_id'));
 
-            // dd($request->get('q'));
+            if(!$request->get('type') || !$request->get('q')){
+                return abort(404);
+            }
+
             if($request->get('type') == 'photos'){
-                $medias = Media::where('title','like',"%{$request->get('q')}%")
+                $datas = Media::where('title','like',"%{$request->get('q')}%")
                         ->orWhere('description','like',"%{$request->get('q')}%")
                         ->get();
-                return view('search/index',['medias'=>$medias, 'type'=>"photos", 'current_user_id'=>$current_user_id]);
-            }else if($request->get('type') == 'users'){
-                $users = User::where("fullname",'like',"%{$request->get('q')}%")->get();
-                return view('search/index',['data'=>$users, 'type'=>"users"]);
+            } else if($request->get('type') == 'users'){
+                $datas = User::where("fullname",'like',"%{$request->get('q')}%")->get();
             }
-            return view('search/index',['medias'=>[], 'current_user_id'=>$current_user_id]);
+
+            $type = $request->get('type');
+
+            return view('search/index', compact('datas', 'type', 'current_user_id'));
         }
 
 }

@@ -1,5 +1,5 @@
-@foreach($medias as $media)
-<li class="work-item mix photography" >
+@foreach($datas as $media)
+<li class="work-item" >
     <div data-postid="{{ $media->_id }}" class="work-item-inner open-single-post">
         <div class="work-img">
             <img src="{{ url($media['images']['medium']) }}" alt="Work">
