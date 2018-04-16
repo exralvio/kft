@@ -437,6 +437,9 @@ a.profile-link {
 	font-size: 20px;
 	margin: 0px;
 	line-height: 20px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .grid-user-followers {
