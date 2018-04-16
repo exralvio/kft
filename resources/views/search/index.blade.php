@@ -30,6 +30,7 @@
                 <div class="col-sm-10 col-sm-push-1">
                   <div id="post-data" class="tab-content discover-grid">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
+                        <ul class="works-grid work-grid-3 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
                         @if($type == 'photos')
                             <div class="mb-10">
                                 Search results: <b>{{ count($datas) }} photo{{ count($datas) > 1 ? 's' : '' }}.</b>
@@ -37,6 +38,7 @@
                             
                             @include('search/media-search')
                         @endif
+                        </ul>
                         
                         @if($type == 'users')
                             <div class="mb-10">
@@ -47,6 +49,7 @@
                                 @include('search/user-search')
                             </div>
                         @endif
+                        
                       </div>
                     </div>  
                 </div>

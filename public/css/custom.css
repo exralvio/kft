@@ -124,11 +124,11 @@ a.nav-notification:hover .fa {
     position: relative;
 }
 
-.dz-message .btn {
+.dz-message .btn{
 	width: 180px;
     height: 40px;
     text-align: center;
-    font-size: 16px;.
+    font-size: 16px;
     border-radius: 3px;
     font-weight: bold;
     color: #fff;
@@ -402,13 +402,19 @@ a.profile-link {
 }
 
 .grid-user-item {
-	background: #fff;
+	/* background: #fff; */
 	border-radius: 3px;
+}
+
+.background-container{
+	background: #fff;
+	padding-bottom:20px;
+	border-radius: 0 0 3px 3px;
 }
 
 .grid-user-img {
 	background: #B9C1C7;
-	margin: 0 -15px;
+	/* margin: 0 -15px; */
 	height: 100px;
 	text-align: center;
 	margin-bottom: 40px;
