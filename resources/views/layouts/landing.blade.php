@@ -111,9 +111,18 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/wow.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/all.js"></script>
-        <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>       
+        <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/nav.js"></script>   
         <!--[if lt IE 10]><script type="text/javascript" src="{{ url('') }}/rythm/js/placeholder.js"></script><![endif]-->
         <script type="text/javascript" src="{{ url('') }}/js/media.js"></script>       
+        
+        @include('partials/uploader')
+
+        @if(\Auth::check())
+        <script type="text/javascript">
+            checkUnreadNotification();
+        </script>
+        @endif
 
         @yield('footer_script')
     </body>
