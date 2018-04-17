@@ -17,7 +17,7 @@ return [
     'facebook' => [
         'client_id' => env('FB_APP_ID'),
         'client_secret' => env('FB_APP_SECRET'),
-        'redirect' => 'https://kft-web.local/login/facebook/callback',
+        'redirect' => 'https://kft.id/login/facebook/callback',
     ],
     
     'google' => [
