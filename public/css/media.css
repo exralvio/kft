@@ -557,6 +557,8 @@ select.discover-category, select.discover-category:focus {
 .media-detail-right{
     margin-left:-15px;
     margin-right:-15px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 768px) {
