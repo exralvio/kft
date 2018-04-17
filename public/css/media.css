@@ -214,6 +214,9 @@ a.button-rounded{
 
 .media-photo-detail, .comment-section{
     margin-right: 0;
+    margin-left: 0;
+    min-height: 30px;
+    line-height: 30px;
 }
 
 .comment-section .pp{
@@ -275,9 +278,14 @@ a.button-rounded{
 }
 
 .remodal-close {
-    right: 0;
+    /* right: 0;
     z-index: 9999;
-    left:inherit!important;
+    left:inherit!important; */
+
+    right: -8px;
+    z-index: 9999;
+    left: inherit!important;
+    top: -8px;
 }
 
 .dynamicComment{
@@ -526,8 +534,14 @@ a.button-rounded{
     max-height: 100%;
 }
 
+.media-photo-detail .post-title{
+    border-top: 1px solid #efefef;
+}
+
 .post-modal .post-details, #media-single .post-details {
-    margin-left: -15px;
+    /* margin-left: -15px; */
+    background: #ffffff;
+    padding: 10px;
 }
 
 .post-model .comment-buttons {
@@ -537,4 +551,22 @@ a.button-rounded{
 select.discover-category, select.discover-category:focus {
     border: 0px;
     box-shadow: none;
+}
+
+.media-detail-right{
+    margin-left:-15px;
+    margin-right:-15px;
+}
+
+@media screen and (max-width: 768px) {
+    .post-modal .media-photo, #media-single .media-photo {
+        height: 45vh;
+        border-right: 1px solid #e8e8e8;
+        line-height: 45vh;
+    }
+    
+    .media-detail-right{
+        margin-left:0px;
+        margin-right:0px;
+    }
 }

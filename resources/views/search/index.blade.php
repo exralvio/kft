@@ -32,7 +32,7 @@
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
                         <ul class="works-grid work-grid-3 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
                         @if($type == 'photos')
-                            <div class="mb-10">
+                            <div class="col-md-12 mb-10">
                                 Search results: <b>{{ count($datas) }} photo{{ count($datas) > 1 ? 's' : '' }}.</b>
                             </div>
                             

@@ -5,9 +5,9 @@
             <img src="{{ url($post['images']['large']) }}">
         </div>
     </div>
-    <div class="col-xs-12 col-md-3">
+    <div class="col-xs-12 col-md-3 media-detail-right">
         <div class="post-details">
-            <div class="row comment-user-block">
+            <div class="comment-user-block">
                 <div class="mt-20 mb-10">
                     <div class="pp">
                         <a href="{{ url('user/'.$post['user']['id']) }}">
@@ -40,10 +40,10 @@
                     </a>
                 </div>
             </div>
-            <div class="row media-photo-detail text-center" style="padding:10px 0px;border-top:1px solid #e8e8e8;">
+            <div class="media-photo-detail text-center">
                 <div class="col-md-12 font-alt post-title">{{ $post->title }}</div>
             </div>
-            <div class="row media-photo-detail text-center pb-10" style="padding-top:10px;border-top:1px solid #e8e8e8;">
+            <div class="media-photo-detail text-center pb-10">
                 <!-- collapse start -->
                 <div id="showPhotoDetail" class="font-alt post-title" style="cursor: pointer;">Photo Details</div>
                 <div id="exifData" style="display:none;">
@@ -78,7 +78,7 @@
             <div class="row comment-section">
                 @if(\Auth::check()) 
                 <div class="comments" style="margin:10px 0;">
-                    <div class="col-md-2 pp text-center">
+                    <div class="col-md-2 col-xs-2 pp text-center">
                         <a href="{{ url('user/'.$post['user']['id']) }}">
                         @if(\App\Models\User::currentPhoto())
                             <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
@@ -87,7 +87,7 @@
                         @endif
                         </a>
                     </div>
-                    <div class="col-md-10 comment-input">
+                    <div class="col-md-10 col-xs-10 comment-input">
                         <input id="commentPhoto" type="text" class="input-md round form-control" name="comment" placeholder="Add a comment">
                         <a class="add-new-comment"><i class="fa fa-send"></i></a>
                     </div>
