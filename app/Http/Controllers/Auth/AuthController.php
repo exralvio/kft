@@ -39,8 +39,11 @@ class AuthController extends Controller{
     {
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
-        if(is_bool($authUser) && $authUser == false){
+        if($authUser && $authUser->is_verified == false){
             Session::flash('not_activated', "Your Account is Not Activated. Please Activate your account by clicking the link we have sent to your email. <a href='".url('resendActivation/'.$authUser->email)."'>Resend Email</a>");
+            return redirect('login');
+        }else if($authUser && $authUser->provider_exception == true){
+            Session::flash('not_activated', "Login Failed");
             return redirect('login');
         }else{
             Auth::login($authUser, true);
@@ -64,11 +67,16 @@ class AuthController extends Controller{
                 ->first();
         if ($authUser) {
             if($authUser->is_verified == false){
-                return false;
+                return $authUser;
             }
             if(!isset($authUser->provider[$provider."_id"])){
                 if(!empty($authUser->provider)){
-                    $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
+                    try{
+                        $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
+                    } catch (Exception $e){
+                        $authUser->provider_exception = true;
+                        return $authUser;
+                    }
                 } else {
                     $authUser->provider = [$provider."_id"=>$user->id];
                 }
