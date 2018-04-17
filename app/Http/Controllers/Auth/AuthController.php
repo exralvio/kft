@@ -70,13 +70,13 @@ class AuthController extends Controller{
                 return $authUser;
             }
             if(!isset($authUser->provider[$provider."_id"])){
-                if(!empty($authUser->provider)){
-                    try{
-                        $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
-                    } catch (Exception $e){
-                        $authUser->provider_exception = true;
-                        return $authUser;
-                    }
+                if(!empty($authUser->provider) && is_array($authUser->provider)){
+                    // try{
+                    $authUser->provider = array_merge($authUser->provider, [$provider."_id"=>$user->id]);
+                    // } catch (Exception $e){
+                    //     $authUser->provider_exception = true;
+                    //     return $authUser;
+                    // }
                 } else {
                     $authUser->provider = [$provider."_id"=>$user->id];
                 }
