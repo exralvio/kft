@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Abrigham\LaravelEmailExceptions\Exceptions\EmailHandler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
