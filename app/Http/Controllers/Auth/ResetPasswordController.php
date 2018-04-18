@@ -66,8 +66,7 @@ class ResetPasswordController extends Controller
                 return redirect('reset-password/'.$data['reset_token']);
             }
         }else{
-            dd('user not found or token invalid');
-            return view('auth/passwords/reset-password', ['email'=>"fazrin.mutaqin@gmail.com"]);
+            return abort(400);
         }
     }
 }
