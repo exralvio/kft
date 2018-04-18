@@ -53,7 +53,7 @@ class MediaController extends Controller{
             $preview->save($preview_path);
             $preview->destroy();
         } catch(\Exception $e){
-            dd('masuk kesini');
+            echo $e->getMessage();
         }
         
 

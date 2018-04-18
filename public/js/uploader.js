@@ -191,8 +191,9 @@ $(function(){
 	});
 
 	mydropzone.on('uploadprogress', function(file, progress, bytesSent){
-		$('.dz-new-progress-bar', file.previewElement).css('height', progress+'%');
-		$('.dz-new-progress-txt', file.previewElement).text(progress+'%');
+		var progressString = Math.round(progress);
+		$('.dz-new-progress-bar', file.previewElement).css('height', progressString+'%');
+		$('.dz-new-progress-txt', file.previewElement).text(progressString+'%');
 	});
 
 	$('body').on('click', '.dz-preview', editUploadForm);
