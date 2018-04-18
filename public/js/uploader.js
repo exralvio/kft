@@ -13,7 +13,10 @@ function resetUploadForm(){
 function editUploadForm(e){
 	var upload_index = $(this).data('upload-index');
 	var data = upload_images[upload_index];
-	console.log(data);return;
+
+	if(data == null){
+		return;
+	}
 
 	$('.upload-keywords').tagsinput('destroy');
 	$('.upload-keywords').val('');
@@ -150,10 +153,7 @@ $(function(){
 			'keywords': []
 		});
 
-		if(first_time == 1){
-			$('body .dz-preview').trigger('click');
-			first_time = 0;
-		}
+		
 	});
 
 	mydropzone.on("sending", function(file, xhr, formData) {
@@ -179,6 +179,11 @@ $(function(){
             // changing src of preview element
             file.previewElement.querySelector("img").src = newname;
             $('.dz-new-progress', file.previewElement).addClass('success');
+
+            if(first_time == 1){
+				$('body .dz-preview').trigger('click');
+				first_time = 0;
+			}
 		}
 	});
 
