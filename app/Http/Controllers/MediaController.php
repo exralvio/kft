@@ -19,14 +19,18 @@ class MediaController extends Controller{
 
     public function postUpload(Request $request){
         set_time_limit(0);
-
+        
 		$input = $request->all();
 
 		$rules = array(
-		    'file' => 'image|max:50000|mimes:png,jpg,jpeg'
+		    'file' => 'image|mimes:png,jpg,jpeg|max:50000'
 		);
 
-		$validation = Validator::make($input, $rules);
+        $messages = array(
+            'file.max'=>"Image too large, max 50Mb."
+        );
+
+		$validation = Validator::make($input, $rules, $messages);
 
 		if ($validation->fails())
 		{

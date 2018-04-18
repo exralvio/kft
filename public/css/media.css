@@ -277,18 +277,6 @@ a.button-rounded{
     float: left;
 }
 
-.remodal-close {
-    /* right: 0;
-    z-index: 9999;
-    left:inherit!important; */
-
-    right: 0px;
-    z-index: 9999;
-    left: inherit!important;
-    top: 0px;
-    background: beige;
-}
-
 .dynamicComment{
     max-height: 45vh;
     overflow-y: scroll;

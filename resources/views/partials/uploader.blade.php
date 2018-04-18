@@ -2,9 +2,6 @@
 <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/bootstrap-tagsinput.css">
 
 <div class="remodal upload-modal" data-remodal-id="uploader">
-  <div class="row">
-    
-  </div>
   <form action="{{ url('media/upload') }}" class="dropzone pt-20 pd-20 col-sm-12 col-md-12" id="uploadzone">
   	@csrf
   	<div class="dz-default dz-message">
@@ -19,6 +16,7 @@
   		</div>
   		Add more photos
   	</div>
+    <button data-remodal-action="cancel" class="remodal-close"></button>
   </form>
   <div class="col-sm-12 col-md-3 pull-right form-uploader-wrapper">
     <div class="row">

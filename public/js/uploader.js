@@ -1,9 +1,14 @@
-
-var upload_images = new Array();
+var upload_lock = false;
+var upload_images = [];
 var	first_time = 1;
 var upload_index = 0;
 var image_counter = 0;
-var upload_remodal = $('[data-remodal-id=uploader]').remodal({closeOnConfirm: true, hashTracking: false});
+var upload_remodal = $('[data-remodal-id=uploader]').remodal({
+	hashTracking: false,
+	closeOnEscape: false,
+	closeOnOutsideClick: false,
+	closeOnCancel: false,
+});
 
 function resetUploadForm(){
 	$('.form-uploader')[0].reset();
@@ -115,11 +120,6 @@ $(function(){
 		upload_remodal.open();
 	});
 
-	$(document).on('closed', '.remodal', function (e) {
-		// Reason: 'confirmation', 'cancellation'
-		// console.log('Modal is closing' + (e.reason ? ', reason: ' + e.reason : ''));
-	});
-
 	Dropzone.autoDiscover = false;
 
 	var dropzoneOptions = {
@@ -159,9 +159,11 @@ $(function(){
 	});
 
 	mydropzone.on("sending", function(file, xhr, formData) {
-	  // Will send the filesize along with the file as POST data.
-	  formData.append("upload_index", upload_index);
-	  upload_index++;
+		// Will send the filesize along with the file as POST data.
+		formData.append("upload_index", upload_index);
+		upload_index++;
+		upload_lock = true;
+		$('.btn-uploader-submit').addClass('disabled');
 	});
 
 	mydropzone.on('reset', function(){
@@ -170,7 +172,11 @@ $(function(){
 		$('.form-uploader-wrapper').hide();
 		$('#uploadzone').removeClass('col-md-9').addClass('col-md-12');
 
+		upload_lock = false;
 		first_time = 1;
+		upload_images = [];
+		upload_index = 0;
+		image_counter = 0;
 	});
 
 	mydropzone.on('success', function(file, response){
@@ -189,12 +195,8 @@ $(function(){
 		}
 	});
 
-	mydropzone.on('complete', function(file){
-		// console.log(file);
-	});
-
 	mydropzone.on('queuecomplete', function(){
-		
+		$('.btn-uploader-submit').removeClass('disabled');
 	});
 
 	mydropzone.on('uploadprogress', function(file, progress, bytesSent){
@@ -206,4 +208,15 @@ $(function(){
 	$('.upload-modal').on('click', '.dz-preview', editUploadForm);
 
 	$('.btn-uploader-submit').on('click', submitUpload);
+
+	$(document).on('cancellation', '.remodal.upload-modal', function (e) {
+		if(upload_lock == true){
+			if(confirm("Are you sure want to close? All upload will be canceled.")){
+				upload_remodal.close();
+				mydropzone.removeAllFiles(true)
+			}
+		} else {
+			upload_remodal.close();
+		}
+	});
 });
