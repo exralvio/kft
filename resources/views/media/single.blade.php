@@ -11,7 +11,7 @@
                 <div class="mt-20 mb-10">
                     <div class="pp">
                         <a href="{{ url('user/'.$post['user']['id']) }}">
-                            <img src="{{ !empty($post->user['photo']) ? $post->user['photo'] : url('images/pp-icon.png') }}"/>
+                            <img src="{{ !empty($post->user['photo']) ? url($post->user['photo']) : url('images/pp-icon.png') }}"/>
                         </a>
                     </div>
                     <div class="comment-profile-name">

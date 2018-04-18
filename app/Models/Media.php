@@ -42,11 +42,11 @@ class Media extends Eloquent
     }
 
     public static function discoverFresh($limit = 0){
-        return Media::limit($limit)->get()->sortBy('created_at', null, true);
+        return Media::orderBy('_id','desc')->limit($limit)->get();
     }
 
     public static function discoverPopular($limit = 0){
-        $medias = MediaPopular::where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->limit($limit)->get()->sortBy('view_count', null, true);
+        $medias = MediaPopular::orderBy('like_count','desc')->where('popular_threshold', '>=', now()->format('Y-m-d H:i:s'))->limit($limit)->get();
 
         return $medias;
     }
