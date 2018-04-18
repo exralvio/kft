@@ -95,11 +95,23 @@
                         
                         <div class="team-item-image">
                             
-                            <img src="{{ url('images/team/team-blank.jpg') }}" alt="" />
+                            <img src="{{ url('images/team/team-ery.jpg') }}" alt="" />
                             
-                            <div class="team-item-detail">
-                                <p>
-                                    -
+                            <div class="team-item-detail align-left">
+                                <p class="mb-10 mt-40">
+                                    <img src="images/icon-gm.png"> ery.punta@gmail.com
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-fb.png"> <a href="http://facebook.com/hendraswara" target="_blank">hendraswara</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-tw.png"> <a href="http://twitter.com/phuntos" target="_blank">phuntos</a>
+                                </p>
+                                <p class="mb-10">
+                                    <img src="images/icon-ig.png"> <a href="http://instagram.com/phunto" target="_blank">phunto</a> 
+                                </p>
+                                <p class="mb-0">
+                                    <img src="images/icon-web.png"> N/A
                                 </p>
                             </div>
                         </div>
@@ -110,7 +122,7 @@
                         <div class="team-item-descr font-alt">
                             
                             <div class="team-item-name">
-                                -
+                                Ery Punta Hendraswara
                             </div>
                             
                             <div class="team-item-role">
