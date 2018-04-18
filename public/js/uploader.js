@@ -183,7 +183,7 @@ $(function(){
             $('.dz-new-progress', file.previewElement).addClass('success');
 
             if(first_time == 1){
-				$('body .dz-preview').trigger('click');
+				$('.upload-modal .dz-preview').trigger('click');
 				first_time = 0;
 			}
 		}
@@ -203,7 +203,7 @@ $(function(){
 		$('.dz-new-progress-txt', file.previewElement).text(progressString+'%');
 	});
 
-	$('body').on('click', '.dz-preview', editUploadForm);
+	$('.upload-modal').on('click', '.dz-preview', editUploadForm);
 
 	$('.btn-uploader-submit').on('click', submitUpload);
 });
