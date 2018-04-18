@@ -170,20 +170,6 @@ class MediaController extends Controller{
         }
 
         try{
-            $sm = Image::make($ori_path);
-            $sm->fit(150, 150);
-            if($sm->save($sm_path)){
-                $sm->destroy();
-            }
-
-            $md = Image::make($ori_path);
-            $md->resize(null, 550, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            if($md->save($md_path)){
-                $md->destroy();
-            }
-
             $lg = Image::make($ori_path);
             $lg->resize(null, 1250, function ($constraint) {
                 $constraint->aspectRatio();
@@ -191,6 +177,20 @@ class MediaController extends Controller{
             });
             if($lg->save($lg_path)){
                 $lg->destroy();
+            }
+
+            $md = Image::make($lg_path);
+            $md->resize(null, 550, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            if($md->save($md_path)){
+                $md->destroy();
+            }
+
+            $sm = Image::make($md_path);
+            $sm->fit(150, 150);
+            if($sm->save($sm_path)){
+                $sm->destroy();
             }
         } catch(\Exception $e){
             dd($e->getMessage());
@@ -263,7 +263,7 @@ class MediaController extends Controller{
         } catch(\Exception $e){
             return abort(404);
         }
-        
+
         if(!$post){
             return abort(404);
         }
