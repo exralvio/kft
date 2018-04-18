@@ -257,7 +257,7 @@ a.nav-notification:hover .fa {
 	position: absolute;
     width: 100%;
     bottom: 0;
-    background: #E5E5E5;
+    background: #777;
 }
 
 .dz-new-progress-txt {
@@ -266,6 +266,7 @@ a.nav-notification:hover .fa {
     font-weight: bold;
     position: relative;
     line-height: 50px;
+    color: #bbb;
 }
 
 .dz-new-progress-success {
