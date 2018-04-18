@@ -1,4 +1,5 @@
-<?php $route = Route::current()->uri; ?>
+<?php $route = Route::current() ? Route::current()->uri : ''; ?>
+<?php var_dump($route); ?>
 <!-- Navigation panel -->
 <nav class="main-nav stick-fixed {{ $route == '/' ? 'transparent': '' }}">
     <div class="full-wrapper relative clearfix">
@@ -23,6 +24,7 @@
             </ul>
         </div>
 
+        <?php var_dump(\Auth::check()); ?>
         @if(\Auth::check()) 
             <!-- Main Menu -->
             <div class="inner-nav desktop-nav login-nav">

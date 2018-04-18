@@ -1,4 +1,4 @@
-@extends('layouts/global')
+@extends('layouts/blank')
 
 @section('page-title')
 Komunitas Fotografi Telkom
