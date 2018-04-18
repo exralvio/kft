@@ -280,7 +280,7 @@ class AuthController extends Controller{
         if($user){
             if($this->createTokenAndSendEmail($user)){
                 Session::flash('activation_email_sent', 'Activation email has been sent into your email');
-                return redirect('signup');
+                return redirect('login');
             }
         }else{
             Session::flash('not_activated', 'Email Not Registered');
