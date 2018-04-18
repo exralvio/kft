@@ -150,12 +150,5 @@
 @endsection
 
 @section('footer_script')
-    <script type="text/javascript">
-      var medias = {};
-
-      @foreach(\App\Models\Media::all() as $media)
-        medias["{{ $media['_id'] }}"] = JSON.parse('{!! $media->toJson() !!}');
-      @endforeach
-    </script>
     <script type="text/javascript" src="{{ url('js/manage.js') }}"></script>
 @endsection

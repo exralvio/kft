@@ -1,17 +1,6 @@
-function updateEditForm(e){
-	$('.manage-item-inner').removeClass('active');
-	$(this).addClass('active');
-
-	$('.form-editor')[0].reset();
-	$('.edit-keywords').tagsinput('removeAll');
-	$('.form-blocker').hide();
-	$('.btn-editor-save').text('Save');
-	$('.btn-editor-save').prop('disabled', true);
-
-	var media_id = $(this).data('media-id');
-	var media = medias[media_id];
-
-	$('.btn-remove-media').data('mediaid', media_id);
+function fillEditForm(media){
+	console.log(media);
+	$('.btn-remove-media').data('mediaid', media._id);
 
 	if(typeof media.category.id !== 'undefined')
 		$('.edit-category').val(media.category.id);
@@ -54,6 +43,35 @@ function updateEditForm(e){
 	$('.edit-mediaid').val(media._id);
 }
 
+function updateEditForm(e){
+	$('.manage-item-inner').removeClass('active');
+	$(this).addClass('active');
+
+	var media_id = $(this).data('media-id');
+	var postUrl = '/media/'+media_id+'/json';
+
+	$.ajax({
+		url: postUrl,
+		dataType: 'json',
+		type: 'get',
+		beforeSend: function(){
+			$('.form-blocker').show();
+		},
+		success: function(response){
+			$('.form-editor')[0].reset();
+			$('.edit-keywords').tagsinput('removeAll');
+			$('.btn-editor-save').text('Save');
+			$('.btn-editor-save').prop('disabled', true);
+			$('.form-blocker').hide();
+
+			if(response){
+				fillEditForm(response);
+			}
+		}
+	});
+
+}
+
 function saveEditForm(e){
 	e.preventDefault();
 
@@ -70,10 +88,6 @@ function saveEditForm(e){
 		type: 'post',
 		success: function(response){
 			$('.btn-editor-save').text('Saved');
-			
-			if(typeof response.data !== 'undefined'){
-				medias[response.data._id] = response.data;
-			}
 		}
 	});
 }

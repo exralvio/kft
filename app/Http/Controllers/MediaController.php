@@ -106,6 +106,10 @@ class MediaController extends Controller{
 
         $media = Media::find($media_id);
 
+        if(!$media){
+            return abort(400);
+        }
+
         $category_id = $request->category;
 
         if(!empty($category_id)){
@@ -266,10 +270,14 @@ class MediaController extends Controller{
         return view('media/manage', compact('media_type'));
     }
 
-    public function mediaDetail($mediaId){
+    public function mediaDetail($mediaId, $is_json = false){
         try{
             $mediaId = new ObjectId($mediaId);
-            $post = Media::find($mediaId);
+            if($is_json == 'json'){
+                $post = Media::select(['_id','title','description','category','exif', 'keywords'])->find($mediaId);
+            } else {
+                $post = Media::find($mediaId);
+            }
         } catch(\Exception $e){
             return abort(404);
         }
@@ -282,6 +290,9 @@ class MediaController extends Controller{
 
         $user = User::current();
         $current_user_id = $user['_id'];
+
+        if($is_json == 'json')
+            return Response::json($post);
 
         return view('media/detail', compact('current_user_id','post','comments'));
     }

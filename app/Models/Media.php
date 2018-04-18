@@ -58,7 +58,7 @@ class Media extends Eloquent
             $user = User::current();
         }
 
-        $medias = Media::where('user.id', new ObjectID((string) $user['_id']))->get()->sortBy('created_at', null, true);
+        $medias = Media::orderBy('_id', 'desc')->where('user.id', new ObjectID((string) $user['_id']))->get();
 
         return $medias;
     }
