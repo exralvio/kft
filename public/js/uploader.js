@@ -1,5 +1,5 @@
 
-var upload_images = [];
+var upload_images = new Array();
 var	first_time = 1;
 var upload_index = 0;
 var image_counter = 0;
@@ -72,7 +72,9 @@ function submitUpload(e){
 
 	var active_index = [];
 	$('.dz-preview').each(function(i, e){
-		active_index.push($(e).data('upload-index'));
+		if($(e).data('upload-index') != null){
+			active_index.push($(e).data('upload-index'));
+		}
 	});
 
 	var active_images = [];

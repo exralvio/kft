@@ -18,7 +18,7 @@ use MongoDB\BSON\ObjectID;
 class MediaController extends Controller{
 
     public function postUpload(Request $request){
-        set_time_limit(5);
+        set_time_limit(0);
 
 		$input = $request->all();
 
@@ -75,7 +75,12 @@ class MediaController extends Controller{
         $items = $request->items;
 
         $errors = [];
+
         foreach ($items as $value) {
+            if(empty($value['filename'])){
+                continue;
+            }
+            
             $old_path = storage_path('upload_tmp/'.$value['filename']);
             if(file_exists($old_path)){
                 $extension = File::extension($value['filename']);
