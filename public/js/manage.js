@@ -101,7 +101,6 @@ function removeMedia(e){
 		dataType: 'json',
 		type: 'post',
 		success: function(response){
-			alert("Delete photo success!");
 			$('.manage-item-'+media_id).remove();
 		}
 	});
