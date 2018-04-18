@@ -210,7 +210,13 @@ class MediaController extends Controller{
 
     public function parseExif(&$input){
         $old_path = storage_path('upload_tmp/'.$input['filename']);
-        $exif = exif_read_data($old_path, 0, true);
+        $exif = []
+
+        try {
+            $exif = exif_read_data($old_path, 0, true);
+        } catch(\Exception $e){
+            \Log::error($e->getMessage());
+        }
 
         if(!isset($exif['IFD0'])){
             return;
