@@ -1,5 +1,4 @@
 function fillEditForm(media){
-	console.log(media);
 	$('.btn-remove-media').data('mediaid', media._id);
 
 	if(typeof media.category.id !== 'undefined')
