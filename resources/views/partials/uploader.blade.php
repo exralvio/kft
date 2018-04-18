@@ -68,7 +68,7 @@
       <div class="dz-size" data-dz-size></div>
     </div>
     <div class="dz-thumbnail">    
-      <img data-dz-thumbnail src="{{ url('images/no-review.jpg') }}" />
+      <img src="{{ url('images/no-review.jpg') }}" />
     </div>
     <div class="dz-new-progress">
       <div class="dz-new-progress-bar"></div>
