@@ -44,6 +44,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="align-center mt-0 mb-10">{{ $user['fullname'] }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            @if(!empty($user->about))
+            <div class="col-xs-12 col-md-6 col-md-push-3 align-center">
+                {!! nl2br($user->about) !!}
+            </div>
+            @endif
+            <div class="col-xs-12">
                 <ul class="details align-center mb-0">
                     <li><span>{{ $user->view_count }}</span> Photo Views</li>
                     <li><span>{{ $user->getFollowerCount() }}</span> Followers</li>
