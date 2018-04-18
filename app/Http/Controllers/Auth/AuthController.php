@@ -312,7 +312,6 @@ class AuthController extends Controller{
         $this->mail['token'] = $activation->token;
         Mail::send('emails.activation-mail', ['token' => $this->mail['token']], function($message)
         {
-            $message->from('mail@kft.id');
             $message->subject($this->mail['subject']);
             $message->to($this->mail['to']);
         });
