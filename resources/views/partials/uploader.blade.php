@@ -61,6 +61,25 @@
 
 </div>
 
+<div id="template-container">
+  <div class="dz-preview dz-file-preview">
+    <div class="dz-details">
+      <div class="dz-filename"><span data-dz-name></span></div>
+      <div class="dz-size" data-dz-size></div>
+    </div>
+    <div class="dz-thumbnail">    
+      <img data-dz-thumbnail src="{{ url('images/no-review.jpg') }}" />
+    </div>
+    <div class="dz-new-progress">
+      <div class="dz-new-progress-bar"></div>
+      <span class="dz-new-progress-txt">0%</span>
+      <span class="dz-new-progress-success"><i class="fa fa-check"></i></span>
+    </div>
+    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+    <a class="dz-remove-icon" data-dz-remove><i class="fa fa-times"></i></a>
+  </div>
+</div>
+
 <script type="text/javascript" src="{{ url('') }}/js/dropzone.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/bootstrap-tagsinput.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/uploader.js"></script>

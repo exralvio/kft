@@ -23,7 +23,7 @@ class MediaController extends Controller{
 		$input = $request->all();
 
 		$rules = array(
-		    'file' => 'image|max:50000',
+		    'file' => 'image|max:50000|mimes:png,jpg,jpeg'
 		);
 
 		$validation = Validator::make($input, $rules);
@@ -41,6 +41,21 @@ class MediaController extends Controller{
         $filename = sha1(time().time().rand()).".{$extension}";
 
         $upload_success = $request->file->storeAs($directory, $filename);
+
+        $ori_path = storage_path('upload_tmp/'.$filename);
+        $preview_path = public_path('uploads/preview/'.$filename);
+
+        try{
+            $preview = Image::make($ori_path);
+            $preview->resize(null, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $preview->save($preview_path);
+            $preview->destroy();
+        } catch(\Exception $e){
+            dd('masuk kesini');
+        }
+        
 
         $response = [
         	'filename'=>$filename,
@@ -149,27 +164,31 @@ class MediaController extends Controller{
             return Response::json(['status'=>'error','message'=>'Unable to process the file.'], 200);
         }
 
-        $sm = Image::make($ori_path);
-        $sm->fit(150, 150);
-        if($sm->save($sm_path)){
-            // echo 'success';
-        }
+        try{
+            $sm = Image::make($ori_path);
+            $sm->fit(150, 150);
+            if($sm->save($sm_path)){
+                $sm->destroy();
+            }
 
-        $md = Image::make($ori_path);
-        $md->resize(null, 550, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        if($md->save($md_path)){
-            // echo 'success';
-        }
+            $md = Image::make($ori_path);
+            $md->resize(null, 550, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            if($md->save($md_path)){
+                $md->destroy();
+            }
 
-        $lg = Image::make($ori_path);
-        $lg->resize(null, 1250, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
-        });
-        if($lg->save($lg_path)){
-            // echo 'success';
+            $lg = Image::make($ori_path);
+            $lg->resize(null, 1250, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            if($lg->save($lg_path)){
+                $lg->destroy();
+            }
+        } catch(\Exception $e){
+            dd($e->getMessage());
         }
 
         $input['images'] = [

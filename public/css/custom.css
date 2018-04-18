@@ -206,6 +206,88 @@ a.nav-notification:hover .fa {
 	display: none !important;
 }
 
+.dz-remove-icon {
+	position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: #F48387;
+    color: #fff;
+    line-height: 20px;
+}
+
+.dz-remove-icon:hover {
+	color: #fff;
+	background: #ff0000;
+}
+
+.dz-thumbnail {
+	width: 100%;
+    height: 130px;
+    background: #e6e6e6;
+    position: relative;
+}
+
+.dz-thumbnail img {
+	max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    position: absolute;
+    top: 49%;
+    left: 51%;
+    transform: translate(-51%, -49%);
+    -webkit-transform: translate(-51%, -49%);
+    -ms-transform: translate(-51%, -49%);
+    transform: translate(-51%, -49%);
+}
+
+.dz-new-progress {
+	position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    top: 40px;
+    left: 60px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.dz-new-progress-bar {
+	position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: #E5E5E5;
+}
+
+.dz-new-progress-txt {
+	display: block;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    line-height: 50px;
+}
+
+.dz-new-progress-success {
+    font-size: 25px;
+    line-height: 50px;
+    position: relative;
+	display: none;
+	color: #fff;
+}
+
+.dz-new-progress.success .dz-new-progress-bar {
+	background: #219942;
+}
+
+.dz-new-progress.success .dz-new-progress-success {
+	display: block;
+}
+
+.dz-new-progress.success .dz-new-progress-txt {
+	display: none;
+}
+
 .form-uploader-wrapper {
 	height: 100%;
 	display: none;

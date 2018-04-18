@@ -13,6 +13,7 @@ function resetUploadForm(){
 function editUploadForm(e){
 	var upload_index = $(this).data('upload-index');
 	var data = upload_images[upload_index];
+	console.log(data);return;
 
 	$('.upload-keywords').tagsinput('destroy');
 	$('.upload-keywords').val('');
@@ -118,12 +119,15 @@ $(function(){
 
 	var dropzoneOptions = {
 		dictDefaultMessage: false,
-		addRemoveLinks: true,
+		addRemoveLinks: false,
 		clickable: ".dz-addfile",
 		thumbnailWidth: 170,
 		thumbnailHeight: 110,
 		acceptedFiles: "image/jpeg,image/png",
-		timeout: 1800000
+		timeout: 1800000,
+		previewTemplate: document.querySelector('#template-container').innerHTML,
+		retryChunks: true,
+		retryChunksLimit: 3
 	};
 	
 	var mydropzone = new Dropzone('#uploadzone', dropzoneOptions);
@@ -170,6 +174,11 @@ $(function(){
 	mydropzone.on('success', function(file, response){
 		if(response){
 			upload_images[response.upload_index].filename = response.filename;
+
+			var newname = '/uploads/preview/'+response.filename; // this is my function
+            // changing src of preview element
+            file.previewElement.querySelector("img").src = newname;
+            $('.dz-new-progress', file.previewElement).addClass('success');
 		}
 	});
 
@@ -179,6 +188,11 @@ $(function(){
 
 	mydropzone.on('queuecomplete', function(){
 		
+	});
+
+	mydropzone.on('uploadprogress', function(file, progress, bytesSent){
+		$('.dz-new-progress-bar', file.previewElement).css('height', progress+'%');
+		$('.dz-new-progress-txt', file.previewElement).text(progress+'%');
 	});
 
 	$('body').on('click', '.dz-preview', editUploadForm);
