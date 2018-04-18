@@ -61,7 +61,7 @@
 
 </div>
 
-<div id="template-container">
+<div id="template-container" class="hide">
   <div class="dz-preview dz-file-preview">
     <div class="dz-details">
       <div class="dz-filename"><span data-dz-name></span></div>
