@@ -10,7 +10,7 @@
                 </div>
                 <div class="post-container">
                     <div class="poster"><a class="profile-link" href="{{ url('user/'.$post['user']['id']) }}">{{ $post['user']['fullname'] }}</a></div>
-                    <div class="publish-date">{{ \Carbon\Carbon::parse($post['media']['created_at']['date'])->diffForHumans() }}</div>
+                    <div class="publish-date">{{ \Carbon\Carbon::parse($post['media']['created_at'])->diffForHumans() }}</div>
                 </div>
                 @if(isset($is_popular) and $is_popular == true)
                     <div class="pull-right">                
