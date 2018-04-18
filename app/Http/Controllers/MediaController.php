@@ -80,7 +80,7 @@ class MediaController extends Controller{
             if(empty($value['filename'])){
                 continue;
             }
-            
+
             $old_path = storage_path('upload_tmp/'.$value['filename']);
             if(file_exists($old_path)){
                 $extension = File::extension($value['filename']);
@@ -257,9 +257,13 @@ class MediaController extends Controller{
     }
 
     public function mediaDetail($mediaId){
-        $mediaId = new ObjectId($mediaId);
-        $post = Media::find($mediaId);
-
+        try{
+            $mediaId = new ObjectId($mediaId);
+            $post = Media::find($mediaId);
+        } catch(\Exception $e){
+            return abort(404);
+        }
+        
         if(!$post){
             return abort(404);
         }
