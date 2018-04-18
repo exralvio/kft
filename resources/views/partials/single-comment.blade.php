@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-2 pp text-center">
             <a href="{{ url('user/'.$comment->user['id']) }}">
-                <img src="{{ !empty($comment->user['photo']) ? $comment->user['photo'] : url('images/pp-icon.png') }}"/>
+                <img src="{{ !empty($comment->user['photo']) ? url($comment->user['photo']) : url('images/pp-icon.png') }}"/>
             </a>
         </div>
         <div class="col-xs-10 comment-content align-left">

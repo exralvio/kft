@@ -126,7 +126,7 @@ Edit Profile
 <script type="text/javascript">
     // window.addEventListener("load", function(){
         $(document).ready(function() {
-            var photo = "<?php echo $profile['photo']; ?>";
+            var photo = "<?php echo url($profile['photo']); ?>";
             var photoUrl = "";
             if(photo.length && photo.indexOf('http') == -1){
               photoUrl = "../"+photo;
