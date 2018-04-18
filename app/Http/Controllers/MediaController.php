@@ -149,6 +149,9 @@ class MediaController extends Controller{
         $media_id = $request->media_id;
         $media = Media::find($media_id);
         
+        if(!$media){
+            abort(400);
+        }
 
         if($media->delete()){
             return Response::json(['status'=>'success']);
