@@ -40,38 +40,58 @@
                     </a>
                 </div>
             </div>
-            <div class="media-photo-detail text-center">
-                <div class="col-md-12 font-alt post-title">{{ $post->title }}</div>
+            <div class="media-photo-title text-center ">
+                {{ $post->title }}
             </div>
             <div class="media-photo-detail text-center pb-10">
-                <!-- collapse start -->
-                <div id="showPhotoDetail" class="font-alt post-title" style="cursor: pointer;">Photo Details</div>
-                <div id="exifData" style="display:none;">
+                <a class="open-post-detail">
+                  Details
+                </a>
+                <div class="post-info pb-10">
                     @if(isset($post->exif))
 
                         @if(isset($post->exif['camera']))
-                            {{ $post->exif['camera'] }} <br>
+                        <div class="post-info-camera">
+                           {{ $post->exif['camera'] }}
+                        </div>
                         @endif
 
                         @if(isset($post->exif['lens']))
-                           {{ $post->exif['lens'] }} <br>
+                        <div class="post-info-lens">
+                            {{ $post->exif['lens'] }}
+                        </div>
                         @endif
 
-                        {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
-                        {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
-                        {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
+                        <div class="post-info-meta">
+                            {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
+                            {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
+                            {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
 
-                        @if(isset($post->exif['iso']))
-                           {{ $post->exif['iso'] }} <br>
-                        @endif
-
-                        @if(isset($post->exif['date_taken']))
-                           {{ date('d-m-Y H:i:s', strtotime($post->exif['date_taken'])) }}
-                        @endif
+                            @if(isset($post->exif['iso']))
+                               ISO {{ $post->exif['iso'] }}
+                            @endif
+                        </div>
                     
-                    @else
-                    No Photo Detail
                     @endif
+                    <div class="post-info-detail mt-20">
+                        <label>Category</label>
+                        <span>{{ $post->category['name'] }}</span>
+                        <div class="clearfix"></div>
+                    </div>
+                    @if(isset($post->exif['date_taken']) || !empty($post->exif['date_taken']))
+                    <div class="post-info-detail">
+                        <label>Taken</label>
+                        <span>{{ $post->exif['date_taken'] }}</span>
+                        <div class="clearfix"></div>
+                    </div>
+                    @endif
+                    <div class="post-info-detail">
+                        <label>Uploaded</label>
+                        <span>{{ $post->created_at->diffForHumans() }}</span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                    
                 </div>
                 <!-- collapse end -->
             </div>

@@ -204,7 +204,9 @@ class MediaController extends Controller{
                 $sm->destroy();
             }
         } catch(\Exception $e){
-            dd($e->getMessage());
+            \Log::error($e->getMessage());
+
+            return abort(400);
         }
 
         $input['images'] = [
@@ -243,6 +245,7 @@ class MediaController extends Controller{
 
         if(isset($exif['EXIF']['FocalLength'])){
             $focal_length = $exif['EXIF']['FocalLength'];
+            $focal_length = str_replace('/1', 'mm', $focal_length);
             $results['focal_length'] = $focal_length;
         }
         

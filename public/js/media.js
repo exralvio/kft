@@ -197,6 +197,14 @@ $(function(){
         $('#commentPhoto').focus();
     });
 
+    $('body').on('click', '.open-post-detail', function(e){
+        e.preventDefault();
+        $(this).toggleClass('open');
+        $('.post-info').toggleClass('closed');
+
+        $('.post-info:after').css('content',"\f03a");
+    });
+
     var prev_id = null;
     $(window).scroll(function() {
         if($(window).scrollTop() + $(window).height() >= $(document).height()) {
