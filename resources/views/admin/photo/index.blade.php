@@ -1,21 +1,21 @@
 @extends('admin/layouts/global')
 
 @section('admin-content')
-<!-- <section class="content-header">
+<section class="content-header">
     <h1>
-      Dashboard
-      <small>Control panel</small>
+      Photos
+      <!-- <small>Control panel</small> -->
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Dashboard</li>
+      <li class="active">Photos</li>
     </ol>
-</section> -->
+</section>
 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-      here is dashboard content
+      here is photos content
     </div>
     <!-- /.col -->
   </div>

@@ -103,9 +103,14 @@ Route::get('/resendActivation/{email}', 'Auth\AuthController@resendActivationMai
 /** for development purpose only, must be removed later **/
 Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
 
+
+/** Route for admin role */
 Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('dashboard', function(){
 		return view('admin/dashboard');
+	});
+	Route::get('photo', function(){
+		return view('admin/photo/index');
 	});
 	Route::get('logout','Auth\AdminAuthController@doLogout');
 });

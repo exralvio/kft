@@ -37,26 +37,60 @@
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li> -->
-        <!-- <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
-        </li> -->
-        <li class="active">
+        <!-- <li class="active">
           <a href="#">
             <i class="fa fa-th"></i> <span>Dashboard</span>
             <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+          </a>
+        </li> -->
+        <li>
+          <a href="{{ url('admin/photo') }}">
+            <i class="fa fa-image"></i> <span>Photo</span>
+            <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Users</span>
+            <span class="pull-right-container">
+              <!-- <span class="label label-primary pull-right">4</span> -->
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Users</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Admin Users</a></li>
+            </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-file"></i> <span>Pages</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list-alt"></i>
+            <span>Manage</span>
+            <span class="pull-right-container">
+              <!-- <span class="label label-primary pull-right">4</span> -->
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Publish</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Pending Photos</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Admin Permission</a></li>
+            </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-gear"></i> <span>Settings</span>
+            <span class="pull-right-container">
             </span>
           </a>
         </li>
