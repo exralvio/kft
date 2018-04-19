@@ -40,8 +40,15 @@
                     </a>
                 </div>
             </div>
-            <div class="media-photo-title text-center ">
-                {{ $post->title }}
+            <div class="media-photo-title">
+                <h5>
+                    {{ $post->title }}
+                </h5>
+                @if(!empty($post->description))
+                    <p>
+                        {{ $post->description }}
+                    </p>
+                @endif
             </div>
             <div class="media-photo-detail text-center pb-10">
                 <a class="open-post-detail">

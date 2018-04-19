@@ -550,10 +550,18 @@ select.discover-category, select.discover-category:focus {
 }
 
 .media-photo-title {
-    font-weight: bold;
-    padding: 10px 0;
+    padding: 10px 5px;
     border-top: 1px solid #EEEFF2;
     border-bottom: 1px solid #EEEFF2;
+}
+
+.media-photo-title h5 {
+    margin: 0px;
+    font-size: 20px;
+}
+
+.media-photo-title p {
+    margin: 0px;
 }
 
 .open-post-detail {
