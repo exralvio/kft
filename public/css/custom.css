@@ -553,3 +553,8 @@ a.profile-link {
 	z-index: 1;
 	position: relative;
 }
+
+/** override css */
+.form textarea {
+	text-transform: none!important;
+}
