@@ -20,7 +20,11 @@ class User extends Authenticatable implements CanResetPasswordContract{
     ];
 
     public static function current(){
-        $sess = session('user');
+        $sess = \Auth::user();
+
+        if(!$sess){
+            return false;
+        }
 
         $user = User::raw()->findOne(['_id'=>new ObjectId($sess['_id'])]);
         
@@ -190,10 +194,16 @@ class User extends Authenticatable implements CanResetPasswordContract{
     }
 
     public static function isFollower($user_id){
-        $current_id = User::current()['_id'];
+        $current_user = User::current();
+
+        if(!$current_user){
+            return false;
+        }
+
+        $current_user_id = $current_user['_id'];
         $user_id = new ObjectID($user_id);
 
-        $followed = \App\Models\Following::raw()->findOne(['user_id'=>$current_id, 'followings.id'=>$user_id]);
+        $followed = \App\Models\Following::raw()->findOne(['user_id'=>$current_user_id, 'followings.id'=>$user_id]);
 
         return $followed ? true : false;
     }

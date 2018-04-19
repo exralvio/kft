@@ -11,21 +11,13 @@
 @section('content')
 <!-- Section -->
 <section class="small-section mt-80 bg-white pb-0 pt-0 profile-header">
-    <div class="relative mb-30 mt-30">
+    <div class="relative mb-10 mt-30">
         <div class="row">
             <div class="col-sm-12 align-center">
-                @if($user['_id'] == \App\Models\User::current()['_id'])
+                @if(\Auth::check() and $current_user_id == $user['_id'])
                 <div class="text-right profile-button">
                     <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
                     <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
-                </div>
-                @else
-                <div class="profile-follow">
-                    @if(\App\Models\User::isFollower($user['_id']))
-                    <a class="btn btn-follow followed follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
-                    @else
-                    <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
-                    @endif
                 </div>
                 @endif
 
@@ -36,6 +28,16 @@
                         <img src="{{ url('') }}/images/pp-icon.png" />
                     @endif
                 </div>
+
+                @if($current_user_id != $user['_id'])
+                <div class="profile-follow mt-10">
+                    @if(\App\Models\User::isFollower($user['_id']))
+                    <a class="btn btn-follow followed follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Followed</a>
+                    @else
+                    <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
+                    @endif
+                </div>
+                @endif
             </div>
         </div>
 

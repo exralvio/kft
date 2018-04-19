@@ -36,11 +36,19 @@ $(function(){
 						$('.follow-'+userid).text('Follow');
 					}
 				} else if(response.status == 'error'){
-					console.log(response.errors);
+					alert(response.errors);
 				}
 
 				$(that).prop('disabled', false);
 			}
-		});
+		}).fail(function(jqXHR, ajaxOptions, thrownError)
+	    {
+	        if(thrownError == 'Unauthorized'){
+	            window.location = '/login';
+	            return;
+	        }
+
+	        alert('failed to connect to server ...');
+	    });;
 	});
 });
