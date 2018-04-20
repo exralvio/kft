@@ -14,11 +14,13 @@
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/AdminLTE.min.css">
+    <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
-  <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/morris.js/morris.css">
+  <!-- <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/morris.js/morris.css"> -->
   <!-- jvectormap -->
   <!-- <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/jvectormap/jquery-jvectormap.css"> -->
   <!-- Date Picker -->
@@ -120,8 +122,8 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ url('') }}/admin_lte/components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<script src="{{ url('') }}/admin_lte/components/raphael/raphael.min.js"></script>
-<script src="{{ url('') }}/admin_lte/components/morris.js/morris.min.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/raphael/raphael.min.js"></script> -->
+<!-- <script src="{{ url('') }}/admin_lte/components/morris.js/morris.min.js"></script> -->
 <!-- Sparkline -->
 <script src="{{ url('') }}/admin_lte/components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -136,6 +138,9 @@
 <script src="{{ url('') }}/admin_lte/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ url('') }}/admin_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- DataTables -->
+<script src="{{ url('') }}/admin_lte/components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ url('') }}/admin_lte/components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Slimscroll -->
 <script src="{{ url('') }}/admin_lte/components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->

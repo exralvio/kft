@@ -113,4 +113,5 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 		return view('admin/photo/index');
 	});
 	Route::get('logout','Auth\AdminAuthController@doLogout');
+	Route::resource('media', 'Backend\MediaController');
 });
