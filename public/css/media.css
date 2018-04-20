@@ -550,7 +550,7 @@ select.discover-category, select.discover-category:focus {
 }
 
 .media-photo-title {
-    padding: 10px 5px;
+    padding: 10px 15px;
     border-top: 1px solid #EEEFF2;
     border-bottom: 1px solid #EEEFF2;
 }
@@ -615,7 +615,6 @@ select.discover-category, select.discover-category:focus {
 }
 
 .post-info-camera {
-    padding: 20px 0 0;
     font-size: 13px;
     line-height: 17px;
 }

@@ -40,7 +40,7 @@
                     </a>
                 </div>
             </div>
-            <div class="media-photo-title">
+            <div class="media-photo-title align-left">
                 <h5>
                     {{ $post->title }}
                 </h5>
@@ -51,10 +51,10 @@
                 @endif
             </div>
             <div class="media-photo-detail text-center pb-10">
-                <a class="open-post-detail">
+                <a class="open-post-detail open">
                   Details
                 </a>
-                <div class="post-info pb-10">
+                <div class="post-info pb-10 pt-10">
                     @if(isset($post->exif))
 
                         @if(isset($post->exif['camera']))
@@ -69,18 +69,25 @@
                         </div>
                         @endif
 
-                        <div class="post-info-meta">
-                            {{ isset($post->exif['focal_length']) ? $post->exif['focal_length'] : '' }}&nbsp;
-                            {{ isset($post->exif['shutter_speed']) ? $post->exif['shutter_speed'] : '' }}&nbsp;
-                            {{ isset($post->exif['aperture']) ? $post->exif['aperture'] : '' }}&nbsp;
-
+                        @if(isset($post->exif['focal_length']) || isset($post->exif['shutter_speed']) || isset($post->exif['aperture']) || isset($post->exif['iso']))
+                        <div class="post-info-meta mb-20">
+                            @if(isset($post->exif['focal_length']))
+                                <span>{{ $post->exif['focal_length'] }}</span>
+                            @endif
+                            @if(isset($post->exif['shutter_speed']))
+                                <span>{{ $post->exif['shutter_speed'] }}</span>
+                            @endif
+                            @if(isset($post->exif['aperture']))
+                                <span>{{ $post->exif['aperture'] }}</span>
+                            @endif
                             @if(isset($post->exif['iso']))
-                               ISO {{ $post->exif['iso'] }}
+                               <span>ISO {{ $post->exif['iso'] }}</span>
                             @endif
                         </div>
+                        @endif
                     
                     @endif
-                    <div class="post-info-detail mt-20">
+                    <div class="post-info-detail">
                         <label>Category</label>
                         <span>{{ $post->category['name'] }}</span>
                         <div class="clearfix"></div>
