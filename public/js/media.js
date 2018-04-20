@@ -27,11 +27,11 @@ function loadMoreData(last_id){
 }
 
 function openSinglePost(e){
-    e.preventDefault();
-
-    if($(e.target).hasClass('like-button')){
+    if($(e.target).hasClass('like-button') || $(e.target).hasClass('work-title') || $(e.target).hasClass('work-pp-image')){
         return;
     }
+
+    e.preventDefault();
 
     var post_id = $(this).data('postid');
 
