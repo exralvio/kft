@@ -75,6 +75,10 @@ class DashboardController extends Controller{
         $comments = Comment::where('photo_id','=',new ObjectId($mediaId))->get();
         $post = Media::find($mediaId);
 
+        if(!$post){
+            return abort(404);
+        }
+
         if($post){
             $post->updateView();
         }
@@ -86,9 +90,13 @@ class DashboardController extends Controller{
 
     public function postComment(Request $request){
         $currentUser = User::current();
-        // dd($currentUser);
+       
         $media = Media::find($request->get('post_id'));
-        // dd($media);
+
+        if(!$media){
+            return abort(400);
+        }
+        
         $comment = new Comment;
         $comment->photo_id = new ObjectId($media->_id);
         $comment->user = [
