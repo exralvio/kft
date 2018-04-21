@@ -109,9 +109,10 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('dashboard', function(){
 		return view('admin/dashboard');
 	});
-	Route::get('photo', function(){
-		return view('admin/photo/index');
-	});
+	// Route::get('photo', function(){
+	// 	return view('admin/photo/index');
+	// });
 	Route::get('logout','Auth\AdminAuthController@doLogout');
+	Route::get('media/allMedia', 'Backend\MediaController@getMedia');
 	Route::resource('media', 'Backend\MediaController');
 });

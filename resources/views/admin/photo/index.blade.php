@@ -17,7 +17,7 @@
     <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
+            <h3 class="box-title">List of Photos</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -31,22 +31,36 @@
                   <th>User</th>
                   <th>Action</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>image</td>
-                  <td>title</td>
-                  <td>Description</td>
-                  <td>category</td>
-                  <td>fullname</td>
+              </thead>
+              <tbody>
+                @foreach ($medias as $media)
+                <tr id="list-{{ $media->_id }}">
                   <td>
-                    <div class="action-btn-bg" style="background-color: #346bb0;cursor: pointer;height: 20px;float: left;padding: 0px 10px;border-radius: 5px;color: #fff;">
-                      <i class="fa fa-edit"></i>Edit
+                    <div class="img-container">
+                      <img src="{{ !empty($media->images['small']) ? url($media->images['small']) :url($media->images['medium']) }}"/>
                     </div>
                   </td>
+                  <td id="title-{{ $media->_id }}">{{ $media->title }}</td>
+                  <td>{{ $media->description }}</td>
+                  <td>category</td>
+                  <td>{{ $media->user['fullname'] }}</td>
+                  <td>
+                  <a href="{{ url('admin/media').'/'.$media->_id }}">
+                    <div class="action-btn bg-blue">
+                        <i class="fa fa-edit"></i> Edit
+                    </div>
+                  </a>
+                  <a data-postId="{{$media->id}}" class="remove-button">
+                    <div class="action-btn bg-red">
+                        <i class="fa fa-remove"></i> Delete
+                    </div>
+                  </a>
+                  </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
+            {{ $medias->links() }}
           </div>
           <!-- /.box-body -->
         </div>
@@ -55,15 +69,20 @@
   </div>
   <!-- /.row -->
 </section>
+
+@Include('admin/partial/confirm-delete')
+
 @endsection
 
 @section('admin_footer_script')
 <script>
 $(function () {
-  $('#mediaList').DataTable({
-    ordering: false
-  });
-  console.log($('#mediaList'));
+  $('.remove-button').on('click', function(v, k){
+    var id = $(this).attr('data-postId');
+    var title = $('#title-'+id).html();
+    var url = '/admin/media/';
+    deleteList(url, id, title);
+  })
 })
 </script>
 @endsection

@@ -165,7 +165,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\NotificationServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
@@ -219,7 +218,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'NotificationHelper' => App\Helpers\NotificationHelper::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

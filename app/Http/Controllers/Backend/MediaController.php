@@ -15,7 +15,9 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias = Media::get();
+        $medias = Media::paginate(10);
+        // dd($medias);
+        return view('admin.photo.index',['medias'=>$medias]);
     }
 
     /**
