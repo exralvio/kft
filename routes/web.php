@@ -23,10 +23,6 @@ Route::get('/about', function(){
 	return view('landing/about');
 });
 
-Route::get('/contact', function(){
-	return view('landing/contact');
-});
-
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');
 
