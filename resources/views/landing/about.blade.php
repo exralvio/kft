@@ -80,7 +80,7 @@
                             </div>
                             
                             <div class="team-item-role">
-                                Pelindung
+                                Board Of Executive
                             </div>
                             
                         </div>
