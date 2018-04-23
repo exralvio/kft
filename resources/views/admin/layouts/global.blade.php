@@ -31,6 +31,9 @@
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <!-- <link rel="stylesheet" href="{{ url('') }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
+  <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
+  <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/custom-admin.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -152,6 +155,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ url('') }}/admin_lte/dist/js/pages/dashboard.js"></script>
 <script src="{{ url('') }}/admin_lte/dist/js/custom.js"></script>
+<script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script> 
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{ url('') }}/admin_lte/dist/js/demo.js"></script> -->
 @yield('admin_footer_script')

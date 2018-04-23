@@ -1,0 +1,11 @@
+.zoom-modal{
+    max-width: none;
+}
+
+.remodal-close {
+    right: 0px;
+    z-index: 9999;
+    left: inherit!important;
+    top: 0px;
+    background: beige;
+}

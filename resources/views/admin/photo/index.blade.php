@@ -37,7 +37,10 @@
                 <tr id="list-{{ $media->_id }}">
                   <td>
                     <div class="img-container">
-                      <img src="{{ !empty($media->images['small']) ? url($media->images['small']) :url($media->images['medium']) }}"/>
+                      <a href="#" class="zoomable" data-postId="{{ $media->_id }}">
+                        <img src="{{ !empty($media->images['small']) ? url($media->images['small']) :url($media->images['medium']) }}"/>
+                      </a>
+                      <input id="img-{{ $media->_id }}" type="hidden" value="{{ url($media->images['large']) }}">
                     </div>
                   </td>
                   <td id="title-{{ $media->_id }}">{{ $media->title }}</td>
@@ -70,6 +73,13 @@
   <!-- /.row -->
 </section>
 
+<div class="remodal zoom-modal" data-remodal-id="zoom-modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <div>
+    <img id="zoom-img-container" src="" alt="image"> 
+  </div>
+</div>
+
 @Include('admin/partial/confirm-delete')
 
 @endsection
@@ -77,6 +87,15 @@
 @section('admin_footer_script')
 <script>
 $(function () {
+
+  $('.zoomable').on('click', function(){
+    id = $(this).attr('data-postId');
+    imgSrc = $('#img-'+id).val();
+    $('#zoom-img-container').attr('src',imgSrc);
+    var inst = $('[data-remodal-id=zoom-modal]').remodal();
+    inst.open();
+  });
+
   $('.remove-button').on('click', function(v, k){
     var id = $(this).attr('data-postId');
     var title = $('#title-'+id).html();
