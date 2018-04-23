@@ -14,12 +14,7 @@
     <div class="relative mb-10 mt-30">
         <div class="row">
             <div class="col-sm-12 align-center">
-                @if(\Auth::check() and $current_user_id == $user['_id'])
-                <div class="text-right profile-button">
-                    <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
-                    <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
-                </div>
-                @endif
+                
 
                 <div class="profile-avatar">
                     @if (!empty($user['photo']))
@@ -36,6 +31,13 @@
                     @else
                     <a class="btn btn-follow follow-{{ $user['_id'] }}" data-userid="{{ $user['_id'] }}" data-action="{{ url('user/relation') }}">Follow</a>
                     @endif
+                </div>
+                @endif
+
+                @if(\Auth::check() and $current_user_id == $user['_id'])
+                <div class="profile-button mt-10">
+                    <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
+                    <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
                 </div>
                 @endif
             </div>
