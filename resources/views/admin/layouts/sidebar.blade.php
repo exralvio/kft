@@ -46,7 +46,7 @@
           </a>
         </li> -->
         <li>
-          <a href="{{ url('admin/photo') }}">
+          <a href="{{ url('admin/media') }}">
             <i class="fa fa-image"></i> <span>Photo</span>
             <span class="pull-right-container">
               <!-- <small class="label pull-right bg-green">new</small> -->
