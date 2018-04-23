@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/custom.css">
     <!-- DataTables -->
-  <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/skins/_all-skins.min.css">
@@ -34,6 +34,7 @@
   <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
   <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
   <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/custom-admin.css">
+  <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/bootstrap-tagsinput.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -127,35 +128,35 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ url('') }}/admin_lte/components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
-<!-- <script src="{{ url('') }}/admin_lte/components/raphael/raphael.min.js"></script> -->
-<!-- <script src="{{ url('') }}/admin_lte/components/morris.js/morris.min.js"></script> -->
+<!-- <script src="{{ url('') }}/admin_lte/components/raphael/raphael.min.js"></script>
+<script src="{{ url('') }}/admin_lte/components/morris.js/morris.min.js"></script> -->
 <!-- Sparkline -->
 <script src="{{ url('') }}/admin_lte/components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="{{ url('') }}/admin_lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="{{ url('') }}/admin_lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="{{ url('') }}/admin_lte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script> -->
 <!-- jQuery Knob Chart -->
-<script src="{{ url('') }}/admin_lte/components/jquery-knob/dist/jquery.knob.min.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/jquery-knob/dist/jquery.knob.min.js"></script> -->
 <!-- daterangepicker -->
-<script src="{{ url('') }}/admin_lte/components/moment/min/moment.min.js"></script>
-<script src="{{ url('') }}/admin_lte/components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/moment/min/moment.min.js"></script> -->
+<!-- <script src="{{ url('') }}/admin_lte/components/bootstrap-daterangepicker/daterangepicker.js"></script> -->
 <!-- datepicker -->
 <script src="{{ url('') }}/admin_lte/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="{{ url('') }}/admin_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
 <!-- DataTables -->
-<script src="{{ url('') }}/admin_lte/components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="{{ url('') }}/admin_lte/components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/datatables.net/js/jquery.dataTables.min.js"></script> -->
 <!-- Slimscroll -->
-<script src="{{ url('') }}/admin_lte/components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/jquery-slimscroll/jquery.slimscroll.min.js"></script> -->
 <!-- FastClick -->
-<script src="{{ url('') }}/admin_lte/components/fastclick/lib/fastclick.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/components/fastclick/lib/fastclick.js"></script> -->
 <!-- AdminLTE App -->
 <script src="{{ url('') }}/admin_lte/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ url('') }}/admin_lte/dist/js/pages/dashboard.js"></script>
+<!-- <script src="{{ url('') }}/admin_lte/dist/js/pages/dashboard.js"></script> -->
 <script src="{{ url('') }}/admin_lte/dist/js/custom.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script> 
+<script type="text/javascript" src="{{ url('') }}/js/bootstrap-tagsinput.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{ url('') }}/admin_lte/dist/js/demo.js"></script> -->
 @yield('admin_footer_script')

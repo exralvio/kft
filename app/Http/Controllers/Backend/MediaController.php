@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
+use MongoDB\BSON\ObjectID;
+use Session;
 
 class MediaController extends Controller
 {
@@ -16,7 +18,6 @@ class MediaController extends Controller
     public function index()
     {
         $medias = Media::paginate(10);
-        // dd($medias);
         return view('admin.photo.index',['medias'=>$medias]);
     }
 
@@ -49,7 +50,7 @@ class MediaController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -60,7 +61,9 @@ class MediaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $media = Media::find($id);
+        $media->keywords = join(", ", $media->keywords);
+        return view('admin/photo/edit', ["media"=>$media]);
     }
 
     /**
@@ -72,7 +75,15 @@ class MediaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $media = Media::find($id);
+        $media->title = $data['title'];
+        $media->description = $data['description'];
+        $media->keywords = explode(',', $data['keywords']);
+        if($media->update()){
+            Session::flash('save_success', "Photo data changes has been succcesfully saved");
+            return redirect('admin/media/'.$id.'/edit');
+        }
     }
 
     /**
@@ -83,6 +94,6 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Media::destroy($id);
     }
 }

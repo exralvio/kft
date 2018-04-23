@@ -48,7 +48,7 @@
                   <td>category</td>
                   <td>{{ $media->user['fullname'] }}</td>
                   <td>
-                  <a href="{{ url('admin/media').'/'.$media->_id }}">
+                  <a href="{{ url('admin/media').'/'.$media->_id }}/edit">
                     <div class="action-btn bg-blue">
                         <i class="fa fa-edit"></i> Edit
                     </div>
