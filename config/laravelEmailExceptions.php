@@ -50,7 +50,7 @@ return [
         'globalThrottle' => true,
         'globalThrottleLimit' => 20,
         'globalThrottleDurationMinutes' => 30,
-        'toEmailAddress' => ['exralvioleegia@gmail.com'],
+        'toEmailAddress' => ['exralvioleegia@gmail.com','fazrin.mutaqin@gmail.com'],
         'fromEmailAddress' => 'kft.telkom@gmail.com',
         'emailSubject' => "KFT Error Exception"
     ]
