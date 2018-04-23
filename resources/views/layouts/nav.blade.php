@@ -19,7 +19,6 @@
             <ul class="clearlist scroll-nav local-scroll">
                 <li><a href="{{ url('about') }}">About</a></li>
                 <li><a href="{{ url('discover') }}">Discover</a></li>
-                <li><a href="{{ url('contact') }}">Contact</a></li>
             </ul>
         </div>
 
