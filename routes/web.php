@@ -111,8 +111,22 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	});
 
 	Route::get('logout','Auth\AdminAuthController@doLogout');
+
+	/**
+	 * Media
+	*/
 	Route::get('media/allMedia', 'Backend\MediaController@getMedia');
+	Route::delete('media/{id}', ['as'=> 'media.destroy', 'uses'=>'Backend\MediaController@destroy']);
 	Route::post('media/{id}', ['as'=> 'media.update', 'uses'=>'Backend\MediaController@update']);
 	Route::get('media/{id}/edit', 'Backend\MediaController@edit');
 	Route::get('media', 'Backend\MediaController@index');
+	
+	/**
+	 * User
+	 */
+	Route::get('user', 'Backend\UserController@index');
+	Route::get('user/{id}/edit', 'Backend\UserController@edit');
+	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
+	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
+
 });

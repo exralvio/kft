@@ -9,3 +9,11 @@
     top: 0px;
     background: beige;
 }
+
+.box-footer{
+    text-align: right;
+}
+
+.box-footer button{
+    margin: 0 5px;
+}

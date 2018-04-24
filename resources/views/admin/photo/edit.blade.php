@@ -15,14 +15,9 @@
 
 <section class="content">
     @if(Session::has('save_success'))
-    <div class="row">
-        <div class="col-sm-12 col-md-4 col-md-offset-4">
-            <div class="row">
-                <div class="alert success">
-                    <i class="fa fa-lg fa-check-circle-o"></i> {{ Session::get('save_success') }}
-                </div>
-            </div>
-        </div>    
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> Save Success!</h4> {{ Session::get('save_success') }}
     </div>
     @endif
     <div class="row">
