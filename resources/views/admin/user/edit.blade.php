@@ -3,12 +3,12 @@
 @section('admin-content')
 <section class="content-header">
     <h1>
-      Photos
+      User
       <!-- <small>Control panel</small> -->
     </h1>
     <ol class="breadcrumb">
       <li><i class="fa fa-dashboard"></i> <a href="{{ url('admin/dashboard') }}">Home</a></li>
-      <li class="active"><a href="{{ url('admin/media') }}">Photos</a></li>
+      <li class="active"><a href="{{ url('admin/media') }}">User</a></li>
       <li class="active">Edit</li>
     </ol>
 </section>
@@ -24,15 +24,24 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Edit Photo</h3>
+                    <h3 class="box-title">Edit User</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="edit-img-container" style="width:200px;height: auto;overflow: hidden;text-align: center;margin: 10px auto;">
+                    <!-- <div class="edit-img-container" style="width:200px;height: auto;overflow: hidden;text-align: center;margin: 10px auto;">
                         <img style="width: 100%;height: auto;" src="{{ url($user->photo) }}">
-                    </div>
-                    <form class="form form-uploader pt-20 pd-20 align-left form-horizontal" method="POST" role="form" action="{{ route('user.update', $user->_id) }}">
+                    </div> -->
+                    <form class="form form-uploader pt-20 pd-20 align-left form-horizontal" method="POST" role="form" action="{{ route('user.update', $user->_id) }}"  enctype="multipart/form-data">
                         {{ csrf_field() }}
+                        <div class="col-md-12 edit-pp-container">
+                            <div id="pp-preview">
+                                <input type="file" name="photo" id="image-upload" accept="image/x-png,image/jpeg" />
+                            </div>
+                            <div class="col-md-12 mb-10 text-center" >
+                                <label for="image-upload" id="pp-image-label">Change Profile Picture</label>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="firstname" class="col-sm-2 control-label">First Name</label>
                             <div class="col-sm-10">
@@ -147,6 +156,25 @@
 @section('admin_footer_script')
 <script type="text/javascript">
 $(document).ready(function() {
+
+    var photo = "<?php echo $user['photo']; ?>";
+    var photoUrl = "";
+    if(photo.length && photo.indexOf('http') == -1){
+        photoUrl = "{!! url('"+photo+"') !!}";
+    }else if(photo.length && photo.indexOf('http') != -1){
+        photoUrl = photo;
+    }else{
+        photoUrl = "<?php url('pp-icon.png') ?>";
+    }
+
+    console.log('photoUrl', photoUrl);
+
+    $('#pp-preview').css({'background':"url("+photoUrl+")","background-size":"contain"});
+    $.uploadPreview({
+        input_field: "#image-upload",
+        preview_box: "#pp-preview"
+    });
+
     if($('#company').val() == 'telkom'){
         $('#department-container').show();
         $('#subsidiari-container').hide();

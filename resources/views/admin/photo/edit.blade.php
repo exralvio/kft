@@ -41,6 +41,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-10">
+                                {{ Form::select('category',  array(''=>'Uncategorized') + (App\Models\MediaCategory::pluck('name', '_id')->all()), $media->category['id'], ['placeholder'=>'Uncategorized', 'class'=>'input-md form-control edit-category']) }}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="Description" class="col-sm-2 control-label">Description</label>
                             <div class="col-sm-10">
                                 <textarea type="text" class="form-control" id="Description" name="description" placeholder="Description">
@@ -53,6 +60,57 @@
                             <label for="keyword" class="col-sm-2 control-label">Keyword</label>
                             <div class="col-sm-10">
                                 <input class="photo-keywords form-control" name="keywords" value="{{ $media->keywords }}" data-role="tagsinput">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12 text-center"><hr></div>
+
+                        <div class="form-group">
+                            <label for="camera" class="col-sm-2 control-label">Camera</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="camera" value="{{ $media->exif['camera'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lens" class="col-sm-2 control-label">lens</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="lens" value="{{ $media->exif['lens'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="focal_length" class="col-sm-2 control-label">focal_length</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="focal_length" value="{{ $media->exif['focal_length'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="shutter_speed" class="col-sm-2 control-label">shutter_speed</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="shutter_speed" value="{{ $media->exif['shutter_speed'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aperture" class="col-sm-2 control-label">aperture</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="aperture" value="{{ $media->exif['aperture'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="iso" class="col-sm-2 control-label">iso</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="iso" value="{{ $media->exif['iso'] }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date_taken" class="col-sm-2 control-label">date_taken</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="date_taken" value="{{ $media->exif['date_taken'] }}">
                             </div>
                         </div>
 

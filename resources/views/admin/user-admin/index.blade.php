@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Users</li>
+      <li class="active">Admin Users</li>
     </ol>
 </section>
 
@@ -17,55 +17,45 @@
     <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">List of User</h3>
+            <h3 class="box-title">List of Admin User</h3>
+          </div>
+          <div class="box-header">
+              <a class="pull-right" href="{{ url('admin/user-admin/create') }}">
+                <div class="action-btn bg-blue">
+                    <i class="fa fa-plus"></i> Add
+                </div>
+              </a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="userList" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>Photo</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Gender</th>
-                  <th>Company</th>
-                  <th>Department</th>
-                  <th>Subsidiaries</th>
+                  <th>Admin Role</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($users as $user)
                 <tr id="list-{{ $user->_id }}">
-                  <td>
-                    <div class="img-container">
-                      <a href="#" class="zoomable" data-postId="{{ $user->_id }}">
-                        @if(!empty($user->photo))
-                          <img src="{{ url($user->photo) }}"/>
-                        @else
-                          -
-                        @endif
-                      </a>
-                      <input id="img-{{ $user->_id }}" type="hidden" value="{{ url($user->photo) }}">
-                    </div>
-                  </td>
                   <td id="title-{{ $user->_id }}">{{ $user->fullname }}</td>
                   <td id="title-{{ $user->_id }}">{{ $user->email }}</td>
-                  <td>{{ ($user->gender == 'F') ? 'Female' : 'Male' }}</td>
-                  <td>{{ $user->company }}</td>
-                  <td>{{ !empty($user->department['name']) ? $user->department['name'] : '-' }}</td>
-                  <td>{{ !empty($user->sister_company['name']) ? $user->sister_company['name'] : '-' }}</td>
+                  <td id="title-{{ $user->_id }}">{{ $user->admin_role }}</td>
                   <td>
-                    <a href="{{ url('admin/user').'/'.$user->_id }}/edit">
+                    <a href="{{ url('admin/user-admin').'/'.$user->_id }}/edit">
                       <div class="action-btn bg-blue">
                           <i class="fa fa-edit"></i> Edit
                       </div>
                     </a>
+                    @if($user->admin_role != 'Superadmin')
                     <a data-postId="{{$user->id}}" class="remove-button">
                       <div class="action-btn bg-red">
-                          <i class="fa fa-remove"></i> Delete
+                        <i class="fa fa-remove"></i> Delete
                       </div>
                     </a>
+                    @endif
                   </td>
                 </tr>
                 @endforeach
@@ -95,20 +85,10 @@
 @section('admin_footer_script')
 <script>
 $(function () {
-
-  $('.zoomable').on('click', function(){
-    $('#zoom-img-container').attr('src','');
-    id = $(this).attr('data-postId');
-    imgSrc = $('#img-'+id).val();
-    $('#zoom-img-container').attr('src',imgSrc);
-    var inst = $('[data-remodal-id=zoom-modal]').remodal();
-    inst.open();
-  });
-
   $('.remove-button').on('click', function(v, k){
     var id = $(this).attr('data-postId');
     var title = $('#title-'+id).html();
-    var url = '/admin/user/';
+    var url = '/admin/user-admin/';
     deleteList(url, id, title);
   })
 })

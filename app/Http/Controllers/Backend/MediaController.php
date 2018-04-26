@@ -80,6 +80,15 @@ class MediaController extends Controller
         $media->title = $data['title'];
         $media->description = $data['description'];
         $media->keywords = explode(',', $data['keywords']);
+
+        $category = \App\Models\MediaCategory::find($request->category);
+        $input_category = [
+            'id'=>new ObjectID($request->category),
+            'name'=>$category['name']
+        ];
+
+        $media->category = $input_category;
+
         if($media->update()){
             Session::flash('save_success', "Photo data changes has been succcesfully saved");
             return redirect('admin/media/'.$id.'/edit');

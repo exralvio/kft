@@ -63,7 +63,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('admin/user') }}"><i class="fa fa-circle-o"></i> Users</a></li>
-            <li><a href="{{ url('admin/admin-user') }}"><i class="fa fa-circle-o"></i> Admin Users</a></li>
+            <li><a href="{{ url('admin/user-admin') }}"><i class="fa fa-circle-o"></i> Admin Users</a></li>
             </ul>
         </li>
         <li>

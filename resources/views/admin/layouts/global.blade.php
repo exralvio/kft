@@ -157,6 +157,7 @@
 <script src="{{ url('') }}/admin_lte/dist/js/custom.js"></script>
 <script type="text/javascript" src="{{ url('') }}/js/remodal.min.js"></script> 
 <script type="text/javascript" src="{{ url('') }}/js/bootstrap-tagsinput.js"></script>
+<script type="text/javascript" src="{{ url('') }}/js/jquery.uploadPreview.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{ url('') }}/admin_lte/dist/js/demo.js"></script> -->
 @yield('admin_footer_script')

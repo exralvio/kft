@@ -45,7 +45,7 @@
                   </td>
                   <td id="title-{{ $media->_id }}">{{ $media->title }}</td>
                   <td>{{ $media->description }}</td>
-                  <td>category</td>
+                  <td>{{ !empty($media->category) ? $media->category['name'] : '-' }}</td>
                   <td>{{ $media->user['fullname'] }}</td>
                   <td>
                   <a href="{{ url('admin/media').'/'.$media->_id }}/edit">
@@ -89,6 +89,7 @@
 $(function () {
 
   $('.zoomable').on('click', function(){
+    $('#zoom-img-container').attr('src','');
     id = $(this).attr('data-postId');
     imgSrc = $('#img-'+id).val();
     $('#zoom-img-container').attr('src',imgSrc);
