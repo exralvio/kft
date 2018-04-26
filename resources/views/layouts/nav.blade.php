@@ -104,8 +104,8 @@
             </div>
 
             <div class="search-box visible-md visible-lg pull-right col-md-4">
-                <form action="{{ url('search') }}" class="form">
-                    <input type="text" name="q" class="form-control form-md" autocomplete="off" value="{{ isset($_GET['q']) ? $_GET['q'] : '' }}" >
+                <form action="{{ url('search') }}" class="form search-form">
+                    <input type="text" name="q" class="form-control form-md search-input" autocomplete="off" value="{{ isset($_GET['q']) ? $_GET['q'] : '' }}" >
                     <select name="type" class="form-control form-md">
                         <option value="photos" {{ isset($_GET['type']) && $_GET['type'] == 'photos' ? 'selected' : '' }}>Photo</option>
                         <option value="users" {{ isset($_GET['type']) && $_GET['type'] == 'users' ? 'selected' : '' }}>User</option>

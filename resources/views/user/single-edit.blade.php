@@ -57,7 +57,7 @@ Edit Profile
               </select>
           </div>
           <div class="col-md-6">
-            <label id="department_lbl" for="department">Department*</label>
+            <label id="department_lbl" for="department">Department</label>
             <select id="department" name="department" class="input-md round form-control">
               <option value="">-- Select Department --</option>
               @foreach (\App\Models\UserDepartment::all() as $department)
@@ -73,7 +73,7 @@ Edit Profile
             @endif
           </div>
           <div class="col-md-6">
-            <label id="sister_company_lbl" for="department">Subsidiaries*</label>
+            <label id="sister_company_lbl" for="department">Subsidiaries</label>
             <select id="sister_company" name="sister_company" class="input-md round form-control">
               <option value="">-- Select Subsidiaries --</option>
               @foreach (\App\Models\SisterCompany::all() as $sister_company)
@@ -111,7 +111,6 @@ Edit Profile
         </div>
         <div class="pt-20 pb-20 col-md-12 text-right">
           <div class="col-md-12">
-            <button type="button" data-remodal-action="cancel" class="btn btn-mod btn-gray btn-small btn-round" id="cancel-btn">Cancel</button>
             <button class="btn btn-mod btn-small btn-round" id="save-profile-btn">Save</button>
           </div>
         </div>

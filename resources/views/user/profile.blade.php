@@ -36,7 +36,7 @@
 
                 @if(\Auth::check() and $current_user_id == $user['_id'])
                 <div class="profile-button mt-10">
-                    <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage</a>
+                    <a  href="{{ url('manage/all') }}" class="btn btn-default">Manage Photo</a>
                     <a href="{{ url('user/edit') }}" class="btn btn-primary">Edit Profile</a>
                 </div>
                 @endif
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="work-intro">
                                     <div class="work-pp">
-                                        <img src="{{ url($media->user['photo']) }}">
+                                        <img src="{{ !empty($media->user['photo']) ? url($media->user['photo']) : url('images/pp-icon.png') }}">
                                     </div>
                                     <h3 class="work-title">{{ $media->title }}</h3>
 

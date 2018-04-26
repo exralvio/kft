@@ -7,9 +7,12 @@
         </div>
         <div class="col-xs-10 comment-content align-left">
             <div class="comment-name"><a href="{{ url('user/'.$comment->user['id']) }}">{{ $comment->user['fullname'] }}</a></div>
-            <p class="mb-0">{{ $comment->comment }}</p>
+            <p>{{ $comment->comment }}</p>
             <div class="comment-action">
-                <a href="#" class="comment-reply">Reply</a> <span>- {{ $comment->created_at->format('M d') }}</span>
+                <!-- <a href="#" class="comment-reply">Reply</a> 
+                <span>- {{ $comment->created_at->format('M d') }}</span> -->
+
+                <span>{{ $comment->created_at->format('M d') }}</span>
                 
                 @if(\Auth::check()) 
                     @if($current_user_id == $comment->user['id'])

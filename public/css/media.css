@@ -289,12 +289,21 @@ a.button-rounded{
 
 .comment-content {
     padding-left: 0px;
+    line-height: 20px;
 }
 
 .comment-action .del-comment {
     display: none;
 }
 
+.comment-content p {
+    line-height: 12px;
+    margin-bottom: 5px;
+}
+
+.comment-action span {
+    color: #b9c1c7;
+}
 
 .add-new-comment {
     content: "\f1d8";

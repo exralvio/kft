@@ -82,3 +82,9 @@ $('.btn-open-setting').on('click', function(e){
     e.preventDefault();
     editProfile.open();
 });
+
+$('.search-form').on('submit', function(e){
+    if(!$('.search-input').val()){
+        e.preventDefault();
+    }
+});
