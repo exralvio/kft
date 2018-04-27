@@ -129,10 +129,23 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
 	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
 	
+	/**
+	 * User Admin
+	*/
 	Route::get('user-admin', 'Backend\AdminController@index');
 	Route::get('user-admin/{id}/edit', 'Backend\AdminController@edit');
 	Route::get('user-admin/create', ['as'=>'useradmin.create','uses'=>'Backend\AdminController@create']);
 	Route::post('user-admin/create', ['as'=>'useradmin.store','uses'=>'Backend\AdminController@store']);
 	Route::post('user-admin/{id}', ['as'=> 'useradmin.update', 'uses'=>'Backend\AdminController@update']);
 	Route::delete('user-admin/{id}', ['as'=> 'useradmin.destroy', 'uses'=>'Backend\AdminController@destroy']);
+
+	/**
+	 * Pages
+	*/
+	Route::get('page', 'Backend\PageController@index');
+	Route::get('page/{id}/edit', 'Backend\PageController@edit');
+	Route::get('page/create', ['as'=>'page.create','uses'=>'Backend\PageController@create']);
+	Route::post('page/create', ['as'=>'page.store','uses'=>'Backend\PageController@store']);
+	Route::post('page/{id}', ['as'=> 'page.update', 'uses'=>'Backend\PageController@update']);
+	Route::delete('page/{id}', ['as'=> 'page.destroy', 'uses'=>'Backend\PageController@destroy']);
 });

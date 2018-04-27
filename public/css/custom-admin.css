@@ -70,3 +70,7 @@
     margin: auto;
     font-size: 14px;
 }
+
+#zoom-img-container{
+    max-width: 900px;
+}

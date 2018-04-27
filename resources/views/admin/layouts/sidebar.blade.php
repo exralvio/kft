@@ -67,7 +67,7 @@
             </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ url('admin/page') }}">
             <i class="fa fa-file"></i> <span>Pages</span>
             <span class="pull-right-container">
             </span>
