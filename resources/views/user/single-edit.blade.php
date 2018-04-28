@@ -23,6 +23,12 @@ Edit Profile
         {{ csrf_field() }}
         <div class="col-md-12 edit-pp-container">
             <div id="pp-preview">
+              <label for="image-upload">
+                <i class="fa fa-camera"></i>
+                <p>              
+                  Change Profile Picture
+                </p>
+              </label>
               <input type="file" name="photo" id="image-upload" accept="image/x-png,image/jpeg" />
             </div>
             <div class="col-md-12 mb-10 align-center" >
