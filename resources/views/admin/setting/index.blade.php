@@ -33,7 +33,17 @@
                 @foreach ($settings as $setting)
                 <tr id="list-{{ $setting->_id }}">
                   <td>{{ $setting->label }}</td>
-                  <td>{{ $setting->value }}</td>
+                  <td>
+                    @if($setting->type == 'bool')
+                      @if($setting->value == 1)
+                        <span class="btn-xs btn-success">Enabled</span>
+                      @else
+                        <span class="btn-xs btn-danger">Disabled</span>
+                      @endif
+                    @else
+                      {{ $setting->value }}
+                    @endif
+                  </td>
                   <td>
                     <a href="{{ url('admin/setting/'.$setting->_id) }}/edit">
                       <div class="action-btn bg-blue">

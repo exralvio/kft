@@ -46,7 +46,14 @@
                         <div class="form-group">
                             <label for="value" class="col-sm-2 control-label">Value</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="value" name="value" placeholder="Value" value="{{ $setting->value }}">
+                                @if($setting->type == 'bool')
+                                    <select name="value" id="value" class="form-control">
+                                        <option value="0" {{ $setting->value == 0 ? 'selected' : '' }}>Disable</option>
+                                        <option value="1" {{ $setting->value == 1 ? 'selected' : '' }}>Enable</option>
+                                    </select>
+                                @else
+                                    <input type="text" class="form-control" id="value" name="value" placeholder="Value" value="{{ $setting->value }}">
+                                @endif
                             </div>
                         </div>
 

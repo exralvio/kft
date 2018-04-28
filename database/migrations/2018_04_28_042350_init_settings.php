@@ -17,19 +17,23 @@ class InitSettings extends Migration
         $settings = [
             [
                 'label'=>'popular_like_threshold',
-                'value'=>10
+                'value'=>10,
+                'type'=>'text'
             ],
             [
                 'label'=>'popular_duedate',
-                'value'=>7
+                'value'=>7,
+                'type'=>'text'
             ],
             [
                 'label'=>'enable_post_pending',
-                'value'=>0
+                'value'=>0,
+                'type'=>'bool'
             ],
             [
                 'label'=>'publish_acc_threshold',
-                'value'=>2
+                'value'=>2,
+                'type'=>'text'
             ]
         ];
 
@@ -37,6 +41,7 @@ class InitSettings extends Migration
             $setting_m = new Setting;
             $setting_m->label = $setting['label'];
             $setting_m->value = $setting['value'];
+            $setting_m->type = $setting['type'];
             $setting_m->save();
         }
     }

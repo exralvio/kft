@@ -13,7 +13,9 @@ class MediaPopular extends Eloquent
     public static function updateMedia($media){
         $popular = MediaPopular::where(['media.id'=>new ObjectID($media['_id'])])->first();
 
-        if($media['like_count'] >= 10){
+        $popular_like_threshold = \App\Models\Setting::valueOf('popular_like_threshold');
+
+        if($media['like_count'] >= $popular_like_threshold){
             if($popular){
                 MediaPopular::updateLikeCount($media);
                 return;
@@ -30,7 +32,7 @@ class MediaPopular extends Eloquent
     }
 
     public static function addNewMedia($media){
-    	$popular_threshold = 7;
+    	$popular_duedate = \App\Models\Setting::valueOf('popular_duedate');;
 
     	$popular = new MediaPopular();
     	$popular->media = [
@@ -41,7 +43,7 @@ class MediaPopular extends Eloquent
     	$popular->user = $media['user'];
     	$popular->title = $media['title'];
     	$popular->category = $media['category'];
-    	$popular->popular_threshold = now()->addDays($popular_threshold)->format('Y-m-d H:i:s');
+    	$popular->popular_threshold = now()->addDays($popular_duedate)->format('Y-m-d H:i:s');
     	$popular->like_count = $media['like_count'];
 
     	$popular->save();
