@@ -103,9 +103,59 @@ Route::get('/resendActivation/{email}', 'Auth\AuthController@resendActivationMai
 /** for development purpose only, must be removed later **/
 Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
 
+
+/** Route for admin role */
 Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('dashboard', function(){
 		return view('admin/dashboard');
 	});
+
 	Route::get('logout','Auth\AdminAuthController@doLogout');
+
+	/**
+	 * Media
+	*/
+	Route::get('media/allMedia', 'Backend\MediaController@getMedia');
+	Route::delete('media/{id}', ['as'=> 'media.destroy', 'uses'=>'Backend\MediaController@destroy']);
+	Route::post('media/{id}', ['as'=> 'media.update', 'uses'=>'Backend\MediaController@update']);
+	Route::get('media/{id}/edit', 'Backend\MediaController@edit');
+	Route::get('media', 'Backend\MediaController@index');
+	
+	/**
+	 * User
+	 */
+	Route::get('user', 'Backend\UserController@index');
+	Route::get('user/{id}/edit', 'Backend\UserController@edit');
+	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
+	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
+	
+	/**
+	 * User Admin
+	*/
+	Route::get('user-admin', 'Backend\AdminController@index');
+	Route::get('user-admin/{id}/edit', 'Backend\AdminController@edit');
+	Route::get('user-admin/create', ['as'=>'useradmin.create','uses'=>'Backend\AdminController@create']);
+	Route::post('user-admin/create', ['as'=>'useradmin.store','uses'=>'Backend\AdminController@store']);
+	Route::post('user-admin/{id}', ['as'=> 'useradmin.update', 'uses'=>'Backend\AdminController@update']);
+	Route::delete('user-admin/{id}', ['as'=> 'useradmin.destroy', 'uses'=>'Backend\AdminController@destroy']);
+
+	/**
+	 * Pages
+	*/
+	Route::get('page', 'Backend\PageController@index');
+	Route::get('page/{id}/edit', 'Backend\PageController@edit');
+	Route::get('page/create', ['as'=>'page.create','uses'=>'Backend\PageController@create']);
+	Route::post('page/create', ['as'=>'page.store','uses'=>'Backend\PageController@store']);
+	Route::post('page/{id}', ['as'=> 'page.update', 'uses'=>'Backend\PageController@update']);
+	Route::delete('page/{id}', ['as'=> 'page.destroy', 'uses'=>'Backend\PageController@destroy']);
+
+	/**
+	 * Settings
+	**/
+	Route::get('setting', 'Backend\SettingController@index');
+	Route::get('setting/{id}/edit', 'Backend\SettingController@edit');
+	Route::get('setting/create', ['as'=>'setting.create','uses'=>'Backend\SettingController@create']);
+	Route::post('setting/create', ['as'=>'setting.store','uses'=>'Backend\SettingController@store']);
+	Route::post('setting/{id}', ['as'=> 'setting.update', 'uses'=>'Backend\SettingController@update']);
+	Route::delete('setting/{id}', ['as'=> 'setting.destroy', 'uses'=>'Backend\SettingController@destroy']);
 });
