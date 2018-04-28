@@ -84,11 +84,11 @@
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-circle-o"></i> Publish</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Pending Photos</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Admin Permission</a></li>
+            <!-- <li><a href="#"><i class="fa fa-circle-o"></i> Admin Permission</a></li> -->
             </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ url('admin/setting') }}">
             <i class="fa fa-gear"></i> <span>Settings</span>
             <span class="pull-right-container">
             </span>

@@ -148,4 +148,14 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('page/create', ['as'=>'page.store','uses'=>'Backend\PageController@store']);
 	Route::post('page/{id}', ['as'=> 'page.update', 'uses'=>'Backend\PageController@update']);
 	Route::delete('page/{id}', ['as'=> 'page.destroy', 'uses'=>'Backend\PageController@destroy']);
+
+	/**
+	 * Settings
+	**/
+	Route::get('setting', 'Backend\SettingController@index');
+	Route::get('setting/{id}/edit', 'Backend\SettingController@edit');
+	Route::get('setting/create', ['as'=>'setting.create','uses'=>'Backend\SettingController@create']);
+	Route::post('setting/create', ['as'=>'setting.store','uses'=>'Backend\SettingController@store']);
+	Route::post('setting/{id}', ['as'=> 'setting.update', 'uses'=>'Backend\SettingController@update']);
+	Route::delete('setting/{id}', ['as'=> 'setting.destroy', 'uses'=>'Backend\SettingController@destroy']);
 });
