@@ -101,7 +101,7 @@ Route::get('/user/{user_id}', 'UserController@getProfile');
 Route::get('/resendActivation/{email}', 'Auth\AuthController@resendActivationMail');
 
 /** for development purpose only, must be removed later **/
-Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
+// Route::get('admin/create/{email}/{password}','Auth\AdminAuthController@createAdminUser');
 
 
 /** Route for admin role */
