@@ -142,6 +142,6 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        PageStatic::destroy($id);
+        PartialContent::destroy($id);
     }
 }

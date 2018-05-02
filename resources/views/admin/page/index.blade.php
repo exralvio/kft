@@ -86,7 +86,7 @@ $(function () {
   $('.remove-button').on('click', function(v, k){
     var id = $(this).attr('data-postId');
     var title = $('#title-'+id).html();
-    var url = '/admin/media/';
+    var url = '/admin/page/';
     deleteList(url, id, title);
   })
 })
