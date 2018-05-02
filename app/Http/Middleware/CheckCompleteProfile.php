@@ -12,6 +12,10 @@ class CheckCompleteProfile
     public function handle($request, Closure $next)
     {   
         if (!$request->session()->exists('user')) {
+            //if auth check is true, but session not found then logout user
+            if(\Auth::check()){
+                \Auth::logout();
+            }
             // user value cannot be found in session
             return redirect('/');
         }else{
