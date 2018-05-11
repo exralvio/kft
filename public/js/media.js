@@ -27,7 +27,8 @@ function loadMoreData(last_id){
 }
 
 function openSinglePost(e){
-    if($(e.target).hasClass('like-button') || $(e.target).hasClass('work-title') || $(e.target).hasClass('work-pp-image')){
+    if($(e.target).hasClass('like-button') || $(e.target).hasClass('photo-grid-link') || $(e.target).hasClass('photo-grid-link-img')){
+        e.preventDefault();
         return;
     }
 
@@ -58,6 +59,16 @@ function openSinglePost(e){
 
         alert('failed to connect to server ...');
     });
+}
+
+function openPhotogridLink(e){
+    var link = $(this).data('link');
+
+    if(!link){
+        return;
+    }
+
+    window.location = link;
 }
 
 function addPostLike(e) {
@@ -147,7 +158,9 @@ function addNewComment(e, bypass = false){
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
-    $('body').on('click', 'a.like-button', addPostLike);
+    $('body').on('click', '.like-button', addPostLike);
+
+    $('body').on('click', '.photo-grid-link', openPhotogridLink);
 
     $('body').on('keyup','#commentPhoto', addNewComment);
     $('body').on('click','.add-new-comment', function(e){

@@ -42,7 +42,24 @@ function loadMoreFresh(){
             }
 
             $('#fresh-grid').append(response);
-            $('#fresh .load-more').hide();
+
+            if(fresh_skip == 1){
+                $('#fresh-grid').css('opacity', 0);
+
+                $("#fresh-grid").justifiedGallery({
+                    rowHeight: 256,
+                    margins: 10
+                });
+
+                 setTimeout(function(){
+                    $("#fresh-grid").css('opacity', 1);
+                    $('#fresh .load-more').hide();
+                }, 500);
+            } else {
+                $("#fresh-grid").justifiedGallery('norewind');
+                $('#fresh .load-more').hide();
+            }
+
 
             on_progress = false;
         }
@@ -72,7 +89,25 @@ function loadMorePopular(){
             }
 
             $('#popular-grid').append(response);
-            $('#popular .load-more').hide();
+
+            console.log(popular_skip);
+
+            if(popular_skip == 1){
+                $('#popular-grid').css('opacity', 0);
+
+                $("#popular-grid").justifiedGallery({
+                    rowHeight: 256,
+                    margins: 10
+                });
+
+                 setTimeout(function(){
+                    $("#popular-grid").css('opacity', 1);
+                    $('#popular .load-more').hide();
+                }, 500);
+            } else {
+                $("#popular-grid").justifiedGallery('norewind');
+                $('#popular .load-more').hide();
+            }
 
             on_progress = false;
         }

@@ -3,6 +3,10 @@
 @section('page-title')
  Discover
 @endsection
+
+@section('header_script')
+<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/justifiedGallery.min.css">
+@endsection
      
 @section('content')
     <!-- Section -->
@@ -45,15 +49,16 @@
                 <div class="col-sm-10 col-sm-push-1">
                   <div id="post-data" class="tab-content discover-grid">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
-                        <ul class="works-grid work-grid-3 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
-                        </ul>
+                        <div id="popular-grid" class="photo-grid">
+                        </div>
                         <div class="load-more">
                             <img src="{{ url('images/load-more.gif') }}">
                         </div>
                       </div>
                       <div role="tabpanel" id="fresh" class="tab-pane fade ">
-                        <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hide-titles" id="fresh-grid" >
-                        </ul>
+                        <div id="fresh-grid" class="photo-grid">
+                        </div>
+
                         <div class="load-more">
                             <img src="{{ url('images/load-more.gif') }}">
                         </div>
@@ -69,5 +74,6 @@
 @endsection
 
 @section('footer_script')
+    <script type="text/javascript" src="{{ url('/') }}/js/jquery.justifiedGallery.min.js"></script>
     <script type="text/javascript" src="{{ url('js/discover.js') }}"></script>
 @endsection
