@@ -1,5 +1,5 @@
 @if(isset($is_popular) and $is_popular == true)
-    <div class="timeline-post wow fadeInUp mb-20" id="{{ $post['media']['id'] }}">
+    <div class="timeline-post wow fadeIn mb-20" id="{{ $post['media']['id'] }}">
         <div>
 
             <div class="post-header">
@@ -53,7 +53,7 @@
         </div>
     </div>
 @else
-    <div class="timeline-post wow fadeInUp mb-20" id="{{ $post->_id }}">
+    <div class="timeline-post wow fadeIn mb-20" id="{{ $post->_id }}">
         <div>
 
             <div class="post-header">
