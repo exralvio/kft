@@ -126,6 +126,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	 */
 	Route::get('user', 'Backend\UserController@index');
 	Route::get('user/{id}/edit', 'Backend\UserController@edit');
+	Route::get('user/export', 'Backend\UserController@exportToCSV');
 	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
 	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
 	

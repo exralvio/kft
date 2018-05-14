@@ -9,6 +9,7 @@ use MongoDB\BSON\ObjectID;
 use Session;
 use File;
 use Intervention\Image\ImageManagerStatic as Image;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -167,5 +168,16 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
+    }
+
+    /**
+     * Export User Data into CSV
+    */
+    public function exportToCSV(){
+        $now = New Carbon();
+        $title = 'User-'.$now->toDateString().".csv";
+        $users = User::get(); // All users
+        $csvExporter = new \Laracsv\Export();
+        $csvExporter->build($users, ['email'])->download($title);
     }
 }

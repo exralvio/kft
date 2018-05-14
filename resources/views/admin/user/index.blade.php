@@ -18,6 +18,11 @@
         <div class="box">
           <div class="box-header">
             <h3 class="box-title">List of User</h3>
+            <a href="{{ url('admin/user/export') }}" style="float:right;">
+              <div class="action-btn bg-blue">
+                  <i class="fa fa-file-text"></i> Export
+              </div>
+            </a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
