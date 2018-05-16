@@ -38,7 +38,7 @@
                         <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                         <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                     </a>
-                    <a class="like-button">
+                    <a class="view-button">
                         <i class="fa fa-eye"></i>
                         <span>{{ $post->view_count }}</span>
                     </a>

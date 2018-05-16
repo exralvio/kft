@@ -135,7 +135,7 @@
     background: #f7f8fa;
 }
 
-.post-action .like-button {
+.post-action .like-button, .view-button {
     height: 30px;
     border-radius: 15px;
     padding: 0 20px 0 40px;
@@ -148,11 +148,15 @@
     color: #fff;
 }
 
-.post-action .like-button span {
+.view-button{
+    cursor: auto;
+}
+
+.post-action .like-button span, .view-button span {
     font-weight: bold;
 }
 
-.post-action .like-button .fa {
+.post-action .like-button .fa, .view-button .fa {
     position: absolute;
     left: 15px;
     line-height: 30px;
