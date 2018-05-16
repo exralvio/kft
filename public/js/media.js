@@ -158,6 +158,10 @@ function addNewComment(e, bypass = false){
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
+    $('body').on('click', 'body', function(){
+        $('#replyComment').hide();
+    })
+
     $('body').on('click', '.like-button', addPostLike);
 
     $('body').on('click', '.photo-grid-link', openPhotogridLink);
@@ -165,6 +169,10 @@ $(function(){
     $('body').on('keyup','#commentPhoto', addNewComment);
     $('body').on('click','.add-new-comment', function(e){
         addNewComment(e, true);
+    });
+    
+    $('body').on('click','.add-new-reply', function(e){
+        // addNewComment(e, true, $());
     });
     
     $('body').on('click','.del-comment', function(e){
@@ -204,11 +212,16 @@ $(function(){
     $('body').on('click','#showPhotoDetail', function(e){
         $('#exifData').toggle();
     });
+    
+    $('body').on('click','.comment-reply', function(e){
+        $('#commentReply').attr('parentcomment', $(this).attr('commentId'));
+        $('#replyComment').toggle();
+    });
 
-    $('body').on('click', '.comment-reply', function(e){
+    /* $('body').on('click', '.comment-reply', function(e){
         e.preventDefault();
         $('#commentPhoto').focus();
-    });
+    }); */
 
     $('body').on('click', '.open-post-detail', function(e){
         e.preventDefault();

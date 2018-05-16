@@ -305,7 +305,7 @@ a.button-rounded{
     color: #b9c1c7;
 }
 
-.add-new-comment {
+.add-new-comment, .add-new-reply {
     content: "\f1d8";
     font-family: FontAwesome;
     position: absolute;
@@ -773,4 +773,14 @@ select.discover-category, select.discover-category:focus {
 
 .photo-grid-desc span.photo-grid-link:hover:before {
     opacity: 0.15;
+}
+
+.reply-line{
+    border: 1px solid rgb(212, 212, 212);
+    width: 1px;
+    position: absolute;
+    top: -36px;
+    left: 25px;
+    height: 100%;
+    z-index: 0;
 }
