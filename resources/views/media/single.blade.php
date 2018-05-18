@@ -156,7 +156,7 @@
                         </a>
                     </div>
                     <div class="col-md-10 col-xs-10 comment-input">
-                        <input id="commentReply" type="text" class="input-md round form-control" name="comment" placeholder="reply">
+                        <input id="commentReply" type="text" class="input-md round form-control" name="comment" placeholder="Reply">
                         <a class="add-new-reply"><i class="fa fa-send"></i></a>
                     </div>
                 </div>

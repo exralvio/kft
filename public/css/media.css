@@ -668,6 +668,11 @@ select.discover-category, select.discover-category:focus {
         margin-left:0px;
         margin-right:0px;
     }
+    
+    .reply-line {
+        left: 35px;
+    }
+
 }
 
 .tab-content .tab-pane.tab-grid {
