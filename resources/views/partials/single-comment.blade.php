@@ -1,4 +1,4 @@
-<div class="comment-each comment-{{ $comment['_id'] }} parent_{{ $comment['parent_comment'] }} col-xs-12 mb-10">
+<div class="comment-each comment-{{ $comment['_id'] }} parent_{{ isset($comment['parent_comment']) ? $comment['parent_comment'] : '' }} col-xs-12 mb-10">
     @if(isset($comment['parent_comment']))
     <div class="reply-line"></div>
     @endif

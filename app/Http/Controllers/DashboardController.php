@@ -96,6 +96,10 @@ class DashboardController extends Controller{
     */
     private function sortByHierarcy($comments){
         usort($comments, function($a, $b){
+            
+            if(!isset($a['parent_comment'])) $a['parent_comment'] = '';
+            if(!isset($b['parent_comment'])) $b['parent_comment'] = '';
+
             if ( $a['_id'] == $b['_id'] ) {
                 return 0;
             
