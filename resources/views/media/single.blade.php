@@ -142,6 +142,26 @@
                     <div id="dynamicComment"></div>
                 </div>
             </div>
+            <!-- reply comment section -->
+            <div id="replyComment" style="display: none;" class="row comment-section">
+                @if(\Auth::check()) 
+                <div class="comments" style="margin:10px 0;">
+                    <div class="col-md-2 col-xs-2 pp text-center">
+                        <a href="{{ url('user/'.$post['user']['id']) }}">
+                        @if(\App\Models\User::currentPhoto())
+                            <img src="{{ url(\App\Models\User::currentPhoto()) }}" />
+                        @else
+                            <img src="{{ url('') }}/rythm/images/user-avatar.png">
+                        @endif
+                        </a>
+                    </div>
+                    <div class="col-md-10 col-xs-10 comment-input">
+                        <input id="commentReply" type="text" class="input-md round form-control" name="comment" placeholder="Reply">
+                        <a class="add-new-reply"><i class="fa fa-send"></i></a>
+                    </div>
+                </div>
+                @endif
+            </div>
         </div>
         
     </div>

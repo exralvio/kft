@@ -121,7 +121,19 @@ function addNewComment(e, bypass = false){
         return;
     }
 
-    var message = $('#commentPhoto').val();
+    var parentComment = null;
+    var message = '';
+    var action = 'comment';
+    if($(this).attr('id') == "commentReply"){
+        message = $('#commentReply').val();
+        action = 'reply';
+        parentComment = $(this).attr('parentcomment');
+    }else{
+        message = $('#commentPhoto').val();
+    }
+
+    console.log('message',message);
+    console.log('parentcomment',parentComment);
 
     if(message.trim() == ""){
         return;
@@ -135,14 +147,32 @@ function addNewComment(e, bypass = false){
         },
         data: { 
             // _token: '{{csrf_token()}}',
+            parent_comment: parentComment,
             comment : message,
             post_id: postId
         }
     })
     .done(function(data)
     {
+        var target = ".parent_"+parentComment+":last";
+
+        if($(".parent_"+parentComment+":last").length){
+            target = ".parent_"+parentComment+":last";
+        }else{
+            target = ".comment-"+parentComment;
+        }
+
         $('#commentPhoto').val('');
-        $('#dynamicComment').append(data);
+        $('#commentReply').val('');
+        $('#replyComment').hide();
+
+        console.log('target',target);
+
+        if(action == "reply"){
+            $(data).insertAfter(target);
+        }else{
+            $('#dynamicComment').append(data);
+        }
     })
     .fail(function(jqXHR, ajaxOptions, thrownError)
     {
@@ -158,13 +188,22 @@ function addNewComment(e, bypass = false){
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
 
+    $('body').on('click', 'body', function(){
+        $('#replyComment').hide();
+    })
+
     $('body').on('click', '.like-button', addPostLike);
 
     $('body').on('click', '.photo-grid-link', openPhotogridLink);
 
     $('body').on('keyup','#commentPhoto', addNewComment);
+    $('body').on('keyup','#commentReply', addNewComment);
     $('body').on('click','.add-new-comment', function(e){
         addNewComment(e, true);
+    });
+    
+    $('body').on('click','.add-new-reply', function(e){
+        // addNewComment(e, true, $());
     });
     
     $('body').on('click','.del-comment', function(e){
@@ -204,11 +243,17 @@ $(function(){
     $('body').on('click','#showPhotoDetail', function(e){
         $('#exifData').toggle();
     });
+    
+    $('body').on('click','.comment-reply', function(e){
+        $('#commentReply').attr('parentcomment', $(this).attr('commentId'));
+        $('#replyComment').toggle();
+        $('#commentReply').focus();
+    });
 
-    $('body').on('click', '.comment-reply', function(e){
+    /* $('body').on('click', '.comment-reply', function(e){
         e.preventDefault();
         $('#commentPhoto').focus();
-    });
+    }); */
 
     $('body').on('click', '.open-post-detail', function(e){
         e.preventDefault();

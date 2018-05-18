@@ -72,7 +72,10 @@ class DashboardController extends Controller{
     public function loadMedia($mediaId){
         $user = User::current();
 
-        $comments = Comment::where('photo_id','=',new ObjectId($mediaId))->get();
+        $getComments = Comment::where('photo_id','=',new ObjectId($mediaId))->orderBy('_id')->get();
+        $sortedComment = $this->sortByHierarcy($getComments->toArray());
+        $comments = collect($sortedComment);
+
         $post = Media::find($mediaId);
 
         if(!$post){
@@ -86,6 +89,30 @@ class DashboardController extends Controller{
         $current_user_id = $user['_id'];
 
         return view('media/single', compact('current_user_id', 'post', 'comments'))->render();
+    }
+
+    /**
+     * sort array of comment by hierarcy
+    */
+    private function sortByHierarcy($comments){
+        usort($comments, function($a, $b){
+            if ( $a['_id'] == $b['_id'] ) {
+                return 0;
+            
+            } else if ( $a['parent_comment'] ) {
+                if ( $a['parent_comment'] == $b['parent_comment'] ) {
+                    return ( $a['_id'] < $b['_id'] ? -1 : 1 );
+                } else {
+                return ( $a['parent_comment'] >= $b['_id'] ? 1 : -1 );
+                }
+            } else if ( $b['parent_comment'] ) {
+                return ( $b['parent_comment'] >= $a['_id'] ? -1 : 1);
+            } else {
+                return ( $a['_id'] < $b['_id'] ? -1 : 1 );
+            }
+        });
+
+        return $comments;
     }
 
     public function postComment(Request $request){
@@ -105,6 +132,10 @@ class DashboardController extends Controller{
             'photo'=>$currentUser['photo']
         ];
         $comment->comment = $request->get('comment');
+        $comment->parent_comment = null;
+        if($request->get('parent_comment')){
+            $comment->parent_comment = new ObjectId($request->get('parent_comment'));
+        }
 
         if($comment->save()){
             if($currentUser['_id'] != $media->user['id']){
