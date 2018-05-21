@@ -8,6 +8,7 @@ use App\Models\Setting;
 use MongoDB\BSON\ObjectID;
 use Validator;
 use Session;
+use File;
 
 class SettingController extends Controller
 {
@@ -115,7 +116,19 @@ class SettingController extends Controller
             return redirect('admin/setting/create')->withErrors($validator);
         }
 
-        $collection = collect($request->except(['_token']));
+        $input = $request->except(['_token']);
+
+        if($input['type'] == 'upload'){
+            $original_name = $request->file('value')->getClientOriginalName();
+            $extension = File::extension($original_name);
+            $filename = sha1(time().time().rand()).".{$extension}";
+            $directory = 'images/settings/';
+            $filepath = $directory.$filename;
+            
+            $request->file('value')->storeAs($directory, $filename, 'public_upload');
+
+            $input['value'] = $filepath;
+        }
 
         /**
          * prevent duplicate label
@@ -126,7 +139,7 @@ class SettingController extends Controller
             return view('admin.setting.edit',['setting'=>$request, 'state'=>'edit', "action"=>route('setting.update', $id)]);
         }
 
-        $update = \DB::collection('settings')->where('_id', $id)->update($collection->all());
+        $update = \DB::collection('settings')->where('_id', $id)->update($input);
         Session::flash('save_success', "Setting data changes has been succcesfully saved");
         return redirect('admin/setting/'.$id.'/edit');
     }

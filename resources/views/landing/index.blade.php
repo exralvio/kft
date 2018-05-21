@@ -10,7 +10,8 @@
 
 @section('content')   
     <!-- Home Section -->
-    <section class="home-section bg-dark-alfa-30 parallax-2" data-background="{{ url('') }}/rythm/images/landing/cover.jpg" id="home">
+    <?php $cover = App\Models\Setting::valueOf('cover_landing'); ?>
+    <section class="home-section bg-dark-alfa-30 parallax-2" data-background="{{ !empty($cover) ? url($cover) : url('rythm/images/landing/cover.jpg') }}" id="home">
         <div class="js-height-full">
             
             <!-- Hero Content -->

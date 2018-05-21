@@ -3,7 +3,7 @@
 @section('admin-content')
 <section class="content-header">
     <h1>
-      Page
+      Setting
       <!-- <small>Control panel</small> -->
     </h1>
     <ol class="breadcrumb">
@@ -29,12 +29,14 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{{ $state }} Page</h3>
+                    <h3 class="box-title">{{ $state }} Setting</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form class="form form-uploader pt-20 pd-20 align-left form-horizontal" autocomplete="off" method="POST" role="form" action="{{ $action }}"  enctype="multipart/form-data">
                         {{ csrf_field() }}
+
+                        <input type="hidden" name="type" value="{{ $setting->type }}">
                         
                         <div class="form-group">
                             <label for="label" class="col-sm-2 control-label">Label</label>
@@ -51,6 +53,14 @@
                                         <option value="0" {{ $setting->value == 0 ? 'selected' : '' }}>Disable</option>
                                         <option value="1" {{ $setting->value == 1 ? 'selected' : '' }}>Enable</option>
                                     </select>
+                                @elseif($setting->type == 'upload')
+                                    <input type="file" name="value" class="form-control" id="value">
+
+                                    @if(!empty($setting->value))
+                                        <br>
+                                        Current: <br>
+                                        <img src="{{ url($setting->value) }}" style="max-width:300px;">
+                                    @endif
                                 @else
                                     <input type="text" class="form-control" id="value" name="value" placeholder="Value" value="{{ $setting->value }}">
                                 @endif
