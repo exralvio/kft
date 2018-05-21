@@ -31,6 +31,9 @@
 
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
         <link rel="stylesheet" href="{{ url('') }}/css/media.css">
+
+        @yield('header_script')
+
     </head>
     <body class="appear-animate">
         <!-- Page Loader -->        

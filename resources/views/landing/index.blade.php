@@ -4,6 +4,10 @@
  Komunitas Fotografi Telkom
 @endsection
 
+@section('header_script')
+<link rel="stylesheet" type="text/css" href="{{ url('/') }}/css/justifiedGallery.min.css">
+@endsection
+
 @section('content')   
     <!-- Home Section -->
     <section class="home-section bg-dark-alfa-30 parallax-2" data-background="{{ url('') }}/rythm/images/landing/cover.jpg" id="home">
@@ -64,48 +68,16 @@
                 <div class="col-sm-12">
                   <div id="post-data" class="tab-content discover-grid dashboard-grid">
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
-                        <ul class="works-grid work-grid-2 work-grid-gut  clearfix font-alt hide-titles" id="popular-grid" >
-                            @foreach(\App\Models\Media::discoverPopular(4) as $popular)
-                            <!-- Work Item (Lightbox) -->
-                            <li class="work-item" >
-                                <div data-postid="{{ $popular['media']['id'] }}" class="work-item-inner open-single-post">
-                                    <div class="work-img">
-                                        <img src="{{ url($popular['images']['medium']) }}" alt="Work">
-                                    </div>
-                                    <div class="work-intro align-left">
-                                        <div class="work-pp">
-                                            <img src="{{ url($popular->user['photo']) }}">
-                                        </div>
-                                        <h3 class="work-title">{{ $popular['user']['fullname'] }}</h3>
-                                        <a data-postid="{{ $popular->media['id'] }}" class="like-button like-mini-{{ $popular->media['id'] }}"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- End Work Item -->
-                            @endforeach
-                        </ul>
+                        <div id="popular-grid" class="photo-grid">
+                            <?php $medias = $media_popular; ?>
+                            @include('media/discover-popular')
+                        </div>
                       </div>
                       <div role="tabpanel" id="fresh" class="tab-pane fade ">
-                        <ul class="works-grid work-grid-2 work-grid-gut clearfix font-alt hide-titles" id="fresh-grid" >
-                            @foreach(\App\Models\Media::discoverFresh(4) as $media)
-                            <!-- Work Item (Lightbox) -->
-                            <li class="work-item" >
-                                <div data-postid="{{ $media->_id }}" class="work-item-inner open-single-post">
-                                    <div class="work-img">
-                                        <img src="{{ url($media['images']['medium']) }}" alt="Work">
-                                    </div>
-                                    <div class="work-intro">
-                                        <div class="work-pp">
-                                            <img src="{{ url($media->user['photo']) }}">
-                                        </div>
-                                        <h3 class="work-title">{{ $media['user']['fullname'] }}</h3>
-                                        <a data-postid="{{ $media->_id }}" class="like-button like-mini-{{ $media->_id }}"><i class="fa fa-heart-o"></i></a>
-                                    </div>
-                                </a>
-                            </li>
-                            <!-- End Work Item -->
-                            @endforeach
-                        </ul>
+                        <div id="fresh-grid" class="photo-grid" style="opacity:0;">
+                            <?php $medias = $media_fresh; ?>
+                            @include('media/discover-fresh')
+                        </div>
                       </div>
                     </div>  
                 </div>
@@ -118,13 +90,35 @@
 @endsection
 
 @section('footer_script')
+<script type="text/javascript" src="{{ url('/') }}/js/jquery.justifiedGallery.min.js"></script>
 <script type="text/javascript">
     // Select all tabs
     $(function(){
+        var fresh_done = false;
         $('.nav-tabs a').on('click', function(e){
             e.preventDefault();
             $(this).tab('show');
+
+            if($(this).attr('href') == '#fresh' || !fresh_done){
+                setTimeout(function(){
+                    $("#fresh-grid").justifiedGallery({
+                        rowHeight: 256,
+                        margins: 10
+                    });
+
+                    $('#fresh-grid').css('opacity', 1);
+                }, 500);
+
+                fresh_done = true;
+            }
         });
+
+        
+        $("#popular-grid").justifiedGallery({
+            rowHeight: 256,
+            margins: 10
+        });
+        
     });
 </script>
 @endsection

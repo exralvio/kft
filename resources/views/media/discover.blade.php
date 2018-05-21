@@ -51,6 +51,7 @@
                       <div role="tabpanel" id="popular" class="tab-pane fade in active">
                         <div id="popular-grid" class="photo-grid">
                         </div>
+                        
                         <div class="load-more">
                             <img src="{{ url('images/load-more.gif') }}">
                         </div>
