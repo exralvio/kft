@@ -68,6 +68,7 @@ class MigrateFresh extends Command
         }
 
         echo "Success updated ".$created_i." media created_date!\n\n";
+        ob_flush();
 
         dd("Success inserting ".$fresh_i." fresh medias");
     }
