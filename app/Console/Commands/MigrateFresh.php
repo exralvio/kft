@@ -55,9 +55,6 @@ class MigrateFresh extends Command
             ob_flush();
         }
 
-        echo "Success updated ".$i." media created_date!\n\n";
-        ob_flush();
-
         $medias = Media::orderBy('_id','asc')->get();
 
         $i = 0;
@@ -69,6 +66,8 @@ class MigrateFresh extends Command
                 ob_flush();
             }
         }
+
+        echo "Success updated ".$i." media created_date!\n\n";
 
         dd("Success inserting ".$i." fresh medias");
     }
