@@ -657,6 +657,10 @@ select.discover-category, select.discover-category:focus {
     color: #525558;
 }
 
+.reply-comment{
+    padding-left:55px;
+}
+
 @media screen and (max-width: 768px) {
     .post-modal .media-photo, #media-single .media-photo {
         height: 45vh;

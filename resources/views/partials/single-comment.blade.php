@@ -1,7 +1,4 @@
-<div class="comment-each comment-{{ $comment['_id'] }} parent_{{ isset($comment['parent_comment']) ? $comment['parent_comment'] : '' }} col-xs-12 mb-10">
-    @if(isset($comment['parent_comment']))
-    <div class="reply-line"></div>
-    @endif
+<div class="comment-each comment-{{ $comment['_id'] }} {{ isset($comment['parent_comment']) ? 'reply-comment' : '' }} parent_{{ isset($comment['parent_comment']) ? $comment['parent_comment'] : '' }} col-xs-12 mb-10">
     <div class="row">
         <div class="col-xs-2 pp text-center">
             <a href="{{ url('user/'.$comment['user']['id']) }}">
