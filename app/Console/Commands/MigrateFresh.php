@@ -42,7 +42,7 @@ class MigrateFresh extends Command
         $medias = Media::orderBy('_id','asc')->get();
 
         ob_start();
-        $i=0;
+        $created_i=0;
         /** Fill created_date field **/
         foreach ($medias as $media) {
             $update = Media::find($media['_id']);
@@ -50,25 +50,25 @@ class MigrateFresh extends Command
             $update->created_date = $created_date;
             $update->save();
 
-            $i++;
-            echo "Update created_date ".$i."\n";
+            $created_i++;
+            echo "Update created_date ".$created_i."\n";
             ob_flush();
         }
 
         $medias = Media::orderBy('_id','asc')->get();
 
-        $i = 0;
+        $fresh_i = 0;
         foreach ($medias as $media) {
             $insert = MediaFresh::insertFresh($media);
             if($insert){
-                $i++;
-                echo "Insert fresh ".$i."\n";
+                $fresh_i++;
+                echo "Insert fresh ".$fresh_i."\n";
                 ob_flush();
             }
         }
 
-        echo "Success updated ".$i." media created_date!\n\n";
+        echo "Success updated ".$created_i." media created_date!\n\n";
 
-        dd("Success inserting ".$i." fresh medias");
+        dd("Success inserting ".$fresh_i." fresh medias");
     }
 }
