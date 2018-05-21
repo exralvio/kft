@@ -14,7 +14,7 @@ class MediaFresh extends Eloquent
     	$find = MediaFresh::raw()->count(['user.id'=>$media['user']['id'], 'created_date'=>$media['created_date']]);
 
     	if($find){
-    		return;
+    		return false;
     	}
 
     	$fresh = new MediaFresh();
@@ -31,6 +31,8 @@ class MediaFresh extends Eloquent
     	$fresh->created_date = $media['created_date'];
 
     	$fresh->save();
+
+        return true;
     }
 
     public function isLiked($user_id){
