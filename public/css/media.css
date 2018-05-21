@@ -24,7 +24,7 @@
     padding: 15px;
 }
 .post-container{
-    display: inline-block;
+    display: inline-block;  
     vertical-align: top;
     /*margin-left: 5px;*/
 }
@@ -734,6 +734,11 @@ select.discover-category, select.discover-category:focus {
     font-size: 15px;
     margin: 0px;
     position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 30%;
+    display: inline-block;
 }
 
 .photo-grid-pp {
