@@ -5,6 +5,7 @@ namespace App\Models;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use App\Models\Users;
 use App\Models\MediaCategory;
+use App\Models\MediaFresh;
 use MongoDB\BSON\ObjectID;
 
 class Media extends Eloquent
@@ -27,6 +28,7 @@ class Media extends Eloquent
     	$media->view_count = 0;
     	$media->title = !empty($data['title']) ? $data['title'] : 'Untitled';
     	$media->description = $data['description'];
+        $media->created_date = date('Y-m-d');
 
     	if(!empty($data['category'])){
     		$category = MediaCategory::raw()->findOne(['_id'=>new ObjectID($data['category'])]);
@@ -39,6 +41,8 @@ class Media extends Eloquent
     	$media->comment_count = 0;
     	$media->keywords = !empty($data['keywords']) ? $data['keywords'] : [];
     	$media->save();
+
+        MediaFresh::insertFresh($media);
     }
 
     public static function discoverFresh($limit = 0){
@@ -101,6 +105,7 @@ class Media extends Eloquent
 
                 /** Update Popular Post **/
                 MediaPopular::updateMedia($this);
+                MediaFresh::updateMedia($this);
                 /** End Update Popular **/
 
                 return true;
@@ -113,6 +118,7 @@ class Media extends Eloquent
                 if($this->save()){
                     /** Update Popular Post **/
                     MediaPopular::updateMedia($this);
+                    MediaFresh::updateMedia($this);
                     /** End Update Popular **/
                     
                     return true;
@@ -136,5 +142,30 @@ class Media extends Eloquent
             return true;
 
         return false;
+    }
+
+    public function updateRelated(){
+        $media = $this;
+        $fresh = MediaFresh::where(['media.id'=>new ObjectID($media['_id'])])->first();
+
+        if($fresh){
+            $fresh->images = $media['images'];
+            $fresh->user = $media['user'];
+            $fresh->title = $media['title'];
+            $fresh->category = $media['category'];
+            $fresh->like_count = $media['like_count'];
+            $fresh->save();
+        }
+
+        $popular = MediaPopular::where(['media.id'=>new ObjectID($media['_id'])])->first();
+
+        if($popular){
+            $popular->images = $media['images'];
+            $popular->user = $media['user'];
+            $popular->title = $media['title'];
+            $popular->category = $media['category'];
+            $popular->like_count = $media['like_count'];
+            $popular->save();
+        }
     }
 }

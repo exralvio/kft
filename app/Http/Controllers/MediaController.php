@@ -9,6 +9,7 @@ use File;
 use Response;
 use App\Models\Media;
 use App\Models\MediaPopular;
+use App\Models\MediaFresh;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\MediaCategory;
@@ -136,6 +137,7 @@ class MediaController extends Controller{
         $media->exif = $exif;
 
         $media->save();
+        $media->updateRelated();
 
         $results = [
             'status'=>'success',
@@ -312,13 +314,13 @@ class MediaController extends Controller{
 
     public function loadDiscoverFresh(int $limit=9, int $skip=0, $category = ''){
         if(!empty($category)){
-            $medias = Media::orderBy('_id','desc')
+            $medias = MediaFresh::orderBy('_id','desc')
                 ->where('category.id', $category)
                 ->skip($skip)
                 ->take($limit)
                 ->get();
         } else {
-            $medias = Media::orderBy('_id','desc')
+            $medias = MediaFresh::orderBy('_id','desc')
                 ->skip($skip)
                 ->take($limit)
                 ->get();
