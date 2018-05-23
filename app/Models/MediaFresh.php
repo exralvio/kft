@@ -37,7 +37,8 @@ class MediaFresh extends Eloquent
 
     public function isLiked($user_id){
         $media = Media::find($this->media['id']);
-        if(in_array($user_id, array_map(function($v){ return $v['user_id']; }, $media->like_users))){
+        $like_users = !empty($media) ? $media->like_users : [];
+        if(in_array($user_id, array_map(function($v){ return $v['user_id']; }, $like_users))){
             return true;
         }else{
             return false;
