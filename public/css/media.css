@@ -666,6 +666,7 @@ select.discover-category, select.discover-category:focus {
     border-radius: 20px;
     margin-left: 5px;
     margin-bottom: 4px;
+    padding: 0 30px;
 }
 
 @media screen and (max-width: 768px) {

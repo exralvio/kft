@@ -104,10 +104,10 @@
             function fbs_click(e){
                 u = $(e).attr('share-url');
                 t = $(e).attr('share-title');
-                left = ($(window).width()  - width)  / 2;
-                top = ($(window).height() - height) / 2;
                 width = 626;
                 height = 436;
+                left = ($(window).width()  - width)  / 2;
+                top = ($(window).height() - height) / 2;
                 toolbar = 0;
                 status = 0;
                 opts   = ',width='  + width  +
