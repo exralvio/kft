@@ -42,7 +42,12 @@
                         <i class="fa fa-eye"></i>
                         <span>{{ $post->view_count }}</span>
                     </a>
+                    <a id="fb_link_popup" title="share on facebook" class="btn btn-social-icon btn-facebook share-button-round" share-url="{{ url('media').'/'.$post->_id }}" share-title="{{ $post->description }}" onclick="fbs_click(this);">
+                        <span class="fa fa-facebook"></span>
+                    </a>
                 </div>
+
+
             </div>
             <div class="media-photo-title align-left">
                 <h5>

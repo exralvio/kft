@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="{{ url('') }}/rythm/css/magnific-popup.css">
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
+        <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
 
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
         <link rel="stylesheet" href="{{ url('') }}/css/custom.css">
@@ -99,6 +100,17 @@
 
         @yield('footer_script')
         
+        <script>
+            function fbs_click(e){
+                u = $(e).attr('share-url');
+                t = $(e).attr('share-title');
+                // console.log(u,t);
+                window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+                return false;
+                e.preventDefault();
+            }
+        </script>
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119683014-1"></script>
         <script>

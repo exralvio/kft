@@ -661,6 +661,13 @@ select.discover-category, select.discover-category:focus {
     padding-left:55px;
 }
 
+.share-button-round{
+    height: 30px;
+    border-radius: 20px;
+    margin-left: 5px;
+    margin-bottom: 4px;
+}
+
 @media screen and (max-width: 768px) {
     .post-modal .media-photo, #media-single .media-photo {
         height: 45vh;

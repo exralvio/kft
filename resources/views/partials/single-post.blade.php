@@ -79,7 +79,7 @@
                     <div class="col-xs-6 post-title">{{ $post->title }}</div>
                     <div class="col-xs-6 text-right post-action" >
                         <div class="row">
-                            
+
                             <a id="{{ $post->_id }}" data-postid="{{ $post->_id }}" class=" comment-button open-single-post" href="#">
                                 <i class="fa fa-comment-o"></i>
                             </a>
@@ -91,6 +91,11 @@
                                 <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                                 <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                             </a>
+
+                            <a id="fb_link" title="share on facebook" class="btn btn-social-icon btn-facebook share-button-round" share-url="{{ url('media').'/'.$post->_id }}" share-title="{{ $post->description }}" onclick="fbs_click(this);">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+
                         </div>
                     </div>
                     @if(!empty($post->description))
