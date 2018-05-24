@@ -19,9 +19,7 @@ Route::get('/privacy-policy', function(){
 	return view('other/privacy-policy');
 });
 
-Route::get('/about', function(){
-	return view('landing/about');
-});
+Route::get('/about', 'LandingController@showAbout');
 
 /** Discover **/
 Route::get('/discover', 'MediaController@getDiscover');

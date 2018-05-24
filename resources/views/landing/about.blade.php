@@ -29,10 +29,11 @@
                     <div class="col-sm-12 mb-sm-50 mb-xs-30">
                         
                         <h3 class="hs-line-11 font-alt mb-10 text-center hs-hr">KFT: Beyond Images</h3>
-                        
+                        @if(isset($beyondImages))
                         <p class="text-justify mb-0">
-                            <b>Photography will take you EVERYWHERE.</b> Photography dapat membawa kita kemana saja, membawa kita menjelajahi imajinasi tanpa batas. Komunitas Fotografi Telkom Group (KFT) hadir untuk memberi wadah bagi Telkom group untuk mendorong kreatifitas, memberi tempat bagi tumbuhnya imajinasi tanpa batas. KFT adalah mitra bagi Telkom Group untuk mendorong tumbuhnya budaya digital dan meningkatkan customer experience melalui digital photography. 
+                            <b>{{ $beyondImages->title }}</b> {{ $beyondImages->content }} 
                         </p>
+                        @endif
                     </div>
                 </div>
             </div>

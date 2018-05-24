@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\MediaFresh;
 use App\Models\MediaPopular;
+use App\Models\PartialContent;
 
 class LandingController extends Controller{
 
@@ -26,6 +27,11 @@ class LandingController extends Controller{
        	$current_user_id = false;
 
         return view('landing/index', compact('media_fresh','media_popular','current_user_id'));
+    }
+
+    public function showAbout(){
+        $beyondImages = PartialContent::where('slug','beyond_images')->first();
+        return view('landing/about', compact('beyondImages'));
     }
 
 }
