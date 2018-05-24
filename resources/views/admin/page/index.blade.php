@@ -65,7 +65,6 @@ $(function() {
     var id = $(this).attr('data-postId');
     var title = $('#title-'+id).html();
     var url = '/admin/page/';
-    console.log(url, id, 'title');
     deleteList(url, id, 'title', this);
   });
 

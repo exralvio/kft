@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Media;
 use MongoDB\BSON\ObjectID;
 use Session;
+use Yajra\Datatables\Datatables;
 
 class MediaController extends Controller
 {
@@ -17,8 +18,37 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias = Media::paginate(10);
-        return view('admin.photo.index',['medias'=>$medias]);
+        // $medias = Media::paginate(10);
+        return view('admin.photo.index');
+    }
+    
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data()
+    {
+        $datas = Media::get();
+        // dd($datas);
+        return Datatables::of($datas)
+            ->addColumn('action', function ($data) {
+                return '<a href="'.url('admin/media').'/'.$data->_id.'/edit" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> Edit
+                        </a>
+                        <a data-postId="'.$data->_id.'" class="btn btn-xs btn-danger remove-button">
+                            <i class="glyphicon glyphicon-trash"></i> Delete
+                        </a>';
+            })
+            ->addColumn('image', function($data){
+                return '<div class="img-container">
+                            <a href="#" class="zoomable" data-postId="'.$data->_id.'">
+                                <img src="'.url($data->images['medium']).'"/>
+                            </a>
+                            <input id="img-'.$data->_id.'" type="hidden" value="'.$data->images['large'].'">
+                        </div>';
+            })
+            ->make(true);
     }
 
     /**

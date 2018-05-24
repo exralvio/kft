@@ -118,6 +118,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('media/{id}', ['as'=> 'media.update', 'uses'=>'Backend\MediaController@update']);
 	Route::get('media/{id}/edit', 'Backend\MediaController@edit');
 	Route::get('media', 'Backend\MediaController@index');
+	Route::get('media/data', ['as'=>'media.data','uses'=>'Backend\MediaController@data']);
 	
 	/**
 	 * User

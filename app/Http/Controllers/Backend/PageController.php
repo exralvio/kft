@@ -37,7 +37,7 @@ class PageController extends Controller
                             <i class="glyphicon glyphicon-edit"></i> Edit
                         </a>
                         <a data-postId="'.$page->_id.'" class="btn btn-xs btn-danger remove-button">
-                            <i class="glyphicon glyphicon-remove"></i> Delete
+                            <i class="glyphicon glyphicon-trash"></i> Delete
                         </a>';
             })
             ->make(true);
