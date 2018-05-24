@@ -96,6 +96,10 @@
                                 <span class="fa fa-facebook"></span>
                             </a>
 
+                            <a id="twt_link_popup" title="share on twitter" class="btn btn-social-icon btn-twitter share-button-round" share-url="{{ url('media').'/'.$post->_id }}" share-title="{{ $post->description }}" onclick="twt_click(this);">
+                                <span class="fa fa-twitter"></span>
+                            </a>
+
                         </div>
                     </div>
                     @if(!empty($post->description))

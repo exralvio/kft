@@ -104,11 +104,40 @@
             function fbs_click(e){
                 u = $(e).attr('share-url');
                 t = $(e).attr('share-title');
+                left = ($(window).width()  - width)  / 2;
+                top = ($(window).height() - height) / 2;
+                width = 626;
+                height = 436;
+                toolbar = 0;
+                status = 0;
+                opts   = ',width='  + width  +
+                        ',height=' + height +
+                        ',top='    + top    +
+                        ',left='   + left;
+
                 // console.log(u,t);
-                window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');
+                window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer',opts);
                 return false;
                 e.preventDefault();
             }
+
+            function twt_click(e){
+                var width  = 575,
+                    height = 400,
+                    left   = ($(window).width()  - width)  / 2,
+                    top    = ($(window).height() - height) / 2,
+                    url    = "http://twitter.com/share?url="+$(e).attr('share-url'),
+                    opts   = 'status=1' +
+                            ',width='  + width  +
+                            ',height=' + height +
+                            ',top='    + top    +
+                            ',left='   + left;
+                
+                window.open(url, 'twitter', opts);
+                return false;
+                e.preventDefault();
+            }
+
         </script>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
