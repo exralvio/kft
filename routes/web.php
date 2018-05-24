@@ -144,6 +144,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('page', 'Backend\PageController@index');
 	Route::get('page/{id}/edit', 'Backend\PageController@edit');
 	Route::get('page/create', ['as'=>'page.create','uses'=>'Backend\PageController@create']);
+	Route::get('page/data', ['as'=>'page.data','uses'=>'Backend\PageController@pageData']);
 	Route::post('page/create', ['as'=>'page.store','uses'=>'Backend\PageController@store']);
 	Route::post('page/{id}', ['as'=> 'page.update', 'uses'=>'Backend\PageController@update']);
 	Route::delete('page/{id}', ['as'=> 'page.destroy', 'uses'=>'Backend\PageController@destroy']);
