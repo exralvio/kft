@@ -125,7 +125,7 @@ class SettingController extends Controller
             $directory = 'images/settings/';
             $filepath = $directory.$filename;
             
-            $request->file('value')->storeAs($directory, $filename, 'public_upload');
+            $request->file('value')->storeAs($directory, $filename, 'public_folder');
 
             $input['value'] = $filepath;
         }
