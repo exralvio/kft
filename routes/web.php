@@ -128,6 +128,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('user/export', 'Backend\UserController@exportToCSV');
 	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
 	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
+	Route::get('user/data', ['as'=>'user.data','uses'=>'Backend\UserController@data']);
 	
 	/**
 	 * User Admin
