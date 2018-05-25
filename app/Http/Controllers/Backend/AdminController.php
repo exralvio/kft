@@ -10,6 +10,7 @@ use Session;
 use File;
 use Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use Yajra\Datatables\Datatables;
 
 class AdminController extends Controller
 {
@@ -37,6 +38,31 @@ class AdminController extends Controller
         $admin->lastname = '';
 
         return view('admin.user-admin.edit',['user'=>$admin, "action"=>route('useradmin.create'), 'state'=>'create']);
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data()
+    {
+        $datas = Admin::get();
+        return Datatables::of($datas)
+            ->addColumn('action', function ($data) {
+                $editButton =   '<a href="'.url('admin/user-admin').'/'.$data->_id.'/edit" class="btn btn-xs btn-primary">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                </a>';
+                $delButton  =   '<a data-postId="'.$data->_id.'" class="btn btn-xs btn-danger remove-button">
+                                    <i class="glyphicon glyphicon-trash"></i> Delete
+                                </a>'; 
+
+                $result = $editButton;
+                if($data->admin_role != 'Superadmin'){
+                    $result .= '&nbsp;'.$delButton;
+                }
+                return $result;
+            })->make(true);
     }
 
     /**

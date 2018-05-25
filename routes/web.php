@@ -139,6 +139,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('user-admin/create', ['as'=>'useradmin.store','uses'=>'Backend\AdminController@store']);
 	Route::post('user-admin/{id}', ['as'=> 'useradmin.update', 'uses'=>'Backend\AdminController@update']);
 	Route::delete('user-admin/{id}', ['as'=> 'useradmin.destroy', 'uses'=>'Backend\AdminController@destroy']);
+	Route::get('user-admin/data', ['as'=>'useradmin.data','uses'=>'Backend\AdminController@data']);
 
 	/**
 	 * Pages
