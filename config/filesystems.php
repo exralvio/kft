@@ -55,7 +55,7 @@ return [
             'visibility' => 'public',
         ],
 
-        'public_upload' => [
+        'public_folder' => [
             'driver' => 'local',
             'root'   => public_path(),
         ],
