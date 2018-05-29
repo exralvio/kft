@@ -117,11 +117,12 @@
 
 .post-action a {
     display: inline-block;
+    text-decoration: none;
 }
 
 .post-action .comment-button {
-    width: 50px;
-    height: 30px;
+    /*width: 50px;*/
+    /*height: 30px;*/
     border: 1px solid #c7ced2;
     line-height: 25px;
     text-align: center;
@@ -129,13 +130,19 @@
     color: #c7ced2;
     margin-right: 5px;
     vertical-align: top;
+    padding: 0 10px;
+    line-height: 28px;
+}
+
+.post-action .comment-button span {
+    font-weight: bold;
 }
 
 .post-action .comment-button:hover {
     background: #f7f8fa;
 }
 
-.post-action .like-button, .view-button {
+.post-action .like-button {
     height: 30px;
     border-radius: 15px;
     padding: 0 20px 0 40px;
@@ -148,8 +155,15 @@
     color: #fff;
 }
 
-.view-button{
-    cursor: auto;
+.post-action .view-button {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+    padding: 0 20px 0 40px;
+    border: 1px solid #6D6E71;
+    border-radius: 15px;
+    color: #6D6E71;
 }
 
 .post-action .like-button span, .view-button span {
@@ -174,6 +188,17 @@
 .post-action .liked span {
     font-weight: normal;
     color: #aaa;
+}
+
+.btn-social-icon {
+    font-size: 10px;
+}
+
+.share-button-round{
+    height: 30px;
+    border-radius: 20px;
+    margin-bottom: 4px;
+    padding: 0 30px;
 }
 
 .popular-alert {
@@ -273,7 +298,7 @@ a.button-rounded{
     margin-top: 40px;
     text-align: left;
     margin-bottom: 10px;
-    }
+}
 
 .comments{
     width: 100%;
@@ -659,14 +684,6 @@ select.discover-category, select.discover-category:focus {
 
 .reply-comment{
     padding-left:55px;
-}
-
-.share-button-round{
-    height: 30px;
-    border-radius: 20px;
-    margin-left: 5px;
-    margin-bottom: 4px;
-    padding: 0 30px;
 }
 
 @media screen and (max-width: 768px) {

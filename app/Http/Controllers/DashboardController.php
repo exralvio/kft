@@ -142,6 +142,8 @@ class DashboardController extends Controller{
         }
 
         if($comment->save()){
+            $comment->updateMedia('add');
+
             if($currentUser['_id'] != $media->user['id']){
               \NotificationHelper::setNotification('comment', $currentUser['_id'], $media->user['id'],
                     [
@@ -158,7 +160,10 @@ class DashboardController extends Controller{
     }
 
     public function deleteComment(Request $request){
-        Comment::destroy($request->comment_id);
+        $comment = Comment::find($request->comment_id);
+        $comment->updateMedia('remove');
+        $comment->delete();
+
         return Response::json(['status'=>'success'],200);
     }
 

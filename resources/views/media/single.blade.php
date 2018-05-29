@@ -38,10 +38,10 @@
                         <i class="fa {{ $post->isLiked($current_user_id) ? 'fa-heart' : 'fa-heart-o' }}"></i> 
                         <span id="like-count-{{ $post->_id }}">{{ $post->like_count }}</span>
                     </a>
-                    <a class="view-button">
+                    <div class="view-button">
                         <i class="fa fa-eye"></i>
                         <span>{{ $post->view_count }}</span>
-                    </a>
+                    </div>
                     <a id="fb_link_popup" title="share on facebook" class="btn btn-social-icon btn-facebook share-button-round" share-url="{{ url('media').'/'.$post->_id }}" share-title="{{ $post->description }}" onclick="fbs_click(this);">
                         <span class="fa fa-facebook"></span>
                     </a>

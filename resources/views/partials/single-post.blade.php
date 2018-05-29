@@ -32,7 +32,7 @@
                         <div class="row">
                             
                             <a data-postid="{{ $post['media']['id'] }}" class=" comment-button open-single-post" href="#">
-                                <i class="fa fa-comment-o"></i>
+                                <i class="fa fa-comment-o"></i> <span>123</span>
                             </a>
                             <!-- <a class="button-rounded">
                                 <i class="fa fa-plus-square-o"></i> 
@@ -81,7 +81,7 @@
                         <div class="row">
 
                             <a id="{{ $post->_id }}" data-postid="{{ $post->_id }}" class=" comment-button open-single-post" href="#">
-                                <i class="fa fa-comment-o"></i>
+                                <i class="fa fa-comment-o"></i> <span>{{ $post->comment_count }}</span>
                             </a>
                             <!-- <a class="button-rounded">
                                 <i class="fa fa-plus-square-o"></i> 

@@ -12,7 +12,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         
         <!-- Favicons -->
-        <link rel="shortcut icon" href="{{ url('') }}/rythm/images/favicon.png">
+        <link rel="shortcut icon" href="{{ url('') }}/images/favicon.ico">
         <link rel="apple-touch-icon" href="{{ url('') }}/rythm/images/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="{{ url('') }}/rythm/images/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="{{ url('') }}/rythm/images/apple-touch-icon-114x114.png">
