@@ -8,6 +8,7 @@ use App\Models\PartialContent;
 use MongoDB\BSON\ObjectID;
 use Validator;
 use Session;
+use Yajra\Datatables\Datatables;
 
 class PageController extends Controller
 {
@@ -18,8 +19,28 @@ class PageController extends Controller
      */
     public function index()
     {
-        $content = PartialContent::paginate(10);
-        return view('admin.page.index',['contents'=>$content]);
+        // $content = PartialContent::paginate(10);
+        return view('admin.page.index');
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function pageData()
+    {
+        $pages = PartialContent::get();
+        return Datatables::of($pages)
+            ->addColumn('action', function ($page) {
+                return '<a href="'.url('admin/page').'/'.$page->_id.'/edit" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> Edit
+                        </a>
+                        <a data-postId="'.$page->_id.'" class="btn btn-xs btn-danger remove-button">
+                            <i class="glyphicon glyphicon-trash"></i> Delete
+                        </a>';
+            })
+            ->make(true);
     }
 
     /**

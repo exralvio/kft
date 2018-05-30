@@ -118,6 +118,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('media/{id}', ['as'=> 'media.update', 'uses'=>'Backend\MediaController@update']);
 	Route::get('media/{id}/edit', 'Backend\MediaController@edit');
 	Route::get('media', 'Backend\MediaController@index');
+	Route::get('media/data', ['as'=>'media.data','uses'=>'Backend\MediaController@data']);
 	
 	/**
 	 * User
@@ -127,6 +128,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('user/export', 'Backend\UserController@exportToCSV');
 	Route::post('user/{id}', ['as'=> 'user.update', 'uses'=>'Backend\UserController@update']);
 	Route::delete('user/{id}', ['as'=> 'user.destroy', 'uses'=>'Backend\UserController@destroy']);
+	Route::get('user/data', ['as'=>'user.data','uses'=>'Backend\UserController@data']);
 	
 	/**
 	 * User Admin
@@ -137,6 +139,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('user-admin/create', ['as'=>'useradmin.store','uses'=>'Backend\AdminController@store']);
 	Route::post('user-admin/{id}', ['as'=> 'useradmin.update', 'uses'=>'Backend\AdminController@update']);
 	Route::delete('user-admin/{id}', ['as'=> 'useradmin.destroy', 'uses'=>'Backend\AdminController@destroy']);
+	Route::get('user-admin/data', ['as'=>'useradmin.data','uses'=>'Backend\AdminController@data']);
 
 	/**
 	 * Pages
@@ -144,6 +147,7 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::get('page', 'Backend\PageController@index');
 	Route::get('page/{id}/edit', 'Backend\PageController@edit');
 	Route::get('page/create', ['as'=>'page.create','uses'=>'Backend\PageController@create']);
+	Route::get('page/data', ['as'=>'page.data','uses'=>'Backend\PageController@pageData']);
 	Route::post('page/create', ['as'=>'page.store','uses'=>'Backend\PageController@store']);
 	Route::post('page/{id}', ['as'=> 'page.update', 'uses'=>'Backend\PageController@update']);
 	Route::delete('page/{id}', ['as'=> 'page.destroy', 'uses'=>'Backend\PageController@destroy']);

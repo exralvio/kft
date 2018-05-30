@@ -10,6 +10,7 @@ use Session;
 use File;
 use Intervention\Image\ImageManagerStatic as Image;
 use Carbon\Carbon;
+use Yajra\Datatables\Datatables;
 
 class UserController extends Controller
 {
@@ -21,7 +22,27 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        return view('admin.user.index',['users'=>$users]);
+        return view('admin.user.index');
+    }
+
+    /**
+     * Process datatables ajax request.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data()
+    {
+        $datas = User::get();
+        // dd($datas);
+        return Datatables::of($datas)
+            ->addColumn('action', function ($data) {
+                return '<a href="'.url('admin/user').'/'.$data->_id.'/edit" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i> Edit
+                        </a>
+                        <a data-postId="'.$data->_id.'" class="btn btn-xs btn-danger remove-button">
+                            <i class="glyphicon glyphicon-trash"></i> Delete
+                        </a>';
+            })->make(true);
     }
 
     /**

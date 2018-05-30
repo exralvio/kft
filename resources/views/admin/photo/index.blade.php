@@ -13,71 +13,43 @@
 </section>
 
 <section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">List of Photos</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table id="mediaList" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>image</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Category</th>
-                  <th>User</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($medias as $media)
-                <tr id="list-{{ $media->_id }}">
-                  <td>
-                    <div class="img-container">
-                      <a href="#" class="zoomable" data-postId="{{ $media->_id }}">
-                        <img src="{{ !empty($media->images['small']) ? url($media->images['small']) :url($media->images['medium']) }}"/>
-                      </a>
-                      <input id="img-{{ $media->_id }}" type="hidden" value="{{ url($media->images['large']) }}">
-                    </div>
-                  </td>
-                  <td id="title-{{ $media->_id }}">{{ $media->title }}</td>
-                  <td>{{ $media->description }}</td>
-                  <td>{{ !empty($media->category) ? $media->category['name'] : '-' }}</td>
-                  <td>{{ $media->user['fullname'] }}</td>
-                  <td>
-                  <a href="{{ url('admin/media').'/'.$media->_id }}/edit">
-                    <div class="action-btn bg-blue">
-                        <i class="fa fa-edit"></i> Edit
-                    </div>
-                  </a>
-                  <a data-postId="{{$media->id}}" class="remove-button">
-                    <div class="action-btn bg-red">
-                        <i class="fa fa-remove"></i> Delete
-                    </div>
-                  </a>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            {{ $medias->links() }}
-          </div>
-          <!-- /.box-body -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">List of Photos</h3>
+            </div>
+            <div class="box-header">
+                <a class="pull-right" href="{{ url('admin/media/create') }}">
+                <div class="action-btn bg-blue">
+                    <i class="fa fa-plus"></i> Add
+                </div>
+                </a>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered" id="photo-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>User</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            </div>
         </div>
     </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
 </section>
 
 <div class="remodal zoom-modal" data-remodal-id="zoom-modal">
-  <button data-remodal-action="close" class="remodal-close"></button>
-  <div>
+<button data-remodal-action="close" class="remodal-close"></button>
+<div>
     <img id="zoom-img-container" src="" alt="image"> 
-  </div>
+</div>
 </div>
 
 @Include('admin/partial/confirm-delete')
@@ -86,9 +58,40 @@
 
 @section('admin_footer_script')
 <script>
-$(function () {
+$(function() {
+  $('#photo-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{!! route('media.data') !!}",
+      columns: [
+          { data: 'images',
+            name: "description",
+            "render": function ( data, type, row, meta ) {
+                    html = "<div class=img-container>";
+                    html += "<a href=# class=zoomable data-postId="+row._id+">";
+                    html += "<img src={!! url('"+data.small+"') !!} />";
+                    html += "</a>";
+                    html += "<input id=img-"+row._id+" type=hidden value={!! url('"+data.large+"') !!} />";
+                    html += "</div>";
+                    return html;
+                } 
+          },
+          { data: 'title', name: 'title' },
+          { data: 'description', name: 'description' },
+          { data: 'category.name', name: 'category' },
+          { data: 'user.fullname', name: 'user' },
+          { data: 'action', name: 'action', orderable: false, searchable: false}
+      ]
+  });
 
-  $('.zoomable').on('click', function(){
+  $('body').on('click','.remove-button', function(e){
+    var id = $(this).attr('data-postId');
+    var title = $('#title-'+id).html();
+    var url = '/admin/media/';
+    deleteList(url, id, 'title', this);
+  });
+
+  $('body').on('click','.zoomable', function(e){
     $('#zoom-img-container').attr('src','');
     id = $(this).attr('data-postId');
     imgSrc = $('#img-'+id).val();
@@ -97,12 +100,15 @@ $(function () {
     inst.open();
   });
 
-  $('.remove-button').on('click', function(v, k){
-    var id = $(this).attr('data-postId');
-    var title = $('#title-'+id).html();
-    var url = '/admin/media/';
-    deleteList(url, id, title);
-  })
-})
+  /* $('.zoomable').on('click', function(){
+    $('#zoom-img-container').attr('src','');
+    id = $(this).attr('data-postId');
+    imgSrc = $('#img-'+id).val();
+    $('#zoom-img-container').attr('src',imgSrc);
+    var inst = $('[data-remodal-id=zoom-modal]').remodal();
+    inst.open();
+  }); */
+
+});
 </script>
 @endsection

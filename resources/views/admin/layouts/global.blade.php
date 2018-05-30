@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/custom.css">
     <!-- DataTables -->
   <!-- <link rel="stylesheet" href="{{ url('') }}/admin_lte/components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ url('') }}/admin_lte/dist/css/skins/_all-skins.min.css">
@@ -145,7 +146,7 @@
 <!-- Bootstrap WYSIHTML5 -->
 <!-- <script src="{{ url('') }}/admin_lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
 <!-- DataTables -->
-<!-- <script src="{{ url('') }}/admin_lte/components/datatables.net/js/jquery.dataTables.min.js"></script> -->
+<script src="{{ url('') }}/admin_lte/components/datatables.net/js/jquery.dataTables.min.js"></script>
 <!-- Slimscroll -->
 <!-- <script src="{{ url('') }}/admin_lte/components/jquery-slimscroll/jquery.slimscroll.min.js"></script> -->
 <!-- FastClick -->

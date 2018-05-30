@@ -13,9 +13,9 @@
 </section>
 
 <section class="content">
-  <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
+    <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
             <div class="box-header">
                 <h3 class="box-title">List of Page</h3>
             </div>
@@ -26,69 +26,48 @@
                 </div>
                 </a>
             </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table id="mediaList" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Slug</th>
-                  <th>Content</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($contents as $page)
-                <tr id="list-{{ $page->_id }}">
-                  <td id="title-{{ $page->_id }}">{{ $page->title }}</td>
-                  <td>{{ $page->slug }}</td>
-                  <td>{{ $page->content }}</td>
-                  <td>
-                    <a href="{{ url('admin/page').'/'.$page->_id }}/edit">
-                      <div class="action-btn bg-blue">
-                          <i class="fa fa-edit"></i> Edit
-                      </div>
-                    </a>
-                    <a data-postId="{{$page->id}}" class="remove-button">
-                      <div class="action-btn bg-red">
-                          <i class="fa fa-remove"></i> Delete
-                      </div>
-                    </a>
-                    </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-            {{ $contents->links() }}
+            <div class="box-body">
+              <table class="table table-bordered" id="page-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Content</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+              </table>
+            </div>
           </div>
-          <!-- /.box-body -->
         </div>
     </div>
-    <!-- /.col -->
-  </div>
-  <!-- /.row -->
 </section>
-
-<div class="remodal zoom-modal" data-remodal-id="zoom-modal">
-  <button data-remodal-action="close" class="remodal-close"></button>
-  <div>
-    <img id="zoom-img-container" src="" alt="image"> 
-  </div>
-</div>
-
 @Include('admin/partial/confirm-delete')
 
 @endsection
 
 @section('admin_footer_script')
 <script>
-$(function () {
-  $('.remove-button').on('click', function(v, k){
+$(function() {
+  $('#page-table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{!! route('page.data') !!}",
+      columns: [
+          { data: 'title', name: 'title' },
+          { data: 'slug', name: 'slug' },
+          { data: 'content', name: 'content' },
+          { data: 'action', name: 'action', orderable: false, searchable: false}
+      ]
+  });
+
+  $('body').on('click','.remove-button', function(e){
     var id = $(this).attr('data-postId');
     var title = $('#title-'+id).html();
     var url = '/admin/page/';
-    deleteList(url, id, title);
-  })
-})
+    deleteList(url, id, 'title', this);
+  });
+
+});
 </script>
 @endsection
