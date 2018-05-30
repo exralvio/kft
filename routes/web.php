@@ -104,11 +104,10 @@ Route::get('/resendActivation/{email}', 'Auth\AuthController@resendActivationMai
 
 /** Route for admin role */
 Route::middleware(['admin'])->prefix('admin')->group(function () {
-	Route::get('dashboard', function(){
-		return view('admin/dashboard');
-	});
 
 	Route::get('logout','Auth\AdminAuthController@doLogout');
+
+	Route::get('dashboard','Backend\DashboardController@showDashboard');
 
 	/**
 	 * Media
