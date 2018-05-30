@@ -20,7 +20,7 @@
         <span class="info-box-icon bg-aqua"><i class="ion ion-images"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Upload Today</span>
+          <span class="info-box-text">New Upload Today</span>
           <span class="info-box-number">{{ $todayMedias }}</span>
         </div>
         <!-- /.info-box-content -->
@@ -36,7 +36,7 @@
         <span class="info-box-icon bg-green"><i class="ion ion-ios-chatboxes"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Today's Comments</span>
+          <span class="info-box-text">New Comments Today</span>
           <span class="info-box-number">{{ $todayComments }}</span>
         </div>
         <!-- /.info-box-content -->
