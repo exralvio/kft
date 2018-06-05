@@ -60,9 +60,18 @@
             <div class="col-xs-12">
                 <ul class="details align-center mb-0">
                     <li><span>{{ $user->view_count }}</span> Photo Views</li>
-                    <li><span>{{ $user->getFollowerCount() }}</span> Followers</li>
-                    <li><span>{{ $user->getFollowingCount() }}</span> Following</li>
+                    <li>
+                        <a class="open-followers">
+                            <span>{{ $user->getFollowerCount() }}</span> Followers
+                        </a>
+                    </li>
+                    <li>
+                        <a class="open-followings">
+                            <span>{{ $user->getFollowingCount() }}</span> Following
+                        </a>
+                    </li>
                 </ul>
+                <input id="follow-userId" type="hidden" value="{{ $user['_id'] }}">
             </div>
         </div>
     </div>
@@ -109,6 +118,7 @@
 </section>
 
 @include('partials/post-modal')
+@include('partials/follow-modal')
 
 @endsection
 

@@ -208,13 +208,17 @@ class User extends Authenticatable implements CanResetPasswordContract{
         return $followed ? true : false;
     }
 
-    public static function getFollowing($timeline = false){
+    public static function getFollowing($timeline = false, $userId = null){
         $user = User::current();
-        $user_id = $user['_id'];
+        $user_id = $userId ? new ObjectId($userId) : $user['_id'];
 
         $following = \App\Models\Following::where('user_id', $user_id)->first();
         if(isset($following)){
-            $followings = array_map(function($v){ return $v['id']; }, (array) $following->followings);
+            if(isset($userId)){
+                $followings = array_map(function($v){ return $v; }, (array) $following->followings);
+            }else{
+                $followings = array_map(function($v){ return $v['id']; }, (array) $following->followings);
+            }
         }else{
             $followings = [];
         }
@@ -224,6 +228,20 @@ class User extends Authenticatable implements CanResetPasswordContract{
         }
 
         return $followings;
+    }
+
+    public static function getFollower($userId){
+        $user = User::current();
+        $user_id = $userId ? new ObjectID($userId) : $user['_id'];
+
+        $followed = \App\Models\Followed::where('user_id', $user_id)->first();
+        if(isset($followed)){
+            $followers = array_map(function($v){ return $v; }, (array) $followed->followers);
+        }else{
+            $followers = [];
+        }
+
+        return $followers;
     }
 
     public static function followerCount($user_id){

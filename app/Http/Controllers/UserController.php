@@ -275,4 +275,14 @@ class UserController extends Controller{
         
         return view('user/single-edit', compact('profile'));
     }
+
+    public function getFollowers($userId){
+        $followers = User::getFollower($userId);
+        return view('partials/followers', compact('followers'))->render();
+    }
+    
+    public function getFollowings($userId){
+        $followings = User::getFollowing(false, $userId);
+        return view('partials/following', compact('followings'))->render();
+    }
 }

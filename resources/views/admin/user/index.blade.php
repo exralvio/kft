@@ -81,7 +81,9 @@ $(function() {
               return d == 'F' ? 'Female' : 'Male';
           } },
           { data: 'company', name: 'company' },
-          { data: 'department.name', name: 'department' },
+          { data: 'department', name: 'department' , render: function(d){
+              return d.name ? d.name : '-';
+          } },
           { data: 'sister_company', name: 'sister_company', 
                 "render": function(d,t,r,m){
                     return d.name ? d.name : '-'; 

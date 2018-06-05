@@ -1,5 +1,6 @@
 var postId = $('#postId').val();
 var inst = $('[data-remodal-id=commentPostModal]').remodal({hashTracking: false});
+var followModal = $('[data-remodal-id=followModal]').remodal({hashTracking: false});
 
 function loadMoreData(last_id){
     $.ajax({
@@ -59,6 +60,64 @@ function openSinglePost(e){
 
         alert('failed to connect to server ...');
     });
+}
+
+function openFollowers(e){
+
+    e.preventDefault();
+
+    var userId = $('#follow-userId').val();
+
+    $.ajax({
+        url: '/user/'+userId+'/followers',
+        type: "get"
+    })
+    .done(function(data)
+    {
+        $('#follow-content').empty();
+        $('#follow-content').append(data);
+        followModal.open();
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
+        alert('failed to connect to server ...');
+    });
+
+    
+}
+
+function openFollowings(e){
+
+    e.preventDefault();
+
+    var userId = $('#follow-userId').val();
+
+    $.ajax({
+        url: '/user/'+userId+'/followings',
+        type: "get"
+    })
+    .done(function(data)
+    {
+        $('#follow-content').empty();
+        $('#follow-content').append(data);
+        followModal.open();
+    })
+    .fail(function(jqXHR, ajaxOptions, thrownError)
+    {
+        if(thrownError == 'Unauthorized'){
+            window.location = '/login';
+            return;
+        }
+
+        alert('failed to connect to server ...');
+    });
+
+    
 }
 
 function openPhotogridLink(e){
@@ -187,6 +246,8 @@ function addNewComment(e, bypass = false){
 
 $(function(){
     $('body').on('click', '.open-single-post', openSinglePost);
+    $('body').on('click', '.open-followers', openFollowers);
+    $('body').on('click', '.open-followings', openFollowings);
 
     $('body').on('click', 'body', function(){
         $('#replyComment').hide();

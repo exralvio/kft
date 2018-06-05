@@ -70,6 +70,8 @@ Route::middleware('auth')->group(function () {
 /** User Login and is_active **/
 Route::group(['middleware'=>["auth","complete.profile"]],function(){
 	Route::get('user/profile', ['uses'=>'UserController@showProfile']);
+	Route::get('user/{user_id}/followers', ['uses'=>'UserController@getFollowers']);
+	Route::get('user/{user_id}/followings', ['uses'=>'UserController@getFollowings']);
 
 	Route::get('/dashboard', 'DashboardController@showDashboard');
 	Route::post('/postComment', 'DashboardController@postComment');

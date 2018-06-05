@@ -558,3 +558,36 @@ a.profile-link {
 .form textarea {
 	text-transform: none!important;
 }
+
+ul#follow-list{
+    background-color: #ffffff;
+	padding-left: 0;
+	max-height: 350px;
+	overflow-y: auto;
+}
+ul#follow-list > li{
+    list-style: none;
+    border-top: 1px solid #ccc;
+    padding: 5px 2px;
+    display: flex;
+}
+.follow-name{
+    text-align: left;
+    line-height: 34px;
+}
+.follow-button-cont{
+    text-align: right;
+}
+.follow-pict > img{
+    border-radius: 20px;
+}
+.follow-modal{
+	width: 400px;
+	max-height: 400px;
+	/* overflow-y: auto; */
+}
+
+.open-followers, .open-followings{
+	cursor: pointer;
+	text-decoration: none;
+}
