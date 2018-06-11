@@ -66,11 +66,22 @@ $(function() {
           { data: 'photo',
             name: "photo",
             "render": function ( data, type, row, meta ) {
+                    var img = data;
+                    if(!data){
+                        img = 'images/account-icon.png';
+                    }
+
                     html = "<div class=img-container>";
                     html += "<a href=# class=zoomable data-postId="+row._id+">";
-                    html += "<img src={!! url('"+data+"') !!} />";
-                    html += "</a>";
-                    html += "<input id=img-"+row._id+" type=hidden value={!! url('"+data+"') !!} />";
+                    if(img.indexOf('http') == 0){
+                        html += "<img src='"+img+"'/>";
+                        html += "</a>";
+                        html += "<input id=img-"+row._id+" type=hidden value='"+img+"'/>";
+                    }else{
+                        html += "<img src={!! url('"+img+"') !!} />";
+                        html += "</a>";
+                        html += "<input id=img-"+row._id+" type=hidden value={!! url('"+img+"') !!} />";
+                    }
                     html += "</div>";
                     return html;
                 } 
