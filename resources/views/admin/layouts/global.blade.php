@@ -37,6 +37,8 @@
   <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/custom-admin.css">
   <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/bootstrap-tagsinput.css">
 
+  @yield('header_script')
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

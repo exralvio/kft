@@ -162,4 +162,15 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
 	Route::post('setting/create', ['as'=>'setting.store','uses'=>'Backend\SettingController@store']);
 	Route::post('setting/{id}', ['as'=> 'setting.update', 'uses'=>'Backend\SettingController@update']);
 	Route::delete('setting/{id}', ['as'=> 'setting.destroy', 'uses'=>'Backend\SettingController@destroy']);
+
+	/**
+	 * Announcement
+	*/
+	Route::get('announcement', 'Backend\AnnouncementController@index');
+	Route::get('announcement/{id}/edit', 'Backend\AnnouncementController@edit');
+	Route::get('announcement/create', ['as'=>'announcement.create','uses'=>'Backend\AnnouncementController@create']);
+	Route::get('announcement/data', ['as'=>'announcement.data','uses'=>'Backend\AnnouncementController@getData']);
+	Route::post('announcement/create', ['as'=>'announcement.store','uses'=>'Backend\AnnouncementController@store']);
+	Route::post('announcement/{id}', ['as'=> 'announcement.update', 'uses'=>'Backend\AnnouncementController@update']);
+	Route::delete('announcement/{id}', ['as'=> 'announcement.destroy', 'uses'=>'Backend\AnnouncementController@destroy']);
 });

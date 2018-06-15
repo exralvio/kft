@@ -88,6 +88,13 @@
             </ul>
         </li>
         <li>
+          <a href="{{ url('admin/announcement') }}">
+            <i class="fa fa-bell"></i> <span>Announcement</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li>
           <a href="{{ url('admin/setting') }}">
             <i class="fa fa-gear"></i> <span>Settings</span>
             <span class="pull-right-container">
