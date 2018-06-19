@@ -43,9 +43,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form class="form form-uploader pt-20 pd-20 align-left form-horizontal" autocomplete="off" method="POST" role="form" action="{{ $action }}"  enctype="multipart/form-data">
+                    <form class="form form-uploader pt-20 pd-20 align-left form-horizontal" autocomplete="off" method="post" role="form" action="{{ $action }}"  enctype="multipart/form-data">
                         {{ csrf_field() }}
-
+                        
                         <div class="form-group">
                             <label for="title" class="col-sm-2 control-label">Title*</label>
                             <div class="col-sm-10">
@@ -64,6 +64,10 @@
                             <label for="background" class="col-sm-2 control-label">Background</label>
                             <div class="col-sm-10">
                                 <input type="file" name="background">
+
+                                @if(!empty($announcement['background']))
+                                    <img src="{{ url($announcement['background']) }}" style="margin: 10px 0 0; max-height: 150px;">
+                                @endif
                             </div>
                         </div>
 

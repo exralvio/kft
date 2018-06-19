@@ -591,3 +591,27 @@ ul#follow-list > li{
 	cursor: pointer;
 	text-decoration: none;
 }
+
+#announcement {
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.carousel-indicators {
+	margin-bottom: 0px;
+	bottom: 10px;
+}
+
+.carousel-title {
+	position: absolute;
+    color: #fff;
+    z-index: 10;
+    top: 20px;
+    left: 20%;
+    letter-spacing: 2px;
+    font-weight: bold;
+    right: 20%;
+    text-align: center;
+    font-size: 30px;
+    font-family: Dosis, arial, sans-serif;
+}

@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PartialContent;
 use App\Models\Announcement;
 use Yajra\Datatables\Datatables;
 use Validator;
 use Session;
+use File;
+use Storage;
 
 class AnnouncementController extends Controller
 {
@@ -85,23 +86,26 @@ class AnnouncementController extends Controller
         $newAnnouncement->description = $request->description;
         $newAnnouncement->link = $request->link;
         $newAnnouncement->button = $request->button;
-        $newAnnouncement->background = $request->background;
         $newAnnouncement->start_date = $request->start_date;
         $newAnnouncement->end_date = $request->end_date;
         $newAnnouncement->credit_name = $request->credit_name;
         $newAnnouncement->credit_link = $request->credit_link;
-        $newAnnouncement->save();
 
         if($request->hasFile('background')){
             $original_name = $request->file('background')->getClientOriginalName();
 
+            $uploadFile = $request->file('background');
+
             $extension = File::extension($original_name);
-            $directory = 'upload_tmp';
-            // $directory = path('public').'uploads/tmp/'.sha1(time());
+            $directory = 'announcement';
             $filename = sha1(time().time().rand()).".{$extension}";
 
-            $upload_success = $request->file->storeAs($directory, $filename);    
+            $upload_success = $request->file('background')->storeAs($directory, $filename, 'uploads');    
+
+            $newAnnouncement->background = 'uploads/announcement/'.$filename;
         }
+
+        $newAnnouncement->save();
 
         Session::flash('save_success', "New Announcement has been succcesfully created");
         return redirect('admin/announcement');
@@ -139,7 +143,44 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'title' => 'required'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        $newAnnouncement = Announcement::find($id);
+
+        $newAnnouncement->title = $request->title;
+        $newAnnouncement->description = $request->description;
+        $newAnnouncement->link = $request->link;
+        $newAnnouncement->button = $request->button;
+        $newAnnouncement->start_date = $request->start_date;
+        $newAnnouncement->end_date = $request->end_date;
+        $newAnnouncement->credit_name = $request->credit_name;
+        $newAnnouncement->credit_link = $request->credit_link;
+
+        if($request->hasFile('background')){
+            $original_name = $request->file('background')->getClientOriginalName();
+
+            $uploadFile = $request->file('background');
+
+            $extension = File::extension($original_name);
+            $directory = 'announcement';
+            $filename = sha1(time().time().rand()).".{$extension}";
+
+            $upload_success = $request->file('background')->storeAs($directory, $filename, 'uploads');    
+
+            $newAnnouncement->background = 'uploads/announcement/'.$filename;
+        }
+
+        $newAnnouncement->save();
+
+        Session::flash('save_success', "New Announcement has been succcesfully updated");
+        return redirect('admin/announcement/'.$id.'/edit');
     }
 
     /**
@@ -150,6 +191,6 @@ class AnnouncementController extends Controller
      */
     public function destroy($id)
     {
-        //
+       Announcement::destroy($id);
     }
 }

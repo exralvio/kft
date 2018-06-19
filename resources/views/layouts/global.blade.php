@@ -28,6 +28,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal.css">
         <link rel="stylesheet" type="text/css" href="{{ url('') }}/css/remodal-default-theme.css">
         <link rel="stylesheet" href="{{ url('') }}/bootstrap-social/bootstrap-social.css">
+        <link rel="stylesheet" href="{{ url('') }}/css/bootstrap-carousel.css">
 
         <link rel="stylesheet" href="{{ url('') }}/css/nav.css">
         <link rel="stylesheet" href="{{ url('') }}/css/custom.css">
@@ -76,6 +77,7 @@
         <script type="text/javascript" src="{{ url('') }}/rythm/js/imagesloaded.pkgd.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/rythm/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="{{ url('') }}/js/jquery.uploadPreview.js"></script>
+        <script type="text/javascript" src="{{ url('') }}/js/bootstrap-carousel.min.js"></script>
 
         
         <script type="text/javascript" src="{{ url('') }}/rythm/js/wow.min.js"></script>

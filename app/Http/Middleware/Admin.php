@@ -12,7 +12,7 @@ class Admin {
             return $next($request);
         }
 
-        return redirect('home');
+        return redirect('admin/login');
 
     }
 

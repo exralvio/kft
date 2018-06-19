@@ -13,6 +13,14 @@
 </section>
 
 <section class="content">
+
+    @if(Session::has('save_success'))
+      <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h4><i class="icon fa fa-check"></i> Save Success!</h4> {{ Session::get('save_success') }}
+      </div>
+    @endif
+    
     <div class="row">
       <div class="col-xs-12">
           <div class="box">
@@ -31,7 +39,7 @@
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Start dat</th>
+                        <th>Start date</th>
                         <th>End date</th>
                         <th>Action</th>
                     </tr>
@@ -55,8 +63,8 @@ $(function() {
       ajax: "{!! route('announcement.data') !!}",
       columns: [
           { data: 'title', name: 'title' },
-          { data: 'start_date', name: 'start_date' },
-          { data: 'end_date', name: 'end_date' },
+          { data: 'start_date', name: 'start_date', defaultContent: "<b class='text-danger'>not set</b>" },
+          { data: 'end_date', name: 'end_date', defaultContent: "<b class='text-danger'>not set</b>" },
           { data: 'action', name: 'action', orderable: false, searchable: false}
       ]
   });
