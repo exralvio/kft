@@ -18,24 +18,32 @@
 
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                      <img src="{{ url('uploads/announcement/stockholm.jpg') }}" alt="...">
-                      <h3 class="carousel-title">
-                          Ini adalah title blablasdfbl
-                      </h3>
-                      <div class="carousel-caption">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    @foreach(App\Models\Announcement::all() as $key=>$announcement)
+                      <div class="item {{ $key == 0 ? 'active' : '' }}" >
+                        <img src="{{ url($announcement->background) }}" alt="...">
+
+                        <div class="carousel-overlay"></div>
+                        
+                        <div class="carousel-caption">
+                          <h3>
+                              {{ $announcement['title'] }}
+                          </h3>
+                          @if(!empty($announcement['description']))
+                            {{ $announcement['description'] }}
+                          @endif
+
+                          @if(!empty($announcement['button']))
+                            <a href="{{ $announcement['link'] }}" target="_blank" class="btn btn-mod btn-circle mt-20">{{ $announcement['button'] }}</a>
+                          @endif
+                        </div>
+
+                        @if(!empty($announcement['credit_name']))
+                        <div class="carousel-credit">
+                          Photo By <a href="{{ $announcement['credit_link'] }}" target="_blank">{{ $announcement['credit_name'] }}</a>
+                        </div>
+                        @endif
                       </div>
-                    </div>
-                    <div class="item">
-                      <img src="{{ url('uploads/announcement/stockholm.jpg') }}" alt="...">
-                      <h3 class="carousel-title">
-                          Ini adalah title blablasdfbl
-                      </h3>
-                      <div class="carousel-caption">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                      </div>
-                    </div>
+                    @endforeach
                   </div>
                 </div>
             </div>
