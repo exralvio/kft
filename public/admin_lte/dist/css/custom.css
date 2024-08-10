@@ -1,0 +1,32 @@
+.action-btn{
+    cursor: pointer;
+    height: 20px;
+    float: left;
+    padding: 0px 10px;
+    border-radius: 2px;
+    color: #fff;
+    margin-right: 2px;
+}
+
+.img-container{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.img-container img{
+    width: 100px;
+    height: auto;
+}
+
+.pagination{
+    float:right;
+}
+
+.pt-50 {
+    padding-top: 50px;
+}
+
+.pb-40 {
+    padding-bottom: 40px;
+}

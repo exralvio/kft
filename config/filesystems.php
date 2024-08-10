@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path(),
         ],
 
         'public' => [
@@ -53,6 +53,22 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],
+
+        'public_folder' => [
+            'driver' => 'local',
+            'root'   => public_path(),
+        ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads'),
+        ],
+        
+        // used for Backpack/LogManager
+        'storage' => [
+            'driver' => 'local',
+            'root'   => storage_path(),
         ],
 
         's3' => [

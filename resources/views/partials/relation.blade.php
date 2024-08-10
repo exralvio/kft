@@ -1,0 +1,1 @@
+<script type="text/javascript" src="{{ url('js/relation.js') }}"></script>

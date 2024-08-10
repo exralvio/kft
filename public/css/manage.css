@@ -1,0 +1,242 @@
+body, html {
+	overflow: hidden;
+}
+
+body.timeline {
+	background: #fff;
+}
+
+.manage-left, .manage-center, .manage-right {
+	
+}
+
+.manage-left, .manage-center {
+	border-right: 1px solid #eeeff2;
+}
+
+.manage-uploadbtn {
+	margin-top: 5px;
+	width: 100%;
+	display: block;
+    height: 40px;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 38px;
+    padding: 0 10px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    outline: none;
+    background-color: #0099e5;
+    border: 1px solid #0099e5;
+    text-align: center;
+}
+
+.manage-uploadbtn:hover {
+	background: #00aaff;
+	color: #fff;
+	text-decoration: none;
+}
+
+.manage-header{
+	border-bottom: 1px solid #eeeff2;
+	padding: 0 20px;
+	height: 55px;
+	color: #0099e5;
+}
+
+.manage-header h5 {
+	display: inline-block;
+	margin: 0px;
+	margin-right: 10px;
+	line-height: 50px;
+}
+
+.manage-header span {
+	color: #b9c1c7;
+	line-height: 50px;
+}
+
+.manage-header.first-row {
+	margin-left: 0px;
+}
+
+.manage-categories {
+	padding: 0 20px;
+	margin-right: -15px;
+}
+
+.manage-categories h4 {
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #0099e5;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.manage-categories ul {
+	padding: 0px;
+	list-style: none;
+	margin: 0 -10px;
+}
+
+.manage-categories ul li a {
+	text-decoration: none;
+	padding: 5px 10px;
+	display: block;
+	color: #000;
+}
+
+.manage-categories ul li a:hover {
+	color: #525558;
+    background-color: #f7f8fa;
+}
+
+.manage-categories ul li a.active {
+	background: #0099e5;
+	color: #fff;
+}
+.manage-categories ul li a.active:hover {
+	background: #00aaff;
+}
+
+.manage-categories ul li a span {
+	float: right;
+}
+
+.form-editor-wrapper {
+	height: 100%;
+	display: none;
+	border-radius: 3px;
+}
+
+.form-editor-wrapper .row {
+	height: inherit;
+}
+
+.form-editor {
+	overflow-y: scroll;
+	padding-right: 15px;
+	height: 500px;
+}
+
+.form-editor label {
+	color: #0099e5;
+	font-weight: normal;
+}
+
+.form-editor input, .form-editor textarea {
+	text-transform: none !important;
+}
+
+.form-editor .form-blocker {
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background: white;
+    z-index: 2;
+    top: 0;
+    margin-left: -15px;
+}
+
+.manage-right h3 {
+    color: #222;
+    font-size: 18px;
+    text-align: left;
+}
+
+.form-editor .exif-edit label {
+	color: #222;
+}
+
+.btn-remove-media {
+	width: 100%;
+}
+
+.form-editor-save {
+	border-top: 1px solid #eeeff2;
+	padding-right: 15px;
+	margin-left: -15px;
+}
+
+.form-editor-save .btn-editor-save {
+	width: 100%;
+}
+
+.form-editor-save .btn-cancel {
+	text-decoration: none;
+	font-size: 15px;
+}
+
+.manage-media {
+	background: #F7F8FA;
+	height: 800px;
+	cursor: crosshair;
+	overflow-y: scroll;
+}
+
+.manage-item {
+	/*height: 125px;*/
+}
+
+.manage-item-inner {
+	cursor: default;
+	/*margin: 0 -3px;*/
+	height: 150px;
+	overflow: hidden;
+	border: 3px solid #F7F8FA;
+}
+
+.manage-item-inner.active {
+	border: 3px solid #0099e5;
+}
+
+.manage-item-inner img {
+	object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+.manage-item-icon {
+	position: absolute;
+	top: 3px;
+    left: 18px;
+    right: 18px;
+	padding-top: 5px;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.6)), to(transparent));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+    height: 40px;
+}
+
+.manage-item-icon a {
+	color: #fff;
+}
+
+.manage-item-icon a:first-child {
+	margin-left: 10px;
+}
+
+.manage-item-icon a:last-child {
+	margin-right: 10px;
+}
+
+a.manage-item-remove {
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+    color: #fff;
+    width: 20px;
+    text-align: center;
+    background: #F48387;
+}
+
+a.manage-item-remove:hover {
+	color: #fff;
+	background: #ff0000;
+}
